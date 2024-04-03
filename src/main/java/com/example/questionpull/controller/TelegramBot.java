@@ -14,7 +14,7 @@ public class TelegramBot extends TelegramLongPollingBot {
 
     Logger logger = Logger.getLogger("BotInitializer");
 
-    private BotProperties config;
+    private final BotProperties config;
 
     @Autowired
     public TelegramBot(BotProperties config) {

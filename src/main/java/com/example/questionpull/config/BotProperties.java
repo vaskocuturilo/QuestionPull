@@ -5,7 +5,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 
 @Configuration
-@PropertySource("application.properties")
+@PropertySource("classpath:application.properties")
 public class BotProperties {
 
     @Value("${bot.name}")
