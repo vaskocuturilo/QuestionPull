@@ -1,6 +1,7 @@
 package com.example.questionpull.config;
 
 import com.example.questionpull.controller.TelegramBot;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
@@ -8,12 +9,9 @@ import org.telegram.telegrambots.meta.TelegramBotsApi;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import org.telegram.telegrambots.updatesreceivers.DefaultBotSession;
 
-import java.util.logging.Logger;
-
 @Component
+@Slf4j
 public class BotInitializer {
-
-    Logger logger = Logger.getLogger("BotInitializer");
     private final TelegramBot telegramBot;
 
     public BotInitializer(TelegramBot telegramBot) {
@@ -26,8 +24,7 @@ public class BotInitializer {
         try {
             telegramBotsApi.registerBot(telegramBot);
         } catch (TelegramApiException e) {
-            logger.info("Error occurred: " + e.getMessage());
+            log.error("Error occurred: {}", e.getMessage());
         }
     }
-
 }
