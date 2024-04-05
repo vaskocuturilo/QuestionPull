@@ -1,7 +1,8 @@
 package com.example.questionpull.config;
 
-import com.example.questionpull.controller.TelegramBot;
+import com.example.questionpull.service.TelegramBot;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
@@ -12,8 +13,10 @@ import org.telegram.telegrambots.updatesreceivers.DefaultBotSession;
 @Component
 @Slf4j
 public class BotInitializer {
+
     private final TelegramBot telegramBot;
 
+    @Autowired
     public BotInitializer(TelegramBot telegramBot) {
         this.telegramBot = telegramBot;
     }
