@@ -1,0 +1,17 @@
+[
+  {
+    "id": 1,
+    "title": " The zero max ",
+    "body": "Return a version of the given array where each zero value in the array is replaced by the\n    largest odd value to the right of the zero in the array.\n    If there is no odd value to the right of the zero, leave the zero as a zero."
+  },
+  {
+    "id": 2,
+    "title": " The Reverse integer ",
+    "body": "Given a signed 32-bit integer x, return x with its digits reversed. If reversing x causes the value to go outside the signed 32-bit integer range [-231, 231 - 1], then return 0."
+  },
+  {
+    "id": 3,
+    "title": "The two sum",
+    "body": "Given an array of integers nums and an integer target, return indices of the two numbers such that they add up to target.\n\nYou may assume that each input would have exactly one solution, and you may not use the same element twice.\n\nYou can return the answer in any order."
+  }
+]

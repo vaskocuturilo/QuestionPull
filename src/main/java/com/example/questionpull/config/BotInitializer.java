@@ -1,6 +1,6 @@
 package com.example.questionpull.config;
 
-import com.example.questionpull.controller.TelegramBot;
+import com.example.questionpull.service.TelegramBot;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.context.event.EventListener;

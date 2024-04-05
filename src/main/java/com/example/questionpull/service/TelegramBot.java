@@ -1,6 +1,9 @@
-package com.example.questionpull.controller;
+package com.example.questionpull.service;
 
+import com.example.questionpull.StorageUtils;
 import com.example.questionpull.config.BotProperties;
+import com.example.questionpull.entity.QuestionPullEntity;
+import com.example.questionpull.repository.QuestionPullRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
@@ -9,16 +12,26 @@ import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 import java.util.Arrays;
+import java.util.Optional;
+import java.util.Random;
 
 @Component
 @Slf4j
 public class TelegramBot extends TelegramLongPollingBot {
+
+    private final Random random = new Random();
+
+    static final int MAX_QUESTIONS = 2;
     private final BotProperties config;
 
-    private static final String TEXT = "Test1";
+    private final QuestionPullRepository questionPullRepository;
 
-    public TelegramBot(BotProperties config) {
+    private final StorageUtils storageUtils;
+
+    public TelegramBot(BotProperties config, QuestionPullRepository questionPullRepository, StorageUtils storageUtils) {
         this.config = config;
+        this.questionPullRepository = questionPullRepository;
+        this.storageUtils = storageUtils;
     }
 
     @Override
@@ -38,19 +51,32 @@ public class TelegramBot extends TelegramLongPollingBot {
             long chatId = update.getMessage().getChatId();
 
             switch (messageText) {
-                case "/start" -> showStart(chatId, update.getMessage().getChat().getFirstName());
+                case "/start" -> {
+                    showStart(chatId, update.getMessage().getChat().getFirstName());
+                    storageUtils.loadQuestionsPull();
+                }
                 case "/help" -> helpCommand(chatId);
-                case "/exam" -> {
+                case "/question" -> {
                     var question = getQuestionFromPull();
-                    sendMessage(question, chatId);
+                    question.ifPresentOrElse(questionPullEntity -> sendMessage(
+                                    String.format(""" 
+                                                    Title: %s,
+                                                    Question: %s
+                                                    """, questionPullEntity.getTitle(),
+                                            questionPullEntity.getBody()), chatId),
+                            () -> {
+                                throw new IllegalStateException("Can't take any question");
+                            });
                 }
                 default -> commandNotFound(chatId);
             }
         }
     }
 
-    private String getQuestionFromPull() {
-        return TEXT;
+    private Optional<QuestionPullEntity> getQuestionFromPull() {
+        var randomId = this.random.nextInt(MAX_QUESTIONS) + 1;
+
+        return questionPullRepository.findById(randomId);
     }
 
     private void commandNotFound(long chatId) {
@@ -59,7 +85,7 @@ public class TelegramBot extends TelegramLongPollingBot {
     }
 
     private void helpCommand(long chatId) {
-        String answer = "You can use \"/exam\" command for start question pull.";
+        String answer = "You can use \"/question\" command for start question pull.";
         sendMessage(answer, chatId);
     }
 
@@ -71,7 +97,7 @@ public class TelegramBot extends TelegramLongPollingBot {
     }
 
     private void showStart(long chatId, String name) {
-        String answer = "Hi, " + name + ", Nice to meet you! You can use \"/exam\" command for start question pull or \"/help\" for more information.";
+        String answer = "Hi, " + name + ", Nice to meet you! You can use \"/question\" command for start question pull or \"/help\" for more information.";
         sendMessage(answer, chatId);
     }
 

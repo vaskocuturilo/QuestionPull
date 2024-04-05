@@ -1,18 +1,15 @@
 package com.example.questionpull.config;
 
-import lombok.Getter;
+import lombok.Data;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 
-@Getter
 @Configuration
 @PropertySource("classpath:application.properties")
-public class BotProperties {
+@Data
+public class StorageProperties {
 
-    @Value("${bot.name}")
-    String name;
-
-    @Value("${bot.token}")
-    String token;
+    @Value("${fileName}")
+    String fileName;
 }
