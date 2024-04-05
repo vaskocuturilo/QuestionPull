@@ -5,6 +5,7 @@ import com.example.questionpull.config.BotProperties;
 import com.example.questionpull.entity.QuestionPullEntity;
 import com.example.questionpull.repository.QuestionPullRepository;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
@@ -28,6 +29,7 @@ public class TelegramBot extends TelegramLongPollingBot {
 
     private final StorageUtils storageUtils;
 
+    @Autowired
     public TelegramBot(BotProperties config, QuestionPullRepository questionPullRepository, StorageUtils storageUtils) {
         this.config = config;
         this.questionPullRepository = questionPullRepository;
