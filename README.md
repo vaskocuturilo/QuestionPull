@@ -6,7 +6,7 @@ The Spring Boot REST service for question pull.
 
 - Use any *object-oriented language*.
 - Use the last Spring boot version.
-- Use the last PostgreSQL database version.
+- Use the last PostgresSQL database version.
 - Create REST API service.
 - Create docker-compose for run service.
 - Provide code and clear instructions on how to run it.
@@ -19,30 +19,35 @@ You will need the following technologies available to try it out:
 
 * Git
 * Spring Boot 3+
-* PostgreSQL 16.* +
+* PostgresSQL 16.* +
 * Maven 3+
-* JDK 17+
+* JDK 21+
 * Docker
 * Docker compose
 * IDE of your choice
 
 ## TO-DO list (ASAP):
 
-- Will be adding functionality for work with telegram bot.
-- Will be adding functionality for taking a ticket from the pull.
+- Will be adding functionality for work with telegram bot. :heavy_check_mark:
+- Will be adding functionality for taking a ticket from the pull. :heavy_check_mark:
+- Will be adding functionality for taking a ticket via difficulty.
+- Will be adding functionality for taking a ticket via category.
+- Will be adding functionality for quiz with the most popular questions.
 - Will be adding JWT.
 - Will be adding X-API-KEY.
 - Will be adding a one-time password.
 - Will be adding docker-compose
 - Will be adding integration tests.
-- Will be adding unit tests.
+- Will be adding unit tests. :heavy_check_mark:
 - Will be adding functionality for deployment to AWS.
-- Will be adding React framework.
-- Will be adding positive UI automation scripts (Smoke and Sanity).
-- Will be adding negative UI automation scripts (Smoke and Sanity).
-- Will be adding Logging.
-- Will be adding Jest unit testing for node JS.
-- Will be adding logout timeout functionality.
-- Will be adding a UI form for the generation of an apiKey.
 
+### How to run via spring boot.
 
+```mvn spring-boot:run```
+
+### How to run via docker-compose.
+
+``` docker-compose -f "docker-compose.yml" up --detach --build```
+
+## How it looks
+![](https://i.postimg.cc/NG30hQdz/649127e3-b25a-4589-bf1b-88960d521208.jpg)
