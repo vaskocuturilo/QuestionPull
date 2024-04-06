@@ -1,0 +1,25 @@
+name: CI - Build Backend
+on:
+  workflow_dispatch:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: adopt
+          cache: maven
+
+      - name: Build and run Unit/Integration Tests with Maven
+        env:
+          BOT_NAME: ${{ secrets.BOT_NAME }}
+          BOT_API_KEY: ${{ secrets.BOT_API_KEY }}
+        run: mvn -ntp -B verify
