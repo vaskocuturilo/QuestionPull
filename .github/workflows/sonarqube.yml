@@ -34,3 +34,5 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          BOT_NAME: ${{ secrets.BOT_NAME }}
+          BOT_API_KEY: ${{ secrets.BOT_API_KEY }}
