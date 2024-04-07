@@ -6,7 +6,6 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.dao.DataIntegrityViolationException;
-import org.springframework.orm.jpa.JpaSystemException;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.Optional;
@@ -24,11 +23,11 @@ class QuestionPullRepositoryTest {
 
     @Test
     void itShouldSelectQuestionById() {
-        QuestionPullEntity question = new QuestionPullEntity(1, "Test1", "Test1");
+        QuestionPullEntity question = new QuestionPullEntity("Test1", "Test1");
 
         underTest.save(question);
 
-        Optional<QuestionPullEntity> optionalPaste = underTest.findById(1);
+        Optional<QuestionPullEntity> optionalPaste = underTest.getRandomQuestion();
 
         assertThat(optionalPaste).isPresent().hasValueSatisfying(c -> assertThat(c)
                 .usingRecursiveComparison()
@@ -37,7 +36,7 @@ class QuestionPullRepositoryTest {
 
     @Test
     void itShouldSelectByQuestion() {
-        QuestionPullEntity question = new QuestionPullEntity(2, "Test2", "Test2");
+        QuestionPullEntity question = new QuestionPullEntity("Test2", "Test2");
 
         underTest.save(question);
 
@@ -50,7 +49,7 @@ class QuestionPullRepositoryTest {
 
     @Test
     void itShouldSelectQuestionByBody() {
-        QuestionPullEntity question = new QuestionPullEntity(3, "Test3", "Test3");
+        QuestionPullEntity question = new QuestionPullEntity("Test3", "Test3");
 
         underTest.save(question);
 
@@ -79,18 +78,10 @@ class QuestionPullRepositoryTest {
         assertThat(optionalPaste).isNotPresent();
     }
 
-    @Test
-    void itShouldNotSaveQuestionWhenIdIsNull() {
-        QuestionPullEntity question = new QuestionPullEntity(null, "TEST TITLE", "TEST BODY");
-
-        assertThatThrownBy(() -> underTest.save(question))
-                .hasMessage("Identifier of entity 'com.example.questionpull.entity.QuestionPullEntity' must be manually assigned before calling 'persist()'")
-                .isInstanceOf(JpaSystemException.class);
-    }
 
     @Test
     void itShouldNotSaveQuestionWhenTitleIsNull() {
-        QuestionPullEntity question = new QuestionPullEntity(1, null, "TEST BODY");
+        QuestionPullEntity question = new QuestionPullEntity(null, "TEST BODY");
 
         assertThatThrownBy(() -> underTest.save(question))
                 .hasMessage("not-null property references a null or transient value : com.example.questionpull.entity.QuestionPullEntity.title")
@@ -99,11 +90,10 @@ class QuestionPullRepositoryTest {
 
     @Test
     void itShouldNotSaveQuestionWhenBodyIsNull() {
-        QuestionPullEntity question = new QuestionPullEntity(1, "TEST TITLE", null);
+        QuestionPullEntity question = new QuestionPullEntity("TEST TITLE", null);
 
         assertThatThrownBy(() -> underTest.save(question))
                 .hasMessage("not-null property references a null or transient value : com.example.questionpull.entity.QuestionPullEntity.body")
                 .isInstanceOf(DataIntegrityViolationException.class);
     }
-
 }
