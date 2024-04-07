@@ -2,7 +2,6 @@ package com.example.questionpull.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -13,9 +12,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "question_pull")
-public class QuestionPullEntity {
-    @Id
-    Integer id;
+public class QuestionPullEntity extends AbstractBaseEntity {
 
     @Column(nullable = false, length = 2550000)
     private String title;

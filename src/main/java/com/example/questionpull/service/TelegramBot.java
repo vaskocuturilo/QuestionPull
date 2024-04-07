@@ -14,15 +14,10 @@ import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 import java.util.Arrays;
 import java.util.Optional;
-import java.util.Random;
 
 @Component
 @Slf4j
 public class TelegramBot extends TelegramLongPollingBot {
-
-    private final Random random = new Random();
-
-    static final int MAX_QUESTIONS = 2;
     private final BotProperties config;
 
     private final QuestionPullRepository questionPullRepository;
@@ -76,9 +71,7 @@ public class TelegramBot extends TelegramLongPollingBot {
     }
 
     private Optional<QuestionPullEntity> getQuestionFromPull() {
-        var randomId = this.random.nextInt(MAX_QUESTIONS) + 1;
-
-        return questionPullRepository.findById(randomId);
+        return questionPullRepository.getRandomQuestion();
     }
 
     private void commandNotFound(long chatId) {
