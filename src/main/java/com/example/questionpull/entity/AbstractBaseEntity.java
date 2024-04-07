@@ -1,13 +1,11 @@
 package com.example.questionpull.entity;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
 @MappedSuperclass
 @Access(AccessType.FIELD)
-@Getter
-@Setter
+@Data
 public abstract class AbstractBaseEntity {
     public static final int START_SEQ = 100000;
 
