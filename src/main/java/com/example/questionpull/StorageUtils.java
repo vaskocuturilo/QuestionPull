@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.ResourceUtils;
 
-import java.util.Arrays;
 import java.util.List;
 
 @Component
@@ -34,7 +33,7 @@ public class StorageUtils {
                     typeFactory.constructCollectionType(List.class, QuestionPullEntity.class));
             questionPullRepository.saveAll(questionList);
         } catch (Exception e) {
-            log.error(Arrays.toString(e.getStackTrace()));
+            log.error("{}", e.getMessage());
         }
     }
 }

@@ -9,8 +9,8 @@ import java.util.Optional;
 
 public interface QuestionPullRepository extends CrudRepository<QuestionPullEntity, Integer> {
 
-    @Query(value = "SELECT * FROM question_pull ORDER BY RAND() LIMIT 1", nativeQuery = true)
-    Optional<QuestionPullEntity> getRandomQuestion();
+    @Query(value = "SELECT * FROM question_pull WHERE difficulty = :difficulty ORDER BY RAND() LIMIT 1", nativeQuery = true)
+    Optional<QuestionPullEntity> getRandomQuestion(@Param("difficulty") final String difficulty);
     @Query(value = "select * from question_pull q WHERE title = :title ORDER BY title asc ", nativeQuery = true)
     Optional<QuestionPullEntity> findByTitle(@Param("title") final String title);
 

@@ -22,12 +22,12 @@ class QuestionPullRepositoryTest {
     QuestionPullRepository underTest;
 
     @Test
-    void itShouldSelectQuestionById() {
-        QuestionPullEntity question = new QuestionPullEntity("Test1", "Test1");
+    void itShouldSelectQuestionByEasyDifficulty() {
+        QuestionPullEntity question = new QuestionPullEntity("Test1", "Test1", "easy");
 
         underTest.save(question);
 
-        Optional<QuestionPullEntity> optionalPaste = underTest.getRandomQuestion();
+        Optional<QuestionPullEntity> optionalPaste = underTest.getRandomQuestion("easy");
 
         assertThat(optionalPaste).isPresent().hasValueSatisfying(c -> assertThat(c)
                 .usingRecursiveComparison()
@@ -35,8 +35,21 @@ class QuestionPullRepositoryTest {
     }
 
     @Test
-    void itShouldSelectByQuestion() {
-        QuestionPullEntity question = new QuestionPullEntity("Test2", "Test2");
+    void itShouldSelectQuestionByMediumDifficulty() {
+        QuestionPullEntity question = new QuestionPullEntity("Test1", "Test1", "medium");
+
+        underTest.save(question);
+
+        Optional<QuestionPullEntity> optionalPaste = underTest.getRandomQuestion("medium");
+
+        assertThat(optionalPaste).isPresent().hasValueSatisfying(c -> assertThat(c)
+                .usingRecursiveComparison()
+                .isEqualTo(question));
+    }
+
+    @Test
+    void itShouldSelectByTitle() {
+        QuestionPullEntity question = new QuestionPullEntity("Test2", "Test2", "easy");
 
         underTest.save(question);
 
@@ -49,7 +62,7 @@ class QuestionPullRepositoryTest {
 
     @Test
     void itShouldSelectQuestionByBody() {
-        QuestionPullEntity question = new QuestionPullEntity("Test3", "Test3");
+        QuestionPullEntity question = new QuestionPullEntity("Test3", "Test3", "easy");
 
         underTest.save(question);
 
@@ -78,10 +91,15 @@ class QuestionPullRepositoryTest {
         assertThat(optionalPaste).isNotPresent();
     }
 
+    @Test
+    void itNotShouldSelectQuestionByBodyWhenDifficultyDoesNotExist() {
+        Optional<QuestionPullEntity> optionalPaste = underTest.getRandomQuestion("easy");
+        assertThat(optionalPaste).isNotPresent();
+    }
 
     @Test
     void itShouldNotSaveQuestionWhenTitleIsNull() {
-        QuestionPullEntity question = new QuestionPullEntity(null, "TEST BODY");
+        QuestionPullEntity question = new QuestionPullEntity(null, "TEST BODY", "easy");
 
         assertThatThrownBy(() -> underTest.save(question))
                 .hasMessage("not-null property references a null or transient value : com.example.questionpull.entity.QuestionPullEntity.title")
@@ -90,10 +108,19 @@ class QuestionPullRepositoryTest {
 
     @Test
     void itShouldNotSaveQuestionWhenBodyIsNull() {
-        QuestionPullEntity question = new QuestionPullEntity("TEST TITLE", null);
+        QuestionPullEntity question = new QuestionPullEntity("TEST TITLE", null, "easy");
 
         assertThatThrownBy(() -> underTest.save(question))
                 .hasMessage("not-null property references a null or transient value : com.example.questionpull.entity.QuestionPullEntity.body")
+                .isInstanceOf(DataIntegrityViolationException.class);
+    }
+
+    @Test
+    void itShouldNotSaveQuestionWhenDifficultyIsNull() {
+        QuestionPullEntity question = new QuestionPullEntity("TEST TITLE", "TEST BODY", null);
+
+        assertThatThrownBy(() -> underTest.save(question))
+                .hasMessage("not-null property references a null or transient value : com.example.questionpull.entity.QuestionPullEntity.difficulty")
                 .isInstanceOf(DataIntegrityViolationException.class);
     }
 }
