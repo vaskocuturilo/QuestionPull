@@ -1,34 +1,42 @@
 [
   {
     "title": " The zero max ",
-    "body": "Return a version of the given array where each zero value in the array is replaced by the\n    largest odd value to the right of the zero in the array.\n    If there is no odd value to the right of the zero, leave the zero as a zero."
+    "body": "Return a version of the given array where each zero value in the array is replaced by the\n    largest odd value to the right of the zero in the array.\n    If there is no odd value to the right of the zero, leave the zero as a zero.",
+    "difficulty": "easy"
   },
   {
     "title": " The Reverse integer ",
-    "body": "Given a signed 32-bit integer x, return x with its digits reversed. If reversing x causes the value to go outside the signed 32-bit integer range [-231, 231 - 1], then return 0."
+    "body": "Given a signed 32-bit integer x, return x with its digits reversed. If reversing x causes the value to go outside the signed 32-bit integer range [-231, 231 - 1], then return 0.",
+    "difficulty": "medium"
   },
   {
     "title": "The two sum",
-    "body": "Given an array of integers nums and an integer target, return indices of the two numbers such that they add up to target.\n\nYou may assume that each input would have exactly one solution, and you may not use the same element twice.\n\nYou can return the answer in any order."
+    "body": "Given an array of integers nums and an integer target, return indices of the two numbers such that they add up to target.\n\nYou may assume that each input would have exactly one solution, and you may not use the same element twice.\n\nYou can return the answer in any order.",
+    "difficulty": "easy"
   },
   {
     "title": "Palindrome Number",
-    "body": "Given an integer x, return true if x is a \npalindrome\n, and false otherwise. Input: x = 121\nOutput: true\nExplanation: 121 reads as 121 from left to right and from right to left."
+    "body": "Given an integer x, return true if x is a \npalindrome\n, and false otherwise. Input: x = 121\nOutput: true\nExplanation: 121 reads as 121 from left to right and from right to left.",
+    "difficulty": "easy"
   },
   {
     "title": "Longest Common Prefix",
-    "body": "Write a function to find the longest common prefix string amongst an array of strings.\n\nIf there is no common prefix, return an empty string \"\". Input: strs = [\"flower\",\"flow\",\"flight\"]\nOutput: \"fl\" Input: strs = [\"dog\",\"racecar\",\"car\"]\nOutput: \"\""
+    "body": "Write a function to find the longest common prefix string amongst an array of strings.\n\nIf there is no common prefix, return an empty string \"\". Input: strs = [\"flower\",\"flow\",\"flight\"]\nOutput: \"fl\" Input: strs = [\"dog\",\"racecar\",\"car\"]\nOutput: \"\"",
+    "difficulty": "easy"
   },
   {
     "title": "Valid Parentheses",
-    "body": "Given a string s containing just the characters '(', ')', '{', '}', '[' and ']', determine if the input string is valid. "
+    "body": "Given a string s containing just the characters '(', ')', '{', '}', '[' and ']', determine if the input string is valid. ",
+    "difficulty": "easy"
   },
   {
     "title": "Find the Index of the First Occurrence in a String",
-    "body": "Given two strings needle and haystack, return the index of the first occurrence of needle in haystack, or -1 if needle is not part of haystack."
+    "body": "Given two strings needle and haystack, return the index of the first occurrence of needle in haystack, or -1 if needle is not part of haystack.",
+    "difficulty": "easy"
   },
   {
     "title": " Search Insert Position",
-    "body": "Given a sorted array of distinct integers and a target value, return the index if the target is found. If not, return the index where it would be if it were inserted in order.\n\nYou must write an algorithm with O(log n) runtime complexity."
+    "body": "Given a sorted array of distinct integers and a target value, return the index if the target is found. If not, return the index where it would be if it were inserted in order.\n\nYou must write an algorithm with O(log n) runtime complexity.",
+    "difficulty": "easy"
   }
 ]
