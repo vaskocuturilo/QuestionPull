@@ -23,7 +23,7 @@ class QuestionPullRepositoryTest {
 
     @Test
     void itShouldSelectQuestionByEasyDifficulty() {
-        QuestionPullEntity question = new QuestionPullEntity("Test1", "Test1", "easy");
+        QuestionPullEntity question = new QuestionPullEntity("Test1", "Test1", "easy", false);
 
         underTest.save(question);
 
@@ -36,7 +36,7 @@ class QuestionPullRepositoryTest {
 
     @Test
     void itShouldSelectQuestionByMediumDifficulty() {
-        QuestionPullEntity question = new QuestionPullEntity("Test1", "Test1", "medium");
+        QuestionPullEntity question = new QuestionPullEntity("Test1", "Test1", "medium", false);
 
         underTest.save(question);
 
@@ -49,7 +49,7 @@ class QuestionPullRepositoryTest {
 
     @Test
     void itShouldSelectByTitle() {
-        QuestionPullEntity question = new QuestionPullEntity("Test2", "Test2", "easy");
+        QuestionPullEntity question = new QuestionPullEntity("Test2", "Test2", "easy", false);
 
         underTest.save(question);
 
@@ -62,7 +62,7 @@ class QuestionPullRepositoryTest {
 
     @Test
     void itShouldSelectQuestionByBody() {
-        QuestionPullEntity question = new QuestionPullEntity("Test3", "Test3", "easy");
+        QuestionPullEntity question = new QuestionPullEntity("Test3", "Test3", "easy", false);
 
         underTest.save(question);
 
@@ -99,7 +99,7 @@ class QuestionPullRepositoryTest {
 
     @Test
     void itShouldNotSaveQuestionWhenTitleIsNull() {
-        QuestionPullEntity question = new QuestionPullEntity(null, "TEST BODY", "easy");
+        QuestionPullEntity question = new QuestionPullEntity(null, "TEST BODY", "easy", false);
 
         assertThatThrownBy(() -> underTest.save(question))
                 .hasMessage("not-null property references a null or transient value : com.example.questionpull.entity.QuestionPullEntity.title")
@@ -108,7 +108,7 @@ class QuestionPullRepositoryTest {
 
     @Test
     void itShouldNotSaveQuestionWhenBodyIsNull() {
-        QuestionPullEntity question = new QuestionPullEntity("TEST TITLE", null, "easy");
+        QuestionPullEntity question = new QuestionPullEntity("TEST TITLE", null, "easy", false);
 
         assertThatThrownBy(() -> underTest.save(question))
                 .hasMessage("not-null property references a null or transient value : com.example.questionpull.entity.QuestionPullEntity.body")
@@ -117,7 +117,7 @@ class QuestionPullRepositoryTest {
 
     @Test
     void itShouldNotSaveQuestionWhenDifficultyIsNull() {
-        QuestionPullEntity question = new QuestionPullEntity("TEST TITLE", "TEST BODY", null);
+        QuestionPullEntity question = new QuestionPullEntity("TEST TITLE", "TEST BODY", null, false);
 
         assertThatThrownBy(() -> underTest.save(question))
                 .hasMessage("not-null property references a null or transient value : com.example.questionpull.entity.QuestionPullEntity.difficulty")

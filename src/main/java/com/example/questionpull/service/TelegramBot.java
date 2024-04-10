@@ -62,6 +62,9 @@ public class TelegramBot extends TelegramLongPollingBot {
                 case "/help" -> helpCommand(chatId);
                 case "/question" -> {
                     var question = getQuestionFromPull();
+
+                    checkPull(question, chatId);
+
                     question.ifPresentOrElse(questionPullEntity -> addButtonAndSendMessage(
                                     String.format("""
                                                      Title: %s,
@@ -81,15 +84,25 @@ public class TelegramBot extends TelegramLongPollingBot {
 
             if (callbackData.equals(NEXT_QUESTION)) {
 
-                var joke = getQuestionFromPull();
+                var question = getQuestionFromPull();
 
-                joke.ifPresent(questionPullEntity -> addButtonAndEditText(String.format("""
+                checkPull(question, chatId);
+
+                question.ifPresent(questionPullEntity -> addButtonAndEditText(String.format("""
                                  Title: %s,
                                 Question: %s
                                  """, questionPullEntity.getTitle(),
                         questionPullEntity.getBody()), chatId, update.getCallbackQuery().getMessage().getMessageId()));
             }
         }
+    }
+
+    private void checkPull(Optional<QuestionPullEntity> question, long chatId) {
+        if (question.isEmpty()) {
+            sendMessage("Your question pull is empty", chatId);
+            return;
+        }
+        questionPullRepository.setActiveForQuestion(question.get().getId());
     }
 
     private Optional<QuestionPullEntity> getQuestionFromPull() {
