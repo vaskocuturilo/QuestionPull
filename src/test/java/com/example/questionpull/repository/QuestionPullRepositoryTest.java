@@ -9,6 +9,7 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.Optional;
+import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
@@ -75,7 +76,8 @@ class QuestionPullRepositoryTest {
 
     @Test
     void itNotShouldSelectQuestionByIdWhenIdDoesNotExist() {
-        Optional<QuestionPullEntity> optionalPaste = underTest.findById(100);
+        UUID uuid = UUID.randomUUID();
+        Optional<QuestionPullEntity> optionalPaste = underTest.findById(uuid);
         assertThat(optionalPaste).isNotPresent();
     }
 
@@ -122,5 +124,19 @@ class QuestionPullRepositoryTest {
         assertThatThrownBy(() -> underTest.save(question))
                 .hasMessage("not-null property references a null or transient value : com.example.questionpull.entity.QuestionPullEntity.difficulty")
                 .isInstanceOf(DataIntegrityViolationException.class);
+    }
+
+
+    @Test
+    void itShouldIsActiveTrue() {
+        QuestionPullEntity question = new QuestionPullEntity("Set new data", "Set new data", "easy", false);
+        underTest.save(question);
+        underTest.setActiveForQuestion(question.getUuid());
+
+        Optional<QuestionPullEntity> optionalPaste = underTest.findByTitle("Set new data");
+
+        assertThat(optionalPaste).isPresent().hasValueSatisfying(c -> assertThat(c)
+                .usingRecursiveComparison()
+                .isEqualTo(question));
     }
 }

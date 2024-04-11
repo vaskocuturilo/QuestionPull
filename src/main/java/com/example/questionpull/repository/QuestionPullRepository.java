@@ -8,8 +8,9 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 
 import java.util.Optional;
+import java.util.UUID;
 
-public interface QuestionPullRepository extends CrudRepository<QuestionPullEntity, Integer> {
+public interface QuestionPullRepository extends CrudRepository<QuestionPullEntity, UUID> {
     @Query(value = "SELECT * FROM question_pull q WHERE difficulty = :difficulty AND q.active = false ORDER BY RAND() LIMIT 1", nativeQuery = true)
     Optional<QuestionPullEntity> getRandomQuestion(@Param("difficulty") final String difficulty);
 
@@ -21,7 +22,6 @@ public interface QuestionPullRepository extends CrudRepository<QuestionPullEntit
 
     @Modifying
     @Transactional
-    @Query(value = "UPDATE question_pull q SET q.active = true WHERE id = :id ", nativeQuery = true)
-    void setActiveForQuestion(@Param("id") final Integer id);
-
+    @Query(value = "UPDATE question_pull q SET q.active = true WHERE uuid = :uuid", nativeQuery = true)
+    void setActiveForQuestion(@Param("uuid") final UUID uuid);
 }

@@ -5,13 +5,13 @@ import com.example.questionpull.config.BotProperties;
 import com.example.questionpull.entity.QuestionPullEntity;
 import com.example.questionpull.repository.QuestionPullRepository;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
-import org.telegram.telegrambots.meta.api.methods.updatingmessages.EditMessageText;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
+import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboardRemove;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
@@ -26,12 +26,14 @@ public class TelegramBot extends TelegramLongPollingBot {
     private final BotProperties config;
 
     private final QuestionPullRepository questionPullRepository;
-
     private final StorageUtils storageUtils;
 
     private static final String NEXT_QUESTION = "NEXT_QUESTION";
+    private static final String STOP_QUESTION = "STOP_QUESTION";
 
-    @Autowired
+    @Value("${bot.message.end.question}")
+    String messages;
+
     public TelegramBot(BotProperties config, QuestionPullRepository questionPullRepository, StorageUtils storageUtils) {
         this.config = config;
         this.questionPullRepository = questionPullRepository;
@@ -61,61 +63,51 @@ public class TelegramBot extends TelegramLongPollingBot {
                 }
                 case "/help" -> helpCommand(chatId);
                 case "/question" -> {
-                    var question = getQuestionFromPull();
-
-                    checkPull(question, chatId);
-
-                    question.ifPresentOrElse(questionPullEntity -> addButtonAndSendMessage(
-                                    String.format("""
-                                                     Title: %s,
-                                                    Question: %s
-                                                     """, questionPullEntity.getTitle(),
-                                            questionPullEntity.getBody()), chatId),
-                            () -> {
-                                throw new IllegalStateException("Can't take any question");
-                            });
+                    var question = getQuestionFromPull("easy");
+                    logic(question, chatId);
                 }
                 default -> commandNotFound(chatId);
             }
         } else if (update.hasCallbackQuery()) {
-
             String callbackData = update.getCallbackQuery().getData();
             long chatId = update.getCallbackQuery().getMessage().getChatId();
 
             if (callbackData.equals(NEXT_QUESTION)) {
+                var question = getQuestionFromPull("easy");
+                logic(question, chatId);
+            }
 
-                var question = getQuestionFromPull();
-
-                checkPull(question, chatId);
-
-                question.ifPresent(questionPullEntity -> addButtonAndEditText(String.format("""
-                                 Title: %s,
-                                Question: %s
-                                 """, questionPullEntity.getTitle(),
-                        questionPullEntity.getBody()), chatId, update.getCallbackQuery().getMessage().getMessageId()));
+            if (callbackData.equals(STOP_QUESTION)) {
+                stopChat(chatId);
             }
         }
     }
 
-    private void checkPull(Optional<QuestionPullEntity> question, long chatId) {
-        if (question.isEmpty()) {
-            sendMessage("Your question pull is empty", chatId);
-            return;
-        }
-        questionPullRepository.setActiveForQuestion(question.get().getId());
+    private Optional<QuestionPullEntity> getQuestionFromPull(final String level) {
+        return questionPullRepository.getRandomQuestion(level);
     }
 
-    private Optional<QuestionPullEntity> getQuestionFromPull() {
-        return questionPullRepository.getRandomQuestion("easy");
+    public void addButtonAndSendMessage(String textToSend, long chatId, final String buttonText) {
+        SendMessage message = new SendMessage();
+        message.setText(textToSend);
+        message.setChatId(chatId);
+
+        InlineKeyboardMarkup markupInline = new InlineKeyboardMarkup();
+        List<List<InlineKeyboardButton>> rowsInline = new ArrayList<>();
+        List<InlineKeyboardButton> rowInline = new ArrayList<>();
+        var inlinekeyboardButton = new InlineKeyboardButton();
+        inlinekeyboardButton.setCallbackData(buttonText);
+        inlinekeyboardButton.setText(buttonText);
+        rowInline.add(inlinekeyboardButton);
+        rowsInline.add(rowInline);
+        markupInline.setKeyboard(rowsInline);
+        message.setReplyMarkup(markupInline);
+
+        send(message);
     }
 
-    private void commandNotFound(long chatId) {
-        String answer = "This is not a recognized command. You can use \"/help\" for more information.";
-        sendMessage(answer, chatId);
-    }
-
-    private void helpCommand(long chatId) {
-        String answer = "You can use \"/question\" command for start question pull.";
+    public void showStart(long chatId, String name) {
+        String answer = "Hi, " + name + ", Nice to meet you! You can use \"/question\" command for start question pull or \"/help\" for more information.";
         sendMessage(answer, chatId);
     }
 
@@ -126,9 +118,22 @@ public class TelegramBot extends TelegramLongPollingBot {
         send(message);
     }
 
-    private void showStart(long chatId, String name) {
-        String answer = "Hi, " + name + ", Nice to meet you! You can use \"/question\" command for start question pull or \"/help\" for more information.";
+    public void commandNotFound(long chatId) {
+        String answer = "This is not a recognized command. You can use \"/help\" for more information.";
         sendMessage(answer, chatId);
+    }
+
+    public void helpCommand(long chatId) {
+        String answer = "You can use \"/question\" command for start question pull.";
+        sendMessage(answer, chatId);
+    }
+
+    public void stopChat(long chatId) {
+        SendMessage message = new SendMessage();
+        message.setChatId(chatId);
+        message.setText(messages);
+        message.setReplyMarkup(new ReplyKeyboardRemove(true));
+        send(message);
     }
 
     private void send(SendMessage msg) {
@@ -139,51 +144,12 @@ public class TelegramBot extends TelegramLongPollingBot {
         }
     }
 
-    private void addButtonAndSendMessage(String textToSend, long chatId) {
-
-        SendMessage message = new SendMessage();
-        message.setText(textToSend);
-        message.setChatId(chatId);
-
-        InlineKeyboardMarkup markupInline = new InlineKeyboardMarkup();
-        List<List<InlineKeyboardButton>> rowsInline = new ArrayList<>();
-        List<InlineKeyboardButton> rowInline = new ArrayList<>();
-        var inlinekeyboardButton = new InlineKeyboardButton();
-        inlinekeyboardButton.setCallbackData(NEXT_QUESTION);
-        inlinekeyboardButton.setText("next question");
-        rowInline.add(inlinekeyboardButton);
-        rowsInline.add(rowInline);
-        markupInline.setKeyboard(rowsInline);
-        message.setReplyMarkup(markupInline);
-        send(message);
-    }
-
-    private void addButtonAndEditText(String joke, long chatId, Integer messageId) {
-
-        EditMessageText message = new EditMessageText();
-        message.setChatId(chatId);
-        message.setText(joke);
-        message.setMessageId(messageId);
-
-        InlineKeyboardMarkup markupInline = new InlineKeyboardMarkup();
-        List<List<InlineKeyboardButton>> rowsInline = new ArrayList<>();
-        List<InlineKeyboardButton> rowInline = new ArrayList<>();
-        var inlinekeyboardButton = new InlineKeyboardButton();
-        inlinekeyboardButton.setCallbackData(NEXT_QUESTION);
-        inlinekeyboardButton.setText("next question");
-        rowInline.add(inlinekeyboardButton);
-        rowsInline.add(rowInline);
-        markupInline.setKeyboard(rowsInline);
-        message.setReplyMarkup(markupInline);
-
-        sendEditMessageText(message);
-    }
-
-    private void sendEditMessageText(EditMessageText msg) {
-        try {
-            execute(msg);
-        } catch (TelegramApiException e) {
-            log.error(Arrays.toString(e.getStackTrace()));
-        }
+    private void logic(Optional<QuestionPullEntity> question, long chatId) {
+        question.ifPresent(questionPullEntity -> addButtonAndSendMessage(
+                """
+                          Title: %s
+                          Body: %s                 
+                        """.formatted(questionPullEntity.getTitle(), questionPullEntity.getBody()), chatId, NEXT_QUESTION));
+        question.ifPresentOrElse(questionPullEntity -> questionPullRepository.setActiveForQuestion(questionPullEntity.getUuid()), () -> stopChat(chatId));
     }
 }
