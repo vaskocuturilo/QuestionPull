@@ -10,15 +10,12 @@ import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
-import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
-import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboardRemove;
-import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 import java.util.Optional;
+
+import static com.example.questionpull.factory.KeyboardFactory.addButtonAndSendMessage;
 
 @Component
 @Slf4j
@@ -87,24 +84,6 @@ public class TelegramBot extends TelegramLongPollingBot {
         return questionPullRepository.getRandomQuestion(level);
     }
 
-    public void addButtonAndSendMessage(String textToSend, long chatId, final String buttonText) {
-        SendMessage message = new SendMessage();
-        message.setText(textToSend);
-        message.setChatId(chatId);
-
-        InlineKeyboardMarkup markupInline = new InlineKeyboardMarkup();
-        List<List<InlineKeyboardButton>> rowsInline = new ArrayList<>();
-        List<InlineKeyboardButton> rowInline = new ArrayList<>();
-        var inlinekeyboardButton = new InlineKeyboardButton();
-        inlinekeyboardButton.setCallbackData(buttonText);
-        inlinekeyboardButton.setText(buttonText);
-        rowInline.add(inlinekeyboardButton);
-        rowsInline.add(rowInline);
-        markupInline.setKeyboard(rowsInline);
-        message.setReplyMarkup(markupInline);
-
-        send(message);
-    }
 
     public void showStart(long chatId, String name) {
         String answer = "Hi, " + name + ", Nice to meet you! You can use \"/question\" command for start question pull or \"/help\" for more information.";
@@ -132,7 +111,6 @@ public class TelegramBot extends TelegramLongPollingBot {
         SendMessage message = new SendMessage();
         message.setChatId(chatId);
         message.setText(messages);
-        message.setReplyMarkup(new ReplyKeyboardRemove(true));
         send(message);
     }
 
@@ -145,11 +123,11 @@ public class TelegramBot extends TelegramLongPollingBot {
     }
 
     private void logic(Optional<QuestionPullEntity> question, long chatId) {
-        question.ifPresent(questionPullEntity -> addButtonAndSendMessage(
+        question.ifPresent(questionPullEntity -> send(addButtonAndSendMessage(
                 """
                           Title: %s
                           Body: %s                 
-                        """.formatted(questionPullEntity.getTitle(), questionPullEntity.getBody()), chatId, NEXT_QUESTION));
+                        """.formatted(questionPullEntity.getTitle(), questionPullEntity.getBody()), chatId, NEXT_QUESTION)));
         question.ifPresentOrElse(questionPullEntity -> questionPullRepository.setActiveForQuestion(questionPullEntity.getUuid()), () -> stopChat(chatId));
     }
 }
