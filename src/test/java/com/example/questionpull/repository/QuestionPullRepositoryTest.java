@@ -1,6 +1,8 @@
 package com.example.questionpull.repository;
 
 import com.example.questionpull.entity.QuestionPullEntity;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,14 +23,22 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 class QuestionPullRepositoryTest {
     @Autowired
     QuestionPullRepository underTest;
+    @PersistenceContext
+    EntityManager entityManager;
 
     @Test
     void itShouldSelectQuestionByEasyDifficulty() {
-        QuestionPullEntity question = new QuestionPullEntity("Test1", "Test1", "easy", false);
+        String level = "easy";
+        QuestionPullEntity question = QuestionPullEntity
+                .builder()
+                .title("Test")
+                .body("Test")
+                .difficulty(level)
+                .active(false).build();
 
         underTest.save(question);
 
-        Optional<QuestionPullEntity> optionalPaste = underTest.getRandomQuestion("easy");
+        Optional<QuestionPullEntity> optionalPaste = underTest.getRandomQuestion(level);
 
         assertThat(optionalPaste).isPresent().hasValueSatisfying(c -> assertThat(c)
                 .usingRecursiveComparison()
@@ -37,11 +47,17 @@ class QuestionPullRepositoryTest {
 
     @Test
     void itShouldSelectQuestionByMediumDifficulty() {
-        QuestionPullEntity question = new QuestionPullEntity("Test1", "Test1", "medium", false);
+        String level = "medium";
+        QuestionPullEntity question = QuestionPullEntity
+                .builder()
+                .title("Test")
+                .body("Test")
+                .difficulty(level)
+                .active(false).build();
 
         underTest.save(question);
 
-        Optional<QuestionPullEntity> optionalPaste = underTest.getRandomQuestion("medium");
+        Optional<QuestionPullEntity> optionalPaste = underTest.getRandomQuestion(level);
 
         assertThat(optionalPaste).isPresent().hasValueSatisfying(c -> assertThat(c)
                 .usingRecursiveComparison()
@@ -50,11 +66,16 @@ class QuestionPullRepositoryTest {
 
     @Test
     void itShouldSelectByTitle() {
-        QuestionPullEntity question = new QuestionPullEntity("Test2", "Test2", "easy", false);
+        QuestionPullEntity question = QuestionPullEntity
+                .builder()
+                .title("Test")
+                .body("Test")
+                .difficulty("easy")
+                .active(false).build();
 
         underTest.save(question);
 
-        Optional<QuestionPullEntity> optionalPaste = underTest.findByTitle("Test2");
+        Optional<QuestionPullEntity> optionalPaste = underTest.findByTitle("Test");
 
         assertThat(optionalPaste).isPresent().hasValueSatisfying(c -> assertThat(c)
                 .usingRecursiveComparison()
@@ -63,11 +84,16 @@ class QuestionPullRepositoryTest {
 
     @Test
     void itShouldSelectQuestionByBody() {
-        QuestionPullEntity question = new QuestionPullEntity("Test3", "Test3", "easy", false);
+        QuestionPullEntity question = QuestionPullEntity
+                .builder()
+                .title("Test")
+                .body("Test")
+                .difficulty("easy")
+                .active(false).build();
 
         underTest.save(question);
 
-        Optional<QuestionPullEntity> optionalPaste = underTest.findByBody("Test3");
+        Optional<QuestionPullEntity> optionalPaste = underTest.findByBody("Test");
 
         assertThat(optionalPaste).isPresent().hasValueSatisfying(c -> assertThat(c)
                 .usingRecursiveComparison()
@@ -83,13 +109,13 @@ class QuestionPullRepositoryTest {
 
     @Test
     void itNotShouldSelectQuestionByTitleWhenTitleDoesNotExist() {
-        Optional<QuestionPullEntity> optionalPaste = underTest.findByTitle("TEST TITLE");
+        Optional<QuestionPullEntity> optionalPaste = underTest.findByTitle("Test title");
         assertThat(optionalPaste).isNotPresent();
     }
 
     @Test
     void itNotShouldSelectQuestionByBodyWhenBodyDoesNotExist() {
-        Optional<QuestionPullEntity> optionalPaste = underTest.findByBody("TEST BODY");
+        Optional<QuestionPullEntity> optionalPaste = underTest.findByBody("Test body");
         assertThat(optionalPaste).isNotPresent();
     }
 
@@ -101,7 +127,7 @@ class QuestionPullRepositoryTest {
 
     @Test
     void itShouldNotSaveQuestionWhenTitleIsNull() {
-        QuestionPullEntity question = new QuestionPullEntity(null, "TEST BODY", "easy", false);
+        QuestionPullEntity question = new QuestionPullEntity(null, "Test body", "easy", false);
 
         assertThatThrownBy(() -> underTest.save(question))
                 .hasMessage("not-null property references a null or transient value : com.example.questionpull.entity.QuestionPullEntity.title")
@@ -110,7 +136,7 @@ class QuestionPullRepositoryTest {
 
     @Test
     void itShouldNotSaveQuestionWhenBodyIsNull() {
-        QuestionPullEntity question = new QuestionPullEntity("TEST TITLE", null, "easy", false);
+        QuestionPullEntity question = new QuestionPullEntity("Test title", null, "easy", false);
 
         assertThatThrownBy(() -> underTest.save(question))
                 .hasMessage("not-null property references a null or transient value : com.example.questionpull.entity.QuestionPullEntity.body")
@@ -119,7 +145,12 @@ class QuestionPullRepositoryTest {
 
     @Test
     void itShouldNotSaveQuestionWhenDifficultyIsNull() {
-        QuestionPullEntity question = new QuestionPullEntity("TEST TITLE", "TEST BODY", null, false);
+        QuestionPullEntity question = QuestionPullEntity
+                .builder()
+                .title("Test")
+                .body("Test")
+                .difficulty(null)
+                .active(false).build();
 
         assertThatThrownBy(() -> underTest.save(question))
                 .hasMessage("not-null property references a null or transient value : com.example.questionpull.entity.QuestionPullEntity.difficulty")
@@ -128,15 +159,31 @@ class QuestionPullRepositoryTest {
 
 
     @Test
-    void itShouldIsActiveTrue() {
-        QuestionPullEntity question = new QuestionPullEntity("Set new data", "Set new data", "easy", false);
-        underTest.save(question);
-        underTest.setActiveForQuestion(question.getUuid());
+    void itShouldBeActiveTrueAfterChange() {
+        QuestionPullEntity questionBeforeChange = QuestionPullEntity
+                .builder()
+                .title("Test")
+                .body("Test")
+                .difficulty("easy")
+                .active(false).build();
 
-        Optional<QuestionPullEntity> optionalPaste = underTest.findByTitle("Set new data");
+        QuestionPullEntity questionAfterChange = QuestionPullEntity
+                .builder()
+                .title("Test")
+                .body("Test")
+                .difficulty("easy")
+                .active(true).build();
+
+        underTest.save(questionBeforeChange);
+        underTest.setActiveForQuestion(questionBeforeChange.getUuid());
+
+        //clear cache
+        entityManager.clear();
+
+        Optional<QuestionPullEntity> optionalPaste = underTest.findByTitle("Test");
 
         assertThat(optionalPaste).isPresent().hasValueSatisfying(c -> assertThat(c)
-                .usingRecursiveComparison()
-                .isEqualTo(question));
+                .usingRecursiveComparison().ignoringFieldsMatchingRegexes("uuid")
+                .isEqualTo(questionAfterChange));
     }
 }
