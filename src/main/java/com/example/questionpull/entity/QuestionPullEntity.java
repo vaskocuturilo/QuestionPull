@@ -20,9 +20,19 @@ public class QuestionPullEntity extends AbstractBaseEntity {
     @Column(nullable = false, length = 2550000)
     private String body;
 
+    @Column(nullable = false, length = 2550000)
+    private String example;
+
     @Column(nullable = false, length = 10)
     private String difficulty;
 
     @Column(nullable = false)
     private boolean active = false;
+
+    public QuestionPullEntity(String title, String body, String example, String difficulty) {
+        this.title = title;
+        this.body = body;
+        this.example = example;
+        this.difficulty = difficulty;
+    }
 }
