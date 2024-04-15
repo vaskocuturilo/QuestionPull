@@ -125,9 +125,10 @@ public class TelegramBot extends TelegramLongPollingBot {
     private void logic(Optional<QuestionPullEntity> question, long chatId) {
         question.ifPresent(questionPullEntity -> send(addButtonAndSendMessage(
                 """
-                          Title: %s
-                          Body: %s                 
-                        """.formatted(questionPullEntity.getTitle(), questionPullEntity.getBody()), chatId, NEXT_QUESTION)));
+                          Title: %s,
+                          Body: %s,
+                          Example: %s                
+                        """.formatted(questionPullEntity.getTitle(), questionPullEntity.getBody(), questionPullEntity.getExample()), chatId, NEXT_QUESTION)));
         question.ifPresentOrElse(questionPullEntity -> questionPullRepository.setActiveForQuestion(questionPullEntity.getUuid()), () -> stopChat(chatId));
     }
 }

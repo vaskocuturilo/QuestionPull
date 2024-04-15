@@ -33,6 +33,7 @@ class QuestionPullRepositoryTest {
                 .builder()
                 .title("Test")
                 .body("Test")
+                .example("Example")
                 .difficulty(level)
                 .active(false).build();
 
@@ -52,6 +53,7 @@ class QuestionPullRepositoryTest {
                 .builder()
                 .title("Test")
                 .body("Test")
+                .example("Example")
                 .difficulty(level)
                 .active(false).build();
 
@@ -70,6 +72,7 @@ class QuestionPullRepositoryTest {
                 .builder()
                 .title("Test")
                 .body("Test")
+                .example("Example")
                 .difficulty("easy")
                 .active(false).build();
 
@@ -88,6 +91,7 @@ class QuestionPullRepositoryTest {
                 .builder()
                 .title("Test")
                 .body("Test")
+                .example("Example")
                 .difficulty("easy")
                 .active(false).build();
 
@@ -127,7 +131,13 @@ class QuestionPullRepositoryTest {
 
     @Test
     void itShouldNotSaveQuestionWhenTitleIsNull() {
-        QuestionPullEntity question = new QuestionPullEntity(null, "Test body", "easy", false);
+        QuestionPullEntity question = QuestionPullEntity
+                .builder()
+                .title(null)
+                .body("Test")
+                .example("Example")
+                .difficulty("easy")
+                .active(false).build();
 
         assertThatThrownBy(() -> underTest.save(question))
                 .hasMessage("not-null property references a null or transient value : com.example.questionpull.entity.QuestionPullEntity.title")
@@ -136,7 +146,13 @@ class QuestionPullRepositoryTest {
 
     @Test
     void itShouldNotSaveQuestionWhenBodyIsNull() {
-        QuestionPullEntity question = new QuestionPullEntity("Test title", null, "easy", false);
+        QuestionPullEntity question = QuestionPullEntity
+                .builder()
+                .title("Test")
+                .body(null)
+                .example("Example")
+                .difficulty("easy")
+                .active(false).build();
 
         assertThatThrownBy(() -> underTest.save(question))
                 .hasMessage("not-null property references a null or transient value : com.example.questionpull.entity.QuestionPullEntity.body")
@@ -149,11 +165,27 @@ class QuestionPullRepositoryTest {
                 .builder()
                 .title("Test")
                 .body("Test")
+                .example("Example")
                 .difficulty(null)
                 .active(false).build();
 
         assertThatThrownBy(() -> underTest.save(question))
                 .hasMessage("not-null property references a null or transient value : com.example.questionpull.entity.QuestionPullEntity.difficulty")
+                .isInstanceOf(DataIntegrityViolationException.class);
+    }
+
+    @Test
+    void itShouldNotSaveQuestionWhenExampleIsNull() {
+        QuestionPullEntity question = QuestionPullEntity
+                .builder()
+                .title("Test")
+                .body("Test")
+                .example(null)
+                .difficulty("easy")
+                .active(false).build();
+
+        assertThatThrownBy(() -> underTest.save(question))
+                .hasMessage("not-null property references a null or transient value : com.example.questionpull.entity.QuestionPullEntity.example")
                 .isInstanceOf(DataIntegrityViolationException.class);
     }
 
@@ -164,6 +196,7 @@ class QuestionPullRepositoryTest {
                 .builder()
                 .title("Test")
                 .body("Test")
+                .example("Example")
                 .difficulty("easy")
                 .active(false).build();
 
@@ -171,6 +204,7 @@ class QuestionPullRepositoryTest {
                 .builder()
                 .title("Test")
                 .body("Test")
+                .example("Example")
                 .difficulty("easy")
                 .active(true).build();
 
@@ -186,4 +220,5 @@ class QuestionPullRepositoryTest {
                 .usingRecursiveComparison().ignoringFieldsMatchingRegexes("uuid")
                 .isEqualTo(questionAfterChange));
     }
+
 }
