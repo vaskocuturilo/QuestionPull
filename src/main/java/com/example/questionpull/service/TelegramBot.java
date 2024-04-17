@@ -3,7 +3,6 @@ package com.example.questionpull.service;
 import com.example.questionpull.StorageUtils;
 import com.example.questionpull.config.BotProperties;
 import com.example.questionpull.entity.QuestionPullEntity;
-import com.example.questionpull.repository.QuestionPullRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -22,7 +21,7 @@ import static com.example.questionpull.factory.KeyboardFactory.addButtonAndSendM
 public class TelegramBot extends TelegramLongPollingBot {
     private final BotProperties config;
 
-    private final QuestionPullRepository questionPullRepository;
+    private final QuestionPullServiceImplementation questionPullService;
     private final StorageUtils storageUtils;
 
     private static final String NEXT_QUESTION = "NEXT_QUESTION";
@@ -31,9 +30,9 @@ public class TelegramBot extends TelegramLongPollingBot {
     @Value("${bot.message.end.question}")
     String messages;
 
-    public TelegramBot(BotProperties config, QuestionPullRepository questionPullRepository, StorageUtils storageUtils) {
+    public TelegramBot(BotProperties config, QuestionPullServiceImplementation questionPullService, StorageUtils storageUtils) {
         this.config = config;
-        this.questionPullRepository = questionPullRepository;
+        this.questionPullService = questionPullService;
         this.storageUtils = storageUtils;
     }
 
@@ -65,7 +64,8 @@ public class TelegramBot extends TelegramLongPollingBot {
                 }
                 default -> commandNotFound(chatId);
             }
-        } else if (update.hasCallbackQuery()) {
+        }
+        if (update.hasCallbackQuery()) {
             String callbackData = update.getCallbackQuery().getData();
             long chatId = update.getCallbackQuery().getMessage().getChatId();
 
@@ -81,7 +81,7 @@ public class TelegramBot extends TelegramLongPollingBot {
     }
 
     private Optional<QuestionPullEntity> getQuestionFromPull(final String level) {
-        return questionPullRepository.getRandomQuestion(level);
+        return questionPullService.getRandomQuestion(level);
     }
 
 
@@ -129,6 +129,7 @@ public class TelegramBot extends TelegramLongPollingBot {
                           Body: %s,
                           Example: %s                
                         """.formatted(questionPullEntity.getTitle(), questionPullEntity.getBody(), questionPullEntity.getExample()), chatId, NEXT_QUESTION)));
-        question.ifPresentOrElse(questionPullEntity -> questionPullRepository.setActiveForQuestion(questionPullEntity.getUuid()), () -> stopChat(chatId));
+
+        question.ifPresentOrElse(questionPullEntity -> questionPullService.setActiveForQuestion(questionPullEntity.getUuid()), () -> stopChat(chatId));
     }
 }
