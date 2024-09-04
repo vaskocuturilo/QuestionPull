@@ -9,7 +9,11 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
+import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
+import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import static com.example.questionpull.factory.KeyboardFactory.addButtonAndSendMessage;
@@ -48,6 +52,7 @@ public class UpdateController {
                 case "/start" -> {
                     showStart(chatId, update.getMessage().getChat().getFirstName());
                     storageUtils.loadQuestionsPull();
+                    sendDropDownMenu(chatId);
                 }
                 case "/help" -> helpCommand(chatId);
                 case "/question" -> {
@@ -79,7 +84,7 @@ public class UpdateController {
     }
 
     public void showStart(long chatId, String name) {
-        String answer = "Hi, " + name + ", Nice to meet you! You can use \"/question\" command for start question pull or \"/help\" for more information.";
+        String answer = "Hi, " + name + ", Nice to meet you! You can use menu or \"/help\" for more information.";
         sendMessage(answer, chatId);
     }
 
@@ -96,7 +101,8 @@ public class UpdateController {
     }
 
     public void helpCommand(long chatId) {
-        String answer = "You can use \"/question\" command for start question pull.";
+        sendDropDownMenu(chatId);
+        String answer = "You can use menu";
         sendMessage(answer, chatId);
     }
 
@@ -104,6 +110,36 @@ public class UpdateController {
         SendMessage message = new SendMessage();
         message.setChatId(chatId);
         message.setText(messages);
+        telegramBot.send(message);
+    }
+
+    private void sendDropDownMenu(long chatId) {
+        SendMessage message = new SendMessage();
+        message.setChatId(String.valueOf(chatId));
+        message.setText("Choose an option:");
+
+        InlineKeyboardMarkup markup = new InlineKeyboardMarkup();
+        List<List<InlineKeyboardButton>> keyboard = new ArrayList<>();
+
+        List<InlineKeyboardButton> row1 = new ArrayList<>();
+
+        InlineKeyboardButton button1 = new InlineKeyboardButton();
+        button1.setText("Next Question");
+        button1.setCallbackData(NEXT_QUESTION);
+
+        InlineKeyboardButton button2 = new InlineKeyboardButton();
+        button2.setText("Stop question");
+        button2.setCallbackData(STOP_QUESTION);
+
+        row1.add(button1);
+        row1.add(button2);
+
+        keyboard.add(row1);
+
+        markup.setKeyboard(keyboard);
+
+        message.setReplyMarkup(markup);
+
         telegramBot.send(message);
     }
 
