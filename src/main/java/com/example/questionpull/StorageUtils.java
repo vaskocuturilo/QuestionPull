@@ -6,7 +6,8 @@ import com.example.questionpull.repository.QuestionPullRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.type.TypeFactory;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.context.event.ApplicationReadyEvent;
+import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 import org.springframework.util.ResourceUtils;
 
@@ -18,12 +19,13 @@ public class StorageUtils {
     private final QuestionPullRepository questionPullRepository;
     private final StorageProperties storageProperties;
 
-    @Autowired
     public StorageUtils(QuestionPullRepository questionPullRepository, StorageProperties storageProperties) {
         this.questionPullRepository = questionPullRepository;
         this.storageProperties = storageProperties;
     }
 
+
+    @EventListener(ApplicationReadyEvent.class)
     public void loadQuestionsPull() {
         try {
             ObjectMapper objectMapper = new ObjectMapper();
