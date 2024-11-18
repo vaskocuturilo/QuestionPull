@@ -1,7 +1,7 @@
 package com.example.questionpull.controller;
 
-import com.example.questionpull.service.QuestionPullServiceImplementation;
-import com.example.questionpull.service.SomeService;
+import com.example.questionpull.service.QuestionPullImplementation;
+import com.example.questionpull.service.QuestionPullService;
 import com.example.questionpull.service.TelegramBot;
 import com.example.questionpull.util.CallbackData;
 import lombok.extern.slf4j.Slf4j;
@@ -17,8 +17,8 @@ import java.util.function.Consumer;
 @Slf4j
 public class UpdateController {
     private TelegramBot telegramBot;
-    private final QuestionPullServiceImplementation questionPullService;
-    private final SomeService service;
+    private final QuestionPullImplementation questionPullService;
+    private final QuestionPullService service;
 
     @Value("${bot.message.end.questions}")
     String endMessage;
@@ -26,8 +26,8 @@ public class UpdateController {
     @Value("${bot.message.stop.questions}")
     String stopQuiz;
 
-    public UpdateController(QuestionPullServiceImplementation questionPullService,
-                            SomeService service) {
+    public UpdateController(QuestionPullImplementation questionPullService,
+                            QuestionPullService service) {
         this.questionPullService = questionPullService;
         this.service = service;
     }
