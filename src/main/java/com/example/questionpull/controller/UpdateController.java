@@ -3,11 +3,15 @@ package com.example.questionpull.controller;
 import com.example.questionpull.service.QuestionPullServiceImplementation;
 import com.example.questionpull.service.SomeService;
 import com.example.questionpull.service.TelegramBot;
+import com.example.questionpull.util.CallbackData;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
+
+import java.util.Map;
+import java.util.function.Consumer;
 
 @Component
 @Slf4j
@@ -16,8 +20,11 @@ public class UpdateController {
     private final QuestionPullServiceImplementation questionPullService;
     private final SomeService service;
 
-    @Value("${bot.message.end.question}")
+    @Value("${bot.message.end.questions}")
     String endMessage;
+
+    @Value("${bot.message.stop.questions}")
+    String stopQuiz;
 
     public UpdateController(QuestionPullServiceImplementation questionPullService,
                             SomeService service) {
@@ -52,10 +59,10 @@ public class UpdateController {
     private void sendNextQuestion(final long chatId, String level) {
         questionPullService.getRandomQuestion(level).ifPresentOrElse(question -> {
             service.sendQuestionMessage(question, chatId);
+
             questionPullService.setActiveForQuestion(question.getUuid());
         }, () -> service.sendStopMessage(chatId, endMessage));
     }
-
 
     private void handleHelpCommand(long chatId) {
         final SendMessage sendMessage = service.createCustomMessage(chatId);
@@ -72,21 +79,31 @@ public class UpdateController {
     }
 
     private void handleCallbackQuery(Update update) {
-        String callbackData = update.getCallbackQuery().getData();
+        String callBackData = update.getCallbackQuery().getData();
         long chatId = update.getCallbackQuery().getMessage().getChatId();
 
-        switch (callbackData) {
-            case "NEXT_QUESTION" -> sendNextQuestion(chatId, "easy");
-            case "STOP_QUESTION" -> handleStopCommand(chatId);
-            case "HELP" -> handleHelpCommand(chatId);
-            default -> log.warn("Unhandled callback query: " + callbackData);
-        }
+        CallbackData.fromString(callBackData)
+                .ifPresentOrElse(callback -> callbackHandlers.getOrDefault(callback, this::handleUnhandledCallback).accept(chatId),
+                        () -> log.warn("Invalid callback data: {}", callBackData)
+                );
+    }
+
+    private final Map<CallbackData, Consumer<Long>> callbackHandlers = Map.of(
+            CallbackData.NEXT_QUESTION_EASY, chatId -> sendNextQuestion(chatId, "easy"),
+            CallbackData.NEXT_QUESTION_MEDIUM, chatId -> sendNextQuestion(chatId, "medium"),
+            CallbackData.NEXT_QUESTION_HARD, chatId -> sendNextQuestion(chatId, "hard"),
+            CallbackData.STOP_QUESTION, this::handleStopCommand,
+            CallbackData.HELP, this::handleHelpCommand
+    );
+
+    private void handleUnhandledCallback(long chatId) {
+        log.warn("Unhandled callback query for chatId: {}", chatId);
     }
 
     private void handleStopCommand(long chatId) {
         SendMessage message = new SendMessage();
         message.setChatId(chatId);
-        message.setText("STOP");
+        message.setText(stopQuiz);
         telegramBot.send(message);
     }
 }
