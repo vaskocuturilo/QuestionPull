@@ -8,11 +8,11 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Service
-public class QuestionPullServiceImplementation implements QuestionPullService {
+public class QuestionPullImplementation implements QuestionPull {
 
     private final QuestionPullRepository questionPullRepository;
 
-    public QuestionPullServiceImplementation(QuestionPullRepository questionPullRepository) {
+    public QuestionPullImplementation(QuestionPullRepository questionPullRepository) {
         this.questionPullRepository = questionPullRepository;
     }
 

@@ -1,36 +1,49 @@
 package com.example.questionpull.factory;
 
-import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
+import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Component
 public class KeyboardFactory {
 
-    private KeyboardFactory() {
+    public InlineKeyboardMarkup createInlineKeyboard(List<List<InlineKeyboardButton>> rows) {
+        InlineKeyboardMarkup keyboardMarkup = new InlineKeyboardMarkup();
+        keyboardMarkup.setKeyboard(rows);
+        return keyboardMarkup;
     }
 
-    public static SendMessage addButtonAndSendMessage(String textToSend, long chatId, final String buttonText) {
-        SendMessage message = new SendMessage();
-        message.setText(textToSend);
-        message.setChatId(chatId);
+    public KeyboardBuilder builder() {
+        return new KeyboardBuilder();
+    }
 
-        InlineKeyboardMarkup markupInline = new InlineKeyboardMarkup();
-        List<List<InlineKeyboardButton>> rowsInline = new ArrayList<>();
-        List<InlineKeyboardButton> rowInline = new ArrayList<>();
+    public class KeyboardBuilder {
+        final List<List<InlineKeyboardButton>> rows = new ArrayList<>();
 
-        var inlinekeyboardButton = new InlineKeyboardButton();
-        inlinekeyboardButton.setCallbackData(buttonText);
-        inlinekeyboardButton.setText(buttonText);
 
-        rowInline.add(inlinekeyboardButton);
-        rowsInline.add(rowInline);
+        public KeyboardBuilder addRow() {
+            rows.add(new ArrayList<>());
+            return this;
+        }
 
-        markupInline.setKeyboard(rowsInline);
-        message.setReplyMarkup(markupInline);
+        public KeyboardBuilder addButton(final String text, final String callbackData) {
+            if (rows.isEmpty()) {
+                addRow();
+            }
 
-        return message;
+            InlineKeyboardButton button = new InlineKeyboardButton();
+            button.setText(text);
+            button.setCallbackData(callbackData);
+            rows.get(rows.size() - 1).add(button);
+
+            return this;
+        }
+
+        public InlineKeyboardMarkup build() {
+            return createInlineKeyboard(rows);
+        }
     }
 }

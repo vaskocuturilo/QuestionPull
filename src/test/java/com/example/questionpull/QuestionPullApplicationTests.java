@@ -9,5 +9,4 @@ class QuestionPullApplicationTests {
     @Test
     void contextLoads() {
     }
-
 }
