@@ -20,7 +20,6 @@ public class KeyboardFactory {
         return new KeyboardBuilder();
     }
 
-
     public class KeyboardBuilder {
         final List<List<InlineKeyboardButton>> rows = new ArrayList<>();
 
