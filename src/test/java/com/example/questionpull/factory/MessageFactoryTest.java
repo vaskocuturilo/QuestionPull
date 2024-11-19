@@ -11,7 +11,7 @@ class MessageFactoryTest {
     private final MessageFactory messageFactory = new MessageFactory();
 
     @Test
-    void createMessageWithKeyboard() {
+    void testCreateMessageWithKeyboard() {
         String text = "Simple Message";
         long chatId = 123456L;
 
@@ -25,7 +25,7 @@ class MessageFactoryTest {
     }
 
     @Test
-    void createSimpleMessage() {
+    void testCreateSimpleMessage() {
         String text = "Simple Message";
         long chatId = 123456L;
 
