@@ -4,7 +4,6 @@ import com.example.questionpull.entity.QuestionPullEntity;
 import com.example.questionpull.factory.KeyboardFactory;
 import com.example.questionpull.factory.MessageFactory;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
