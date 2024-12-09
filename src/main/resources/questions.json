@@ -54,6 +54,324 @@
     "difficulty": "easy"
   },
   {
+    "title": "Addition Arrays",
+    "body": "",
+    "example": "",
+    "difficulty": "easy"
+  },
+  {
+    "title": "Alphabetic",
+    "body": "",
+    "example": "",
+    "difficulty": "easy"
+  },
+  {
+    "title": "BinarySearch",
+    "body": "",
+    "example": "",
+    "difficulty": "easy"
+  },
+  {
+    "title": "CheckBubbleSort",
+    "body": "",
+    "example": "",
+    "difficulty": "easy"
+  },
+  {
+    "title": "CalculateCharacter",
+    "body": "",
+    "example": "",
+    "difficulty": "easy"
+  },
+  {
+    "title": "CompareVersion",
+    "body": "",
+    "example": "",
+    "difficulty": "easy"
+  },
+  {
+    "title": "NumberOfCharacter",
+    "body": "",
+    "example": "",
+    "difficulty": "easy"
+  },
+  {
+    "title": "Duplicate elements array and remove",
+    "body": "",
+    "example": "",
+    "difficulty": "easy"
+  },
+  {
+    "title": "Factorial",
+    "body": "",
+    "example": "",
+    "difficulty": "easy"
+  },
+  {
+    "title": "Fibonacci",
+    "body": "",
+    "example": "",
+    "difficulty": "easy"
+  },
+  {
+    "title": "FindDuplicates in array",
+    "body": "",
+    "example": "",
+    "difficulty": "easy"
+  },
+  {
+    "title": "Find Duplicates In Arrays",
+    "body": "",
+    "example": "",
+    "difficulty": "easy"
+  },
+  {
+    "title": "Find sum of elements",
+    "body": "",
+    "example": "",
+    "difficulty": "easy"
+  },
+  {
+    "title": "FizzBuzz. Loop and Stream.",
+    "body": "",
+    "example": "",
+    "difficulty": "easy"
+  },
+  {
+    "title": "Flip array",
+    "body": "",
+    "example": "",
+    "difficulty": "easy"
+  },
+  {
+    "title": "Length in array",
+    "body": "",
+    "example": "",
+    "difficulty": "easy"
+  },
+  {
+    "title": "LuckyTicket. String and Numeric.",
+    "body": "",
+    "example": "",
+    "difficulty": "easy"
+  },
+  {
+    "title": "Matrix diagonal sum",
+    "body": "",
+    "example": "",
+    "difficulty": "easy"
+  },
+  {
+    "title": "Merge arrays",
+    "body": "",
+    "example": "",
+    "difficulty": "easy"
+  },
+  {
+    "title": "min and max values in array",
+    "body": "",
+    "example": "",
+    "difficulty": "easy"
+  },
+  {
+    "title": "Missing a number",
+    "body": "",
+    "example": "",
+    "difficulty": "easy"
+  },
+  {
+    "title": "Move zeroes in array",
+    "body": "",
+    "example": "",
+    "difficulty": "easy"
+  },
+  {
+    "title": "Find Number of Element. Line Method.",
+    "body": "",
+    "example": "",
+    "difficulty": "easy"
+  },
+  {
+    "title": "Parse Brackets",
+    "body": "",
+    "example": "",
+    "difficulty": "easy"
+  },
+  {
+    "title": "ParseString. Full version",
+    "body": "",
+    "example": "",
+    "difficulty": "easy"
+  },
+  {
+    "title": "Palindrome. String and numeric",
+    "body": "",
+    "example": "",
+    "difficulty": "easy"
+  },
+  {
+    "title": "Quick Sort",
+    "body": "",
+    "example": "",
+    "difficulty": "easy"
+  },
+  {
+    "title": "Remove First Letter from ich word from list and sort",
+    "body": "",
+    "example": "",
+    "difficulty": "easy"
+  },
+  {
+    "title": "Reverse string.",
+    "body": "",
+    "example": "",
+    "difficulty": "easy"
+  },
+  {
+    "title": "Selection Sort",
+    "body": "",
+    "example": "",
+    "difficulty": "easy"
+  },
+  {
+    "title": "Singleton",
+    "body": "",
+    "example": "",
+    "difficulty": "easy"
+  },
+  {
+    "title": "Stack. With interface and without interface.",
+    "body": "",
+    "example": "",
+    "difficulty": "easy"
+  },
+  {
+    "title": "Queue. With interface and without interface.",
+    "body": "",
+    "example": "",
+    "difficulty": "easy"
+  },
+  {
+    "title": "Remove one array from another array.",
+    "body": "",
+    "example": "",
+    "difficulty": "easy"
+  },
+  {
+    "title": "Find second min and max value in array.",
+    "body": "",
+    "example": "",
+    "difficulty": "easy"
+  },
+  {
+    "title": "Calculate words in String",
+    "body": "",
+    "example": "",
+    "difficulty": "easy"
+  },
+  {
+    "title": "Change the first word with last in String.",
+    "body": "",
+    "example": "",
+    "difficulty": "easy"
+  },
+  {
+    "title": "Change the first element with last in Array.",
+    "body": "",
+    "example": "",
+    "difficulty": "easy"
+  },
+  {
+    "title": "Number of Armstrong",
+    "body": "",
+    "example": "",
+    "difficulty": "easy"
+  },
+  {
+    "title": "Capitalize",
+    "body": "",
+    "example": "",
+    "difficulty": "easy"
+  },
+  {
+    "title": "Anagram",
+    "body": "",
+    "example": "",
+    "difficulty": "easy"
+  },
+  {
+    "title": "addBinary",
+    "body": "",
+    "example": "",
+    "difficulty": "easy"
+  },
+  {
+    "title": "NumbersForFind1000",
+    "body": "",
+    "example": "",
+    "difficulty": "easy"
+  },
+  {
+    "title": "3Sum",
+    "body": "",
+    "example": "",
+    "difficulty": "easy"
+  },
+  {
+    "title": "Warm days",
+    "body": "",
+    "example": "",
+    "difficulty": "easy"
+  },
+  {
+    "title": "The first palindrome word in array",
+    "body": "",
+    "example": "",
+    "difficulty": "easy"
+  },
+  {
+    "title": "zero max",
+    "body": "",
+    "example": "",
+    "difficulty": "easy"
+  },
+  {
+    "title": "Double sort",
+    "body": "",
+    "example": "",
+    "difficulty": "easy"
+  },
+  {
+    "title": "Find longest subsequence",
+    "body": "",
+    "example": "",
+    "difficulty": "easy"
+  },
+  {
+    "title": "The decorator pattern",
+    "body": "",
+    "example": "",
+    "difficulty": "easy"
+  },
+  {
+    "title": "The builder pattern",
+    "body": "",
+    "example": "",
+    "difficulty": "easy"
+  },
+  {
+    "title": "The reverse integer",
+    "body": "",
+    "example": "",
+    "difficulty": "easy"
+  },
+  {
+    "title": "Find Closest Number to Zero",
+    "body": "",
+    "example": "",
+    "difficulty": "easy"
+  },
+  {
     "title": "Binary Tree Right Side View",
     "body": "Given the root of a binary tree, imagine yourself standing on the right side of it, return the values of the nodes you can see ordered from top to bottom.",
     "example": "Input: root = [1,2,3,null,5,null,4]\nOutput: [1,3,4];   Input: root = [1,null,3]\nOutput: [1,3];    Input: root = []\nOutput: []",

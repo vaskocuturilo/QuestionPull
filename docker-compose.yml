@@ -1,0 +1,30 @@
+version: "3.8"
+services:
+  server:
+    hostname: question
+    container_name: question
+    image: myapp
+    restart: always
+    environment:
+      BOT_NAME: ${BOT_NAME}
+      BOT_API_KEY: ${BOT_API_KEY}
+      BOT_FILE_NAME: classpath:questions.json
+    volumes:
+      - ./src/main/resources/questions.json:/absolute/path/to/questions.json
+
+    logging:
+      #limit logs to 200MB (4rotations of 50M each)
+      driver: "json-file"
+      options:
+        max-size: "50m"
+        max-file: "4"
+    build:
+      context: .
+      dockerfile: Dockerfile
+
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:8090/actuator/health" ]
+      interval: 10s
+      timeout: 2s
+      retries: 10
+      start_period: 40s
