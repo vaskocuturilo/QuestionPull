@@ -1,9 +1,9 @@
 version: "3.8"
 services:
-  server:
+  quiestion:
     hostname: question
     container_name: question
-    image: myapp
+    image: question
     restart: always
     environment:
       BOT_NAME: ${BOT_NAME}
@@ -19,12 +19,13 @@ services:
         max-size: "50m"
         max-file: "4"
     build:
-      context: .
+      context: ../QuestionPull
       dockerfile: Dockerfile
-
-    healthcheck:
-      test: [ "CMD", "curl", "-f", "http://localhost:8090/actuator/health" ]
-      interval: 10s
-      timeout: 2s
-      retries: 10
-      start_period: 40s
+    deploy:
+      resources:
+        limits:
+          cpus: '0.50'
+          memory: 50M
+        reservations:
+          cpus: '0.25'
+          memory: 20M

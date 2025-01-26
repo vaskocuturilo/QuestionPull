@@ -140,7 +140,7 @@ class QuestionPullRepositoryTest {
                 .active(false).build();
 
         assertThatThrownBy(() -> underTest.save(question))
-                .hasMessage("not-null property references a null or transient value : com.example.questionpull.entity.QuestionPullEntity.title")
+                .hasMessage("not-null property references a null or transient value: com.example.questionpull.entity.QuestionPullEntity.title")
                 .isInstanceOf(DataIntegrityViolationException.class);
     }
 
@@ -155,7 +155,7 @@ class QuestionPullRepositoryTest {
                 .active(false).build();
 
         assertThatThrownBy(() -> underTest.save(question))
-                .hasMessage("not-null property references a null or transient value : com.example.questionpull.entity.QuestionPullEntity.body")
+                .hasMessage("not-null property references a null or transient value: com.example.questionpull.entity.QuestionPullEntity.body")
                 .isInstanceOf(DataIntegrityViolationException.class);
     }
 
@@ -170,7 +170,7 @@ class QuestionPullRepositoryTest {
                 .active(false).build();
 
         assertThatThrownBy(() -> underTest.save(question))
-                .hasMessage("not-null property references a null or transient value : com.example.questionpull.entity.QuestionPullEntity.difficulty")
+                .hasMessage("not-null property references a null or transient value: com.example.questionpull.entity.QuestionPullEntity.difficulty")
                 .isInstanceOf(DataIntegrityViolationException.class);
     }
 
@@ -185,7 +185,7 @@ class QuestionPullRepositoryTest {
                 .active(false).build();
 
         assertThatThrownBy(() -> underTest.save(question))
-                .hasMessage("not-null property references a null or transient value : com.example.questionpull.entity.QuestionPullEntity.example")
+                .hasMessage("not-null property references a null or transient value: com.example.questionpull.entity.QuestionPullEntity.example")
                 .isInstanceOf(DataIntegrityViolationException.class);
     }
 
