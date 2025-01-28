@@ -19,7 +19,13 @@ jobs:
           cache: maven
 
       - name: Build and run Unit/Integration Tests with Maven
+        run: mvn -ntp -B verify
+
+      - name: Build and run docker container and docker compose file
         env:
           BOT_NAME: ${{ secrets.BOT_NAME }}
           BOT_API_KEY: ${{ secrets.BOT_API_KEY }}
-        run: mvn -ntp -B verify
+        run: docker compose up --detach
+
+      - name: Stop docker container and docker compose file
+        run: docker compose down
