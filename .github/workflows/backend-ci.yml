@@ -25,4 +25,4 @@ jobs:
         env:
           BOT_NAME: ${{ secrets.BOT_NAME }}
           BOT_API_KEY: ${{ secrets.BOT_API_KEY }}
-        run: docker-compose up --detach
+        run: docker compose up --detach
