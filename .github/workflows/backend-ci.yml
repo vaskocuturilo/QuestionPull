@@ -27,12 +27,5 @@ jobs:
           BOT_API_KEY: ${{ secrets.BOT_API_KEY }}
         run: docker compose up --detach
 
-      - name: send message using socks5 proxy URL
-        uses: appleboy/telegram-action@master
-        with:
-          to: ${{ secrets.TELEGRAM_CHAT_ID }}
-          token: ${{ secrets.BOT_NAME }}
-          message: "I'm here"
-
       - name: Stop docker container and docker compose file
         run: docker compose down
