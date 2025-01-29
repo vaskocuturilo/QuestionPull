@@ -66,7 +66,7 @@ public class UpdateController {
 
     private void handleHelpCommand(long chatId) {
         final SendMessage sendMessage = service.createCustomMessage(chatId);
-        String answer = "You can use menu";
+        String answer = "You can use menu:";
         sendMessage.setText(answer);
         telegramBot.send(sendMessage);
     }
@@ -105,5 +105,6 @@ public class UpdateController {
         message.setChatId(chatId);
         message.setText(stopQuiz);
         telegramBot.send(message);
+        handleHelpCommand(chatId);
     }
 }

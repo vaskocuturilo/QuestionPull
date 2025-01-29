@@ -66,7 +66,7 @@ class QuestionPullServiceTest {
         SendMessage actualMessage = questionPullService.createCustomMessage(CHAT_ID);
 
         assertEquals(expectedMessage, actualMessage);
-        verify(keyboardBuilder, times(2)).addRow();
+        verify(keyboardBuilder, times(5)).addRow();
         verify(keyboardBuilder, times(5)).addButton(anyString(), anyString());
         verify(keyboardBuilder).build();
         verify(messageFactory).createMessageWithKeyboard("Choose an option:", CHAT_ID, inlineKeyboardMarkup);
