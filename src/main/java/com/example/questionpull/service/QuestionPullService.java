@@ -47,15 +47,14 @@ public class QuestionPullService {
     private InlineKeyboardMarkup buildMenuKeyboard() {
         return keyboardFactory
                 .builder()
-                .addRow()
-                .addButton(BUTTON_NEXT_QUESTION_EASY, NEXT_QUESTION_EASY)
-                .addButton(BUTTON_NEXT_QUESTION_MEDIUM, NEXT_QUESTION_MEDIUM)
-                .addButton(BUTTON_NEXT_QUESTION_HARD, NEXT_QUESTION_HARD)
-                .addButton(BUTTON_STOP_QUESTION, STOP_QUESTION)
-                .addRow()
-                .addButton(BUTTON_HELP_INFO_QUESTION, HELP)
+                .addRow().addButton(BUTTON_NEXT_QUESTION_EASY, NEXT_QUESTION_EASY)
+                .addRow().addButton(BUTTON_NEXT_QUESTION_MEDIUM, NEXT_QUESTION_MEDIUM)
+                .addRow().addButton(BUTTON_NEXT_QUESTION_HARD, NEXT_QUESTION_HARD)
+                .addRow().addButton(BUTTON_STOP_QUESTION, STOP_QUESTION)
+                .addRow().addButton(BUTTON_HELP_INFO_QUESTION, HELP)
                 .build();
     }
+
 
     public String formatQuestionMessage(QuestionPullEntity question) {
         return """
