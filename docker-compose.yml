@@ -1,9 +1,18 @@
 version: "3.8"
 services:
+  watchtower:
+    image: containrrr/watchtower
+    command:
+      - "--label-enable"
+      - "--interval"
+      - "30"
+      - "--rolling-restart"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
   quiestion:
     hostname: question
     container_name: question
-    image: question
+    image: vaskocuturilo/questionpull:latest
     restart: always
     environment:
       BOT_NAME: ${BOT_NAME}
