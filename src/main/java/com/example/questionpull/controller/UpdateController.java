@@ -105,6 +105,5 @@ public class UpdateController {
         message.setChatId(chatId);
         message.setText(stopQuiz);
         telegramBot.send(message);
-        handleHelpCommand(chatId);
     }
 }
