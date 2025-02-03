@@ -8,7 +8,6 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
       - uses: actions/checkout@v4
       - name: Set up JDK 17
@@ -17,15 +16,11 @@ jobs:
           java-version: '17'
           distribution: adopt
           cache: maven
+      - name: Login to Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_ACCESS_TOKEN }}
 
       - name: Build and run Unit/Integration Tests with Maven
-        run: mvn -ntp -B verify
-
-      - name: Build and run docker container and docker compose file
-        env:
-          BOT_NAME: ${{ secrets.BOT_NAME }}
-          BOT_API_KEY: ${{ secrets.BOT_API_KEY }}
-        run: docker compose up --detach
-
-      - name: Stop docker container and docker compose file
-        run: docker compose down
+        run: mvn -ntp -B verify jib:build
