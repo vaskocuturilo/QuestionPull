@@ -4,8 +4,7 @@ services:
     image: containrrr/watchtower
     command:
       - "--label-enable"
-      - "--interval"
-      - "30"
+      - "--interval 30"
       - "--rolling-restart"
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
