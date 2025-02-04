@@ -14,6 +14,8 @@ public class QuestionPullService {
     private final KeyboardFactory keyboardFactory;
     private final TelegramBot telegramBot;
     private static final String BUTTON_NEXT_QUESTION_EASY = "⚡ Next Question Easy";
+
+    private static final String BUTTON_CHANGE_THE_LEVEL = "Change the level";
     private static final String BUTTON_NEXT_QUESTION_MEDIUM = "⭐ Next Question Medium";
     private static final String BUTTON_NEXT_QUESTION_HARD = "\uD83D\uDD25 Next Question Hard";
     private static final String BUTTON_STOP_QUESTION = "⛔ Stop Quiz";
@@ -21,8 +23,11 @@ public class QuestionPullService {
     private static final String NEXT_QUESTION_EASY = "NEXT_QUESTION_EASY";
     private static final String NEXT_QUESTION_MEDIUM = "NEXT_QUESTION_MEDIUM";
     private static final String NEXT_QUESTION_HARD = "NEXT_QUESTION_HARD";
+    private static final String CHANGE_LEVEL = "CHANGE_LEVEL";
     private static final String STOP_QUESTION = "STOP_QUESTION";
     private static final String HELP = "HELP";
+    private static final String BUTTON_PASS = "PASS";
+    private static final String BUTTON_FAIL = "FAIL";
 
     public QuestionPullService(MessageFactory messageFactory, KeyboardFactory keyboardFactory, @Lazy TelegramBot telegramBot) {
         this.messageFactory = messageFactory;
@@ -38,7 +43,7 @@ public class QuestionPullService {
 
     public void sendQuestionMessage(final QuestionPullEntity question, final long chatId) {
         String text = formatQuestionMessage(question);
-        InlineKeyboardMarkup keyboard = buildMenuKeyboard();
+        InlineKeyboardMarkup keyboard = buildQuestionMenuKeyboard();
         SendMessage sendMessage = messageFactory.createMessageWithKeyboard(text, chatId, keyboard);
 
         sendMessageToUser(sendMessage);
@@ -52,6 +57,16 @@ public class QuestionPullService {
                 .addRow().addButton(BUTTON_NEXT_QUESTION_HARD, NEXT_QUESTION_HARD)
                 .addRow().addButton(BUTTON_STOP_QUESTION, STOP_QUESTION)
                 .addRow().addButton(BUTTON_HELP_INFO_QUESTION, HELP)
+                .build();
+    }
+
+    private InlineKeyboardMarkup buildQuestionMenuKeyboard() {
+        return keyboardFactory
+                .builder()
+                .addRow().addButton(BUTTON_PASS, NEXT_QUESTION_EASY)
+                .addRow().addButton(BUTTON_FAIL, NEXT_QUESTION_EASY)
+                .addRow().addButton(BUTTON_CHANGE_THE_LEVEL, CHANGE_LEVEL)
+                .addRow().addButton(BUTTON_STOP_QUESTION, STOP_QUESTION)
                 .build();
     }
 
