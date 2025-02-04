@@ -26,6 +26,9 @@ public class UpdateController {
     @Value("${bot.message.stop.questions}")
     String stopQuiz;
 
+    @Value("${bot.message.change.level}")
+    String changeLevel;
+
     public UpdateController(QuestionPullImplementation questionPullService,
                             QuestionPullService service) {
         this.questionPullService = questionPullService;
@@ -92,6 +95,7 @@ public class UpdateController {
             CallbackData.NEXT_QUESTION_EASY, chatId -> sendNextQuestion(chatId, "easy"),
             CallbackData.NEXT_QUESTION_MEDIUM, chatId -> sendNextQuestion(chatId, "medium"),
             CallbackData.NEXT_QUESTION_HARD, chatId -> sendNextQuestion(chatId, "hard"),
+            CallbackData.CHANGE_LEVEL, this::handleChangeLevelCommand,
             CallbackData.STOP_QUESTION, this::handleStopCommand,
             CallbackData.HELP, this::handleHelpCommand
     );
@@ -105,5 +109,12 @@ public class UpdateController {
         message.setChatId(chatId);
         message.setText(stopQuiz);
         telegramBot.send(message);
+    }
+
+    private void handleChangeLevelCommand(long chatId) {
+        final SendMessage sendMessage = service.createCustomMessage(chatId);
+        sendMessage.setChatId(chatId);
+        sendMessage.setText(changeLevel);
+        telegramBot.send(sendMessage);
     }
 }
