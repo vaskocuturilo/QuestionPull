@@ -1,8 +1,8 @@
 package com.example.questionpull.controller;
 
-import com.example.questionpull.service.QuestionPullImplementation;
-import com.example.questionpull.service.QuestionPullService;
 import com.example.questionpull.service.TelegramBot;
+import com.example.questionpull.service.question.QuestionPullImplementation;
+import com.example.questionpull.service.question.QuestionPullService;
 import com.example.questionpull.util.CallbackData;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -61,7 +61,7 @@ public class UpdateController {
 
     private void sendNextQuestion(final long chatId, String level) {
         questionPullService.getRandomQuestion(level).ifPresentOrElse(question -> {
-            service.sendQuestionMessage(question, chatId);
+            service.sendQuestionMessage(question, chatId, level);
 
             questionPullService.setActiveForQuestion(question.getUuid());
         }, () -> service.sendStopMessage(chatId, endMessage));
@@ -112,7 +112,7 @@ public class UpdateController {
     }
 
     private void handleChangeLevelCommand(long chatId) {
-        final SendMessage sendMessage = service.createCustomMessage(chatId);
+        final SendMessage sendMessage = service.createChangeLevelMessage(chatId);
         sendMessage.setChatId(chatId);
         sendMessage.setText(changeLevel);
         telegramBot.send(sendMessage);

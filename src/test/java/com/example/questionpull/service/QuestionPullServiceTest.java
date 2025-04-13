@@ -3,6 +3,7 @@ package com.example.questionpull.service;
 import com.example.questionpull.entity.QuestionPullEntity;
 import com.example.questionpull.factory.KeyboardFactory;
 import com.example.questionpull.factory.MessageFactory;
+import com.example.questionpull.service.question.QuestionPullService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
@@ -79,7 +80,7 @@ class QuestionPullServiceTest {
                 Body: Test Body
                 Example: Test Example
                 """;
-
+        String level = "easy";
         InlineKeyboardMarkup keyboard = mock(InlineKeyboardMarkup.class);
         SendMessage expectedMessage = new SendMessage();
         expectedMessage.setChatId(String.valueOf(CHAT_ID));
@@ -93,7 +94,7 @@ class QuestionPullServiceTest {
         when(messageFactory.createMessageWithKeyboard(formattedText, CHAT_ID, keyboard)).thenReturn(expectedMessage);
 
         // Act
-        questionPullService.sendQuestionMessage(question, CHAT_ID);
+        questionPullService.sendQuestionMessage(question, CHAT_ID, level);
 
         // Assert
         verify(telegramBot).send(expectedMessage);

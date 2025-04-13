@@ -1,9 +1,10 @@
-package com.example.questionpull.service;
+package com.example.questionpull.service.question;
 
 import com.example.questionpull.entity.QuestionPullEntity;
 import com.example.questionpull.repository.QuestionPullRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -24,5 +25,10 @@ public class QuestionPullImplementation implements QuestionPull {
     @Override
     public void setActiveForQuestion(UUID uuid) {
         questionPullRepository.setActiveForQuestion(uuid);
+    }
+
+    @Override
+    public Optional<QuestionPullEntity> getRandomQuestionExcludingIds(String level, List<UUID> excludedIds) {
+        return questionPullRepository.findRandomByDifficultyExcludingIds(level, excludedIds);
     }
 }
