@@ -7,7 +7,6 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 
-import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -25,7 +24,4 @@ public interface QuestionPullRepository extends CrudRepository<QuestionPullEntit
     @Transactional
     @Query("UPDATE QuestionPullEntity q SET q.active = true WHERE q.uuid = :uuid")
     void setActiveForQuestion(@Param("uuid") final UUID uuid);
-
-    @Query("SELECT q FROM QuestionPullEntity q WHERE q.difficulty = :difficulty AND q.uuid NOT IN :excludedIds ORDER BY function('RAND') LIMIT 1")
-    Optional<QuestionPullEntity> findRandomByDifficultyExcludingIds(@Param("difficulty") String difficulty, @Param("excludedIds") List<UUID> excludedIds);
 }
