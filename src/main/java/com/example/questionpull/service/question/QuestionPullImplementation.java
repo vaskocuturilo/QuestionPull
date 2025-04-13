@@ -4,7 +4,6 @@ import com.example.questionpull.entity.QuestionPullEntity;
 import com.example.questionpull.repository.QuestionPullRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
