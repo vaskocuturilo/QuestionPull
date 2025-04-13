@@ -26,9 +26,4 @@ public class QuestionPullImplementation implements QuestionPull {
     public void setActiveForQuestion(UUID uuid) {
         questionPullRepository.setActiveForQuestion(uuid);
     }
-
-    @Override
-    public Optional<QuestionPullEntity> getRandomQuestionExcludingIds(String level, List<UUID> excludedIds) {
-        return questionPullRepository.findRandomByDifficultyExcludingIds(level, excludedIds);
-    }
 }
