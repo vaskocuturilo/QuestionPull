@@ -74,6 +74,31 @@ class QuestionPullServiceTest {
     }
 
     @Test
+    void testCreateChangeLevelMessage() {
+        InlineKeyboardMarkup inlineKeyboardMarkup = mock(InlineKeyboardMarkup.class);
+
+        SendMessage expectedMessage = new SendMessage();
+        expectedMessage.setChatId(String.valueOf(CHAT_ID));
+        expectedMessage.setText("Choose an option:");
+        expectedMessage.setReplyMarkup(inlineKeyboardMarkup);
+
+        when(keyboardFactory.builder()).thenReturn(keyboardBuilder);
+        when(keyboardFactory.builder().addRow()).thenReturn(keyboardBuilder);
+        when(keyboardFactory.builder().addButton(anyString(), anyString())).thenReturn(keyboardBuilder);
+        when(keyboardFactory.builder().build()).thenReturn(inlineKeyboardMarkup);
+        when(messageFactory.createMessageWithKeyboard("Choose an option:", CHAT_ID, inlineKeyboardMarkup))
+                .thenReturn(expectedMessage);
+
+        SendMessage actualMessage = questionPullService.createChangeLevelMessage(CHAT_ID);
+
+        assertEquals(expectedMessage, actualMessage);
+        verify(keyboardBuilder, times(3)).addRow();
+        verify(keyboardBuilder, times(3)).addButton(anyString(), anyString());
+        verify(keyboardBuilder).build();
+        verify(messageFactory).createMessageWithKeyboard("Choose an option:", CHAT_ID, inlineKeyboardMarkup);
+    }
+
+    @Test
     void testSendQuestionMessage() {
         String formattedText = """
                 Title: Test Title
