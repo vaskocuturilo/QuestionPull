@@ -11,17 +11,17 @@ import java.util.Optional;
 import java.util.UUID;
 
 public interface QuestionPullRepository extends CrudRepository<QuestionPullEntity, UUID> {
-    @Query(value = "SELECT * FROM question_pull q WHERE difficulty = :difficulty AND q.active = false ORDER BY RAND() LIMIT 1", nativeQuery = true)
+    @Query("SELECT q FROM QuestionPullEntity q WHERE q.difficulty = :difficulty AND q.active = false ORDER BY RAND() LIMIT 1")
     Optional<QuestionPullEntity> getRandomQuestion(@Param("difficulty") final String difficulty);
 
-    @Query(value = "select * from question_pull q WHERE title = :title ORDER BY title asc ", nativeQuery = true)
+    @Query("SELECT q from QuestionPullEntity q WHERE q.title = :title ORDER BY q.title asc")
     Optional<QuestionPullEntity> findByTitle(@Param("title") final String title);
 
-    @Query(value = "select * from question_pull q WHERE body LIKE CONCAT('%', :body, '%') ORDER BY body asc ", nativeQuery = true)
+    @Query("SELECT q from QuestionPullEntity q WHERE q.body LIKE CONCAT('%', :body, '%') ORDER BY q.body asc ")
     Optional<QuestionPullEntity> findByBody(@Param("body") final String body);
 
     @Modifying
     @Transactional
-    @Query(value = "UPDATE question_pull q SET q.active = true WHERE uuid = :uuid", nativeQuery = true)
+    @Query("UPDATE QuestionPullEntity q SET q.active = true WHERE q.uuid = :uuid")
     void setActiveForQuestion(@Param("uuid") final UUID uuid);
 }

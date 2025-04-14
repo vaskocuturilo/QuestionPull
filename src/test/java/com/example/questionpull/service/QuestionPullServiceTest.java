@@ -3,6 +3,7 @@ package com.example.questionpull.service;
 import com.example.questionpull.entity.QuestionPullEntity;
 import com.example.questionpull.factory.KeyboardFactory;
 import com.example.questionpull.factory.MessageFactory;
+import com.example.questionpull.service.question.QuestionPullService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
@@ -73,13 +74,38 @@ class QuestionPullServiceTest {
     }
 
     @Test
+    void testCreateChangeLevelMessage() {
+        InlineKeyboardMarkup inlineKeyboardMarkup = mock(InlineKeyboardMarkup.class);
+
+        SendMessage expectedMessage = new SendMessage();
+        expectedMessage.setChatId(String.valueOf(CHAT_ID));
+        expectedMessage.setText("Choose an option:");
+        expectedMessage.setReplyMarkup(inlineKeyboardMarkup);
+
+        when(keyboardFactory.builder()).thenReturn(keyboardBuilder);
+        when(keyboardFactory.builder().addRow()).thenReturn(keyboardBuilder);
+        when(keyboardFactory.builder().addButton(anyString(), anyString())).thenReturn(keyboardBuilder);
+        when(keyboardFactory.builder().build()).thenReturn(inlineKeyboardMarkup);
+        when(messageFactory.createMessageWithKeyboard("Choose an option:", CHAT_ID, inlineKeyboardMarkup))
+                .thenReturn(expectedMessage);
+
+        SendMessage actualMessage = questionPullService.createChangeLevelMessage(CHAT_ID);
+
+        assertEquals(expectedMessage, actualMessage);
+        verify(keyboardBuilder, times(3)).addRow();
+        verify(keyboardBuilder, times(3)).addButton(anyString(), anyString());
+        verify(keyboardBuilder).build();
+        verify(messageFactory).createMessageWithKeyboard("Choose an option:", CHAT_ID, inlineKeyboardMarkup);
+    }
+
+    @Test
     void testSendQuestionMessage() {
         String formattedText = """
                 Title: Test Title
                 Body: Test Body
                 Example: Test Example
                 """;
-
+        String level = "easy";
         InlineKeyboardMarkup keyboard = mock(InlineKeyboardMarkup.class);
         SendMessage expectedMessage = new SendMessage();
         expectedMessage.setChatId(String.valueOf(CHAT_ID));
@@ -93,7 +119,7 @@ class QuestionPullServiceTest {
         when(messageFactory.createMessageWithKeyboard(formattedText, CHAT_ID, keyboard)).thenReturn(expectedMessage);
 
         // Act
-        questionPullService.sendQuestionMessage(question, CHAT_ID);
+        questionPullService.sendQuestionMessage(question, CHAT_ID, level);
 
         // Assert
         verify(telegramBot).send(expectedMessage);

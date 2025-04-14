@@ -1,4 +1,4 @@
-package com.example.questionpull.service;
+package com.example.questionpull.service.question;
 
 import com.example.questionpull.entity.QuestionPullEntity;
 

@@ -1,8 +1,10 @@
-package com.example.questionpull.service;
+package com.example.questionpull.service.question;
 
 import com.example.questionpull.entity.QuestionPullEntity;
 import com.example.questionpull.factory.KeyboardFactory;
 import com.example.questionpull.factory.MessageFactory;
+import com.example.questionpull.service.TelegramBot;
+import com.example.questionpull.util.CallbackData;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
@@ -14,7 +16,6 @@ public class QuestionPullService {
     private final KeyboardFactory keyboardFactory;
     private final TelegramBot telegramBot;
     private static final String BUTTON_NEXT_QUESTION_EASY = "⚡ Next Question Easy";
-
     private static final String BUTTON_CHANGE_THE_LEVEL = "Change the level";
     private static final String BUTTON_NEXT_QUESTION_MEDIUM = "⭐ Next Question Medium";
     private static final String BUTTON_NEXT_QUESTION_HARD = "\uD83D\uDD25 Next Question Hard";
@@ -23,7 +24,6 @@ public class QuestionPullService {
     private static final String NEXT_QUESTION_EASY = "NEXT_QUESTION_EASY";
     private static final String NEXT_QUESTION_MEDIUM = "NEXT_QUESTION_MEDIUM";
     private static final String NEXT_QUESTION_HARD = "NEXT_QUESTION_HARD";
-    private static final String CHANGE_LEVEL = "CHANGE_LEVEL";
     private static final String STOP_QUESTION = "STOP_QUESTION";
     private static final String HELP = "HELP";
     private static final String BUTTON_PASS = "PASS";
@@ -41,9 +41,15 @@ public class QuestionPullService {
         return messageFactory.createMessageWithKeyboard("Choose an option:", chatId, keyboard);
     }
 
-    public void sendQuestionMessage(final QuestionPullEntity question, final long chatId) {
+    public SendMessage createChangeLevelMessage(final long chatId) {
+        InlineKeyboardMarkup keyboard = buildChangeLevelKeyboard();
+
+        return messageFactory.createMessageWithKeyboard("Choose an option:", chatId, keyboard);
+    }
+
+    public void sendQuestionMessage(final QuestionPullEntity question, final long chatId, String level) {
         String text = formatQuestionMessage(question);
-        InlineKeyboardMarkup keyboard = buildQuestionMenuKeyboard();
+        InlineKeyboardMarkup keyboard = buildQuestionMenuKeyboard(level);
         SendMessage sendMessage = messageFactory.createMessageWithKeyboard(text, chatId, keyboard);
 
         sendMessageToUser(sendMessage);
@@ -60,13 +66,29 @@ public class QuestionPullService {
                 .build();
     }
 
-    private InlineKeyboardMarkup buildQuestionMenuKeyboard() {
+    private InlineKeyboardMarkup buildQuestionMenuKeyboard(String level) {
+        String callbackData;
+        switch (level.toLowerCase()) {
+            case "medium" -> callbackData = CallbackData.NEXT_QUESTION_MEDIUM.name();
+            case "hard" -> callbackData = CallbackData.NEXT_QUESTION_HARD.name();
+            default -> callbackData = CallbackData.NEXT_QUESTION_EASY.name();
+        }
+
         return keyboardFactory
                 .builder()
-                .addRow().addButton(BUTTON_PASS, NEXT_QUESTION_EASY)
-                .addRow().addButton(BUTTON_FAIL, NEXT_QUESTION_EASY)
-                .addRow().addButton(BUTTON_CHANGE_THE_LEVEL, CHANGE_LEVEL)
-                .addRow().addButton(BUTTON_STOP_QUESTION, STOP_QUESTION)
+                .addRow().addButton(BUTTON_PASS, callbackData)
+                .addRow().addButton(BUTTON_FAIL, callbackData)
+                .addRow().addButton(BUTTON_CHANGE_THE_LEVEL, CallbackData.CHANGE_LEVEL.name())
+                .addRow().addButton(BUTTON_STOP_QUESTION, CallbackData.STOP_QUESTION.name())
+                .build();
+    }
+
+    private InlineKeyboardMarkup buildChangeLevelKeyboard() {
+        return keyboardFactory
+                .builder()
+                .addRow().addButton(BUTTON_NEXT_QUESTION_EASY, NEXT_QUESTION_EASY)
+                .addRow().addButton(BUTTON_NEXT_QUESTION_MEDIUM, NEXT_QUESTION_MEDIUM)
+                .addRow().addButton(BUTTON_NEXT_QUESTION_HARD, NEXT_QUESTION_HARD)
                 .build();
     }
 
