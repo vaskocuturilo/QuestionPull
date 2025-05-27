@@ -8,7 +8,7 @@ services:
       - "--rolling-restart"
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-  quiestion:
+  question:
     hostname: question
     container_name: question
     image: vaskocuturilo/questionpull:latest

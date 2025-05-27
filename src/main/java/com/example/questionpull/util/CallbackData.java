@@ -12,6 +12,8 @@ public enum CallbackData {
     NEXT_QUESTION_HARD("NEXT_QUESTION_HARD"),
     CHANGE_LEVEL("CHANGE_LEVEL"),
     STOP_QUESTION("STOP_QUESTION"),
+    BUTTON_PASS("BUTTON_PASS"),
+    BUTTON_FAIL("BUTTON_FAIL"),
     HELP("HELP");
 
     private final String value;

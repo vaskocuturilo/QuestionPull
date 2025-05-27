@@ -1,4 +1,4 @@
-package com.example.questionpull.service.question;
+package com.example.questionpull.service.questions;
 
 import com.example.questionpull.entity.QuestionPullEntity;
 import com.example.questionpull.factory.KeyboardFactory;
@@ -86,9 +86,11 @@ public class QuestionPullService {
     private InlineKeyboardMarkup buildChangeLevelKeyboard() {
         return keyboardFactory
                 .builder()
-                .addRow().addButton(BUTTON_NEXT_QUESTION_EASY, NEXT_QUESTION_EASY)
-                .addRow().addButton(BUTTON_NEXT_QUESTION_MEDIUM, NEXT_QUESTION_MEDIUM)
-                .addRow().addButton(BUTTON_NEXT_QUESTION_HARD, NEXT_QUESTION_HARD)
+                .addRow().addButton(BUTTON_NEXT_QUESTION_EASY, CallbackData.NEXT_QUESTION_EASY.name())
+                .addRow().addButton(BUTTON_NEXT_QUESTION_MEDIUM, CallbackData.NEXT_QUESTION_MEDIUM.name())
+                .addRow().addButton(BUTTON_NEXT_QUESTION_HARD, CallbackData.NEXT_QUESTION_HARD.name())
+                .addRow().addButton(BUTTON_STOP_QUESTION, CallbackData.STOP_QUESTION.name())
+                .addRow().addButton(BUTTON_HELP_INFO_QUESTION, CallbackData.HELP.name())
                 .build();
     }
 

@@ -10,6 +10,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -34,12 +35,11 @@ class QuestionPullRepositoryTest {
                 .title("Test")
                 .body("Test")
                 .example("Example")
-                .difficulty(level)
-                .active(false).build();
+                .difficulty(level).build();
 
         underTest.save(question);
 
-        Optional<QuestionPullEntity> optionalPaste = underTest.getRandomQuestion(level);
+        Optional<QuestionPullEntity> optionalPaste = underTest.findRandomByDifficultyExcludingIds(level, List.of(UUID.randomUUID()));
 
         assertThat(optionalPaste).isPresent().hasValueSatisfying(c -> assertThat(c)
                 .usingRecursiveComparison()
@@ -55,11 +55,11 @@ class QuestionPullRepositoryTest {
                 .body("Test")
                 .example("Example")
                 .difficulty(level)
-                .active(false).build();
+                .build();
 
         underTest.save(question);
 
-        Optional<QuestionPullEntity> optionalPaste = underTest.getRandomQuestion(level);
+        Optional<QuestionPullEntity> optionalPaste = underTest.findRandomByDifficultyExcludingIds(level, List.of(UUID.randomUUID()));
 
         assertThat(optionalPaste).isPresent().hasValueSatisfying(c -> assertThat(c)
                 .usingRecursiveComparison()
@@ -74,7 +74,7 @@ class QuestionPullRepositoryTest {
                 .body("Test")
                 .example("Example")
                 .difficulty("easy")
-                .active(false).build();
+                .build();
 
         underTest.save(question);
 
@@ -93,7 +93,7 @@ class QuestionPullRepositoryTest {
                 .body("Test")
                 .example("Example")
                 .difficulty("easy")
-                .active(false).build();
+                .build();
 
         underTest.save(question);
 
@@ -125,7 +125,7 @@ class QuestionPullRepositoryTest {
 
     @Test
     void itNotShouldSelectQuestionByBodyWhenDifficultyDoesNotExist() {
-        Optional<QuestionPullEntity> optionalPaste = underTest.getRandomQuestion("easy");
+        Optional<QuestionPullEntity> optionalPaste = underTest.findRandomByDifficultyExcludingIds("easy", List.of(UUID.randomUUID()));
         assertThat(optionalPaste).isNotPresent();
     }
 
@@ -137,7 +137,7 @@ class QuestionPullRepositoryTest {
                 .body("Test")
                 .example("Example")
                 .difficulty("easy")
-                .active(false).build();
+                .build();
 
         assertThatThrownBy(() -> underTest.save(question))
                 .hasMessage("not-null property references a null or transient value: com.example.questionpull.entity.QuestionPullEntity.title")
@@ -152,7 +152,7 @@ class QuestionPullRepositoryTest {
                 .body(null)
                 .example("Example")
                 .difficulty("easy")
-                .active(false).build();
+                .build();
 
         assertThatThrownBy(() -> underTest.save(question))
                 .hasMessage("not-null property references a null or transient value: com.example.questionpull.entity.QuestionPullEntity.body")
@@ -167,7 +167,7 @@ class QuestionPullRepositoryTest {
                 .body("Test")
                 .example("Example")
                 .difficulty(null)
-                .active(false).build();
+                .build();
 
         assertThatThrownBy(() -> underTest.save(question))
                 .hasMessage("not-null property references a null or transient value: com.example.questionpull.entity.QuestionPullEntity.difficulty")
@@ -182,43 +182,10 @@ class QuestionPullRepositoryTest {
                 .body("Test")
                 .example(null)
                 .difficulty("easy")
-                .active(false).build();
+                .build();
 
         assertThatThrownBy(() -> underTest.save(question))
                 .hasMessage("not-null property references a null or transient value: com.example.questionpull.entity.QuestionPullEntity.example")
                 .isInstanceOf(DataIntegrityViolationException.class);
     }
-
-
-    @Test
-    void itShouldBeActiveTrueAfterChange() {
-        QuestionPullEntity questionBeforeChange = QuestionPullEntity
-                .builder()
-                .title("Test")
-                .body("Test")
-                .example("Example")
-                .difficulty("easy")
-                .active(false).build();
-
-        QuestionPullEntity questionAfterChange = QuestionPullEntity
-                .builder()
-                .title("Test")
-                .body("Test")
-                .example("Example")
-                .difficulty("easy")
-                .active(true).build();
-
-        underTest.save(questionBeforeChange);
-        underTest.setActiveForQuestion(questionBeforeChange.getUuid());
-
-        //clear cache
-        entityManager.clear();
-
-        Optional<QuestionPullEntity> optionalPaste = underTest.findByTitle("Test");
-
-        assertThat(optionalPaste).isPresent().hasValueSatisfying(c -> assertThat(c)
-                .usingRecursiveComparison().ignoringFieldsMatchingRegexes("uuid")
-                .isEqualTo(questionAfterChange));
-    }
-
 }
