@@ -1,12 +1,14 @@
 package com.example.questionpull.repository;
 
-import com.example.questionpull.entity.User;
+import com.example.questionpull.entity.UserEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface UsersRepo extends JpaRepository<User, Integer> {
+public interface UsersRepository extends JpaRepository<UserEntity, Integer> {
     Boolean existsByChatId(Long chatId);
 
-    User findByChatId(Long chatId);
+    UserEntity findByChatId(Long chatId);
+
+    UserEntity findByName(String name);
 }

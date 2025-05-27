@@ -6,23 +6,23 @@ import lombok.Data;
 import lombok.experimental.FieldDefaults;
 
 import java.util.List;
+import java.util.UUID;
 
 @Entity
 @Table(name = "users")
 @Data
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class User {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Integer id;
+public class UserEntity extends AbstractBaseEntity {
 
     Long chatId;
 
     String name;
+
     @Column(name = "current_q_id")
-    Integer currentQId;
+    UUID currentQId;
 
     @ElementCollection(fetch = FetchType.EAGER)
-    List<Integer> historyArray;
+    List<UUID> historyArray;
+
+    Integer statisticArray;
 }

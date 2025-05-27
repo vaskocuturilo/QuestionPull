@@ -3,7 +3,7 @@ package com.example.questionpull.service;
 import com.example.questionpull.entity.QuestionPullEntity;
 import com.example.questionpull.factory.KeyboardFactory;
 import com.example.questionpull.factory.MessageFactory;
-import com.example.questionpull.service.question.QuestionPullService;
+import com.example.questionpull.service.questions.QuestionPullService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
@@ -92,8 +92,8 @@ class QuestionPullServiceTest {
         SendMessage actualMessage = questionPullService.createChangeLevelMessage(CHAT_ID);
 
         assertEquals(expectedMessage, actualMessage);
-        verify(keyboardBuilder, times(3)).addRow();
-        verify(keyboardBuilder, times(3)).addButton(anyString(), anyString());
+        verify(keyboardBuilder, times(5)).addRow();
+        verify(keyboardBuilder, times(5)).addButton(anyString(), anyString());
         verify(keyboardBuilder).build();
         verify(messageFactory).createMessageWithKeyboard("Choose an option:", CHAT_ID, inlineKeyboardMarkup);
     }

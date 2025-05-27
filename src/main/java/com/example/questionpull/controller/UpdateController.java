@@ -1,8 +1,10 @@
 package com.example.questionpull.controller;
 
+import com.example.questionpull.entity.UserEntity;
 import com.example.questionpull.service.TelegramBot;
-import com.example.questionpull.service.question.QuestionPullImplementation;
-import com.example.questionpull.service.question.QuestionPullService;
+import com.example.questionpull.service.questions.QuestionPullImplementation;
+import com.example.questionpull.service.questions.QuestionPullService;
+import com.example.questionpull.service.users.UserService;
 import com.example.questionpull.util.CallbackData;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -10,7 +12,10 @@ import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 import java.util.function.Consumer;
 
 @Component
@@ -19,6 +24,8 @@ public class UpdateController {
     private TelegramBot telegramBot;
     private final QuestionPullImplementation questionPullService;
     private final QuestionPullService service;
+    private final UserService userService;
+
 
     @Value("${bot.message.end.questions}")
     String endMessage;
@@ -30,9 +37,10 @@ public class UpdateController {
     String changeLevel;
 
     public UpdateController(QuestionPullImplementation questionPullService,
-                            QuestionPullService service) {
+                            QuestionPullService service, UserService userService) {
         this.questionPullService = questionPullService;
         this.service = service;
+        this.userService = userService;
     }
 
     public void registerBot(TelegramBot telegramBot) {
@@ -60,10 +68,16 @@ public class UpdateController {
     }
 
     private void sendNextQuestion(final long chatId, String level) {
-        questionPullService.getRandomQuestion(level).ifPresentOrElse(question -> {
-            service.sendQuestionMessage(question, chatId, level);
+        UserEntity user = userService.findOrCreateUser(chatId, "");
+        List<UUID> history = user.getHistoryArray() != null ? user.getHistoryArray() : new ArrayList<>();
 
-            questionPullService.setActiveForQuestion(question.getUuid());
+        questionPullService.getRandomQuestionExcludingIds(level, history).ifPresentOrElse(question -> {
+            history.add(question.getUuid());
+            user.setCurrentQId(question.getUuid());
+            user.setHistoryArray(history);
+            userService.updateUser(user);
+
+            service.sendQuestionMessage(question, chatId, level);
         }, () -> service.sendStopMessage(chatId, endMessage));
     }
 
@@ -95,6 +109,8 @@ public class UpdateController {
             CallbackData.NEXT_QUESTION_EASY, chatId -> sendNextQuestion(chatId, "easy"),
             CallbackData.NEXT_QUESTION_MEDIUM, chatId -> sendNextQuestion(chatId, "medium"),
             CallbackData.NEXT_QUESTION_HARD, chatId -> sendNextQuestion(chatId, "hard"),
+            CallbackData.BUTTON_PASS, this::handleChangeLevelCommand,
+            CallbackData.BUTTON_FAIL, this::handleChangeLevelCommand,
             CallbackData.CHANGE_LEVEL, this::handleChangeLevelCommand,
             CallbackData.STOP_QUESTION, this::handleStopCommand,
             CallbackData.HELP, this::handleHelpCommand
@@ -105,6 +121,7 @@ public class UpdateController {
     }
 
     private void handleStopCommand(long chatId) {
+        userService.resetUserQuestions(chatId);
         SendMessage message = new SendMessage();
         message.setChatId(chatId);
         message.setText(stopQuiz);
