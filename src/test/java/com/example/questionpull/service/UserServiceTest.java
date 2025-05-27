@@ -54,6 +54,8 @@ class UserServiceTest {
         when(usersRepository.existsByChatId(chatId)).thenReturn(false);
         when(usersRepository.save(any(UserEntity.class))).thenAnswer(invocation -> invocation.getArgument(0));
 
+        UserEntity result = userService.findOrCreateUser(chatId, name);
+
         verify(usersRepository).save(captor.capture());
         UserEntity savedUser = captor.getValue();
 
