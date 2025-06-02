@@ -396,6 +396,12 @@
     "difficulty": "medium"
   },
   {
+    "title": "Daily Temperatures",
+    "body": "Given an array of integers temperatures represents the daily temperatures, return an array answer such that answer[i] is the number of days you have to wait after the ith day to get a warmer temperature. If there is no future day for which this is possible, keep answer[i] == 0 instead.",
+    "example": "Input: temperatures = [73,74,75,71,69,72,76,73], Output: [1,1,4,2,1,1,0,0] \n Input: temperatures = [30,40,50,60], Output: [1,1,1,0] \n Input: temperatures = [30,60,90], Output: [1,1,0]",
+    "difficulty": "medium"
+  },
+  {
     "title": "Best Time to Buy and Sell Stock IV",
     "body": "You are given an integer array prices where prices[i] is the price of a given stock on the ith day, and an integer k.\n\nFind the maximum profit you can achieve. You may complete at most k transactions: i.e. you may buy at most k times and sell at most k times.\n\nNote: You may not engage in multiple transactions simultaneously (i.e., you must sell the stock before you buy again).",
     "example": "Input: k = 2, prices = [2,4,1]\nOutput: 2\nExplanation: Buy on day 1 (price = 2) and sell on day 2 (price = 4), profit = 4-2 = 2; Input: k = 2, prices = [3,2,6,5,0,3]\nOutput: 7\nExplanation: Buy on day 2 (price = 2) and sell on day 3 (price = 6), profit = 6-2 = 4. Then buy on day 5 (price = 0) and sell on day 6 (price = 3), profit = 3-0 = 3.",
