@@ -41,7 +41,7 @@ public class UserService implements User {
     }
 
     @Override
-    public UserEntity addStatistic(Long chatId, String name, Integer value)  {
+    public UserEntity addStatistic(Long chatId, String name, Integer value) {
         UserEntity existUser = usersRepository.findByChatId(chatId);
         existUser.setStatisticArray(value);
         return usersRepository.save(existUser);
@@ -50,7 +50,16 @@ public class UserService implements User {
     @Override
     public void resetUserQuestions(Long chatId) {
         UserEntity user = usersRepository.findByChatId(chatId);
-        user.setHistoryArray(new ArrayList<>());
+
+        if (user == null) {
+            user = new UserEntity();
+            user.setChatId(chatId);
+            user.setName("Unknown");
+            user.setCurrentQId(UUID.randomUUID());
+            user.setHistoryArray(new ArrayList<>());
+        } else {
+            user.setHistoryArray(new ArrayList<>());
+        }
         usersRepository.save(user);
     }
 }
