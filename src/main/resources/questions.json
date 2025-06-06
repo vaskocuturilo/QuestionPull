@@ -402,6 +402,12 @@
     "difficulty": "medium"
   },
   {
+    "title": "Longest Word in Dictionary",
+    "body": "Given an array of strings words representing an English Dictionary, return the longest word in words that can be built one character at a time by other words in words.\n If there is more than one possible answer, return the longest word with the smallest lexicographical order. If there is no answer, return the empty string.\n Note that the word should be built from left to right with each additional character being added to the end of a previous word. \n",
+    "example": "Input: words = [\"w\",\"wo\",\"wor\",\"worl\",\"world\"], Output: \"world\", Explanation: The word \"world\" can be built one character at a time by \"w\", \"wo\", \"wor\", and \"worl\". \n Input: words = [\"a\",\"banana\",\"app\",\"appl\",\"ap\",\"apply\",\"apple\"], Output: \"apple\", Explanation: Both \"apply\" and \"apple\" can be built from other words in the dictionary. However, \"apple\" is lexicographically smaller than \"apply\". \n",
+    "difficulty": "medium"
+  },
+  {
     "title": "Best Time to Buy and Sell Stock IV",
     "body": "You are given an integer array prices where prices[i] is the price of a given stock on the ith day, and an integer k.\n\nFind the maximum profit you can achieve. You may complete at most k transactions: i.e. you may buy at most k times and sell at most k times.\n\nNote: You may not engage in multiple transactions simultaneously (i.e., you must sell the stock before you buy again).",
     "example": "Input: k = 2, prices = [2,4,1]\nOutput: 2\nExplanation: Buy on day 1 (price = 2) and sell on day 2 (price = 4), profit = 4-2 = 2; Input: k = 2, prices = [3,2,6,5,0,3]\nOutput: 7\nExplanation: Buy on day 2 (price = 2) and sell on day 3 (price = 6), profit = 6-2 = 4. Then buy on day 5 (price = 0) and sell on day 6 (price = 3), profit = 3-0 = 3.",
