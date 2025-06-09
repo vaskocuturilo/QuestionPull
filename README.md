@@ -5,10 +5,10 @@ The Spring Boot REST service for question pull.
 ## Requirements:
 
 - Use any *object-oriented language*.
-- Use the last Spring boot version.
-- Use the last PostgresSQL database version.
-- Create REST API service.
-- Create docker-compose for run service.
+- Use the latest Spring Boot version.
+- Use the latest PostgreSQL database version.
+- Create Ra EST API service.
+- Create a Docker Compose to run the service.
 - Provide code and clear instructions on how to run it.
 
 **Note**: Please put your code in a public repository.
@@ -19,7 +19,7 @@ You will need the following technologies available to try it out:
 
 * Git
 * Spring Boot 3+
-* PostgresSQL 16.* +
+* PostgreSQL 16.* +
 * Maven 3+
 * JDK 21+
 * Docker
@@ -28,7 +28,7 @@ You will need the following technologies available to try it out:
 
 ## TO-DO list (ASAP):
 
-- Will be adding functionality for work with telegram bot. :heavy_check_mark:
+- Will be adding functionality for working with the Telegram bot. :heavy_check_mark:
 - Will be adding functionality for taking a ticket from the pull. :heavy_check_mark:
 - Will be adding functionality for taking a ticket via difficulty. :heavy_check_mark:
 - Will be adding functionality for taking a ticket via category.
@@ -36,12 +36,12 @@ You will need the following technologies available to try it out:
 - Will be adding JWT.
 - Will be adding X-API-KEY.
 - Will be adding a one-time password.
-- Will be adding docker-compose
+- Will be adding docker-compose :heavy_check_mark:
 - Will be adding integration tests.
 - Will be adding unit tests. :heavy_check_mark:
-- Will be adding functionality for deployment to AWS.
+- Will be adding functionality for deployment to VPS.
 
-### How to run via spring boot.
+### How to run via Spring Boot.
 
 ```mvn spring-boot:run```
 
