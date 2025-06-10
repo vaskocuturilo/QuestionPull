@@ -41,10 +41,27 @@ public class UserService implements User {
     }
 
     @Override
-    public UserEntity addStatistic(Long chatId, String name, Integer value) {
+    public UserEntity addStatistic(Long chatId, Integer value) {
         UserEntity existUser = usersRepository.findByChatId(chatId);
-        existUser.setStatisticArray(value);
+
+        if (existUser == null) {
+            throw new IllegalArgumentException("User with chatId" + chatId + "Not found");
+        }
+
+        int currentStat = Optional.ofNullable(existUser.getStatisticArray()).orElse(0);
+        existUser.setStatisticArray(currentStat + value);
+
         return usersRepository.save(existUser);
+    }
+
+    @Override
+    public Integer getStatistic(Long chatId) {
+        UserEntity existUser = usersRepository.findByChatId(chatId);
+
+        if (existUser == null) {
+            throw new IllegalArgumentException("User with chatId " + chatId + " Not found");
+        }
+        return existUser.getStatisticArray();
     }
 
     @Override
@@ -57,8 +74,10 @@ public class UserService implements User {
             user.setName("Unknown");
             user.setCurrentQId(UUID.randomUUID());
             user.setHistoryArray(new ArrayList<>());
+            user.setStatisticArray(0);
         } else {
             user.setHistoryArray(new ArrayList<>());
+            user.setStatisticArray(0);
         }
         usersRepository.save(user);
     }

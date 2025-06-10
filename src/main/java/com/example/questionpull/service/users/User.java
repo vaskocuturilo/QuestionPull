@@ -6,9 +6,15 @@ import java.util.Optional;
 
 public interface User {
     UserEntity findOrCreateUser(Long chatId, String name);
+
     void updateUser(UserEntity user);
+
     Optional<UserEntity> getUserByChatId(Long chatId);
-    UserEntity addStatistic(Long chatId, String name, Integer value);
+
+    UserEntity addStatistic(Long chatId, Integer value);
+
+    Integer getStatistic(Long chatId);
+
     void resetUserQuestions(Long chatId);
 
 }

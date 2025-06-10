@@ -19,12 +19,14 @@ public class QuestionPullService {
     private static final String BUTTON_CHANGE_THE_LEVEL = "Change the level";
     private static final String BUTTON_NEXT_QUESTION_MEDIUM = "⭐ Next Question Medium";
     private static final String BUTTON_NEXT_QUESTION_HARD = "\uD83D\uDD25 Next Question Hard";
+    private static final String BUTTON_SHOW_STATISTIC = "ℹ️ Show Statistic";
     private static final String BUTTON_STOP_QUESTION = "⛔ Stop Quiz";
     private static final String BUTTON_HELP_INFO_QUESTION = "ℹ️ Help & Info";
     private static final String NEXT_QUESTION_EASY = "NEXT_QUESTION_EASY";
     private static final String NEXT_QUESTION_MEDIUM = "NEXT_QUESTION_MEDIUM";
     private static final String NEXT_QUESTION_HARD = "NEXT_QUESTION_HARD";
     private static final String STOP_QUESTION = "STOP_QUESTION";
+    private static final String SHOW_STATISTIC = "SHOW_STATISTIC";
     private static final String HELP = "HELP";
     private static final String BUTTON_PASS = "PASS";
     private static final String BUTTON_FAIL = "FAIL";
@@ -61,24 +63,22 @@ public class QuestionPullService {
                 .addRow().addButton(BUTTON_NEXT_QUESTION_EASY, NEXT_QUESTION_EASY)
                 .addRow().addButton(BUTTON_NEXT_QUESTION_MEDIUM, NEXT_QUESTION_MEDIUM)
                 .addRow().addButton(BUTTON_NEXT_QUESTION_HARD, NEXT_QUESTION_HARD)
+                .addRow().addButton(BUTTON_SHOW_STATISTIC, SHOW_STATISTIC)
                 .addRow().addButton(BUTTON_STOP_QUESTION, STOP_QUESTION)
                 .addRow().addButton(BUTTON_HELP_INFO_QUESTION, HELP)
                 .build();
     }
 
     private InlineKeyboardMarkup buildQuestionMenuKeyboard(String level) {
-        String callbackData;
-        switch (level.toLowerCase()) {
-            case "medium" -> callbackData = CallbackData.NEXT_QUESTION_MEDIUM.name();
-            case "hard" -> callbackData = CallbackData.NEXT_QUESTION_HARD.name();
-            default -> callbackData = CallbackData.NEXT_QUESTION_EASY.name();
-        }
+        String passCallback = "ANSWER_PASS_" + level.toUpperCase();
+        String failCallback = "ANSWER_FAIL_" + level.toUpperCase();
 
         return keyboardFactory
                 .builder()
-                .addRow().addButton(BUTTON_PASS, callbackData)
-                .addRow().addButton(BUTTON_FAIL, callbackData)
+                .addRow().addButton(BUTTON_PASS, passCallback)
+                .addRow().addButton(BUTTON_FAIL, failCallback)
                 .addRow().addButton(BUTTON_CHANGE_THE_LEVEL, CallbackData.CHANGE_LEVEL.name())
+                .addRow().addButton(BUTTON_SHOW_STATISTIC, CallbackData.SHOW_STATISTIC.name())
                 .addRow().addButton(BUTTON_STOP_QUESTION, CallbackData.STOP_QUESTION.name())
                 .build();
     }
@@ -89,6 +89,7 @@ public class QuestionPullService {
                 .addRow().addButton(BUTTON_NEXT_QUESTION_EASY, CallbackData.NEXT_QUESTION_EASY.name())
                 .addRow().addButton(BUTTON_NEXT_QUESTION_MEDIUM, CallbackData.NEXT_QUESTION_MEDIUM.name())
                 .addRow().addButton(BUTTON_NEXT_QUESTION_HARD, CallbackData.NEXT_QUESTION_HARD.name())
+                .addRow().addButton(BUTTON_SHOW_STATISTIC, CallbackData.SHOW_STATISTIC.name())
                 .addRow().addButton(BUTTON_STOP_QUESTION, CallbackData.STOP_QUESTION.name())
                 .addRow().addButton(BUTTON_HELP_INFO_QUESTION, CallbackData.HELP.name())
                 .build();

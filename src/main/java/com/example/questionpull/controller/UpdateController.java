@@ -99,10 +99,33 @@ public class UpdateController {
         String callBackData = update.getCallbackQuery().getData();
         long chatId = update.getCallbackQuery().getMessage().getChatId();
 
+        if (callBackData.startsWith("ANSWER_PASS_") || callBackData.startsWith("ANSWER_FAIL_")) {
+            handleAnswerCallback(callBackData, chatId);
+            return;
+        }
+
         CallbackData.fromString(callBackData)
-                .ifPresentOrElse(callback -> callbackHandlers.getOrDefault(callback, this::handleUnhandledCallback).accept(chatId),
-                        () -> log.warn("Invalid callback data: {}", callBackData)
-                );
+                .ifPresentOrElse(callback -> callbackHandlers
+                                .getOrDefault(callback, this::handleUnhandledCallback)
+                                .accept(chatId),
+                        () -> log.warn("Invalid callback data: {}", callBackData));
+
+    }
+
+    private void handleAnswerCallback(String callbackData, Long chatId) {
+        String[] parts = callbackData.split("_");
+        if (parts.length != 3) {
+            log.warn("Invalid answer callback format: {}", callbackData);
+            return;
+        }
+
+        String result = parts[1];
+        String level = parts[2].toLowerCase();
+
+        int score = "PASS".equalsIgnoreCase(result) ? 1 : 0;
+        userService.addStatistic(chatId, score);
+
+        sendNextQuestion(chatId, level);
     }
 
     private final Map<CallbackData, Consumer<Long>> callbackHandlers = Map.of(
@@ -112,6 +135,7 @@ public class UpdateController {
             CallbackData.BUTTON_PASS, this::handleChangeLevelCommand,
             CallbackData.BUTTON_FAIL, this::handleChangeLevelCommand,
             CallbackData.CHANGE_LEVEL, this::handleChangeLevelCommand,
+            CallbackData.SHOW_STATISTIC, this::handleShowStatisticCommand,
             CallbackData.STOP_QUESTION, this::handleStopCommand,
             CallbackData.HELP, this::handleHelpCommand
     );
@@ -125,6 +149,14 @@ public class UpdateController {
         SendMessage message = new SendMessage();
         message.setChatId(chatId);
         message.setText(stopQuiz);
+        telegramBot.send(message);
+    }
+
+    private void handleShowStatisticCommand(long chatId) {
+        Integer statistic = userService.getStatistic(chatId);
+        SendMessage message = new SendMessage();
+        message.setChatId(chatId);
+        message.setText(String.format("You statistic:  %d", statistic));
         telegramBot.send(message);
     }
 
