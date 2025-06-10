@@ -102,7 +102,6 @@ class UserServiceTest {
     @Test
     void addStatistic_shouldUpdateUserStatistic() {
         Long chatId = 303L;
-        String name = "StatUser";
         int statValue = 5;
         UserEntity user = new UserEntity();
         user.setChatId(chatId);
@@ -110,7 +109,7 @@ class UserServiceTest {
         when(usersRepository.findByChatId(chatId)).thenReturn(user);
         when(usersRepository.save(any(UserEntity.class))).thenAnswer(invocation -> invocation.getArgument(0));
 
-        UserEntity result = userService.addStatistic(chatId, name, statValue);
+        UserEntity result = userService.addStatistic(chatId, statValue);
 
         assertEquals(user, result);
         assertEquals(statValue, result.getStatisticArray());

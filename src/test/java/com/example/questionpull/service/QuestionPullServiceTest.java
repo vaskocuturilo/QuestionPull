@@ -67,8 +67,8 @@ class QuestionPullServiceTest {
         SendMessage actualMessage = questionPullService.createCustomMessage(CHAT_ID);
 
         assertEquals(expectedMessage, actualMessage);
-        verify(keyboardBuilder, times(5)).addRow();
-        verify(keyboardBuilder, times(5)).addButton(anyString(), anyString());
+        verify(keyboardBuilder, times(6)).addRow();
+        verify(keyboardBuilder, times(6)).addButton(anyString(), anyString());
         verify(keyboardBuilder).build();
         verify(messageFactory).createMessageWithKeyboard("Choose an option:", CHAT_ID, inlineKeyboardMarkup);
     }
@@ -92,8 +92,8 @@ class QuestionPullServiceTest {
         SendMessage actualMessage = questionPullService.createChangeLevelMessage(CHAT_ID);
 
         assertEquals(expectedMessage, actualMessage);
-        verify(keyboardBuilder, times(5)).addRow();
-        verify(keyboardBuilder, times(5)).addButton(anyString(), anyString());
+        verify(keyboardBuilder, times(6)).addRow();
+        verify(keyboardBuilder, times(6)).addButton(anyString(), anyString());
         verify(keyboardBuilder).build();
         verify(messageFactory).createMessageWithKeyboard("Choose an option:", CHAT_ID, inlineKeyboardMarkup);
     }
