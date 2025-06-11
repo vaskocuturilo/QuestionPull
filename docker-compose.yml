@@ -1,16 +1,8 @@
 version: "3.8"
 services:
-  watchtower:
-    image: containrrr/watchtower
-    command:
-      - "--label-enable"
-      - "--interval 30"
-      - "--rolling-restart"
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
   question:
-    hostname: question
-    container_name: question
+    hostname: questions
+    container_name: questions
     image: vaskocuturilo/questionpull:latest
     restart: always
     environment:
@@ -37,3 +29,12 @@ services:
         reservations:
           cpus: '0.25'
           memory: 50M
+
+  watchtower:
+    image: containrrr/watchtower
+    command:
+      - "--label-enable"
+      - "--interval 30 questions"
+      - "--rolling-restart"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
