@@ -436,5 +436,11 @@
     "body": "Given an m x n integers matrix, return the length of the longest increasing path in matrix., From each cell, you can either move in four directions: left, right, up, or down. You may not move diagonally or move outside the boundary (i.e., wrap-around is not allowed).\n\n",
     "example": "Input: matrix = [[9,9,4],[6,6,8],[2,1,1]], Output: 4, Explanation: The longest increasing path is [1, 2, 6, 9]; Input: matrix = [[3,4,5],[3,2,6],[2,2,1]], Output: 4, Explanation: The longest increasing path is [3, 4, 5, 6]. Moving diagonally is not allowed.; Input: matrix = [[1]], Output: 1",
     "difficulty": "hard"
+  },
+  {
+    "title": "Concatenated Words",
+    "body": "Given an array of strings words (without duplicates), return all the concatenated words in the given list of words.\n\nA concatenated word is defined as a string that is comprised entirely of at least two shorter words (not necessarily distinct) in the given array.",
+    "example": "Input: words = [\"cat\",\"cats\",\"catsdogcats\",\"dog\",\"dogcatsdog\",\"hippopotamuses\",\"rat\",\"ratcatdogcat\"], Output: [\"catsdogcats\",\"dogcatsdog\",\"ratcatdogcat\"], Explanation: \"catsdogcats\" can be concatenated by \"cats\", \"dog\" and \"cats\"; \n\"dogcatsdog\" can be concatenated by \"dog\", \"cats\" and \"dog\"; \n\"ratcatdogcat\" can be concatenated by \"rat\", \"cat\", \"dog\" and \"cat\"; Input: words = [\"cat\",\"dog\",\"catdog\"], Output: [\"catdog\"]",
+    "difficulty": "hard"
   }
 ]
