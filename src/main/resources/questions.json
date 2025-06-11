@@ -414,6 +414,12 @@
     "difficulty": "medium"
   },
   {
+    "title": "The Truck problem",
+    "body": "You need to write three classes:\n1st class car, the car has a default maximum speed of 100 km/h, the name and condition are empty/ loaded\n2 - The car's heir is a passenger car. By default, any passenger car is not loaded. However, this state can only change after the car is created (not during creation). \n3 - The car's heir is a cargo truck. By default, any truck is loaded. However, this state can change both during the creation of the car and after. \nAt the same time, the maximum speed of this car depends on the workload. If it is loaded, then its speed drops by half.\nAs well: \nIt is necessary to implement the ability to compare trucks by name and current maximum speed.\nIt is necessary to write code that verifies the correctness of the implementation of tasks (speed versus workload, truck comparisons)",
+    "example": "Nothing",
+    "difficulty": "medium"
+  },
+  {
     "title": "Best Time to Buy and Sell Stock IV",
     "body": "You are given an integer array prices where prices[i] is the price of a given stock on the ith day, and an integer k.\n\nFind the maximum profit you can achieve. You may complete at most k transactions: i.e. you may buy at most k times and sell at most k times.\n\nNote: You may not engage in multiple transactions simultaneously (i.e., you must sell the stock before you buy again).",
     "example": "Input: k = 2, prices = [2,4,1]\nOutput: 2\nExplanation: Buy on day 1 (price = 2) and sell on day 2 (price = 4), profit = 4-2 = 2; Input: k = 2, prices = [3,2,6,5,0,3]\nOutput: 7\nExplanation: Buy on day 2 (price = 2) and sell on day 3 (price = 6), profit = 6-2 = 4. Then buy on day 5 (price = 0) and sell on day 6 (price = 3), profit = 3-0 = 3.",
