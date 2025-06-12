@@ -1,4 +1,4 @@
-FROM maven:3.9.9-amazoncorretto-17-alpine AS TEMP_BUILD_IMAGE
+FROM maven:3.9.9-amazoncorretto-17-alpine AS temp_build_image
 
 ENV APP_HOME=/usr/app/
 
@@ -8,7 +8,7 @@ COPY pom.xml .
 
 COPY src ./src
 
-RUN mvn clean package -DskipTests || return 0
+RUN mvn clean package
 
 FROM openjdk:17-jdk-slim
 
@@ -18,6 +18,6 @@ ENV APP_HOME=/usr/app
 
 WORKDIR $APP_HOME
 
-COPY --from=TEMP_BUILD_IMAGE $APP_HOME/target/$ARTIFACT_NAME app.jar
+COPY --from=temp_build_image $APP_HOME/target/$ARTIFACT_NAME app.jar
 
 ENTRYPOINT ["java", "-jar", "app.jar"]

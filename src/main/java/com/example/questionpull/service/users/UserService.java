@@ -25,6 +25,7 @@ public class UserService implements User {
         user.setChatId(chatId);
         user.setName(name);
         user.setCurrentQId(UUID.randomUUID());
+        user.setStatisticArray(0);
         user.setHistoryArray(new ArrayList<>());
 
         return usersRepository.save(user);

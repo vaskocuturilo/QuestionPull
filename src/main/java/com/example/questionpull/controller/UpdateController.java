@@ -89,6 +89,7 @@ public class UpdateController {
     }
 
     private void handleStartCommand(final long chatId, final String name) {
+        userService.findOrCreateUser(chatId, "");
         final SendMessage sendMessage = service.createCustomMessage(chatId);
         String answer = "Hi, " + name + ", Nice to meet you! You can use menu or 'Help & Info' button for more information.";
         sendMessage.setText(answer);

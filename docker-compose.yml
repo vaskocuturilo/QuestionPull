@@ -39,8 +39,6 @@ services:
       - "--interval=30"
       - "--label-enable"
       - "--rolling-restart"
-    environment:
-      - WATCHTOWER_USERNAME=${DOCKERHUB_USERNAME}
-      - WATCHTOWER_PASSWORD=${DOCKERHUB_PASSWORD}
+
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
