@@ -11,6 +11,9 @@ import org.mockito.MockitoAnnotations;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.*;
@@ -50,6 +53,11 @@ class QuestionPullServiceTest {
 
     @Test
     void testCreateCustomMessage() {
+        Map<String, Long> counts = new HashMap<>();
+        counts.put("easy", 1L);
+        counts.put("medium", 1L);
+        counts.put("hard", 1L);
+
         InlineKeyboardMarkup inlineKeyboardMarkup = mock(InlineKeyboardMarkup.class);
 
         SendMessage expectedMessage = new SendMessage();
@@ -64,7 +72,7 @@ class QuestionPullServiceTest {
         when(messageFactory.createMessageWithKeyboard("Choose an option:", CHAT_ID, inlineKeyboardMarkup))
                 .thenReturn(expectedMessage);
 
-        SendMessage actualMessage = questionPullService.createCustomMessage(CHAT_ID);
+        SendMessage actualMessage = questionPullService.createCustomMessage(CHAT_ID, counts);
 
         assertEquals(expectedMessage, actualMessage);
         verify(keyboardBuilder, times(6)).addRow();

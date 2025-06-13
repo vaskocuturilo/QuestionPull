@@ -10,8 +10,11 @@ import org.springframework.stereotype.Service;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
 
+import java.util.Map;
+
 @Service
 public class QuestionPullService {
+
     private final MessageFactory messageFactory;
     private final KeyboardFactory keyboardFactory;
     private final TelegramBot telegramBot;
@@ -37,8 +40,8 @@ public class QuestionPullService {
         this.telegramBot = telegramBot;
     }
 
-    public SendMessage createCustomMessage(final long chatId) {
-        InlineKeyboardMarkup keyboard = buildMenuKeyboard();
+    public SendMessage createCustomMessage(final long chatId, final Map<String, Long> counts) {
+        InlineKeyboardMarkup keyboard = buildMenuKeyboard(counts);
 
         return messageFactory.createMessageWithKeyboard("Choose an option:", chatId, keyboard);
     }
@@ -57,12 +60,16 @@ public class QuestionPullService {
         sendMessageToUser(sendMessage);
     }
 
-    private InlineKeyboardMarkup buildMenuKeyboard() {
+    private InlineKeyboardMarkup buildMenuKeyboard(final Map<String, Long> counts) {
+        long easyCount = counts.getOrDefault("easy", 0L);
+        long mediumCount = counts.getOrDefault("medium", 0L);
+        long hardCount = counts.getOrDefault("hard", 0L);
+
         return keyboardFactory
                 .builder()
-                .addRow().addButton(BUTTON_NEXT_QUESTION_EASY, NEXT_QUESTION_EASY)
-                .addRow().addButton(BUTTON_NEXT_QUESTION_MEDIUM, NEXT_QUESTION_MEDIUM)
-                .addRow().addButton(BUTTON_NEXT_QUESTION_HARD, NEXT_QUESTION_HARD)
+                .addRow().addButton(BUTTON_NEXT_QUESTION_EASY + "(" + easyCount + ")", NEXT_QUESTION_EASY)
+                .addRow().addButton(BUTTON_NEXT_QUESTION_MEDIUM + "(" + mediumCount + ")", NEXT_QUESTION_MEDIUM)
+                .addRow().addButton(BUTTON_NEXT_QUESTION_HARD + "(" + hardCount + ")", NEXT_QUESTION_HARD)
                 .addRow().addButton(BUTTON_SHOW_STATISTIC, SHOW_STATISTIC)
                 .addRow().addButton(BUTTON_STOP_QUESTION, STOP_QUESTION)
                 .addRow().addButton(BUTTON_HELP_INFO_QUESTION, HELP)

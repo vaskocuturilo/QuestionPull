@@ -21,4 +21,7 @@ public interface QuestionPullRepository extends CrudRepository<QuestionPullEntit
 
     @Query("SELECT q FROM QuestionPullEntity q WHERE q.difficulty = :difficulty AND q.uuid NOT IN :excludedIds ORDER BY function('RAND') LIMIT 1")
     Optional<QuestionPullEntity> findRandomByDifficultyExcludingIds(@Param("difficulty") String difficulty, @Param("excludedIds") List<UUID> excludedIds);
+
+    @Query("SELECT q.difficulty, COUNT(q) FROM QuestionPullEntity q GROUP BY q.difficulty")
+    List<Object[]> getCountQuestions();
 }
