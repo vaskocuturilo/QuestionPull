@@ -24,5 +24,5 @@ public class QuestionPullEntity extends AbstractBaseEntity {
     private String example;
 
     @Column(nullable = false, length = 10)
-    private String difficulty;
+    private String level;
 }

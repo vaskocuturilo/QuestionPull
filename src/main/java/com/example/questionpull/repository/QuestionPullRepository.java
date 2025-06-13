@@ -19,6 +19,9 @@ public interface QuestionPullRepository extends CrudRepository<QuestionPullEntit
     @Query("SELECT q from QuestionPullEntity q WHERE q.body LIKE CONCAT('%', :body, '%') ORDER BY q.body asc ")
     Optional<QuestionPullEntity> findByBody(@Param("body") final String body);
 
-    @Query("SELECT q FROM QuestionPullEntity q WHERE q.difficulty = :difficulty AND q.uuid NOT IN :excludedIds ORDER BY function('RAND') LIMIT 1")
+    @Query("SELECT q FROM QuestionPullEntity q WHERE q.level = :difficulty AND q.uuid NOT IN :excludedIds ORDER BY function('RAND') LIMIT 1")
     Optional<QuestionPullEntity> findRandomByDifficultyExcludingIds(@Param("difficulty") String difficulty, @Param("excludedIds") List<UUID> excludedIds);
+
+    @Query("SELECT q.level, COUNT(q) FROM QuestionPullEntity q GROUP BY q.level")
+    List<Object[]> getCountQuestions();
 }

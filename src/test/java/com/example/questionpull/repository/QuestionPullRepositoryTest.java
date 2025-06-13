@@ -1,8 +1,6 @@
 package com.example.questionpull.repository;
 
 import com.example.questionpull.entity.QuestionPullEntity;
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.PersistenceContext;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,18 +22,16 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 class QuestionPullRepositoryTest {
     @Autowired
     QuestionPullRepository underTest;
-    @PersistenceContext
-    EntityManager entityManager;
 
     @Test
-    void itShouldSelectQuestionByEasyDifficulty() {
+    void itShouldSelectQuestionByEasyLevel() {
         String level = "easy";
         QuestionPullEntity question = QuestionPullEntity
                 .builder()
                 .title("Test")
                 .body("Test")
                 .example("Example")
-                .difficulty(level).build();
+                .level(level).build();
 
         underTest.save(question);
 
@@ -47,14 +43,14 @@ class QuestionPullRepositoryTest {
     }
 
     @Test
-    void itShouldSelectQuestionByMediumDifficulty() {
+    void itShouldSelectQuestionByMediumLevel() {
         String level = "medium";
         QuestionPullEntity question = QuestionPullEntity
                 .builder()
                 .title("Test")
                 .body("Test")
                 .example("Example")
-                .difficulty(level)
+                .level(level)
                 .build();
 
         underTest.save(question);
@@ -73,7 +69,7 @@ class QuestionPullRepositoryTest {
                 .title("Test")
                 .body("Test")
                 .example("Example")
-                .difficulty("easy")
+                .level("easy")
                 .build();
 
         underTest.save(question);
@@ -92,7 +88,7 @@ class QuestionPullRepositoryTest {
                 .title("Test")
                 .body("Test")
                 .example("Example")
-                .difficulty("easy")
+                .level("easy")
                 .build();
 
         underTest.save(question);
@@ -136,7 +132,7 @@ class QuestionPullRepositoryTest {
                 .title(null)
                 .body("Test")
                 .example("Example")
-                .difficulty("easy")
+                .level("easy")
                 .build();
 
         assertThatThrownBy(() -> underTest.save(question))
@@ -151,7 +147,7 @@ class QuestionPullRepositoryTest {
                 .title("Test")
                 .body(null)
                 .example("Example")
-                .difficulty("easy")
+                .level("easy")
                 .build();
 
         assertThatThrownBy(() -> underTest.save(question))
@@ -160,17 +156,17 @@ class QuestionPullRepositoryTest {
     }
 
     @Test
-    void itShouldNotSaveQuestionWhenDifficultyIsNull() {
+    void itShouldNotSaveQuestionWhenLevelIsNull() {
         QuestionPullEntity question = QuestionPullEntity
                 .builder()
                 .title("Test")
                 .body("Test")
                 .example("Example")
-                .difficulty(null)
+                .level(null)
                 .build();
 
         assertThatThrownBy(() -> underTest.save(question))
-                .hasMessage("not-null property references a null or transient value: com.example.questionpull.entity.QuestionPullEntity.difficulty")
+                .hasMessage("not-null property references a null or transient value: com.example.questionpull.entity.QuestionPullEntity.level")
                 .isInstanceOf(DataIntegrityViolationException.class);
     }
 
@@ -181,7 +177,7 @@ class QuestionPullRepositoryTest {
                 .title("Test")
                 .body("Test")
                 .example(null)
-                .difficulty("easy")
+                .level("easy")
                 .build();
 
         assertThatThrownBy(() -> underTest.save(question))
