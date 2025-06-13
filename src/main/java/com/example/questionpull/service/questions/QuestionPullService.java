@@ -46,8 +46,8 @@ public class QuestionPullService {
         return messageFactory.createMessageWithKeyboard("Choose an option:", chatId, keyboard);
     }
 
-    public SendMessage createChangeLevelMessage(final long chatId) {
-        InlineKeyboardMarkup keyboard = buildChangeLevelKeyboard();
+    public SendMessage createChangeLevelMessage(final long chatId, final Map<String, Long> counts) {
+        InlineKeyboardMarkup keyboard = buildChangeLevelKeyboard(counts);
 
         return messageFactory.createMessageWithKeyboard("Choose an option:", chatId, keyboard);
     }
@@ -90,12 +90,16 @@ public class QuestionPullService {
                 .build();
     }
 
-    private InlineKeyboardMarkup buildChangeLevelKeyboard() {
+    private InlineKeyboardMarkup buildChangeLevelKeyboard(final Map<String, Long> counts) {
+        long easyCount = counts.getOrDefault("easy", 0L);
+        long mediumCount = counts.getOrDefault("medium", 0L);
+        long hardCount = counts.getOrDefault("hard", 0L);
+
         return keyboardFactory
                 .builder()
-                .addRow().addButton(BUTTON_NEXT_QUESTION_EASY, CallbackData.NEXT_QUESTION_EASY.name())
-                .addRow().addButton(BUTTON_NEXT_QUESTION_MEDIUM, CallbackData.NEXT_QUESTION_MEDIUM.name())
-                .addRow().addButton(BUTTON_NEXT_QUESTION_HARD, CallbackData.NEXT_QUESTION_HARD.name())
+                .addRow().addButton(BUTTON_NEXT_QUESTION_EASY + "(" + easyCount + ")", CallbackData.NEXT_QUESTION_EASY.name())
+                .addRow().addButton(BUTTON_NEXT_QUESTION_MEDIUM + "(" + mediumCount + ")", CallbackData.NEXT_QUESTION_MEDIUM.name())
+                .addRow().addButton(BUTTON_NEXT_QUESTION_HARD + "(" + hardCount + ")", CallbackData.NEXT_QUESTION_HARD.name())
                 .addRow().addButton(BUTTON_SHOW_STATISTIC, CallbackData.SHOW_STATISTIC.name())
                 .addRow().addButton(BUTTON_STOP_QUESTION, CallbackData.STOP_QUESTION.name())
                 .addRow().addButton(BUTTON_HELP_INFO_QUESTION, CallbackData.HELP.name())

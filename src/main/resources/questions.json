@@ -3,444 +3,444 @@
     "title": "The zero max ",
     "body": "Return a version of the given array where each zero value in the array is replaced by the\n    largest odd value to the right of the zero in the array.\n    If there is no odd value to the right of the zero, leave the zero as a zero.",
     "example": "zeroMax([0, 5, 0, 3]) → [5, 5, 3, 3] \n zeroMax([0, 4, 0, 3]) → [3, 4, 3, 3] \n zeroMax([0, 1, 0]) → [1, 1, 0]",
-    "difficulty": "easy"
+    "level": "easy"
   },
   {
     "title": "The Reverse integer",
     "body": "Given a signed 32-bit integer x, return x with its digits reversed. If reversing x causes the value to go outside the signed 32-bit integer range [-231, 231 - 1], then return 0.",
     "example": "Input: x = 123, Output: 321; Input: x = -123, Output: -321; Input: x = 120, Output: 21",
-    "difficulty": "medium"
+    "level": "medium"
   },
   {
     "title": "The two sum",
     "body": "Given an array of integers nums and an integer target, return indices of the two numbers such that they add up to target.\n You may assume that each input would have exactly one solution, and you may not use the same element twice.\n You can return the answer in any order.",
     "example": "Input: nums = [2,7,11,15], target = 9, Output: [0,1], Explanation: Because nums[0] + nums[1] == 9, we return [0, 1]; Input: nums = [3,2,4], target = 6, Output: [1,2]; Input: nums = [3,3], target = 6, Output: [0,1]",
-    "difficulty": "easy"
+    "level": "easy"
   },
   {
     "title": "Palindrome Number",
     "body": "Given an integer x, return true if x is a \npalindrome\n, and false otherwise. Input: x = 121\nOutput: true\nExplanation: 121 reads as 121 from left to right and from right to left.",
     "example": "Input: x = 121, Output: true, Explanation: 121 reads as 121 from left to right and from right to left; Input: x = -121, Output: false, Explanation: From left to right, it reads -121. From right to left, it becomes 121-. Therefore it is not a palindrome.",
-    "difficulty": "easy"
+    "level": "easy"
   },
   {
     "title": "Longest Common Prefix",
     "body": "Write a function to find the longest common prefix string amongst an array of strings.\n\nIf there is no common prefix, return an empty string \"\"",
     "example": "Input: strs = [\"flower\",\"flow\",\"flight\"], Output: \"fl\"; Input: strs = [\"dog\",\"racecar\",\"car\"], Output: \"\", Explanation: There is no common prefix among the input strings.",
-    "difficulty": "easy"
+    "level": "easy"
   },
   {
     "title": "Valid Parentheses",
     "body": "Given a string s containing just the characters '(', ')', '{', '}', '[' and ']', determine if the input string is valid. ",
     "example": "Input: s = \"()\", Output: true; Input: s = \"()[]{}\", Output: true; Input: s = \"(]\", Output: false",
-    "difficulty": "easy"
+    "level": "easy"
   },
   {
     "title": "Find the Index of the First Occurrence in a String",
     "body": "Given two strings needle and haystack, return the index of the first occurrence of needle in haystack, or -1 if needle is not part of haystack.",
     "example": "Input: haystack = \"sadbutsad\", needle = \"sad\", Output: 0, Explanation: \"sad\" occurs at index 0 and 6.\nThe first occurrence is at index 0, so we return 0; Input: haystack = \"leetcode\", needle = \"leeto\", Output: -1, Explanation: \"leeto\" did not occur in \"leetcode\", so we return -1",
-    "difficulty": "easy"
+    "level": "easy"
   },
   {
     "title": "Search Insert Position",
     "body": "Given a sorted array of distinct integers and a target value, return the index if the target is found. If not, return the index where it would be if it were inserted in order.\n\nYou must write an algorithm with O(log n) runtime complexity.",
     "example": "Input: nums = [1,3,5,6], target = 5, Output: 2; Input: nums = [1,3,5,6], target = 2, Output: 1; Input: nums = [1,3,5,6], target = 7, Output: 4",
-    "difficulty": "easy"
+    "level": "easy"
   },
   {
     "title": "Plus One",
     "body": "You are given a large integer represented as an integer array digits, where each digits[i] is the ith digit of the integer. The digits are ordered from most significant to least significant in left-to-right order. The large integer does not contain any leading 0's. \n Increment the large integer by one and return the resulting array of digits.",
     "example": "Input: digits = [1,2,3], Output: [1,2,4], Explanation: The array represents the integer 123.\nIncrementing by one gives 123 + 1 = 124.\n Thus, the result should be [1,2,4]; Input: digits = [4,3,2,1], Output: [4,3,2,2], Explanation: The array represents the integer 4321.\nIncrementing by one gives 4321 + 1 = 4322.\n Thus, the result should be [4,3,2,2]",
-    "difficulty": "easy"
+    "level": "easy"
   },
   {
     "title": "Addition Arrays",
     "body": "",
     "example": "",
-    "difficulty": "easy"
+    "level": "easy"
   },
   {
     "title": "Alphabetic",
     "body": "",
     "example": "",
-    "difficulty": "easy"
+    "level": "easy"
   },
   {
     "title": "BinarySearch",
     "body": "",
     "example": "",
-    "difficulty": "easy"
+    "level": "easy"
   },
   {
     "title": "CheckBubbleSort",
     "body": "",
     "example": "",
-    "difficulty": "easy"
+    "level": "easy"
   },
   {
     "title": "CalculateCharacter",
     "body": "",
     "example": "",
-    "difficulty": "easy"
+    "level": "easy"
   },
   {
     "title": "CompareVersion",
     "body": "",
     "example": "",
-    "difficulty": "easy"
+    "level": "easy"
   },
   {
     "title": "NumberOfCharacter",
     "body": "",
     "example": "",
-    "difficulty": "easy"
+    "level": "easy"
   },
   {
     "title": "Duplicate elements array and remove",
     "body": "",
     "example": "",
-    "difficulty": "easy"
+    "level": "easy"
   },
   {
     "title": "Factorial",
     "body": "",
     "example": "",
-    "difficulty": "easy"
+    "level": "easy"
   },
   {
     "title": "Fibonacci",
     "body": "",
     "example": "",
-    "difficulty": "easy"
+    "level": "easy"
   },
   {
     "title": "FindDuplicates in array",
     "body": "",
     "example": "",
-    "difficulty": "easy"
+    "level": "easy"
   },
   {
     "title": "Find Duplicates In Arrays",
     "body": "",
     "example": "",
-    "difficulty": "easy"
+    "level": "easy"
   },
   {
     "title": "Find sum of elements",
     "body": "",
     "example": "",
-    "difficulty": "easy"
+    "level": "easy"
   },
   {
     "title": "FizzBuzz. Loop and Stream.",
     "body": "Given an integer n, return a string array answer (1-indexed) where: answer[i] == \"FizzBuzz\" if i is divisible by 3 and 5 \n, answer[i] == \"Fizz\" if i is divisible by 3 \n, answer[i] == \"Buzz\" if i is divisible by 5 \n, answer[i] == i (as a string) if none of the above conditions are true \n",
     "example": "Input: n = 3, Output: [\"1\",\"2\",\"Fizz\"] \n; Input: n = 5, Output: [\"1\",\"2\",\"Fizz\",\"4\",\"Buzz\"]\n; Input: n = 15, Output: [\"1\",\"2\",\"Fizz\",\"4\",\"Buzz\",\"Fizz\",\"7\",\"8\",\"Fizz\",\"Buzz\",\"11\",\"Fizz\",\"13\",\"14\",\"FizzBuzz\"]\n;",
-    "difficulty": "easy"
+    "level": "easy"
   },
   {
     "title": "Flip array",
     "body": "",
     "example": "",
-    "difficulty": "easy"
+    "level": "easy"
   },
   {
     "title": "Length in array",
     "body": "",
     "example": "",
-    "difficulty": "easy"
+    "level": "easy"
   },
   {
     "title": "LuckyTicket. String and Numeric.",
     "body": "",
     "example": "",
-    "difficulty": "easy"
+    "level": "easy"
   },
   {
     "title": "Matrix diagonal sum",
     "body": "",
     "example": "",
-    "difficulty": "easy"
+    "level": "easy"
   },
   {
     "title": "Merge arrays",
     "body": "",
     "example": "",
-    "difficulty": "easy"
+    "level": "easy"
   },
   {
     "title": "min and max values in array",
     "body": "",
     "example": "",
-    "difficulty": "easy"
+    "level": "easy"
   },
   {
     "title": "Missing a number",
     "body": "",
     "example": "",
-    "difficulty": "easy"
+    "level": "easy"
   },
   {
     "title": "Move zeroes in array",
     "body": "",
     "example": "",
-    "difficulty": "easy"
+    "level": "easy"
   },
   {
     "title": "Find Number of Element. Line Method.",
     "body": "",
     "example": "",
-    "difficulty": "easy"
+    "level": "easy"
   },
   {
     "title": "Parse Brackets",
     "body": "",
     "example": "",
-    "difficulty": "easy"
+    "level": "easy"
   },
   {
     "title": "ParseString. Full version",
     "body": "",
     "example": "",
-    "difficulty": "easy"
+    "level": "easy"
   },
   {
     "title": "Palindrome. String and numeric",
     "body": "",
     "example": "",
-    "difficulty": "easy"
+    "level": "easy"
   },
   {
     "title": "Quick Sort",
     "body": "",
     "example": "",
-    "difficulty": "easy"
+    "level": "easy"
   },
   {
     "title": "Remove First Letter from ich word from list and sort",
     "body": "",
     "example": "",
-    "difficulty": "easy"
+    "level": "easy"
   },
   {
     "title": "Reverse string.",
     "body": "",
     "example": "",
-    "difficulty": "easy"
+    "level": "easy"
   },
   {
     "title": "Selection Sort",
     "body": "",
     "example": "",
-    "difficulty": "easy"
+    "level": "easy"
   },
   {
     "title": "Singleton",
     "body": "",
     "example": "",
-    "difficulty": "easy"
+    "level": "easy"
   },
   {
     "title": "Stack. With interface and without interface.",
     "body": "",
     "example": "",
-    "difficulty": "easy"
+    "level": "easy"
   },
   {
     "title": "Queue. With interface and without interface.",
     "body": "",
     "example": "",
-    "difficulty": "easy"
+    "level": "easy"
   },
   {
     "title": "Remove one array from another array.",
     "body": "",
     "example": "",
-    "difficulty": "easy"
+    "level": "easy"
   },
   {
     "title": "Find second min and max value in array.",
     "body": "",
     "example": "",
-    "difficulty": "easy"
+    "level": "easy"
   },
   {
     "title": "Calculate words in String",
     "body": "",
     "example": "",
-    "difficulty": "easy"
+    "level": "easy"
   },
   {
     "title": "Change the first word with last in String.",
     "body": "",
     "example": "",
-    "difficulty": "easy"
+    "level": "easy"
   },
   {
     "title": "Change the first element with last in Array.",
     "body": "",
     "example": "",
-    "difficulty": "easy"
+    "level": "easy"
   },
   {
     "title": "Number of Armstrong",
     "body": "",
     "example": "",
-    "difficulty": "easy"
+    "level": "easy"
   },
   {
     "title": "Capitalize",
     "body": "",
     "example": "",
-    "difficulty": "easy"
+    "level": "easy"
   },
   {
     "title": "Anagram",
     "body": "",
     "example": "",
-    "difficulty": "easy"
+    "level": "easy"
   },
   {
     "title": "addBinary",
     "body": "",
     "example": "",
-    "difficulty": "easy"
+    "level": "easy"
   },
   {
     "title": "NumbersForFind1000",
     "body": "",
     "example": "",
-    "difficulty": "easy"
+    "level": "easy"
   },
   {
     "title": "3Sum",
     "body": "",
     "example": "",
-    "difficulty": "easy"
+    "level": "easy"
   },
   {
     "title": "Warm days",
     "body": "",
     "example": "",
-    "difficulty": "easy"
+    "level": "easy"
   },
   {
     "title": "The first palindrome word in array",
     "body": "",
     "example": "",
-    "difficulty": "easy"
+    "level": "easy"
   },
   {
     "title": "zero max",
     "body": "",
     "example": "",
-    "difficulty": "easy"
+    "level": "easy"
   },
   {
     "title": "Double sort",
     "body": "",
     "example": "",
-    "difficulty": "easy"
+    "level": "easy"
   },
   {
     "title": "Find longest subsequence",
     "body": "",
     "example": "",
-    "difficulty": "easy"
+    "level": "easy"
   },
   {
     "title": "The decorator pattern",
     "body": "",
     "example": "",
-    "difficulty": "easy"
+    "level": "easy"
   },
   {
     "title": "The builder pattern",
     "body": "",
     "example": "",
-    "difficulty": "easy"
+    "level": "easy"
   },
   {
     "title": "The reverse integer",
     "body": "",
     "example": "",
-    "difficulty": "easy"
+    "level": "easy"
   },
   {
     "title": "Find Closest Number to Zero",
     "body": "",
     "example": "",
-    "difficulty": "easy"
+    "level": "easy"
   },
   {
     "title": "Binary Tree Right Side View",
     "body": "Given the root of a binary tree, imagine yourself standing on the right side of it, return the values of the nodes you can see ordered from top to bottom.",
     "example": "Input: root = [1,2,3,null,5,null,4]\nOutput: [1,3,4];   Input: root = [1,null,3]\nOutput: [1,3];    Input: root = []\nOutput: []",
-    "difficulty": "medium"
+    "level": "medium"
   },
   {
     "title": "House Robber",
     "body": "You are a professional robber planning to rob houses along a street. Each house has a certain amount of money stashed, the only constraint stopping you from robbing each of them is that adjacent houses have security systems connected and it will automatically contact the police if two adjacent houses were broken into on the same night.\n\nGiven an integer array nums representing the amount of money of each house, return the maximum amount of money you can rob tonight without alerting the police.",
     "example": "Input: nums = [1,2,3,1]\nOutput: 4\nExplanation: Rob house 1 (money = 1) and then rob house 3 (money = 3).\nTotal amount you can rob = 1 + 3 = 4;   Input: nums = [2,7,9,3,1]\nOutput: 12\nExplanation: Rob house 1 (money = 2), rob house 3 (money = 9) and rob house 5 (money = 1).\nTotal amount you can rob = 2 + 9 + 1 = 12.",
-    "difficulty": "medium"
+    "level": "medium"
   },
   {
     "title": "Rotate Array",
     "body": "Given an integer array nums, rotate the array to the right by k steps, where k is non-negative.\n\n",
     "example": "Input: nums = [1,2,3,4,5,6,7], k = 3\nOutput: [5,6,7,1,2,3,4]\nExplanation:\nrotate 1 steps to the right: [7,1,2,3,4,5,6]\nrotate 2 steps to the right: [6,7,1,2,3,4,5]\nrotate 3 steps to the right: [5,6,7,1,2,3,4]\n; Input: nums = [-1,-100,3,99], k = 2\nOutput: [3,99,-1,-100]\nExplanation: \nrotate 1 steps to the right: [99,-1,-100,3]\nrotate 2 steps to the right: [3,99,-1,-100]",
-    "difficulty": "medium"
+    "level": "medium"
   },
   {
     "title": "Repeated DNA Sequences",
     "body": "The DNA sequence is composed of a series of nucleotides abbreviated as 'A', 'C', 'G', and 'T'.\n\nFor example, \"ACGAATTCCG\" is a DNA sequence.\nWhen studying DNA, it is useful to identify repeated sequences within the DNA.\n\nGiven a string s that represents a DNA sequence, return all the 10-letter-long sequences (substrings) that occur more than once in a DNA molecule. You may return the answer in any order.",
     "example": "Input: s = \"AAAAACCCCCAAAAACCCCCCAAAAAGGGTTT\"\nOutput: [\"AAAAACCCCC\",\"CCCCCAAAAA\"]; Input: s = \"AAAAAAAAAAAAA\"\nOutput: [\"AAAAAAAAAA\"]",
-    "difficulty": "medium"
+    "level": "medium"
   },
   {
     "title": "Daily Temperatures",
     "body": "Given an array of integers temperatures represents the daily temperatures, return an array answer such that answer[i] is the number of days you have to wait after the ith day to get a warmer temperature. If there is no future day for which this is possible, keep answer[i] == 0 instead.",
     "example": "Input: temperatures = [73,74,75,71,69,72,76,73], Output: [1,1,4,2,1,1,0,0] \n Input: temperatures = [30,40,50,60], Output: [1,1,1,0] \n Input: temperatures = [30,60,90], Output: [1,1,0]",
-    "difficulty": "medium"
+    "level": "medium"
   },
   {
     "title": "Longest Word in Dictionary",
     "body": "Given an array of strings words representing an English Dictionary, return the longest word in words that can be built one character at a time by other words in words.\n If there is more than one possible answer, return the longest word with the smallest lexicographical order. If there is no answer, return the empty string.\n Note that the word should be built from left to right with each additional character being added to the end of a previous word. \n",
     "example": "Input: words = [\"w\",\"wo\",\"wor\",\"worl\",\"world\"], Output: \"world\", Explanation: The word \"world\" can be built one character at a time by \"w\", \"wo\", \"wor\", and \"worl\". \n Input: words = [\"a\",\"banana\",\"app\",\"appl\",\"ap\",\"apply\",\"apple\"], Output: \"apple\", Explanation: Both \"apply\" and \"apple\" can be built from other words in the dictionary. However, \"apple\" is lexicographically smaller than \"apply\". \n",
-    "difficulty": "medium"
+    "level": "medium"
   },
   {
     "title": "Reverse Words in a String",
     "body": "Given an input string s, reverse the order of the words. A word is defined as a sequence of non-space characters. The words in s will be separated by at least one space. Return a string of the words in reverse order concatenated by a single space. Note that s may contain leading or trailing spaces or multiple spaces between two words. The returned string should only have a single space separating the words. Do not include any extra spaces.",
     "example": "Input: s = \"the sky is blue\", Output: \"blue is sky the\";\n Input: s = \"  hello world  \", Output: \"world hello\", Explanation: Your reversed string should not contain leading or trailing spaces.;\n Input: s = \"a good   example\", Output: \"example good a\", Explanation: You need to reduce multiple spaces between two words to a single space in the reversed string.",
-    "difficulty": "medium"
+    "level": "medium"
   },
   {
     "title": "The Truck problem",
     "body": "You need to write three classes:\n1st class car, the car has a default maximum speed of 100 km/h, the name and condition are empty/ loaded\n2 - The car's heir is a passenger car. By default, any passenger car is not loaded. However, this state can only change after the car is created (not during creation). \n3 - The car's heir is a cargo truck. By default, any truck is loaded. However, this state can change both during the creation of the car and after. \nAt the same time, the maximum speed of this car depends on the workload. If it is loaded, then its speed drops by half.\nAs well: \nIt is necessary to implement the ability to compare trucks by name and current maximum speed.\nIt is necessary to write code that verifies the correctness of the implementation of tasks (speed versus workload, truck comparisons)",
     "example": "Nothing",
-    "difficulty": "medium"
+    "level": "medium"
   },
   {
     "title": "Best Time to Buy and Sell Stock IV",
     "body": "You are given an integer array prices where prices[i] is the price of a given stock on the ith day, and an integer k.\n\nFind the maximum profit you can achieve. You may complete at most k transactions: i.e. you may buy at most k times and sell at most k times.\n\nNote: You may not engage in multiple transactions simultaneously (i.e., you must sell the stock before you buy again).",
     "example": "Input: k = 2, prices = [2,4,1]\nOutput: 2\nExplanation: Buy on day 1 (price = 2) and sell on day 2 (price = 4), profit = 4-2 = 2; Input: k = 2, prices = [3,2,6,5,0,3]\nOutput: 7\nExplanation: Buy on day 2 (price = 2) and sell on day 3 (price = 6), profit = 6-2 = 4. Then buy on day 5 (price = 0) and sell on day 6 (price = 3), profit = 3-0 = 3.",
-    "difficulty": "hard"
+    "level": "hard"
   },
   {
     "title": "Insert Delete GetRandom O(1) - Duplicates allowed",
     "body": "RandomizedCollection is a data structure that contains a collection of numbers, possibly duplicates (i.e., a multiset). It should support inserting and removing specific elements and also reporting a random element.\n\nImplement the RandomizedCollection class:\n\nRandomizedCollection() Initializes the empty RandomizedCollection object.\nbool insert(int val) Inserts an item val into the multiset, even if the item is already present. Returns true if the item is not present, false otherwise.\nbool remove(int val) Removes an item val from the multiset if present. Returns true if the item is present, false otherwise. Note that if val has multiple occurrences in the multiset, we only remove one of them.\nint getRandom() Returns a random element from the current multiset of elements. The probability of each element being returned is linearly related to the number of the same values the multiset contains.\nYou must implement the functions of the class such that each function works on average O(1) time complexity.\n\nNote: The test cases are generated such that getRandom will only be called if there is at least one item in the RandomizedCollection.\n\n",
     "example": "Input\n[\"RandomizedCollection\", \"insert\", \"insert\", \"insert\", \"getRandom\", \"remove\", \"getRandom\"]\n[[], [1], [1], [2], [], [1], []]\nOutput\n[null, true, false, true, 2, true, 1]",
-    "difficulty": "hard"
+    "level": "hard"
   },
   {
     "title": "Longest Increasing Path in a Matrix",
     "body": "Given an m x n integers matrix, return the length of the longest increasing path in matrix., From each cell, you can either move in four directions: left, right, up, or down. You may not move diagonally or move outside the boundary (i.e., wrap-around is not allowed).\n\n",
     "example": "Input: matrix = [[9,9,4],[6,6,8],[2,1,1]], Output: 4, Explanation: The longest increasing path is [1, 2, 6, 9]; Input: matrix = [[3,4,5],[3,2,6],[2,2,1]], Output: 4, Explanation: The longest increasing path is [3, 4, 5, 6]. Moving diagonally is not allowed.; Input: matrix = [[1]], Output: 1",
-    "difficulty": "hard"
+    "level": "hard"
   },
   {
     "title": "Concatenated Words",
     "body": "Given an array of strings words (without duplicates), return all the concatenated words in the given list of words.\n\nA concatenated word is defined as a string that is comprised entirely of at least two shorter words (not necessarily distinct) in the given array.",
     "example": "Input: words = [\"cat\",\"cats\",\"catsdogcats\",\"dog\",\"dogcatsdog\",\"hippopotamuses\",\"rat\",\"ratcatdogcat\"], Output: [\"catsdogcats\",\"dogcatsdog\",\"ratcatdogcat\"], Explanation: \"catsdogcats\" can be concatenated by \"cats\", \"dog\" and \"cats\"; \n\"dogcatsdog\" can be concatenated by \"dog\", \"cats\" and \"dog\"; \n\"ratcatdogcat\" can be concatenated by \"rat\", \"cat\", \"dog\" and \"cat\"; Input: words = [\"cat\",\"dog\",\"catdog\"], Output: [\"catdog\"]",
-    "difficulty": "hard"
+    "level": "hard"
   }
 ]

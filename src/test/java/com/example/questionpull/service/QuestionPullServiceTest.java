@@ -83,6 +83,11 @@ class QuestionPullServiceTest {
 
     @Test
     void testCreateChangeLevelMessage() {
+        Map<String, Long> counts = new HashMap<>();
+        counts.put("easy", 1L);
+        counts.put("medium", 1L);
+        counts.put("hard", 1L);
+
         InlineKeyboardMarkup inlineKeyboardMarkup = mock(InlineKeyboardMarkup.class);
 
         SendMessage expectedMessage = new SendMessage();
@@ -97,7 +102,7 @@ class QuestionPullServiceTest {
         when(messageFactory.createMessageWithKeyboard("Choose an option:", CHAT_ID, inlineKeyboardMarkup))
                 .thenReturn(expectedMessage);
 
-        SendMessage actualMessage = questionPullService.createChangeLevelMessage(CHAT_ID);
+        SendMessage actualMessage = questionPullService.createChangeLevelMessage(CHAT_ID, counts);
 
         assertEquals(expectedMessage, actualMessage);
         verify(keyboardBuilder, times(6)).addRow();
