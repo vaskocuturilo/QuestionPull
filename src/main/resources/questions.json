@@ -420,6 +420,12 @@
     "level": "medium"
   },
   {
+    "title": "Top K Frequent Elements",
+    "body": "Given an integer array and an integer k, return the k most frequent elements. Optimize for time complexity better than O(n log n)",
+    "example": "Input: nums = [1,1,1,2,2,3], k = 2, Output: [1,2]",
+    "level": "hard"
+  },
+  {
     "title": "Best Time to Buy and Sell Stock IV",
     "body": "You are given an integer array prices where prices[i] is the price of a given stock on the ith day, and an integer k.\n\nFind the maximum profit you can achieve. You may complete at most k transactions: i.e. you may buy at most k times and sell at most k times.\n\nNote: You may not engage in multiple transactions simultaneously (i.e., you must sell the stock before you buy again).",
     "example": "Input: k = 2, prices = [2,4,1]\nOutput: 2\nExplanation: Buy on day 1 (price = 2) and sell on day 2 (price = 4), profit = 4-2 = 2; Input: k = 2, prices = [3,2,6,5,0,3]\nOutput: 7\nExplanation: Buy on day 2 (price = 2) and sell on day 3 (price = 6), profit = 6-2 = 4. Then buy on day 5 (price = 0) and sell on day 6 (price = 3), profit = 3-0 = 3.",
