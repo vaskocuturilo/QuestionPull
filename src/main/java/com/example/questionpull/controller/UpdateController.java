@@ -64,6 +64,7 @@ public class UpdateController {
         switch (messageText) {
             case "/start" -> handleStartCommand(chatId, update.getMessage().getChat().getFirstName());
             case "/help" -> handleHelpCommand(chatId);
+            case "/stop" -> handleStopCommand(chatId);
             case "/question" -> sendNextQuestion(chatId, "easy");
             default -> service.createCustomMessage(chatId, counts);
         }
@@ -84,11 +85,7 @@ public class UpdateController {
     }
 
     private void handleHelpCommand(long chatId) {
-        final Map<String, Long> counts = questionPullService.getQuestionCountsByLevel();
-
-        final SendMessage sendMessage = service.createCustomMessage(chatId, counts);
-        String answer = "You can use menu:";
-        sendMessage.setText(answer);
+        final SendMessage sendMessage = service.createCustomMessage(chatId);
         telegramBot.send(sendMessage);
     }
 
@@ -98,7 +95,8 @@ public class UpdateController {
         userService.findOrCreateUser(chatId, "");
         final SendMessage sendMessage = service.createCustomMessage(chatId, counts);
 
-        String answer = "Hi, " + name + ", Nice to meet you! You can use menu or 'Help & Info' button for more information.";
+        String answer = "Hi, " + name + ", Nice to meet you! You can start any time.";
+
         sendMessage.setText(answer);
         telegramBot.send(sendMessage);
     }

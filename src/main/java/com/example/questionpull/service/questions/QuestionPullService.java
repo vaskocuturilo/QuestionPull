@@ -18,11 +18,11 @@ public class QuestionPullService {
     private final MessageFactory messageFactory;
     private final KeyboardFactory keyboardFactory;
     private final TelegramBot telegramBot;
-    private static final String BUTTON_NEXT_QUESTION_EASY = "⚡ Next Question Easy";
-    private static final String BUTTON_CHANGE_THE_LEVEL = "Change the level";
-    private static final String BUTTON_NEXT_QUESTION_MEDIUM = "⭐ Next Question Medium";
-    private static final String BUTTON_NEXT_QUESTION_HARD = "\uD83D\uDD25 Next Question Hard";
-    private static final String BUTTON_SHOW_STATISTIC = "ℹ️ Show Statistic";
+    private static final String BUTTON_NEXT_QUESTION_EASY = "⚡ Next Easy Question ";
+    private static final String BUTTON_CHANGE_THE_LEVEL = "\uD83D\uDD04 Change the level";
+    private static final String BUTTON_NEXT_QUESTION_MEDIUM = "⭐ Next Medium Question ";
+    private static final String BUTTON_NEXT_QUESTION_HARD = "\uD83D\uDD25 Next Hard Question ";
+    private static final String BUTTON_SHOW_STATISTIC = "\uD83D\uDCCA Show Statistic";
     private static final String BUTTON_STOP_QUESTION = "⛔ Stop Quiz";
     private static final String BUTTON_HELP_INFO_QUESTION = "ℹ️ Help & Info";
     private static final String NEXT_QUESTION_EASY = "NEXT_QUESTION_EASY";
@@ -31,8 +31,8 @@ public class QuestionPullService {
     private static final String STOP_QUESTION = "STOP_QUESTION";
     private static final String SHOW_STATISTIC = "SHOW_STATISTIC";
     private static final String HELP = "HELP";
-    private static final String BUTTON_PASS = "PASS";
-    private static final String BUTTON_FAIL = "FAIL";
+    private static final String BUTTON_PASS = "✅ PASS";
+    private static final String BUTTON_FAIL = "⛔ FAIL";
 
     public QuestionPullService(MessageFactory messageFactory, KeyboardFactory keyboardFactory, @Lazy TelegramBot telegramBot) {
         this.messageFactory = messageFactory;
@@ -44,6 +44,33 @@ public class QuestionPullService {
         InlineKeyboardMarkup keyboard = buildMenuKeyboard(counts);
 
         return messageFactory.createMessageWithKeyboard("Choose an option:", chatId, keyboard);
+    }
+
+    public SendMessage createCustomMessage(final long chatId) {
+        return messageFactory.createSimpleMessage("""
+                
+                This bot can help you for prepare the technical interview. You can select a level of question (easy, medium, and hard).
+                Likewise, you can upload your questions.
+                
+                You can use commands:
+                
+                /start - This command will launch a question pull bot
+                /help  - This command will launch a help section
+                /stop  -  This command stop a question pull bot
+                
+                I see some students want some advice after struggling with coding challenges/exercises, getting blocked, and/or being demotivated.
+                Don't worry, we've all been there. However, how you respond to that is what's important.
+                Don't give up, you must be persistent.
+                
+                I just want to provide some tips:
+                
+                1. Positive mindset.
+                2. Practice, lots of it.
+                3. Active learning and learn from mistakes.
+                4. Write clean code.
+                5. Take your time and solve using multiple approaches.
+                
+                """, chatId);
     }
 
     public SendMessage createChangeLevelMessage(final long chatId, final Map<String, Long> counts) {
