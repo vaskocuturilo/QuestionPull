@@ -421,8 +421,26 @@
   },
   {
     "title": "The Truck problem",
-    "body": "You need to write three classes:\n1st class car, the car has a default maximum speed of 100 km/h, the name and condition are empty/ loaded\n2 - The car's heir is a passenger car. By default, any passenger car is not loaded. However, this state can only change after the car is created (not during creation). \n3 - The car's heir is a cargo truck. By default, any truck is loaded. However, this state can change both during the creation of the car and after. \nAt the same time, the maximum speed of this car depends on the workload. If it is loaded, then its speed drops by half.\nAs well: \nIt is necessary to implement the ability to compare trucks by name and current maximum speed.\nIt is necessary to write code that verifies the correctness of the implementation of tasks (speed versus workload, truck comparisons)",
+    "body": "You need to write three classes:\n 1st class car, the car has a default maximum speed of 100 km/h, the name and condition are empty/ loaded\n2 - The car's heir is a passenger car. By default, any passenger car is not loaded. However, this state can only change after the car is created (not during creation). \n3 - The car's heir is a cargo truck. By default, any truck is loaded. However, this state can change both during the creation of the car and after. \nAt the same time, the maximum speed of this car depends on the workload. If it is loaded, then its speed drops by half.\nAs well: \nIt is necessary to implement the ability to compare trucks by name and current maximum speed.\n It is necessary to write code that verifies the correctness of the implementation of tasks (speed versus workload, truck comparisons)",
     "example": "Nothing",
+    "level": "medium"
+  },
+  {
+    "title": "Validate IP Address",
+    "body": "Write a method that takes a string and determines whether it is a valid IPv4 or IPv6 address. Return \"IPv4\" if valid IPv4, \"IPv6\" if valid IPv6, or \"Neither\" if invalid.",
+    "example": "\"172.16.254.1\" → \"IPv4\", \"2001:0db8:85a3:0000:0000:8a2e:0370:7334\" → \"IPv6, \"256.256.256.256\" → \"Neither\"",
+    "level": "medium"
+  },
+  {
+    "title": "Implement a Custom Stack with Min Function",
+    "body": "Design and implement a CustomStack class that supports push(int), pop(), peek(), and getMin() — all in constant time.\nThe getMin() method should return the smallest element in the stack.",
+    "example": "Concepts Tested:\n\nStack implementation\n\nConstant-time algorithms\n\nAuxiliary data structures",
+    "level": "medium"
+  },
+  {
+    "title": "Group Anagrams",
+    "body": "Given a list of strings, group them by anagrams. Return a list of grouped anagrams, where each group contains strings that are anagrams of each other.",
+    "example": "Example Input: [\"eat\", \"tea\", \"tan\", \"ate\", \"nat\", \"bat\"], Expected Output Format: [\n  [\"eat\", \"tea\", \"ate\"],\n  [\"tan\", \"nat\"],\n  [\"bat\"]\n]; Concepts Tested:\n\nString manipulation\n\nHashing and grouping\n\nWorking with Map and List collections",
     "level": "medium"
   },
   {
