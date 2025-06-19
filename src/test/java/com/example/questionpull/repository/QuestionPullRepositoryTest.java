@@ -3,6 +3,8 @@ package com.example.questionpull.repository;
 import com.example.questionpull.entity.QuestionPullEntity;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -23,35 +25,15 @@ class QuestionPullRepositoryTest {
     @Autowired
     QuestionPullRepository underTest;
 
-    @Test
-    void itShouldSelectQuestionByEasyLevel() {
-        String level = "easy";
+    @ParameterizedTest
+    @ValueSource(strings = {"easy", "medium", "hard", "random"})
+    void itShouldSelectQuestionByEasyLevel(final String level) {
         QuestionPullEntity question = QuestionPullEntity
                 .builder()
                 .title("Test")
                 .body("Test")
                 .example("Example")
                 .level(level).build();
-
-        underTest.save(question);
-
-        Optional<QuestionPullEntity> optionalPaste = underTest.findRandomByDifficultyExcludingIds(level, List.of(UUID.randomUUID()));
-
-        assertThat(optionalPaste).isPresent().hasValueSatisfying(c -> assertThat(c)
-                .usingRecursiveComparison()
-                .isEqualTo(question));
-    }
-
-    @Test
-    void itShouldSelectQuestionByMediumLevel() {
-        String level = "medium";
-        QuestionPullEntity question = QuestionPullEntity
-                .builder()
-                .title("Test")
-                .body("Test")
-                .example("Example")
-                .level(level)
-                .build();
 
         underTest.save(question);
 

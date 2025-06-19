@@ -12,10 +12,7 @@ import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 import java.util.function.Consumer;
 
 @Component
@@ -25,7 +22,8 @@ public class UpdateController {
     private final QuestionPullImplementation questionPullService;
     private final QuestionPullService service;
     private final UserService userService;
-
+    private final List<String> levels = new ArrayList<>(List.of("easy", "medium", "hard"));
+    private static final Random RANDOM = new Random();
 
     @Value("${bot.message.end.questions}")
     String endMessage;
@@ -65,7 +63,6 @@ public class UpdateController {
             case "/start" -> handleStartCommand(chatId, update.getMessage().getChat().getFirstName());
             case "/help" -> handleHelpCommand(chatId);
             case "/stop" -> handleStopCommand(chatId);
-            case "/question" -> sendNextQuestion(chatId, "easy");
             default -> service.createCustomMessage(chatId, counts);
         }
     }
@@ -74,7 +71,7 @@ public class UpdateController {
         UserEntity user = userService.findOrCreateUser(chatId, "");
         List<UUID> history = user.getHistoryArray() != null ? user.getHistoryArray() : new ArrayList<>();
 
-        questionPullService.getRandomQuestionExcludingIds(level, history).ifPresentOrElse(question -> {
+        questionPullService.getRandomQuestionExcludingIds(level.contains("random") ? levels.get(RANDOM.nextInt(0, 2)) : level, history).ifPresentOrElse(question -> {
             history.add(question.getUuid());
             user.setCurrentQId(question.getUuid());
             user.setHistoryArray(history);
@@ -138,6 +135,7 @@ public class UpdateController {
             CallbackData.NEXT_QUESTION_EASY, chatId -> sendNextQuestion(chatId, "easy"),
             CallbackData.NEXT_QUESTION_MEDIUM, chatId -> sendNextQuestion(chatId, "medium"),
             CallbackData.NEXT_QUESTION_HARD, chatId -> sendNextQuestion(chatId, "hard"),
+            CallbackData.NEXT_QUESTION_RANDOM, chatId -> sendNextQuestion(chatId, "random"),
             CallbackData.BUTTON_PASS, this::handleChangeLevelCommand,
             CallbackData.BUTTON_FAIL, this::handleChangeLevelCommand,
             CallbackData.CHANGE_LEVEL, this::handleChangeLevelCommand,
