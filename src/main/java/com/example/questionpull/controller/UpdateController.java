@@ -12,6 +12,7 @@ import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
 
+import java.security.SecureRandom;
 import java.util.*;
 import java.util.function.Consumer;
 
@@ -23,7 +24,7 @@ public class UpdateController {
     private final QuestionPullService service;
     private final UserService userService;
     private final List<String> levels = new ArrayList<>(List.of("easy", "medium", "hard"));
-    private static final Random RANDOM = new Random();
+    private static final SecureRandom RANDOM = new SecureRandom();
 
     @Value("${bot.message.end.questions}")
     String endMessage;
