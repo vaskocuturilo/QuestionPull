@@ -58,13 +58,11 @@ public class UpdateController {
         String messageText = update.getMessage().getText();
         long chatId = update.getMessage().getChatId();
 
-        final Map<String, Long> counts = questionPullService.getQuestionCountsByLevel();
-
         switch (messageText) {
             case "/start" -> handleStartCommand(chatId, update.getMessage().getChat().getFirstName());
             case "/help" -> handleHelpCommand(chatId);
             case "/stop" -> handleStopCommand(chatId);
-            default -> service.createCustomMessage(chatId, counts);
+            default -> handleUnknownCommand(chatId, messageText);
         }
     }
 
@@ -173,5 +171,13 @@ public class UpdateController {
         sendMessage.setChatId(chatId);
         sendMessage.setText(changeLevel);
         telegramBot.send(sendMessage);
+    }
+
+    private void handleUnknownCommand(long chatId, String command) {
+        String reply = "❓ Unknown command: " + command + "\n\nType /help to see available commands.";
+        SendMessage message = new SendMessage();
+        message.setChatId(chatId);
+        message.setText(reply);
+        telegramBot.send(message);
     }
 }
