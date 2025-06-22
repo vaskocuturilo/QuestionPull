@@ -32,6 +32,25 @@ services:
           cpus: '0.25'
           memory: 50M
 
+  grafana:
+    image: grafana/grafana
+    ports:
+      - "3000:3000"
+
+  loki:
+    image: grafana/loki:2.9.3
+    ports:
+      - "3100:3100"
+    command: -config.file=/etc/loki/local-config.yaml
+
+  promtail:
+    image: grafana/promtail:2.9.3
+    volumes:
+      - /var/log:/var/log
+      - /etc/promtail:/etc/promtail
+      - /var/lib/docker/containers:/var/lib/docker/containers
+    command: -config.file=/etc/promtail/promtail-config.yaml
+
   watchtower:
     image: containrrr/watchtower
     container_name: watchtower
