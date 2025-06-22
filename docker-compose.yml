@@ -13,6 +13,7 @@ services:
       BOT_FILE_NAME: classpath:questions.json
     volumes:
       - ./src/main/resources/questions.json:/absolute/path/to/questions.json
+      - ./logs:/logs
 
     logging:
       #limit logs to 200MB (4 rotations of 50M each)
