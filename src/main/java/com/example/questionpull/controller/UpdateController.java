@@ -59,9 +59,18 @@ public class UpdateController {
         long chatId = update.getMessage().getChatId();
 
         switch (messageText) {
-            case "/start" -> handleStartCommand(chatId, update.getMessage().getChat().getFirstName());
-            case "/help" -> handleHelpCommand(chatId);
-            case "/stop" -> handleStopCommand(chatId);
+            case "/start" -> {
+                handleStartCommand(chatId, update.getMessage().getChat().getFirstName());
+                log.info("User started bot: chatId={}, name={}", chatId, update.getMessage().getChat().getFirstName());
+            }
+            case "/help" -> {
+                handleHelpCommand(chatId);
+                log.info("User use the help command: chatId={}, name={}", chatId, update.getMessage().getChat().getFirstName());
+            }
+            case "/stop" -> {
+                handleStopCommand(chatId);
+                log.info("User use the stop command: chatId={}, name={}", chatId, update.getMessage().getChat().getFirstName());
+            }
             default -> handleUnknownCommand(chatId, messageText);
         }
     }
