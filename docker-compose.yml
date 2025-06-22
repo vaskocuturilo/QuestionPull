@@ -46,9 +46,8 @@ services:
   promtail:
     image: grafana/promtail:2.9.3
     volumes:
-      - /var/log:/var/log
-      - /etc/promtail:/etc/promtail
-      - /var/lib/docker/containers:/var/lib/docker/containers
+      - ./promtail/promtail-config.yaml:/etc/promtail/promtail-config.yaml
+      - ./logs:/app/logs
     command: -config.file=/etc/promtail/promtail-config.yaml
 
   watchtower:
