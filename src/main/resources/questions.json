@@ -378,6 +378,12 @@
     "level": "easy"
   },
   {
+    "title": "Valid Boomerang",
+    "body": "Given an array points where points[i] = [xi, yi] represents a point on the X-Y plane, return true if these points are a boomerang.\n\nA boomerang is a set of three points that are all distinct and not in a straight line.",
+    "example": "Example 1:\n\nInput: points = [[1,1],[2,3],[3,2]]\nOutput: true; Example 2:\n\nInput: points = [[1,1],[2,2],[3,3]]\nOutput: false",
+    "level": "easy"
+  },
+  {
     "title": "Binary Tree Right Side View",
     "body": "Given the root of a binary tree, imagine yourself standing on the right side of it, return the values of the nodes you can see ordered from top to bottom.",
     "example": "Input: root = [1,2,3,null,5,null,4]\nOutput: [1,3,4];   Input: root = [1,null,3]\nOutput: [1,3];    Input: root = []\nOutput: []",
