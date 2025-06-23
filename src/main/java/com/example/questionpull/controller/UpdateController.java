@@ -60,16 +60,16 @@ public class UpdateController {
 
         switch (messageText) {
             case "/start" -> {
-                handleStartCommand(chatId, update.getMessage().getChat().getFirstName());
                 log.info("User started bot: chatId={}, name={}", chatId, update.getMessage().getChat().getFirstName());
+                handleStartCommand(chatId, update.getMessage().getChat().getFirstName());
             }
             case "/help" -> {
-                handleHelpCommand(chatId);
                 log.info("User use the help command: chatId={}, name={}", chatId, update.getMessage().getChat().getFirstName());
+                handleHelpCommand(chatId);
             }
             case "/stop" -> {
-                handleStopCommand(chatId);
                 log.info("User use the stop command: chatId={}, name={}", chatId, update.getMessage().getChat().getFirstName());
+                handleStopCommand(chatId);
             }
             default -> handleUnknownCommand(chatId, messageText);
         }
@@ -79,14 +79,17 @@ public class UpdateController {
         UserEntity user = userService.findOrCreateUser(chatId, "");
         List<UUID> history = user.getHistoryArray() != null ? user.getHistoryArray() : new ArrayList<>();
 
-        questionPullService.getRandomQuestionExcludingIds(level.contains("random") ? levels.get(RANDOM.nextInt(0, 2)) : level, history).ifPresentOrElse(question -> {
-            history.add(question.getUuid());
-            user.setCurrentQId(question.getUuid());
-            user.setHistoryArray(history);
-            userService.updateUser(user);
+        String finalLevel = level.contains("random") ? levels.get(RANDOM.nextInt(0, levels.size())) : level;
 
-            service.sendQuestionMessage(question, chatId, level);
-        }, () -> service.sendStopMessage(chatId, endMessage));
+        questionPullService.getRandomQuestionExcludingIds(finalLevel, history)
+                .ifPresentOrElse(question -> {
+                    history.add(question.getUuid());
+                    user.setCurrentQId(question.getUuid());
+                    user.setHistoryArray(history);
+                    userService.updateUser(user);
+
+                    service.sendQuestionMessage(question, chatId, finalLevel);
+                }, () -> service.sendStopMessage(chatId, endMessage));
     }
 
     private void handleHelpCommand(long chatId) {
