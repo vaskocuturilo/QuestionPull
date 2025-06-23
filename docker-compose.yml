@@ -59,5 +59,14 @@ services:
       - "--label-enable"
       - "--rolling-restart"
 
+  redis:
+    image: redis:7.2
+    container_name: redis
+    ports:
+      - "6379:6379"
+    environment:
+      - SPRING_REDIS_HOST=${SPRING_REDIS_HOST}
+      - SPRING_REDIS_PORT=${SPRING_REDIS_PORT}
+
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
