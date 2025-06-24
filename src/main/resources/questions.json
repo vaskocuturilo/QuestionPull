@@ -55,8 +55,8 @@
   },
   {
     "title": "Concatenate two arrays in Java",
-    "body": "",
-    "example": "",
+    "body": "Concatenate two arrays  with the standard Java API",
+    "example": "String[] strArray1 = {\"element 1\", \"element 2\", \"element 3\"}; String[] strArray2 = {\"element 4\", \"element 5\"}; result = String[] expectedStringArray = {\"element 1\", \"element 2\", \"element 3\", \"element 4\", \"element 5\"}; int[] intArray1 = { 0, 1, 2, 3 };\nint[] intArray2 = { 4, 5, 6, 7 };\nint[] expectedIntArray = { 0, 1, 2, 3, 4, 5, 6, 7 };",
     "level": "easy"
   },
   {
@@ -79,8 +79,8 @@
   },
   {
     "title": "Calculate Character",
-    "body": "",
-    "example": "",
+    "body": "Count the number of occurrences of a char in a String in Java",
+    "example": "test => {t-2, e-1, s-1}",
     "level": "easy"
   },
   {
@@ -90,15 +90,9 @@
     "level": "easy"
   },
   {
-    "title": "Number Of Character",
-    "body": "",
-    "example": "",
-    "level": "easy"
-  },
-  {
     "title": "Duplicate elements array and remove",
-    "body": "",
-    "example": "",
+    "body": "Find all duplicates elements in array and remove them. Return a new array",
+    "example": "{1,1,2,2,3,4,5,6} => result = {1,2,3,4,5,6}",
     "level": "easy"
   },
   {
@@ -108,27 +102,27 @@
     "level": "easy"
   },
   {
-    "title": "Fibonacci",
-    "body": "Create a function for the finding the fibonacci",
+    "title": "Fibonacci Series Generator",
+    "body": "Create a Java method that prints the first n numbers of the Fibonacci sequence, where n is a positive integer parameter passed to the method.",
     "example": "",
     "level": "easy"
   },
   {
     "title": "Find Duplicates in array",
-    "body": "",
-    "example": "",
+    "body": "Find all duplicates in array an return them in the a new array",
+    "example": "{1,1,2,2,3} => result = {1,2}",
     "level": "easy"
   },
   {
     "title": "Find Duplicates In Arrays",
-    "body": "",
-    "example": "",
+    "body": "Find all duplicates in arrays an return them in the a new array",
+    "example": "array1 = {1,2,3,4}, array1 = {1,2,3,5} => result =  {1,2,3}",
     "level": "easy"
   },
   {
     "title": "Find sum of elements",
-    "body": "",
-    "example": "",
+    "body": "Calculate all elements in the array and return a result",
+    "example": "{1,2,3} => result = 6",
     "level": "easy"
   },
   {
@@ -139,44 +133,44 @@
   },
   {
     "title": "Flip array",
-    "body": "",
-    "example": "",
+    "body": "Returns an array in flip order",
+    "example": "{1,2,3,4} => {4,3,2,1}",
     "level": "easy"
   },
   {
     "title": "Length in array",
-    "body": "",
-    "example": "",
+    "body": "Count a length array",
+    "example": " {1,2,3,4}  result = 4",
     "level": "easy"
   },
   {
-    "title": "LuckyTicket. String and Numeric.",
-    "body": "",
-    "example": "",
+    "title": "LuckyTicket. With arguments string and numeric",
+    "body": "Bus ticket numbers consist of 6 decimal digits. It is considered lucky when the sum of the first three digits equals the sum of the last three digits. ",
+    "example": "123321 = > is lucky, 123322 => is not lucky",
     "level": "easy"
   },
   {
     "title": "Matrix diagonal sum",
-    "body": "",
-    "example": "",
+    "body": "Given a square matrix mat, return the sum of the matrix diagonals.\n\nOnly include the sum of all the elements on the primary diagonal and all the elements on the secondary diagonal that are not part of the primary diagonal.",
+    "example": "Input: mat = [[1,2,3],\n              [4,5,6],\n              [7,8,9]], Output: 25\nExplanation: Diagonals sum: 1 + 5 + 9 + 3 + 7 = 25; Input: mat = [[1,1,1,1],\n              [1,1,1,1],\n              [1,1,1,1],\n              [1,1,1,1]], Output: 8; Input: mat = [[5]], Output: 5",
     "level": "easy"
   },
   {
     "title": "Merge arrays",
-    "body": "",
-    "example": "",
+    "body": "The merge two arrays",
+    "example": "array1 = {1,2,3}, array2= {4,5,6}, result = {1,2,3,4,5,6}",
     "level": "easy"
   },
   {
-    "title": "min and max values in array",
-    "body": "",
-    "example": "",
+    "title": "Find min and max values in array",
+    "body": "Given an array of size N. The task is to find the maximum and the minimum element of the array using the minimum number of comparisons.",
+    "example": "nput: arr[] = {3, 5, 4, 1, 9}\nOutput: Minimum element is: 1\n              Maximum element is: 9; Input: arr[] = {22, 14, 8, 17, 35, 3}\nOutput:  Minimum element is: 3\n              Maximum element is: 35",
     "level": "easy"
   },
   {
-    "title": "Missing a number",
-    "body": "",
-    "example": "",
+    "title": "Missing Number",
+    "body": "Given an array nums containing n distinct numbers in the range [0, n], return the only number in the range that is missing from the array.",
+    "example": "Example 1:\n\nInput: nums = [3,0,1]\n\nOutput: 2\n\nExplanation:\n\nn = 3 since there are 3 numbers, so all numbers are in the range [0,3]. 2 is the missing number in the range since it does not appear in nums.; Example 2:\n\nInput: nums = [0,1]\n\nOutput: 2\n\nExplanation:\n\nn = 2 since there are 2 numbers, so all numbers are in the range [0,2]. 2 is the missing number in the range since it does not appear in nums.Example 3:\n\nInput: nums = [9,6,4,2,3,5,7,0,1]\n\nOutput: 8\n\nExplanation:\n\nn = 9 since there are 9 numbers, so all numbers are in the range [0,9]. 8 is the missing number in the range since it does not appear in nums.",
     "level": "easy"
   },
   {
@@ -187,104 +181,98 @@
   },
   {
     "title": "Find Number of Element. Line Method.",
-    "body": "",
-    "example": "",
-    "level": "easy"
-  },
-  {
-    "title": "Parse Brackets",
-    "body": "",
-    "example": "",
+    "body": "Need to find index element in the array",
+    "example": "{10,20,30,40} => target = 30, result = 2, because this is a index of element 30",
     "level": "easy"
   },
   {
     "title": "ParseString. Full version",
-    "body": "",
-    "example": "",
+    "body": "Parse the string and get all numbers from the string. Divide elements into two arrays. In the first array, only even numbers and in the second, only odd numbers. In the first array, sort by natural order, and second sort in reverse order. ",
+    "example": "text = f1f10d3f4f5f9f0f6, result => {1,4,6,10}, {9,5,3}",
     "level": "easy"
   },
   {
-    "title": "Palindrome. String and numeric",
-    "body": "",
-    "example": "",
+    "title": "Valid Palindrome. The argument string and numeric",
+    "body": "A phrase is a palindrome if, after converting all uppercase letters into lowercase letters and removing all non-alphanumeric characters, it reads the same forward and backward. Alphanumeric characters include letters and numbers.\n\nGiven a string s, return true if it is a palindrome, or false otherwise.",
+    "example": "Input: s = \"A man, a plan, a canal: Panama\"\nOutput: true\nExplanation: \"amanaplanacanalpanama\" is a palindrome. Input: s = \"race a car\"\nOutput: false\nExplanation: \"raceacar\" is not a palindrome. Input: s = \" \"\nOutput: true\nExplanation: s is an empty string \"\" after removing non-alphanumeric characters.\nSince an empty string reads the same forward and backward, it is a palindrome.",
     "level": "easy"
   },
   {
     "title": "Quick Sort",
-    "body": "",
+    "body": "Quicksort is a divide-and-conquer algorithm",
     "example": "",
     "level": "easy"
   },
   {
     "title": "Remove First Letter from ich word from list and sort",
-    "body": "",
-    "example": "",
+    "body": "Remove the first character",
+    "example": "{Tony, Anna, Tom}, result => {nna, ony, om}",
     "level": "easy"
   },
   {
-    "title": "Reverse string.",
-    "body": "",
-    "example": "",
+    "title": "Reverse string",
+    "body": "Write a function that reverses a string. The input string is given as an array of characters s.\n\nYou must do this by modifying the input array in-place with O(1) extra memory.",
+    "example": "Input: s = [\"h\",\"e\",\"l\",\"l\",\"o\"]\nOutput: [\"o\",\"l\",\"l\",\"e\",\"h\"]; Input: s = [\"H\",\"a\",\"n\",\"n\",\"a\",\"h\"]\nOutput: [\"h\",\"a\",\"n\",\"n\",\"a\",\"H\"]",
     "level": "easy"
   },
   {
     "title": "Selection Sort",
-    "body": "",
+    "body": "Implement Selection Sort is a comparison-based sorting algorithm",
     "example": "",
     "level": "easy"
   },
   {
     "title": "Singleton",
-    "body": "",
+    "body": "Implement a singleton pattern",
     "example": "",
     "level": "easy"
   },
   {
-    "title": "Stack. With interface and without interface.",
-    "body": "",
+    "title": "Stack",
+    "body": "Implement stack",
     "example": "",
     "level": "easy"
   },
   {
-    "title": "Queue. With interface and without interface.",
-    "body": "",
+    "title": "Queue",
+    "body": "Implement queue",
     "example": "",
     "level": "easy"
   },
   {
-    "title": "Remove one array from another array.",
-    "body": "",
-    "example": "",
+    "title": "Remove one array from another array",
+    "body": "Implement function for remove all the elements of the array1 from array2",
+    "example": "elements in first array [100, 200, 300, 400, 500, 600]\nelements in second array [300, 500]\nfirst array after removing second array from first array\n[100, 200, 400, 600]",
     "level": "easy"
   },
   {
-    "title": "Find second min and max value in array.",
-    "body": "",
-    "example": "",
+    "title": "Find second min and max value in array",
+    "body": "Given an array arr[] of size N, find the second max and second smallest element in an array.",
+    "example": "nput: arr[] = {12, 13, 1, 10, 34, 1}; Output: 10 13",
     "level": "easy"
   },
   {
-    "title": "Calculate words in String",
-    "body": "",
-    "example": "",
+    "title": "Count words in String",
+    "body": "Given a string, count the number of words in it. The words are separated by the following characters: space (' ') or new line ('\\n') or tab ('\\t') or a combination of these.",
+    "example": "text = Hello world, result = 2",
     "level": "easy"
   },
   {
-    "title": "Change the first word with last in String.",
-    "body": "",
-    "example": "",
+    "title": "Change the first word with last in String",
+    "body": "Implement a function which change the first word with last in String",
+    "example": "text = Hello world, result => world Hello",
     "level": "easy"
   },
   {
-    "title": "Change the first element with last in Array.",
-    "body": "",
-    "example": "",
+    "title": "Change the first element with last in Array",
+    "body": "Implement a function which Change the first element with last in Array",
+    "example": "[1,2,3,4], result => [4,3,2,1]",
     "level": "easy"
   },
   {
     "title": "Number of Armstrong",
-    "body": "",
-    "example": "",
+    "body": "The k-digit number N is an Armstrong number if and only if the k-th power of each digit sums to N.\n\nGiven a positive integer N, return true if and only if it is an Armstrong number.",
+    "example": "Input: 153\nOutput: true\nExplanation: \n153 is a 3-digit number, and 153 = 1^3 + 5^3 + 3^3; Input: 123\nOutput: false\nExplanation: \n123 is a 3-digit number, and 123 != 1^3 + 2^3 + 3^3 = 36.",
     "level": "easy"
   },
   {
@@ -294,81 +282,69 @@
     "level": "easy"
   },
   {
-    "title": "Anagram",
-    "body": "",
-    "example": "",
+    "title": "Valid Anagram",
+    "body": "Given two strings s and t, return true if t is an anagram of s, and false otherwise.",
+    "example": "Example 1:\n\nInput: s = \"anagram\", t = \"nagaram\"\n\nOutput: true; Input: s = \"rat\", t = \"car\"\n\nOutput: false",
     "level": "easy"
   },
   {
-    "title": "addBinary",
-    "body": "",
-    "example": "",
-    "level": "easy"
-  },
-  {
-    "title": "NumbersForFind1000",
-    "body": "",
-    "example": "",
+    "title": "Add Binary",
+    "body": "Given two binary strings a and b, return their sum as a binary string.",
+    "example": "Example 1:\n\nInput: a = \"11\", b = \"1\"\nOutput: \"100\"; Example 2:\n\nInput: a = \"1010\", b = \"1011\"\nOutput: \"10101\"",
     "level": "easy"
   },
   {
     "title": "3Sum",
-    "body": "",
-    "example": "",
+    "body": "Given an integer array nums, return all the triplets [nums[i], nums[j], nums[k]] such that i != j, i != k, and j != k, and nums[i] + nums[j] + nums[k] == 0.\n\nNotice that the solution set must not contain duplicate triplets.",
+    "example": "Input: nums = [-1,0,1,2,-1,-4]\nOutput: [[-1,-1,2],[-1,0,1]], Input: nums = [0,1,1]\nOutput: [], Input: nums = [0,0,0]\nOutput: [[0,0,0]]",
     "level": "easy"
   },
   {
     "title": "Warm days",
-    "body": "",
-    "example": "",
+    "body": "Find the number of days when the temperature was higher or equal to a certain set temperature.",
+    "example": "{25, 30, 20, 28, 22, 35, 18}, temp = 25, result = 3",
     "level": "easy"
   },
   {
-    "title": "The first palindrome word in array",
-    "body": "",
-    "example": "",
+    "title": "Find First Palindromic String in the Array",
+    "body": "Given an array of strings words, return the first palindromic string in the array. If there is no such string, return an empty string \"\".\n\nA string is palindromic if it reads the same forward and backward.",
+    "example": "Input: words = [\"abc\",\"car\",\"ada\",\"racecar\",\"cool\"]\nOutput: \"ada\"\nExplanation: The first string that is palindromic is \"ada\".\nNote that \"racecar\" is also palindromic, but it is not the first; Input: words = [\"notapalindrome\",\"racecar\"]\nOutput: \"racecar\"\nExplanation: The first and only string that is palindromic is \"racecar\".",
     "level": "easy"
   },
   {
-    "title": "zero max",
-    "body": "",
-    "example": "",
+    "title": "Zero max",
+    "body": "Return a version of the given array where each zero value in the array is replaced by the\n    largest odd value to the right of the zero in the array.\n    If there is no odd value to the right of the zero, leave the zero as a zero.",
+    "example": "zeroMax([0, 5, 0, 3]) → [5, 5, 3, 3]\n    zeroMax([0, 4, 0, 3]) → [3, 4, 3, 3]\n        zeroMax([0, 1, 0]) → [1, 1, 0]",
     "level": "easy"
   },
   {
     "title": "Double sort",
-    "body": "",
-    "example": "",
-    "level": "easy"
-  },
-  {
-    "title": "Find longest subsequence",
-    "body": "",
+    "body": "Implement Double sorting, in the context of sorting algorithms, generally refers to sorting a list based on two criteria.",
     "example": "",
     "level": "easy"
   },
   {
     "title": "The decorator pattern",
-    "body": "",
+    "body": "Implement Decorator is a structural design pattern",
     "example": "",
     "level": "easy"
   },
   {
     "title": "The builder pattern",
-    "body": "",
+    "body": "Implement The builder pattern",
     "example": "",
     "level": "easy"
   },
   {
     "title": "The reverse integer",
-    "body": "",
-    "example": "",
+    "body": "Given a signed 32-bit integer x, return x with its digits reversed. If reversing x causes the value to go outside the signed 32-bit integer range [-231, 231 - 1], then return 0.\n\nAssume the environment does not allow you to store 64-bit integers (signed or unsigned).",
+    "example": "Input: x = 123\nOutput: 321, Input: x = -123\nOutput: -321, Input: x = 120\nOutput: 21",
     "level": "easy"
   },
   {
     "title": "Find Closest Number to Zero",
-    "body": "",
-    "example": "",
+    "body": "Given an integer array nums of size n, return the number with the value closest to 0 in nums. If there are multiple answers, return the number with the largest value.",
+    "example": "Input: nums = [-4,-2,1,4,8]\nOutput: 1, Input: nums = [2,-1,1]\nOutput: 1",
     "level": "easy"
   },
   {
@@ -384,9 +360,21 @@
     "level": "easy"
   },
   {
+    "title": "Valid Boomerang",
+    "body": "Given an array points where points[i] = [xi, yi] represents a point on the X-Y plane, return true if these points are a boomerang.\n\nA boomerang is a set of three points that are all distinct and not in a straight line.",
+    "example": "Example 1:\n\nInput: points = [[1,1],[2,3],[3,2]]\nOutput: true; Example 2:\n\nInput: points = [[1,1],[2,2],[3,3]]\nOutput: false",
+    "level": "easy"
+  },
+  {
     "title": "Count Vowels in a String",
-    "body": "A string is a contiguous (non-empty) sequence of characters within a string. A vowel string is a substring that only consists of vowels ('a', 'e', 'i', 'o', and 'u') and has all five vowels present in it.",
-    "example": "Input: word = \"aeiouu\", Output: 6",
+    "body": "Write a method that counts the number of vowels (a, e, i, o, u) in a given string. The method should ignore case.",
+    "example": "text = test, result => 1",
+    "level": "easy"
+  },
+  {
+    "title": "Simple Banking System (OOP Practice)",
+    "body": "Design a basic Java class BankAccount that supports the following:\n\nStoring account number and balance.\n\nMethods: deposit(double amount), withdraw(double amount), getBalance().",
+    "example": "",
     "level": "easy"
   },
   {
