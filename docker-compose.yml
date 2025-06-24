@@ -1,7 +1,6 @@
 services:
   question:
     hostname: questions
-    container_name: questions
     image: vaskocuturilo/questionpull:latest
     restart: always
     labels:
