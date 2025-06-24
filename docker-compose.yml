@@ -24,10 +24,6 @@ services:
       context: .
       dockerfile: Dockerfile
     deploy:
-      replicas: 3
-      restart_policy:
-        condition: on-failure
-
       resources:
         limits:
           cpus: '0.75'
