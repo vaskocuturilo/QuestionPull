@@ -484,5 +484,11 @@
     "body": "Given a string, find the length of the longest substring without repeating characters.",
     "example": "Input: \"abcabcbb\", Output: 3 (substring is \"abc\")",
     "level": "hard"
+  },
+  {
+    "title": "Word Ladder (Transform Words with Dictionary)",
+    "body": "A transformation sequence from word beginWord to word endWord using a dictionary wordList is a sequence of words beginWord -> s1 -> s2 -> ... -> sk such that:\n\nEvery adjacent pair of words differs by a single letter.\nEvery si for 1 <= i <= k is in wordList. Note that beginWord does not need to be in wordList.\nsk == endWord\nGiven two words, beginWord and endWord, and a dictionary wordList, return the number of words in the shortest transformation sequence from beginWord to endWord, or 0 if no such sequence exists.",
+    "example": "Example 1:\n\nInput: beginWord = \"hit\", endWord = \"cog\", wordList = [\"hot\",\"dot\",\"dog\",\"lot\",\"log\",\"cog\"]\nOutput: 5\nExplanation: One shortest transformation sequence is \"hit\" -> \"hot\" -> \"dot\" -> \"dog\" -> cog\", which is 5 words long \n Example 2:\n\nInput: beginWord = \"hit\", endWord = \"cog\", wordList = [\"hot\",\"dot\",\"dog\",\"lot\",\"log\"]\nOutput: 0\nExplanation: The endWord \"cog\" is not in wordList, therefore there is no valid transformation sequence.",
+    "level": "hard"
   }
 ]
