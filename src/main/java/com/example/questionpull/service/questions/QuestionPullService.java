@@ -51,8 +51,12 @@ public class QuestionPullService {
     public SendMessage createCustomMessage(final long chatId) {
         return messageFactory.createSimpleMessage("""
                 
-                This bot can help you for prepare the technical interview. You can select a level of question (easy, medium, and hard).
-                Likewise, you can upload your questions.
+                A bot who can help you prepare for the technical interview.
+                You can select a level of question (easy, medium, and hard).
+                Likewise, you can select a random question at any level.
+                At any moment, you can see your result(statistics button).
+                
+                The bot will analyze your result and give you suggestions for improving the code (This feature will be available soon)
                 
                 You can use commands:
                 
