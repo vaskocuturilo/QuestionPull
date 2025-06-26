@@ -50,4 +50,10 @@ You will need the following technologies available to try it out:
 ``` docker-compose -f "docker-compose.yml" up --detach --build```
 
 ## How it looks
-![](https://i.postimg.cc/NG30hQdz/649127e3-b25a-4589-bf1b-88960d521208.jpg)
+![](https://i.postimg.cc/KYc2cCMS/Screenshot-at-Jun-26-10-34-58.png)
+
+![](https://i.postimg.cc/dQzMzhQy/Screenshot-at-Jun-26-10-35-44.png)
+
+![](https://i.postimg.cc/W4BNSXyd/Screenshot-at-Jun-26-10-36-05.png)
+
+![](https://i.postimg.cc/Z5JVvmKR/Screenshot-at-Jun-26-10-36-31.png)
