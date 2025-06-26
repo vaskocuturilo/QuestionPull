@@ -372,8 +372,32 @@
     "level": "easy"
   },
   {
-    "title": "Simple Banking System (OOP Practice)",
-    "body": "Design a basic Java class BankAccount that supports the following:\n\nStoring account number and balance.\n\nMethods: deposit(double amount), withdraw(double amount), getBalance().",
+    "title": "Basic Banking Application (Object-Oriented)",
+    "body": "Create a simplified banking application. Define a BankAccount class with attributes like accountNumber, accountHolderName, and balance. The class should have methods for:\n 1. Depositing money.\n 2. Withdrawing money (ensure sufficient balance).\n 3. Displaying account details; Then, create a Bank class that manages multiple BankAccount objects (e.g., using a List or Map). The Bank class should provide methods to:\n 1. Create a new bank account.\n 2. Find an account by account number.\n 3. Perform deposits and withdrawals on specific accounts.\n 4. Display details of all accounts; Hint: This exercise emphasizes object-oriented principles.\n\n",
+    "example": "",
+    "level": "easy"
+  },
+  {
+    "title": "Basic Calculator",
+    "body": "Create a console-based Java application that acts as a simple calculator. It should prompt the user to enter two numbers and then choose an operation (addition, subtraction, multiplication, or division). After the user makes their selections, the program should perform the calculation and display the result. You should handle potential InputMismatchException for non-numeric input and ArithmeticException for division by zero.",
+    "example": "",
+    "level": "easy"
+  },
+  {
+    "title": "Student Management System (Console-Based)",
+    "body": "Develop a console application to manage student records. The application should allow users to: \n 1. Add a new student (with properties like ID, name, age, and a list of courses). \n 2. Display details of all students. \n 3. Find a student by ID and display their details. \n 4. Update a student's age or courses.\n 5. Delete a student by ID; \n Hint: Use a List (e.g., ArrayList) to store Student objects. Each Student should be a separate class with appropriate attributes and methods.",
+    "example": "",
+    "level": "easy"
+  },
+  {
+    "title": "Simple Inventory Management",
+    "body": "Design a small inventory management system for a store. The system should allow users to:\n 1. Add new products (with properties like product ID, name, price, and quantity in stock). \n 2. Display all products and their current stock. \n 3. Update the quantity of a specific product. \n  4. Search for a product by name or ID.\n 5. Remove a product from the inventory; Hint: Again, use a List or Map (e.g., HashMap) to store Product objects, where Product is a separate class. Consider how to handle duplicate product IDs.",
+    "example": "",
+    "level": "easy"
+  },
+  {
+    "title": "Text File Analyzer",
+    "body": "Write a Java program that takes a text file as input and performs the following analyses: \n 1. Counts the total number of words in the file.\n 2. Counts the total number of lines in the file.\n 3. Counts the occurrences of each unique word (case-insensitive).\n 4. Finds the 5 most frequent words. Hint: The program should handle FileNotFoundException and other potential IOExceptions. You will need to use FileReader, BufferedReader, and potentially Scanner for file processing, along with data structures like Map for word counts.",
     "example": "",
     "level": "easy"
   },
