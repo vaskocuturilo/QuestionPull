@@ -42,6 +42,19 @@ public class KeyboardFactory {
             return this;
         }
 
+        public KeyboardBuilder addLinkButton(final String text, final String url) {
+            if (rows.isEmpty()) {
+                addRow();
+            }
+
+            InlineKeyboardButton button = new InlineKeyboardButton();
+            button.setText(text);
+            button.setUrl(url);
+            rows.get(rows.size() - 1).add(button);
+
+            return this;
+        }
+
         public InlineKeyboardMarkup build() {
             return createInlineKeyboard(rows);
         }
