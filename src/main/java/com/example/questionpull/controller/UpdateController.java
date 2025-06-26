@@ -110,6 +110,20 @@ public class UpdateController {
     }
 
     private void handleCallbackQuery(Update update) {
+        Map<CallbackData, Consumer<Long>> tempMap = new EnumMap<>(CallbackData.class);
+
+        tempMap.put(CallbackData.NEXT_QUESTION_EASY, chatId -> sendNextQuestion(chatId, "easy"));
+        tempMap.put(CallbackData.NEXT_QUESTION_MEDIUM, chatId -> sendNextQuestion(chatId, "medium"));
+        tempMap.put(CallbackData.NEXT_QUESTION_HARD, chatId -> sendNextQuestion(chatId, "hard"));
+        tempMap.put(CallbackData.NEXT_QUESTION_RANDOM, chatId -> sendNextQuestion(chatId, "random"));
+        tempMap.put(CallbackData.BUTTON_PASS, this::handleChangeLevelCommand);
+        tempMap.put(CallbackData.BUTTON_FAIL, this::handleChangeLevelCommand);
+        tempMap.put(CallbackData.MY_SOLUTION, this::handleMySolutionCallback);
+        tempMap.put(CallbackData.CHANGE_LEVEL, this::handleChangeLevelCommand);
+        tempMap.put(CallbackData.SHOW_STATISTIC, this::handleShowStatisticCommand);
+        tempMap.put(CallbackData.STOP_QUESTION, this::handleStopCommand);
+        tempMap.put(CallbackData.HELP, this::handleHelpCommand);
+
         String callBackData = update.getCallbackQuery().getData();
         long chatId = update.getCallbackQuery().getMessage().getChatId();
 
@@ -119,7 +133,7 @@ public class UpdateController {
         }
 
         CallbackData.fromString(callBackData)
-                .ifPresentOrElse(callback -> callbackHandlers
+                .ifPresentOrElse(callback -> Map.copyOf(tempMap)
                                 .getOrDefault(callback, this::handleUnhandledCallback)
                                 .accept(chatId),
                         () -> log.warn("Invalid callback data: {}", callBackData));
@@ -141,19 +155,6 @@ public class UpdateController {
 
         sendNextQuestion(chatId, level);
     }
-
-    private final Map<CallbackData, Consumer<Long>> callbackHandlers = Map.of(
-            CallbackData.NEXT_QUESTION_EASY, chatId -> sendNextQuestion(chatId, "easy"),
-            CallbackData.NEXT_QUESTION_MEDIUM, chatId -> sendNextQuestion(chatId, "medium"),
-            CallbackData.NEXT_QUESTION_HARD, chatId -> sendNextQuestion(chatId, "hard"),
-            CallbackData.NEXT_QUESTION_RANDOM, chatId -> sendNextQuestion(chatId, "random"),
-            CallbackData.BUTTON_PASS, this::handleChangeLevelCommand,
-            CallbackData.BUTTON_FAIL, this::handleChangeLevelCommand,
-            CallbackData.CHANGE_LEVEL, this::handleChangeLevelCommand,
-            CallbackData.SHOW_STATISTIC, this::handleShowStatisticCommand,
-            CallbackData.STOP_QUESTION, this::handleStopCommand,
-            CallbackData.HELP, this::handleHelpCommand
-    );
 
     private void handleUnhandledCallback(long chatId) {
         log.warn("Unhandled callback query for chatId: {}", chatId);
@@ -186,7 +187,17 @@ public class UpdateController {
     }
 
     private void handleUnknownCommand(long chatId, String command) {
-        String reply = "❓ Unknown command: " + command + "\n\nType /help to see available commands.";
+        final String reply = "❓ Unknown command: " + command + "\n\nType /help to see available commands.";
+        SendMessage message = new SendMessage();
+        message.setChatId(chatId);
+        message.setText(reply);
+        telegramBot.send(message);
+    }
+
+    private void handleMySolutionCallback(long chatId) {
+        final String reply = "❌ This functionality is not available yet";
+        log.warn("Use my solution functionality for chatId: {}", chatId);
+
         SendMessage message = new SendMessage();
         message.setChatId(chatId);
         message.setText(reply);

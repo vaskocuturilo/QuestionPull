@@ -6,8 +6,7 @@ import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKe
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 class KeyboardFactoryTest {
     @Test
@@ -76,5 +75,25 @@ class KeyboardFactoryTest {
         List<List<InlineKeyboardButton>> rows = keyboard.getKeyboard();
 
         assertTrue(rows.isEmpty());
+    }
+
+    @Test
+    void testAddLinkButton() {
+        KeyboardFactory keyboardFactory = new KeyboardFactory();
+        InlineKeyboardMarkup markup = keyboardFactory.builder()
+                .addRow()
+                .addLinkButton("Open Google", "https://www.google.com")
+                .build();
+
+        List<List<InlineKeyboardButton>> rows = markup.getKeyboard();
+
+        assertNotNull(rows);
+        assertEquals(1, rows.size());
+        assertEquals(1, rows.get(0).size());
+
+        InlineKeyboardButton button = rows.get(0).get(0);
+        assertEquals("Open Google", button.getText());
+        assertEquals("https://www.google.com", button.getUrl());
+        assertNull(button.getCallbackData(), "Callback data should be null for link buttons");
     }
 }
