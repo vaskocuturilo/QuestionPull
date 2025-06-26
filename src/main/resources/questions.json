@@ -402,6 +402,30 @@
     "level": "easy"
   },
   {
+    "title": "Check for Prime Number",
+    "body": "Write a method that checks whether a given integer is a prime number. Return true if it is prime, otherwise return false.",
+    "example": "2: The smallest prime number, and the only even prime number.\n3: Divisible only by 1 and 3.\n5: Divisible only by 1 and 5.\n7: Divisible only by 1 and 7.\n11: Divisible only by 1 and 11",
+    "level": "easy"
+  },
+  {
+    "title": "Sum of Digits",
+    "body": "Write a method that takes a positive integer and returns the sum of its digits.",
+    "example": "For example, 123 should return 6",
+    "level": "easy"
+  },
+  {
+    "title": "Simple Calculator (Switch Case)",
+    "body": "Implement a basic calculator that supports +, -, *, and /. The user provides two numbers and an operator, and the method returns the result.",
+    "example": "",
+    "level": "easy"
+  },
+  {
+    "title": "Create a Person Class",
+    "body": "Create a Person class with the fields name, age, and email. Add constructors, getters, setters, and a method to display the information.",
+    "example": "Hint: Think about validation (input integrity), string formatting and immutability",
+    "level": "easy"
+  },
+  {
     "title": "Binary Tree Right Side View",
     "body": "Given the root of a binary tree, imagine yourself standing on the right side of it, return the values of the nodes you can see ordered from top to bottom.",
     "example": "Input: root = [1,2,3,null,5,null,4]\nOutput: [1,3,4];   Input: root = [1,null,3]\nOutput: [1,3];    Input: root = []\nOutput: []",
@@ -465,6 +489,30 @@
     "title": "Group Anagrams",
     "body": "Given a list of strings, group them by anagrams. Return a list of grouped anagrams, where each group contains strings that are anagrams of each other.",
     "example": "Example Input: [\"eat\", \"tea\", \"tan\", \"ate\", \"nat\", \"bat\"], Expected Output Format: [\n  [\"eat\", \"tea\", \"ate\"],\n  [\"tan\", \"nat\"],\n  [\"bat\"]\n]; Concepts Tested:\n\nString manipulation\n\nHashing and grouping\n\nWorking with Map and List collections",
+    "level": "medium"
+  },
+  {
+    "title": "Implement a Thread-Safe Singleton Logger",
+    "body": "Create a singleton Logger class that ensures only one instance is used throughout the application. The logger should be thread-safe and lazily initialized. Add a method to write messages to a log file with timestamps.",
+    "example": "",
+    "level": "medium"
+  },
+  {
+    "title": "Create a Custom HashMap Implementation",
+    "body": "Implement a simplified version of HashMap<K, V> using an array of buckets and linked lists for collision handling. Provide support for basic operations: put(), get(), remove(), and containsKey()",
+    "example": "",
+    "level": "medium"
+  },
+  {
+    "title": "Implement an Event Scheduler System",
+    "body": "Design and implement a class EventScheduler that allows scheduling tasks to run at a specified future time. Each task should be a Runnable. Provide functionality to cancel scheduled tasks.",
+    "example": "",
+    "level": "medium"
+  },
+  {
+    "title": "Build a File Search Utility",
+    "body": "Develop a program that recursively searches through a directory and its subdirectories to find all files matching a given filename pattern (e.g., all .txt files containing a certain keyword).",
+    "example": "",
     "level": "medium"
   },
   {
