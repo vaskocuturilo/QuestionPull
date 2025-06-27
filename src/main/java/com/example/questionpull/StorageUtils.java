@@ -1,9 +1,11 @@
 package com.example.questionpull;
 
 import com.example.questionpull.entity.QuestionPullEntity;
+import com.example.questionpull.entity.SolutionEntity;
 import com.example.questionpull.repository.QuestionPullRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.type.TypeFactory;
+import jakarta.transaction.Transactional;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
@@ -36,6 +38,7 @@ public class StorageUtils {
     }
 
     @EventListener(ApplicationReadyEvent.class)
+    @Transactional
     public void loadQuestionsPull() {
         try {
             if (questionPullRepository.count() > 0) {
@@ -53,6 +56,13 @@ public class StorageUtils {
                 TypeFactory typeFactory = objectMapper.getTypeFactory();
                 List<QuestionPullEntity> questionList = objectMapper.readValue(inputStream,
                         typeFactory.constructCollectionType(List.class, QuestionPullEntity.class));
+
+                for (QuestionPullEntity question : questionList) {
+                    if (question.getSolution() != null) {
+                        SolutionEntity solution = question.getSolution();
+                        solution.setQuestionPull(question);
+                    }
+                }
                 questionPullRepository.saveAll(questionList);
                 log.info("Questions loaded successfully into the database.");
             }

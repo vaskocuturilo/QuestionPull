@@ -1,8 +1,6 @@
 package com.example.questionpull.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.*;
 
 @Data
@@ -10,7 +8,7 @@ import lombok.*;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "question_pull")
+@Table(name = "questions")
 @Builder
 public class QuestionPullEntity extends AbstractBaseEntity {
 
@@ -25,4 +23,7 @@ public class QuestionPullEntity extends AbstractBaseEntity {
 
     @Column(nullable = false, length = 10)
     private String level;
+
+    @OneToOne(mappedBy = "questionPull", cascade = CascadeType.ALL, orphanRemoval = true)
+    private SolutionEntity solution;
 }
