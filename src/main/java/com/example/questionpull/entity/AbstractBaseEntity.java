@@ -2,7 +2,6 @@ package com.example.questionpull.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
-import org.hibernate.annotations.UuidGenerator;
 
 import java.util.UUID;
 
@@ -12,7 +11,7 @@ import java.util.UUID;
 public abstract class AbstractBaseEntity {
 
     @Id
-    @UuidGenerator
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    protected UUID uuid;
+    @GeneratedValue(generator = "UUID")
+    @Column(name = "uuid", updatable = false, nullable = false)
+    private UUID uuid;
 }

@@ -1,6 +1,6 @@
 package com.example.questionpull.service.cache;
 
-import com.example.questionpull.entity.QuestionPullEntity;
+import com.example.questionpull.entity.QuestionEntity;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
@@ -11,13 +11,13 @@ import java.util.List;
 @Service
 @Slf4j
 public class QuestionCacheService {
-    private final RedisTemplate<String, QuestionPullEntity> redisTemplate;
+    private final RedisTemplate<String, QuestionEntity> redisTemplate;
 
-    public QuestionCacheService(RedisTemplate<String, QuestionPullEntity> redisTemplate) {
+    public QuestionCacheService(RedisTemplate<String, QuestionEntity> redisTemplate) {
         this.redisTemplate = redisTemplate;
     }
 
-    public void cacheQuestion(QuestionPullEntity question) {
+    public void cacheQuestion(QuestionEntity question) {
         String listKey = "questions:level:" + question.getLevel();
         String itemKey = "question:" + question.getUuid();
 
@@ -27,9 +27,9 @@ public class QuestionCacheService {
 
     }
 
-    public List<QuestionPullEntity> getQuestionsByLevel(String level) {
+    public List<QuestionEntity> getQuestionsByLevel(String level) {
         String listKey = "questions:level:" + level;
-        List<QuestionPullEntity> cachedList = redisTemplate.opsForList().range(listKey, 0, -1);
+        List<QuestionEntity> cachedList = redisTemplate.opsForList().range(listKey, 0, -1);
 
         if (cachedList == null || cachedList.isEmpty()) {
             log.info("Redis cache miss for level: {}", level);

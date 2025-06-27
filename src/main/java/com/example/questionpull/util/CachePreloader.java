@@ -1,6 +1,6 @@
 package com.example.questionpull.util;
 
-import com.example.questionpull.entity.QuestionPullEntity;
+import com.example.questionpull.entity.QuestionEntity;
 import com.example.questionpull.repository.QuestionPullRepository;
 import com.example.questionpull.service.cache.QuestionCacheService;
 import org.springframework.boot.ApplicationArguments;
@@ -20,7 +20,7 @@ public class CachePreloader implements ApplicationRunner {
 
     @Override
     public void run(ApplicationArguments args) {
-        Iterable<QuestionPullEntity> allQuestions = questionRepo.findAll();
+        Iterable<QuestionEntity> allQuestions = questionRepo.findAll();
         allQuestions.forEach(cacheService::cacheQuestion);
     }
 }

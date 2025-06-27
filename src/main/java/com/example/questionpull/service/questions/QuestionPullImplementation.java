@@ -1,6 +1,6 @@
 package com.example.questionpull.service.questions;
 
-import com.example.questionpull.entity.QuestionPullEntity;
+import com.example.questionpull.entity.QuestionEntity;
 import com.example.questionpull.repository.QuestionPullRepository;
 import com.example.questionpull.service.cache.QuestionCacheService;
 import lombok.extern.slf4j.Slf4j;
@@ -28,23 +28,23 @@ public class QuestionPullImplementation implements QuestionPull {
     }
 
     @Override
-    public Optional<QuestionPullEntity> getRandomQuestionExcludingIds(String level, List<UUID> excludedIds) {
-        List<QuestionPullEntity> cachedQuestions = cacheService.getQuestionsByLevel(level);
+    public Optional<QuestionEntity> getRandomQuestionExcludingIds(String level, List<UUID> excludedIds) {
+        List<QuestionEntity> cachedQuestions = cacheService.getQuestionsByLevel(level);
 
         if (!cachedQuestions.isEmpty()) {
-            List<QuestionPullEntity> available = cachedQuestions.stream()
+            List<QuestionEntity> available = cachedQuestions.stream()
                     .filter(q -> !excludedIds.contains(q.getUuid()))
                     .toList();
 
             if (!available.isEmpty()) {
-                QuestionPullEntity selected = available.get(RANDOM.nextInt(available.size()));
+                QuestionEntity selected = available.get(RANDOM.nextInt(available.size()));
                 log.info("Question [{}] fetched from Redis for level [{}]", selected.getUuid(), level);
                 return Optional.of(selected);
             }
         }
 
         log.info("Fetching random question from DB for level [{}] (cache empty or all questions used)", level);
-        Optional<QuestionPullEntity> dbQuestion =
+        Optional<QuestionEntity> dbQuestion =
                 questionPullRepository.findRandomByDifficultyExcludingIds(level, excludedIds);
 
         dbQuestion.ifPresent(question -> {

@@ -35,6 +35,9 @@ public class UpdateController {
     @Value("${bot.message.change.level}")
     String changeLevel;
 
+    @Value("${bot.message.help.info}")
+    String showHelpInfo;
+
     public UpdateController(QuestionPullImplementation questionPullService,
                             QuestionPullService service, UserService userService) {
         this.questionPullService = questionPullService;
@@ -93,7 +96,7 @@ public class UpdateController {
     }
 
     private void handleHelpCommand(long chatId) {
-        final SendMessage sendMessage = service.createCustomMessage(chatId);
+        final SendMessage sendMessage = service.createCustomMessage(chatId, showHelpInfo);
         telegramBot.send(sendMessage);
     }
 
@@ -118,7 +121,7 @@ public class UpdateController {
         tempMap.put(CallbackData.NEXT_QUESTION_RANDOM, chatId -> sendNextQuestion(chatId, "random"));
         tempMap.put(CallbackData.BUTTON_PASS, this::handleChangeLevelCommand);
         tempMap.put(CallbackData.BUTTON_FAIL, this::handleChangeLevelCommand);
-        tempMap.put(CallbackData.MY_SOLUTION, this::handleMySolutionCallback);
+        tempMap.put(CallbackData.COMPARE_MY_SOLUTION, this::handleCompareWithMySolutionCallback);
         tempMap.put(CallbackData.CHANGE_LEVEL, this::handleChangeLevelCommand);
         tempMap.put(CallbackData.SHOW_STATISTIC, this::handleShowStatisticCommand);
         tempMap.put(CallbackData.STOP_QUESTION, this::handleStopCommand);
@@ -194,9 +197,9 @@ public class UpdateController {
         telegramBot.send(message);
     }
 
-    private void handleMySolutionCallback(long chatId) {
+    private void handleCompareWithMySolutionCallback(long chatId) {
         final String reply = "❌ This functionality is not available yet";
-        log.warn("Use my solution functionality for chatId: {}", chatId);
+        log.warn("Use compare with my solution functionality for chatId: {}", chatId);
 
         SendMessage message = new SendMessage();
         message.setChatId(chatId);
