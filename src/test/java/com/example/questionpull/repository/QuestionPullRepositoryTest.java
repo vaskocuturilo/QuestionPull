@@ -118,7 +118,7 @@ class QuestionPullRepositoryTest {
                 .build();
 
         assertThatThrownBy(() -> underTest.save(question))
-                .hasMessage("not-null property references a null or transient value: com.example.questionpull.entity.QuestionPullEntity.title")
+                .hasMessage("not-null property references a null or transient value: com.example.questionpull.entity.QuestionEntity.title")
                 .isInstanceOf(DataIntegrityViolationException.class);
     }
 
@@ -133,7 +133,7 @@ class QuestionPullRepositoryTest {
                 .build();
 
         assertThatThrownBy(() -> underTest.save(question))
-                .hasMessage("not-null property references a null or transient value: com.example.questionpull.entity.QuestionPullEntity.body")
+                .hasMessage("not-null property references a null or transient value: com.example.questionpull.entity.QuestionEntity.body")
                 .isInstanceOf(DataIntegrityViolationException.class);
     }
 
@@ -148,7 +148,7 @@ class QuestionPullRepositoryTest {
                 .build();
 
         assertThatThrownBy(() -> underTest.save(question))
-                .hasMessage("not-null property references a null or transient value: com.example.questionpull.entity.QuestionPullEntity.level")
+                .hasMessage("not-null property references a null or transient value: com.example.questionpull.entity.QuestionEntity.level")
                 .isInstanceOf(DataIntegrityViolationException.class);
     }
 
@@ -163,7 +163,7 @@ class QuestionPullRepositoryTest {
                 .build();
 
         assertThatThrownBy(() -> underTest.save(question))
-                .hasMessage("not-null property references a null or transient value: com.example.questionpull.entity.QuestionPullEntity.example")
+                .hasMessage("not-null property references a null or transient value: com.example.questionpull.entity.QuestionEntity.example")
                 .isInstanceOf(DataIntegrityViolationException.class);
     }
 }
