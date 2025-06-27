@@ -1,6 +1,6 @@
 package com.example.questionpull.repository;
 
-import com.example.questionpull.entity.QuestionPullEntity;
+import com.example.questionpull.entity.QuestionEntity;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -28,7 +28,7 @@ class QuestionPullRepositoryTest {
     @ParameterizedTest
     @ValueSource(strings = {"easy", "medium", "hard", "random"})
     void itShouldSelectQuestionByEasyLevel(final String level) {
-        QuestionPullEntity question = QuestionPullEntity
+        QuestionEntity question = QuestionEntity
                 .builder()
                 .title("Test")
                 .body("Test")
@@ -37,7 +37,7 @@ class QuestionPullRepositoryTest {
 
         underTest.save(question);
 
-        Optional<QuestionPullEntity> optionalPaste = underTest.findRandomByDifficultyExcludingIds(level, List.of(UUID.randomUUID()));
+        Optional<QuestionEntity> optionalPaste = underTest.findRandomByDifficultyExcludingIds(level, List.of(UUID.randomUUID()));
 
         assertThat(optionalPaste).isPresent().hasValueSatisfying(c -> assertThat(c)
                 .usingRecursiveComparison()
@@ -46,7 +46,7 @@ class QuestionPullRepositoryTest {
 
     @Test
     void itShouldSelectByTitle() {
-        QuestionPullEntity question = QuestionPullEntity
+        QuestionEntity question = QuestionEntity
                 .builder()
                 .title("Test")
                 .body("Test")
@@ -56,7 +56,7 @@ class QuestionPullRepositoryTest {
 
         underTest.save(question);
 
-        Optional<QuestionPullEntity> optionalPaste = underTest.findByTitle("Test");
+        Optional<QuestionEntity> optionalPaste = underTest.findByTitle("Test");
 
         assertThat(optionalPaste).isPresent().hasValueSatisfying(c -> assertThat(c)
                 .usingRecursiveComparison()
@@ -65,7 +65,7 @@ class QuestionPullRepositoryTest {
 
     @Test
     void itShouldSelectQuestionByBody() {
-        QuestionPullEntity question = QuestionPullEntity
+        QuestionEntity question = QuestionEntity
                 .builder()
                 .title("Test")
                 .body("Test")
@@ -75,7 +75,7 @@ class QuestionPullRepositoryTest {
 
         underTest.save(question);
 
-        Optional<QuestionPullEntity> optionalPaste = underTest.findByBody("Test");
+        Optional<QuestionEntity> optionalPaste = underTest.findByBody("Test");
 
         assertThat(optionalPaste).isPresent().hasValueSatisfying(c -> assertThat(c)
                 .usingRecursiveComparison()
@@ -85,31 +85,31 @@ class QuestionPullRepositoryTest {
     @Test
     void itNotShouldSelectQuestionByIdWhenIdDoesNotExist() {
         UUID uuid = UUID.randomUUID();
-        Optional<QuestionPullEntity> optionalPaste = underTest.findById(uuid);
+        Optional<QuestionEntity> optionalPaste = underTest.findById(uuid);
         assertThat(optionalPaste).isNotPresent();
     }
 
     @Test
     void itNotShouldSelectQuestionByTitleWhenTitleDoesNotExist() {
-        Optional<QuestionPullEntity> optionalPaste = underTest.findByTitle("Test title");
+        Optional<QuestionEntity> optionalPaste = underTest.findByTitle("Test title");
         assertThat(optionalPaste).isNotPresent();
     }
 
     @Test
     void itNotShouldSelectQuestionByBodyWhenBodyDoesNotExist() {
-        Optional<QuestionPullEntity> optionalPaste = underTest.findByBody("Test body");
+        Optional<QuestionEntity> optionalPaste = underTest.findByBody("Test body");
         assertThat(optionalPaste).isNotPresent();
     }
 
     @Test
     void itNotShouldSelectQuestionByBodyWhenDifficultyDoesNotExist() {
-        Optional<QuestionPullEntity> optionalPaste = underTest.findRandomByDifficultyExcludingIds("easy", List.of(UUID.randomUUID()));
+        Optional<QuestionEntity> optionalPaste = underTest.findRandomByDifficultyExcludingIds("easy", List.of(UUID.randomUUID()));
         assertThat(optionalPaste).isNotPresent();
     }
 
     @Test
     void itShouldNotSaveQuestionWhenTitleIsNull() {
-        QuestionPullEntity question = QuestionPullEntity
+        QuestionEntity question = QuestionEntity
                 .builder()
                 .title(null)
                 .body("Test")
@@ -124,7 +124,7 @@ class QuestionPullRepositoryTest {
 
     @Test
     void itShouldNotSaveQuestionWhenBodyIsNull() {
-        QuestionPullEntity question = QuestionPullEntity
+        QuestionEntity question = QuestionEntity
                 .builder()
                 .title("Test")
                 .body(null)
@@ -139,7 +139,7 @@ class QuestionPullRepositoryTest {
 
     @Test
     void itShouldNotSaveQuestionWhenLevelIsNull() {
-        QuestionPullEntity question = QuestionPullEntity
+        QuestionEntity question = QuestionEntity
                 .builder()
                 .title("Test")
                 .body("Test")
@@ -154,7 +154,7 @@ class QuestionPullRepositoryTest {
 
     @Test
     void itShouldNotSaveQuestionWhenExampleIsNull() {
-        QuestionPullEntity question = QuestionPullEntity
+        QuestionEntity question = QuestionEntity
                 .builder()
                 .title("Test")
                 .body("Test")

@@ -1,6 +1,6 @@
 package com.example.questionpull.service.questions;
 
-import com.example.questionpull.entity.QuestionPullEntity;
+import com.example.questionpull.entity.QuestionEntity;
 import com.example.questionpull.factory.KeyboardFactory;
 import com.example.questionpull.factory.MessageFactory;
 import com.example.questionpull.service.TelegramBot;
@@ -23,15 +23,15 @@ public class QuestionPullService {
     private static final String BUTTON_CHANGE_THE_LEVEL = "\uD83D\uDD04 Change the level";
     private static final String BUTTON_NEXT_QUESTION_MEDIUM = "⭐ Next Medium Question ";
     private static final String BUTTON_NEXT_QUESTION_HARD = "\uD83D\uDD25 Next Hard Question ";
-    private static final String BUTTON_MY_SOLUTION = "\uD83C\uDD98 My Solution ";
+    private static final String BUTTON_COMPARE_MY_SOLUTION = "\uD83C\uDD9A Compare With My Solution";
     private static final String BUTTON_NEXT_QUESTION_RANDOM = "\uD83C\uDFB2 Next Random Question ";
     private static final String BUTTON_SHOW_STATISTIC = "\uD83D\uDCCA Show Statistic";
-    private static final String BUTTON_STOP_QUESTION = "⛔ Stop Quiz";
+    private static final String BUTTON_STOP_QUESTION = "⛔ Stop Questions";
     private static final String BUTTON_DONATE = "\uD83D\uDCB2 Donate";
     private static final String BUTTON_HELP_INFO_QUESTION = "ℹ️ Help & Info";
     private static final String NEXT_QUESTION_EASY = "NEXT_QUESTION_EASY";
     private static final String NEXT_QUESTION_MEDIUM = "NEXT_QUESTION_MEDIUM";
-    private static final String MY_SOLUTION = "MY_SOLUTION";
+    private static final String COMPARE_MY_SOLUTION = "COMPARE_MY_SOLUTION";
     private static final String NEXT_QUESTION_RANDOM = "NEXT_QUESTION_RANDOM";
     private static final String NEXT_QUESTION_HARD = "NEXT_QUESTION_HARD";
     private static final String STOP_QUESTION = "STOP_QUESTION";
@@ -55,35 +55,8 @@ public class QuestionPullService {
         return messageFactory.createMessageWithKeyboard("Choose an option:", chatId, keyboard);
     }
 
-    public SendMessage createCustomMessage(final long chatId) {
-        return messageFactory.createSimpleMessage("""
-                
-                A bot who can help you prepare for the technical interview.
-                You can select a level of question (easy, medium, and hard).
-                Likewise, you can select a random question at any level.
-                At any moment, you can see your result(statistics button).
-                
-                The bot will analyze your result and give you suggestions for improving the code (This feature will be available soon)
-                
-                You can use commands:
-                
-                /start - This command will launch a question pull bot
-                /help  - This command will launch a help section
-                /stop  -  This command stop a question pull bot
-                
-                I see some students want some advice after struggling with coding challenges/exercises, getting blocked, and/or being demotivated.
-                Don't worry, we've all been there. However, how you respond to that is what's important.
-                Don't give up, you must be persistent.
-                
-                I just want to provide some tips:
-                
-                1. Positive mindset.
-                2. Practice, lots of it.
-                3. Active learning and learn from mistakes.
-                4. Write clean code.
-                5. Take your time and solve using multiple approaches.
-                
-                """, chatId);
+    public SendMessage createCustomMessage(final long chatId, final String text) {
+        return messageFactory.createSimpleMessage(text, chatId);
     }
 
     public SendMessage createChangeLevelMessage(final long chatId, final Map<String, Long> counts) {
@@ -92,7 +65,7 @@ public class QuestionPullService {
         return messageFactory.createMessageWithKeyboard("Choose an option:", chatId, keyboard);
     }
 
-    public void sendQuestionMessage(final QuestionPullEntity question, final long chatId, String level) {
+    public void sendQuestionMessage(final QuestionEntity question, final long chatId, String level) {
         String text = formatQuestionMessage(question);
         InlineKeyboardMarkup keyboard = buildQuestionMenuKeyboard(level);
         SendMessage sendMessage = messageFactory.createMessageWithKeyboard(text, chatId, keyboard);
@@ -126,7 +99,7 @@ public class QuestionPullService {
                 .builder()
                 .addRow().addButton(BUTTON_PASS, passCallback)
                 .addRow().addButton(BUTTON_FAIL, failCallback)
-                .addRow().addButton(BUTTON_MY_SOLUTION, MY_SOLUTION)
+                .addRow().addButton(BUTTON_COMPARE_MY_SOLUTION, COMPARE_MY_SOLUTION)
                 .addRow().addButton(BUTTON_NEXT_QUESTION_RANDOM, NEXT_QUESTION_RANDOM)
                 .addRow().addButton(BUTTON_CHANGE_THE_LEVEL, CallbackData.CHANGE_LEVEL.name())
                 .addRow().addButton(BUTTON_SHOW_STATISTIC, CallbackData.SHOW_STATISTIC.name())
@@ -144,7 +117,7 @@ public class QuestionPullService {
                 .addRow().addButton(BUTTON_NEXT_QUESTION_EASY + "(" + easyCount + ")", CallbackData.NEXT_QUESTION_EASY.name())
                 .addRow().addButton(BUTTON_NEXT_QUESTION_MEDIUM + "(" + mediumCount + ")", CallbackData.NEXT_QUESTION_MEDIUM.name())
                 .addRow().addButton(BUTTON_NEXT_QUESTION_HARD + "(" + hardCount + ")", CallbackData.NEXT_QUESTION_HARD.name())
-                .addRow().addButton(BUTTON_MY_SOLUTION, CallbackData.MY_SOLUTION.name())
+                .addRow().addButton(BUTTON_COMPARE_MY_SOLUTION, CallbackData.COMPARE_MY_SOLUTION.name())
                 .addRow().addButton(BUTTON_NEXT_QUESTION_RANDOM, CallbackData.NEXT_QUESTION_RANDOM.name())
                 .addRow().addButton(BUTTON_SHOW_STATISTIC, CallbackData.SHOW_STATISTIC.name())
                 .addRow().addButton(BUTTON_STOP_QUESTION, CallbackData.STOP_QUESTION.name())
@@ -154,7 +127,7 @@ public class QuestionPullService {
     }
 
 
-    public String formatQuestionMessage(QuestionPullEntity question) {
+    public String formatQuestionMessage(QuestionEntity question) {
         return """
                 Title: %s
                 Body: %s

@@ -1,6 +1,6 @@
 package com.example.questionpull.service.cache;
 
-import com.example.questionpull.entity.QuestionPullEntity;
+import com.example.questionpull.entity.QuestionEntity;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -23,13 +23,13 @@ import static org.mockito.Mockito.when;
 class QuestionCacheServiceTest {
 
     @Mock
-    private RedisTemplate<String, QuestionPullEntity> redisTemplate;
+    private RedisTemplate<String, QuestionEntity> redisTemplate;
 
     @Mock
-    private ListOperations<String, QuestionPullEntity> listOps;
+    private ListOperations<String, QuestionEntity> listOps;
 
     @Mock
-    private ValueOperations<String, QuestionPullEntity> valueOps;
+    private ValueOperations<String, QuestionEntity> valueOps;
 
     private QuestionCacheService cacheService;
 
@@ -43,7 +43,7 @@ class QuestionCacheServiceTest {
     @Test
     void shouldCacheQuestionCorrectly() {
         // Arrange
-        QuestionPullEntity question = new QuestionPullEntity();
+        QuestionEntity question = new QuestionEntity();
         question.setUuid(UUID.randomUUID());
         question.setLevel("easy");
 
@@ -61,16 +61,16 @@ class QuestionCacheServiceTest {
     @Test
     void shouldReturnQuestionsFromCache() {
         // Arrange
-        QuestionPullEntity question1 = new QuestionPullEntity();
+        QuestionEntity question1 = new QuestionEntity();
         question1.setUuid(UUID.randomUUID());
         question1.setLevel("easy");
 
-        List<QuestionPullEntity> mockList = List.of(question1);
+        List<QuestionEntity> mockList = List.of(question1);
 
         when(listOps.range("questions:level:easy", 0, -1)).thenReturn(mockList);
 
         // Act
-        List<QuestionPullEntity> result = cacheService.getQuestionsByLevel("easy");
+        List<QuestionEntity> result = cacheService.getQuestionsByLevel("easy");
 
         // Assert
         assertEquals(1, result.size());
@@ -83,7 +83,7 @@ class QuestionCacheServiceTest {
         when(listOps.range("questions:level:medium", 0, -1)).thenReturn(null);
 
         // Act
-        List<QuestionPullEntity> result = cacheService.getQuestionsByLevel("medium");
+        List<QuestionEntity> result = cacheService.getQuestionsByLevel("medium");
 
         // Assert
         assertTrue(result.isEmpty());

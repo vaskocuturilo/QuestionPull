@@ -15,7 +15,7 @@ public class SolutionEntity extends AbstractBaseEntity {
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "question_id", referencedColumnName = "uuid")
-    private QuestionPullEntity questionPull;
+    private QuestionEntity questionPull;
 
     @Column(name = "content", nullable = false, length = 2550000)
     private String content;

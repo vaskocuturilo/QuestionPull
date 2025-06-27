@@ -1,6 +1,6 @@
 package com.example.questionpull;
 
-import com.example.questionpull.entity.QuestionPullEntity;
+import com.example.questionpull.entity.QuestionEntity;
 import com.example.questionpull.entity.SolutionEntity;
 import com.example.questionpull.repository.QuestionPullRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -54,10 +54,10 @@ public class StorageUtils {
 
             try (InputStream inputStream = resource.getInputStream()) {
                 TypeFactory typeFactory = objectMapper.getTypeFactory();
-                List<QuestionPullEntity> questionList = objectMapper.readValue(inputStream,
-                        typeFactory.constructCollectionType(List.class, QuestionPullEntity.class));
+                List<QuestionEntity> questionList = objectMapper.readValue(inputStream,
+                        typeFactory.constructCollectionType(List.class, QuestionEntity.class));
 
-                for (QuestionPullEntity question : questionList) {
+                for (QuestionEntity question : questionList) {
                     if (question.getSolution() != null) {
                         SolutionEntity solution = question.getSolution();
                         solution.setQuestionPull(question);

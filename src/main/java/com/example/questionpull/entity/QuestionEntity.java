@@ -10,7 +10,7 @@ import lombok.*;
 @AllArgsConstructor
 @Table(name = "questions")
 @Builder
-public class QuestionPullEntity extends AbstractBaseEntity {
+public class QuestionEntity extends AbstractBaseEntity {
 
     @Column(nullable = false, length = 2550000)
     private String title;

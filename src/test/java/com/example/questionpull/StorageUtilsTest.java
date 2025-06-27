@@ -1,6 +1,6 @@
 package com.example.questionpull;
 
-import com.example.questionpull.entity.QuestionPullEntity;
+import com.example.questionpull.entity.QuestionEntity;
 import com.example.questionpull.entity.SolutionEntity;
 import com.example.questionpull.repository.QuestionPullRepository;
 
@@ -101,8 +101,8 @@ class StorageUtilsTest {
 
         when(resource.getInputStream()).thenReturn(mockInputStream);
 
-        List<QuestionPullEntity> questionList = new ArrayList<>();
-        QuestionPullEntity question = new QuestionPullEntity();
+        List<QuestionEntity> questionList = new ArrayList<>();
+        QuestionEntity question = new QuestionEntity();
         question.setTitle("Title1");
         question.setBody("Body1");
         question.setExample("Example1");
@@ -115,7 +115,7 @@ class StorageUtilsTest {
         questionList.add(question);
 
         JavaType javaType = TypeFactory.defaultInstance()
-                .constructCollectionType(List.class, QuestionPullEntity.class);
+                .constructCollectionType(List.class, QuestionEntity.class);
 
         when(objectMapper.getTypeFactory()).thenReturn(TypeFactory.defaultInstance());
         when(objectMapper.readValue(any(InputStream.class), eq(javaType))).thenReturn(questionList);

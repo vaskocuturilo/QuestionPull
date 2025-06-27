@@ -1,6 +1,6 @@
 package com.example.questionpull.service;
 
-import com.example.questionpull.entity.QuestionPullEntity;
+import com.example.questionpull.entity.QuestionEntity;
 import com.example.questionpull.factory.KeyboardFactory;
 import com.example.questionpull.factory.MessageFactory;
 import com.example.questionpull.service.questions.QuestionPullService;
@@ -38,7 +38,7 @@ class QuestionPullServiceTest {
     private static final String TEST_BODY = "Test Body";
     private static final String TEST_EXAMPLE = "Test Example";
 
-    private QuestionPullEntity question;
+    private QuestionEntity question;
 
     @BeforeEach
     void setUp() {
@@ -46,7 +46,7 @@ class QuestionPullServiceTest {
 
         questionPullService = new QuestionPullService(messageFactory, keyboardFactory, telegramBot);
 
-        question = new QuestionPullEntity();
+        question = new QuestionEntity();
         question.setTitle(TEST_TITLE);
         question.setBody(TEST_BODY);
         question.setExample(TEST_EXAMPLE);
