@@ -23,7 +23,7 @@ public class QuestionPullService {
     private static final String BUTTON_CHANGE_THE_LEVEL = "\uD83D\uDD04 Change the level";
     private static final String BUTTON_NEXT_QUESTION_MEDIUM = "⭐ Next Medium Question ";
     private static final String BUTTON_NEXT_QUESTION_HARD = "\uD83D\uDD25 Next Hard Question ";
-    private static final String BUTTON_MY_SOLUTION = "\uD83C\uDD98help me My Solution ";
+    private static final String BUTTON_MY_SOLUTION = "\uD83C\uDD98 My Solution ";
     private static final String BUTTON_NEXT_QUESTION_RANDOM = "\uD83C\uDFB2 Next Random Question ";
     private static final String BUTTON_SHOW_STATISTIC = "\uD83D\uDCCA Show Statistic";
     private static final String BUTTON_STOP_QUESTION = "⛔ Stop Quiz";
