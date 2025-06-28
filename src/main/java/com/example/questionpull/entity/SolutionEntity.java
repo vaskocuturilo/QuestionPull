@@ -1,5 +1,6 @@
 package com.example.questionpull.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Data;
@@ -15,6 +16,7 @@ public class SolutionEntity extends AbstractBaseEntity {
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "question_id", referencedColumnName = "uuid")
+    @JsonBackReference
     private QuestionEntity questionPull;
 
     @Column(name = "content", nullable = false, length = 2550000)

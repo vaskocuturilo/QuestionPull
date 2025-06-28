@@ -1,5 +1,6 @@
 package com.example.questionpull.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -25,5 +26,6 @@ public class QuestionEntity extends AbstractBaseEntity {
     private String level;
 
     @OneToOne(mappedBy = "questionPull", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference
     private SolutionEntity solution;
 }
