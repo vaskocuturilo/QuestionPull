@@ -1,27 +1,39 @@
 [
   {
-    "title": "The zero max ",
+    "title": "The zero max",
     "body": "Return a version of the given array where each zero value in the array is replaced by the\n    largest odd value to the right of the zero in the array.\n    If there is no odd value to the right of the zero, leave the zero as a zero.",
     "example": "zeroMax([0, 5, 0, 3]) → [5, 5, 3, 3] \n zeroMax([0, 4, 0, 3]) → [3, 4, 3, 3] \n zeroMax([0, 1, 0]) → [1, 1, 0]",
-    "level": "easy"
+    "level": "easy",
+    "solution": {
+      "content": "public int[] zeroMax(final int[] inputArray) {\n        int maxValue = Integer.MIN_VALUE;\n\n        int[] result = Arrays.copyOf(inputArray, inputArray.length);\n\n        Objects.requireNonNull(inputArray, \"Input array must not be null\");\n\n        if (inputArray.length < 2) {\n            return new int[0];\n        }\n\n        for (int i = result.length - 1; i >= 0; i--) {\n            if (result[i] % 2 != 0) {\n                maxValue = Math.max(maxValue, result[i]);\n            }\n\n            if (result[i] == 0 && maxValue != Integer.MIN_VALUE) {\n                result[i] = maxValue;\n            }\n        }\n        return result;\n    }"
+    }
   },
   {
     "title": "The Reverse integer",
     "body": "Given a signed 32-bit integer x, return x with its digits reversed. If reversing x causes the value to go outside the signed 32-bit integer range [-231, 231 - 1], then return 0.",
     "example": "Input: x = 123, Output: 321; Input: x = -123, Output: -321; Input: x = 120, Output: 21",
-    "level": "medium"
+    "level": "medium",
+    "solution": {
+      "content": "public Integer reverseNumbers(Integer number) {\n        var reverse = 0L;\n        var digit = 0;\n\n        while (number != 0) {\n            digit = number % 10;\n            reverse = reverse * 10 + digit;\n            number /= 10;\n        }\n\n        if (reverse > Integer.MAX_VALUE || reverse < Integer.MIN_VALUE) {\n            return 0;\n        }\n\n        return (int) reverse;\n    }"
+    }
   },
   {
     "title": "The two sum",
     "body": "Given an array of integers nums and an integer target, return indices of the two numbers such that they add up to target.\n You may assume that each input would have exactly one solution, and you may not use the same element twice.\n You can return the answer in any order.",
     "example": "Input: nums = [2,7,11,15], target = 9, Output: [0,1], Explanation: Because nums[0] + nums[1] == 9, we return [0, 1]; Input: nums = [3,2,4], target = 6, Output: [1,2]; Input: nums = [3,3], target = 6, Output: [0,1]",
-    "level": "easy"
+    "level": "easy",
+    "solution": {
+      "content": "public int[] findTwoSum(final int[] inputArray, final int target) {\n        Objects.requireNonNull(inputArray, \"Input array must not be null\");\n\n        if (inputArray.length < 2) {\n            throw new IllegalArgumentException(\"Input array must contain at least two elements\");\n        }\n\n        HashMap<Integer, Integer> lookup = new HashMap<>();\n\n        for (int i = 0; i < inputArray.length; i++) {\n            int complement = target - inputArray[i];\n            if (lookup.containsKey(complement)) {\n                return new int[]{lookup.get(complement), i};\n            }\n\n            lookup.put(inputArray[i], i);\n\n        }\n        throw new IllegalArgumentException(\"No two elements sum up to the target\");\n    }"
+    }
   },
   {
     "title": "Palindrome Number",
     "body": "Given an integer x, return true if x is a \npalindrome\n, and false otherwise. Input: x = 121\nOutput: true\nExplanation: 121 reads as 121 from left to right and from right to left.",
     "example": "Input: x = 121, Output: true, Explanation: 121 reads as 121 from left to right and from right to left; Input: x = -121, Output: false, Explanation: From left to right, it reads -121. From right to left, it becomes 121-. Therefore it is not a palindrome.",
-    "level": "easy"
+    "level": "easy",
+    "solution": {
+      "content": "public boolean checkPalindromeNumber(final int number) {\n        if (number < 0 || (number != 0 && number % 10 == 0)) {\n            return false;\n        }\n\n        int reversed = 0;\n        int n = number;\n\n        while (n != 0) {\n            int digit = n % 10;\n            reversed = reversed * 10 + digit;\n            n /= 10;\n        }\n\n        return reversed == number;\n    }"
+    }
   },
   {
     "title": "Longest Common Prefix",
