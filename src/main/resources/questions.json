@@ -39,13 +39,19 @@
     "title": "Longest Common Prefix",
     "body": "Write a function to find the longest common prefix string amongst an array of strings.\n\nIf there is no common prefix, return an empty string \"\"",
     "example": "Input: strs = [\"flower\",\"flow\",\"flight\"], Output: \"fl\"; Input: strs = [\"dog\",\"racecar\",\"car\"], Output: \"\", Explanation: There is no common prefix among the input strings.",
-    "level": "easy"
+    "level": "easy",
+    "solution": {
+      "content": "public String findLongestSubstringWithoutRepeatingCharacters(final String inputText) {\n        Objects.requireNonNull(inputText, \"The sentence cannot be null\");\n\n        final String trimmed = inputText.toLowerCase().trim();\n\n        if (trimmed.isEmpty()) {\n            throw new IllegalArgumentException(\"The sentence contains only spaces\");\n        }\n\n        boolean hasLetter = trimmed.chars().anyMatch(Character::isAlphabetic);\n\n        if (!hasLetter) {\n            throw new IllegalArgumentException(\"The sentence contains no letters\");\n        }\n\n        final String[] inputStringArray = trimmed.split(\"\\\\s+\");\n\n        if (inputStringArray.length < 2) {\n            throw new IllegalArgumentException(\"The sentence must contain at least two words.\");\n        }\n\n        String prefix = inputStringArray[0];\n\n        for (String item : inputStringArray) {\n            while (item.indexOf(prefix) != 0) {\n                prefix = prefix.substring(0, prefix.length() - 1);\n                if (prefix.isEmpty()) {\n                    return \"\";\n                }\n            }\n        }\n        return prefix;\n    }"
+    }
   },
   {
     "title": "Valid Parentheses",
     "body": "Given a string s containing just the characters '(', ')', '{', '}', '[' and ']', determine if the input string is valid. ",
     "example": "Input: s = \"()\", Output: true; Input: s = \"()[]{}\", Output: true; Input: s = \"(]\", Output: false",
-    "level": "easy"
+    "level": "easy",
+    "solution": {
+      "content": "Objects.requireNonNull(text, \"The sentence cannot be null\");\n\n        String trimmed = text.trim();\n\n        if (trimmed.isEmpty()) {\n            throw new IllegalArgumentException(\"The sentence contains only white spaces\");\n        }\n\n        Deque<Character> deque = new ArrayDeque<>();\n\n        for (char symbol : trimmed.toCharArray()) {\n            switch (symbol) {\n                case '(', '{', '[' -> {\n                    deque.push(switch (symbol) {\n                        case '(' -> ')';\n                        case '{' -> '}';\n                        case '[' -> ']';\n                        default -> throw new IllegalStateException(\"Unexpected opening bracket: \" + symbol);\n                    });\n                }\n                case ')', '}', ']' -> {\n                    if (deque.isEmpty() || deque.pop() != symbol) {\n                        return false;\n                    }\n                }\n                default -> {\n                    // Skip non-bracket characters\n                }\n            }\n        }\n\n        return deque.isEmpty();\n    }"
+    }
   },
   {
     "title": "Find the Index of the First Occurrence in a String",
@@ -63,31 +69,46 @@
     "title": "Plus One",
     "body": "You are given a large integer represented as an integer array digits, where each digits[i] is the ith digit of the integer. The digits are ordered from most significant to least significant in left-to-right order. The large integer does not contain any leading 0's. \n Increment the large integer by one and return the resulting array of digits.",
     "example": "Input: digits = [1,2,3], Output: [1,2,4], Explanation: The array represents the integer 123.\nIncrementing by one gives 123 + 1 = 124.\n Thus, the result should be [1,2,4]; Input: digits = [4,3,2,1], Output: [4,3,2,2], Explanation: The array represents the integer 4321.\nIncrementing by one gives 4321 + 1 = 4322.\n Thus, the result should be [4,3,2,2]",
-    "level": "easy"
+    "level": "easy",
+    "solution": {
+      "content": "public int[] plusOne(final int[] digits) {\n        Objects.requireNonNull(digits, \"The array cannot be null\");\n\n        for (int i = digits.length - 1; i >= 0; i--) {\n            if (digits[i] < 9) {\n                digits[i]++;\n                return digits;\n            }\n            digits[i] = 0;\n        }\n\n        int[] result = new int[digits.length + 1];\n        result[0] = 1;\n        return result;\n    }"
+    }
   },
   {
     "title": "Concatenate two arrays in Java",
     "body": "Concatenate two arrays  with the standard Java API",
     "example": "String[] strArray1 = {\"element 1\", \"element 2\", \"element 3\"}; String[] strArray2 = {\"element 4\", \"element 5\"}; result = String[] expectedStringArray = {\"element 1\", \"element 2\", \"element 3\", \"element 4\", \"element 5\"}; int[] intArray1 = { 0, 1, 2, 3 };\nint[] intArray2 = { 4, 5, 6, 7 };\nint[] expectedIntArray = { 0, 1, 2, 3, 4, 5, 6, 7 };",
-    "level": "easy"
+    "level": "easy",
+    "solution": {
+      "content": "public static void additionOfArrays(final int[] firstArray, final int[] secondArray) {\n        IntStream\n                .concat(Arrays.stream(firstArray), Arrays.stream(secondArray))\n                .distinct()\n                .sorted()\n                .forEach(System.out::print);\n    }"
+    }
   },
   {
     "title": "Count Character Frequencies",
-    "body": "Show how concatenate two arrays in Java. Also, the method should work not only with String arrays, so you need to show how look for a generic solution.",
-    "example": "String[] strArray1 = {\"element 1\", \"element 2\", \"element 3\"}; String[] strArray2 = {\"element 4\", \"element 5\"}; String[] expectedStringArray = {\"element 1\", \"element 2\", \"element 3\", \"element 4\", \"element 5\"}",
-    "level": "easy"
+    "body": "Write a method that takes a string and returns a Map<Character, Integer> representing the frequency of each character (ignore spaces and case sensitivity).",
+    "example": "Input: \"Programming\"\nOutput: {r=2, o=1, g=2, a=1, m=2, i=1, n=1, p=1}",
+    "level": "easy",
+    "solution": {
+      "content": "public Map<Character, Integer> countCharacterFrequencies(final String sentence) {\n        final Map<Character, Integer> frequencyMap = new HashMap<>();\n\n        Objects.requireNonNull(sentence, \"The sentence cannot be null\");\n\n        final String trimmed = sentence.trim();\n\n        if (trimmed.isEmpty()) {\n            throw new IllegalArgumentException(\"The sentence contains only spaces\");\n        }\n\n        boolean hasLetter = trimmed.chars().anyMatch(Character::isAlphabetic);\n\n        if (!hasLetter) {\n            throw new IllegalArgumentException(\"The sentence contains no letters\");\n        }\n\n        for (final char symbol : trimmed.toCharArray()) {\n            if (Character.isAlphabetic(symbol)) {\n                char c = Character.toLowerCase(symbol);\n                frequencyMap.merge(c, 1, Integer::sum);\n            }\n        }\n        return frequencyMap;\n    }"
+    }
   },
   {
     "title": "Binary Search",
     "body": "Given an array of integers nums which is sorted in ascending order, and an integer target, write a function to search target in nums. If target exists, then return its index. Otherwise, return -1. You must write an algorithm with O(log n) runtime complexity.\n\n",
     "example": "Input: nums = [-1,0,3,5,9,12], target = 9\nOutput: 4\nExplanation: 9 exists in nums and its index is 4; Input: nums = [-1,0,3,5,9,12], target = 2\nOutput: -1\nExplanation: 2 does not exist in nums so return -1",
-    "level": "easy"
+    "level": "easy",
+    "solution": {
+      "content": "private static int binarySearch(int[] sortedArray, int target) {\n        int left = 0;\n        int right = sortedArray.length - 1;\n        int result = -1;\n        while (left <= right) {\n            int mid = left + (right - left) / 2;\n            if (sortedArray[mid] == target) {\n                result = mid;\n                right = mid - 1;\n            } else if (sortedArray[mid] < target) {\n                left = mid + 1;\n            } else {\n                right = mid - 1;\n            }\n        }\n\n        return result;\n    }"
+    }
   },
   {
     "title": "Check Bubble Sort",
     "body": "Take 10 numbers and shuffle them into a random order.  Your goal is to sort the numbers into ascending numerical order as shown below, using a bubble sort.\n",
     "example": "[7, 12, 9, 11, 3] => [3, 7, 9, 11, 12]",
-    "level": "easy"
+    "level": "easy",
+    "solution": {
+      "content": "public int[] bubbleSort(final int[] inputArray) {\n        Objects.requireNonNull(inputArray, \"The array cannot be null\");\n\n        if (inputArray.length < 2) {\n            throw new IllegalArgumentException(\"The array should contain min 2 elements\");\n        }\n\n        boolean swaped = true;\n\n        final int length = inputArray.length;\n\n        for (int i = 0; i < length - 1 && swaped; i++) {\n            swaped = false;\n\n            for (int j = 0; j < length - i - 1; j++) {\n                if (inputArray[j] > inputArray[j + 1]) {\n                    int temp = inputArray[j];\n                    inputArray[j] = inputArray[j + 1];\n                    inputArray[j + 1] = temp;\n                    swaped = true;\n                }\n            }\n        }\n\n        return inputArray;\n    }"
+    }
   },
   {
     "title": "Calculate Character",
@@ -99,7 +120,10 @@
     "title": "Compare Version Numbers",
     "body": "Given two version strings, version1 and version2, compare them. A version string consists of revisions separated by dots '.'. The value of the revision is its integer conversion ignoring leading zeros.\n\nTo compare version strings, compare their revision values in left-to-right order. If one of the version strings has fewer revisions, treat the missing revision values as 0. \n Return the following:\n\nIf version1 < version2, return -1.\nIf version1 > version2, return 1.\nOtherwise, return 0.",
     "example": "Input: version1 = \"1.2\", version2 = \"1.10\"\n\nOutput: -1\n\nExplanation:\n\nversion1's second revision is \"2\" and version2's second revision is \"10\": 2 < 10, so version1 < version2.   Input: version1 = \"1.01\", version2 = \"1.001\"\n\nOutput: 0\n\nExplanation:\n\nIgnoring leading zeroes, both \"01\" and \"001\" represent the same integer \"1\".  Input: version1 = \"1.0\", version2 = \"1.0.0.0\"\n\nOutput: 0\n\nExplanation:\n\nversion1 has less revisions, which means every missing revision are treated as \"0\".",
-    "level": "easy"
+    "level": "easy",
+    "solution": {
+      "content": "public int compareVersions(final String version1, final String version2) {\n        Objects.requireNonNull(version1, \"Version1 cannot be null\");\n        Objects.requireNonNull(version2, \"Version2 cannot be null\");\n\n        if (version1.isEmpty() || version2.isEmpty()) {\n            throw new IllegalArgumentException(\"Version strings cannot be empty\");\n        }\n\n        final String[] v1Parts = version1.split(\"\\\\.\");\n        final String[] v2Parts = version2.split(\"\\\\.\");\n\n        final int maxLength = Math.max(v1Parts.length, v2Parts.length);\n\n        for (int i = 0; i < maxLength; i++) {\n            int v1 = i < v1Parts.length ? Integer.parseInt(v1Parts[i]) : 0;\n            int v2 = i < v2Parts.length ? Integer.parseInt(v2Parts[i]) : 0;\n\n            if (v1 != v2) {\n                return Integer.compare(v1, v2);\n            }\n        }\n\n        return 0;\n    }"
+    }
   },
   {
     "title": "Duplicate elements array and remove",
