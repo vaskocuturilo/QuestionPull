@@ -576,10 +576,31 @@
     "level": "medium"
   },
   {
+    "title": "Implement of a thread-safe singleton logger",
+    "body": "Create a singleton Logger class that ensures only one instance is used throughout the application. The logger should be thread-safe and lazily initialized. Add a method to write messages to a log file with timestamps.",
+    "example": "",
+    "level": "medium",
+    "solution": {
+      "content": "public class SingletonLogger {\n    private static final Logger logger = Logger.getLogger(SingletonLogger.class.getName());\n\n    private static SingletonLogger log;\n\n    private static final String LOG_FILE = \"singleton_log.txt\";\n\n    private SingletonLogger() {\n        try {\n            FileHandler fileHandler = new FileHandler(LOG_FILE, true);\n            fileHandler.setFormatter(new SimpleFormatter());\n            if (logger.getHandlers().length == 0) {\n                logger.addHandler(fileHandler);\n            }\n        } catch (IOException exception) {\n            logger.log(Level.WARNING, \"Failed to set up file handler: {0}\", exception.getMessage());\n        }\n    }\n\n    public static synchronized SingletonLogger getLog() {\n        if (log == null) {\n            log = new SingletonLogger();\n        }\n        return log;\n    }\n\n    public void log(Level level, String message) {\n        logger.log(level, message);\n    }\n}"
+    }
+  },
+  {
+    "title": "Create a Custom HashMap Implementation",
+    "body": "Implement a simplified version of HashMap<K, V> using an array of buckets and linked lists for collision handling. Provide support for basic operations: put(), get() and remove()",
+    "example": "",
+    "level": "medium",
+    "solution": {
+      "content": "public class HashMapCustom<K, V> {\n    static class Entry<K, V> {\n        K key;\n        V value;\n        HashMapCustom.Entry<K, V> next;\n\n        public Entry(K key, V value, HashMapCustom.Entry<K, V> next) {\n            this.key = key;\n            this.value = value;\n            this.next = next;\n        }\n    }\n\n    private static final float LOAD_FACTOR = 0.75f;\n    private int size;\n    private int capacity = 4;\n    @SuppressWarnings(\"unchecked\")\n    private HashMapCustom.Entry<K, V>[] bucket = new HashMapCustom.Entry[capacity];\n\n    public HashMapCustom() {\n        capacity = 4;\n        bucket = (HashMapCustom.Entry<K, V>[]) new HashMapCustom.Entry[capacity];\n    }\n\n    public void put(K key, V value) {\n        if (key == null) return;\n\n        if ((float) size / capacity >= LOAD_FACTOR) {\n            resize();\n        }\n\n        int hash = hash(key);\n        HashMapCustom.Entry<K, V> current = bucket[hash];\n\n        if (current == null) {\n            bucket[hash] = new HashMapCustom.Entry<>(key, value, null);\n            size++;\n            return;\n        }\n\n        while (current != null) {\n            if (current.key.equals(key)) {\n                current.value = value;\n                return;\n            }\n            if (current.next == null) {\n                current.next = new HashMapCustom.Entry<>(key, value, null);\n                size++;\n                return;\n            }\n            current = current.next;\n        }\n    }\n\n    public V get(K key) {\n        if (key == null) return null;\n        int hash = hash(key);\n        HashMapCustom.Entry<K, V> current = bucket[hash];\n        while (current != null) {\n            if (current.key.equals(key)) return current.value;\n            current = current.next;\n        }\n        return null;\n    }\n\n    public boolean remove(K key) {\n        if (key == null) return false;\n        int hash = hash(key);\n        HashMapCustom.Entry<K, V> current = bucket[hash];\n        HashMapCustom.Entry<K, V> prev = null;\n\n        while (current != null) {\n            if (current.key.equals(key)) {\n                if (prev == null) {\n                    bucket[hash] = current.next;\n                } else {\n                    prev.next = current.next;\n                }\n                size--;\n                return true;\n            }\n            prev = current;\n            current = current.next;\n        }\n\n        return false;\n    }\n\n    private int hash(K key) {\n        return Math.abs(key.hashCode()) % capacity;\n    }\n\n    @SuppressWarnings(\"unchecked\")\n    private void resize() {\n        int newCapacity = capacity * 2;\n        HashMapCustom.Entry<K, V>[] oldBucket = bucket;\n        bucket = (HashMapCustom.Entry<K, V>[]) new HashMapCustom.Entry[newCapacity];\n        capacity = newCapacity;\n        size = 0;\n\n        for (HashMapCustom.Entry<K, V> head : oldBucket) {\n            while (head != null) {\n                put(head.key, head.value);\n                head = head.next;\n            }\n        }\n    }\n\n    public int size() {\n        return size;\n    }"
+    }
+  },
+  {
     "title": "Top K Frequent Elements",
     "body": "Given an integer array and an integer k, return the k most frequent elements. Optimize for time complexity better than O(n log n)",
     "example": "Input: nums = [1,1,1,2,2,3], k = 2, Output: [1,2]",
-    "level": "hard"
+    "level": "hard",
+    "solution": {
+      "content": "public int[] topFrequentElements(final int[] inputArray, final int k) {\n        Objects.requireNonNull(inputArray, \"Input array cannot be null\");\n\n        if (inputArray.length == 0 || k <= 0) {\n            throw new IllegalArgumentException(\"Array must not be empty and k must be > 0\");\n        }\n\n        Map<Integer, Integer> frequencyMap = new HashMap<>();\n        for (int num : inputArray) {\n            frequencyMap.put(num, frequencyMap.getOrDefault(num, 0) + 1);\n        }\n\n        PriorityQueue<Map.Entry<Integer, Integer>> maxHeap =\n                new PriorityQueue<>((a, b) -> b.getValue() - a.getValue());\n\n        maxHeap.addAll(frequencyMap.entrySet());\n\n        int[] result = new int[k];\n        for (int i = 0; i < k; i++) {\n            result[i] = Objects.requireNonNull(maxHeap.poll()).getKey();\n        }\n\n        return result;\n    }"
+    }
   },
   {
     "title": "Best Time to Buy and Sell Stock IV",
