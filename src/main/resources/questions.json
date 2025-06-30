@@ -129,34 +129,49 @@
     "title": "Duplicate elements array and remove",
     "body": "Find all duplicates elements in array and remove them. Return a new array",
     "example": "{1,1,2,2,3,4,5,6} => result = {1,2,3,4,5,6}",
-    "level": "easy"
+    "level": "easy",
+    "solution": {
+      "content": "public Integer[] findDuplicatesAndRemove(final Integer[] inputArray) {\n        Objects.requireNonNull(inputArray, \"Input array must not be null\");\n\n        if (inputArray.length < 2) {\n            throw new IllegalArgumentException(\"Input array must contain at least two elements\");\n        }\n\n        Set<Integer> uniqElements = new LinkedHashSet<>(Arrays.asList(inputArray));\n\n\n        return uniqElements.toArray(new Integer[0]);\n    }"
+    }
   },
   {
     "title": "Factorial",
     "body": "Create a function for the finding the factorial",
     "example": "",
-    "level": "easy"
+    "level": "easy",
+    "solution": {
+      "content": "public int factorial(final int number) {\n        if (number < 0) throw new IllegalArgumentException(\"Factorial is undefined for negative numbers\");\n        if (number >= 20)\n            throw new IllegalArgumentException(\"Factorial result overflows int. Use a smaller number or BigInteger.\");\n\n        return IntStream.rangeClosed(2, number).reduce(1, Math::multiplyExact);\n    }"
+    }
   },
   {
     "title": "Fibonacci Series Generator",
     "body": "Create a Java method that prints the first n numbers of the Fibonacci sequence, where n is a positive integer parameter passed to the method.",
     "example": "",
-    "level": "easy"
+    "level": "easy",
+    "solution": {
+      "content": "public long getFibonacciNumber(final int n) {\n        if (n < 0) {\n            throw new IllegalArgumentException(\"The number must be non-negative\");\n        }\n\n        if (n == 0) return 0;\n        if (n == 1) return 1;\n\n        long prev2 = 0;\n        long prev1 = 1;\n\n        for (int i = 2; i <= n; i++) {\n            long current = prev1 + prev2;\n            prev2 = prev1;\n            prev1 = current;\n        }\n\n        return prev1;\n    }"
+    }
   },
   {
-    "title": "Find Duplicates in array",
+    "title": "Find duplicates in array",
     "body": "Find all duplicates in array an return them in the a new array",
     "example": "{1,1,2,2,3} => result = {1,2}",
-    "level": "easy"
+    "level": "easy",
+    "solution": {
+      "content": "public int[] findDuplicates(final int[] inputArray) {\n        Set<Integer> duplicates = new HashSet<>();\n        Set<Integer> actual = new HashSet<>();\n\n        Objects.requireNonNull(inputArray, \"The array cannot be null\");\n\n        if (inputArray.length < 2) {\n            throw new IllegalArgumentException(\"The array cannot have less than two elements.\");\n        }\n\n        for (int item : inputArray) {\n            if (!actual.add(item)) {\n                duplicates.add(item);\n            }\n        }\n        return duplicates.stream().mapToInt(Integer::intValue).toArray();\n    }"
+    }
   },
   {
-    "title": "Find Duplicates In Arrays",
+    "title": "Find duplicates In arrays",
     "body": "Find all duplicates in arrays an return them in the a new array",
     "example": "array1 = {1,2,3,4}, array1 = {1,2,3,5} => result =  {1,2,3}",
-    "level": "easy"
+    "level": "easy",
+    "solution": {
+      "content": "public int[] findDuplicatesInArrays(final Integer[] firstArray, final Integer[] secondArray) {\n        Objects.requireNonNull(firstArray, \"The firstArray cannot be null\");\n        Objects.requireNonNull(secondArray, \"The secondArray cannot be null\");\n\n        if (firstArray.length == 0 || secondArray.length == 0) {\n            throw new IllegalArgumentException(\"Neither input array can be empty\");\n        }\n\n        Set<Integer> actual = new HashSet<>(Arrays.asList(firstArray));\n        Set<Integer> duplicates = new HashSet<>();\n\n        for (int item : secondArray) {\n            if (actual.contains(item)) {\n                duplicates.add(item);\n            }\n        }\n\n        return duplicates.stream().mapToInt(Integer::intValue).toArray();\n    }"
+    }
   },
   {
-    "title": "Find sum of elements",
+    "title": "Find sum of elements in array",
     "body": "Calculate all elements in the array and return a result",
     "example": "{1,2,3} => result = 6",
     "level": "easy"
@@ -165,7 +180,10 @@
     "title": "FizzBuzz. Loop and Stream.",
     "body": "Given an integer n, return a string array answer (1-indexed) where: answer[i] == \"FizzBuzz\" if i is divisible by 3 and 5 \n, answer[i] == \"Fizz\" if i is divisible by 3 \n, answer[i] == \"Buzz\" if i is divisible by 5 \n, answer[i] == i (as a string) if none of the above conditions are true \n",
     "example": "Input: n = 3, Output: [\"1\",\"2\",\"Fizz\"] \n; Input: n = 5, Output: [\"1\",\"2\",\"Fizz\",\"4\",\"Buzz\"]\n; Input: n = 15, Output: [\"1\",\"2\",\"Fizz\",\"4\",\"Buzz\",\"Fizz\",\"7\",\"8\",\"Fizz\",\"Buzz\",\"11\",\"Fizz\",\"13\",\"14\",\"FizzBuzz\"]\n;",
-    "level": "easy"
+    "level": "easy",
+    "solution": {
+      "content": "public static void getFizzBuzz() {\n        PrintStream printStream = System.out;\n        for (int i = 1; i < 100; i++) {\n            if (i % 15 == 0) {\n                printStream.println(\" Fizz Buzz \" + i);\n            } else if (i % 3 == 0) {\n                printStream.println(\" Fizz \" + i);\n            } else if (i % 5 == 0) {\n                printStream.println(\" Buzz \" + i);\n            } else {\n                printStream.println(\" \" + i);\n            }\n        }\n    } \n  private static void streamFizBuzz() {\n        IntStream.rangeClosed(1, 100)\n                .mapToObj(i -> i % 3 == 0 ? (i % 5 == 0 ? \"Fizz Buzz \" : \"Fizz \") : (i % 5 == 0 ? \"Buzz \" : i + \" \"))\n                .forEach(System.out::println);\n    }"
+    }
   },
   {
     "title": "Flip array",
