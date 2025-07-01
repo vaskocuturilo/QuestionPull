@@ -594,6 +594,15 @@
     }
   },
   {
+    "title": "Build a File Search Utility",
+    "body": "Develop a program that recursively searches through a directory and its subdirectories to find all files matching a given filename pattern (e.g., all .txt files containing a certain keyword).",
+    "example": "",
+    "level": "medium",
+    "solution": {
+      "content": "public class SearchFile {\n    private static final Logger logger = Logger.getLogger(SearchFile.class.getName());\n\n    public List<String> searchWithWc(final Path rootDir, final String pattern) {\n        Objects.requireNonNull(rootDir, \"The rootDir variable cannot be null\");\n        Objects.requireNonNull(pattern, \"The pattern variable cannot be null\");\n\n        List<String> matchesList = new ArrayList<>();\n\n        final FileVisitor<Path> matcherVisitor = new SimpleFileVisitor<>() {\n            @Override\n            public @NotNull FileVisitResult visitFile(Path file, final @NotNull BasicFileAttributes attribs) {\n                final PathMatcher matcher = FileSystems.getDefault().getPathMatcher(pattern);\n                if (matcher.matches(file.getFileName())) {\n                    matchesList.add(file.toAbsolutePath().toString());\n                }\n                return FileVisitResult.CONTINUE;\n            }\n        };\n        try {\n            Files.walkFileTree(rootDir, matcherVisitor);\n        } catch (IOException exception) {\n            logger.log(Level.WARNING, \"Error during file traversal: {0}\", exception.getMessage());\n        }\n        return matchesList;\n    }\n}"
+    }
+  },
+  {
     "title": "Top K Frequent Elements",
     "body": "Given an integer array and an integer k, return the k most frequent elements. Optimize for time complexity better than O(n log n)",
     "example": "Input: nums = [1,1,1,2,2,3], k = 2, Output: [1,2]",
