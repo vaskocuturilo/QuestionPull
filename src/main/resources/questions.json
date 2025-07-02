@@ -369,7 +369,10 @@
     "title": "Zero max",
     "body": "Return a version of the given array where each zero value in the array is replaced by the\n    largest odd value to the right of the zero in the array.\n    If there is no odd value to the right of the zero, leave the zero as a zero.",
     "example": "zeroMax([0, 5, 0, 3]) → [5, 5, 3, 3]\n    zeroMax([0, 4, 0, 3]) → [3, 4, 3, 3]\n        zeroMax([0, 1, 0]) → [1, 1, 0]",
-    "level": "easy"
+    "level": "easy",
+    "solution": {
+      "content": "public int[] zeroMax(final int[] inputArray) {\n        int maxValue = Integer.MIN_VALUE;\n\n        int[] result = Arrays.copyOf(inputArray, inputArray.length);\n\n        Objects.requireNonNull(inputArray, \"Input array must not be null\");\n\n        if (inputArray.length < 2) {\n            return new int[0];\n        }\n\n        for (int i = result.length - 1; i >= 0; i--) {\n            if (result[i] % 2 != 0) {\n                maxValue = Math.max(maxValue, result[i]);\n            }\n\n            if (result[i] == 0 && maxValue != Integer.MIN_VALUE) {\n                result[i] = maxValue;\n            }\n        }\n        return result;\n    }"
+    }
   },
   {
     "title": "Double sort",
@@ -393,13 +396,19 @@
     "title": "The reverse integer",
     "body": "Given a signed 32-bit integer x, return x with its digits reversed. If reversing x causes the value to go outside the signed 32-bit integer range [-231, 231 - 1], then return 0.\n\nAssume the environment does not allow you to store 64-bit integers (signed or unsigned).",
     "example": "Input: x = 123\nOutput: 321, Input: x = -123\nOutput: -321, Input: x = 120\nOutput: 21",
-    "level": "easy"
+    "level": "easy",
+    "solution": {
+      "content": "public Integer reverseNumbers(Integer number) {\n        var reverse = 0L;\n        var digit = 0;\n\n        while (number != 0) {\n            digit = number % 10;\n            reverse = reverse * 10 + digit;\n            number /= 10;\n        }\n\n        if (reverse > Integer.MAX_VALUE || reverse < Integer.MIN_VALUE) {\n            return 0;\n        }\n\n        return (int) reverse;\n    }"
+    }
   },
   {
     "title": "Find Closest Number to Zero",
     "body": "Given an integer array nums of size n, return the number with the value closest to 0 in nums. If there are multiple answers, return the number with the largest value.",
     "example": "Input: nums = [-4,-2,1,4,8]\nOutput: 1, Input: nums = [2,-1,1]\nOutput: 1",
-    "level": "easy"
+    "level": "easy",
+    "solution": {
+      "content": "public int findClosetNumberToZero(final int[] inputArray) {\n        Objects.requireNonNull(inputArray, \"The array cannot be null\");\n\n        if (inputArray.length == 0) {\n            throw new IllegalArgumentException(\"The array should contain min 1 item\");\n        }\n\n        int result = inputArray[0];\n\n        for (int number : inputArray) {\n            int absNumber = Math.abs(number);\n            int absResult = Math.abs(result);\n\n            if (absNumber < absResult || (absNumber == absResult && number > result)) {\n                result = number;\n            }\n        }\n        return result;\n    }"
+    }
   },
   {
     "title": "Counting Bits",
@@ -414,16 +423,13 @@
     "level": "easy"
   },
   {
-    "title": "Valid Boomerang",
-    "body": "Given an array points where points[i] = [xi, yi] represents a point on the X-Y plane, return true if these points are a boomerang.\n\nA boomerang is a set of three points that are all distinct and not in a straight line.",
-    "example": "Example 1:\n\nInput: points = [[1,1],[2,3],[3,2]]\nOutput: true; Example 2:\n\nInput: points = [[1,1],[2,2],[3,3]]\nOutput: false",
-    "level": "easy"
-  },
-  {
     "title": "Count Vowels in a String",
     "body": "Write a method that counts the number of vowels (a, e, i, o, u) in a given string. The method should ignore case.",
     "example": "text = test, result => 1",
-    "level": "easy"
+    "level": "easy",
+    "solution": {
+      "content": "public class Exercise {\n    private static final Set<Character> VOWELS = Set.of('a', 'e', 'i', 'o', 'u');\n\n    public long countVowels(final String text) {\n        Objects.requireNonNull(text, \"The sentence cannot be null\");\n\n        final String normalizedText = text.toLowerCase().trim().replaceAll(\"[^a-z]\", \"\");\n\n        if (normalizedText.isEmpty()) {\n            throw new IllegalArgumentException(\"The sentence contains only spaces or no vowels\");\n        }\n\n        return normalizedText\n                .chars()\n                .mapToObj(c -> (char) c)\n                .filter(VOWELS::contains)\n                .count();\n    }\n}"
+    }
   },
   {
     "title": "Basic Banking Application (Object-Oriented)",
@@ -462,25 +468,37 @@
     "title": "Check for Prime Number",
     "body": "Write a method that checks whether a given integer is a prime number. Return true if it is prime, otherwise return false.",
     "example": "2: The smallest prime number, and the only even prime number.\n3: Divisible only by 1 and 3.\n5: Divisible only by 1 and 5.\n7: Divisible only by 1 and 7.\n11: Divisible only by 1 and 11",
-    "level": "easy"
+    "level": "easy",
+    "solution": {
+      "content": "public boolean checkPrimeNumber(final int number) {\n    if (number <= 1) return false;\n    if (number == 2) return true;\n\n    for (int i = 2; i <= Math.sqrt(number); i++) {\n        if (number % i == 0) {\n            return false;\n        }\n    }\n    return true;\n}"
+    }
   },
   {
     "title": "Sum of Digits",
     "body": "Write a method that takes a positive integer and returns the sum of its digits.",
     "example": "For example, 123 should return 6",
-    "level": "easy"
+    "level": "easy",
+    "solution": {
+      "content": "public int sumOfDigits(final int number) {\n    int sum = 0;\n    int n = Math.abs(number);\n\n    while (n > 0) {\n        sum += n % 10;\n        n /= 10;\n    }\n    return sum;\n}"
+    }
   },
   {
     "title": "Simple Calculator (Switch Case)",
     "body": "Implement a basic calculator that supports +, -, *, and /. The user provides two numbers and an operator, and the method returns the result.",
     "example": "",
-    "level": "easy"
+    "level": "easy",
+    "solution": {
+      "content": "public int createSimpleCalculator(final int a, final int b, final String operator) {\n    int result;\n\n    switch (operator.trim()) {\n        case \"+\" -> result = a + b;\n        case \"-\" -> result = a - b;\n        case \"*\" -> result = a * b;\n        case \"/\" -> {\n            if (b == 0) {\n                throw new ArithmeticException(\"Cannot divide by zero\");\n            }\n            result = a / b;\n        }\n        default -> throw new IllegalArgumentException(\"Unsupported operator: \" + operator);\n    }\n\n    return result;\n}"
+    }
   },
   {
     "title": "Create a Person Class",
     "body": "Create a Person class with the fields name, age, and email. Add constructors, getters, setters, and a method to display the information.",
     "example": "Hint: Think about validation (input integrity), string formatting and immutability",
-    "level": "easy"
+    "level": "easy",
+    "solution": {
+      "content": "public class Person {\n    private final String name;\n    private final int age;\n    private final String email;\n\n    public Person(String name, int age, String email) {\n        if (name.trim().isEmpty()) {\n            throw new IllegalArgumentException(\"The name cannot be null\");\n        }\n        this.name = name;\n\n        if (age < 0) throw new IllegalArgumentException(\"Age cannot be negative\");\n        this.age = age;\n\n        if (email.trim().isEmpty()) {\n            throw new IllegalArgumentException(\"The email cannot be null\");\n        }\n        this.email = email;\n    }\n\n    public String getName() {\n        return name;\n    }\n\n    public int getAge() {\n        return age;\n    }\n\n    public String getEmail() {\n        return email;\n    }\n\n    @Override\n    public String toString() {\n        return String.format(\"The person name is : %s, with age is : %d, and email =  %s\", this.name, this.age, this.email);\n    }\n}"
+    }
   },
   {
     "title": "The shortest path",
