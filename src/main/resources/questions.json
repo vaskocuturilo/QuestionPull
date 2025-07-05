@@ -98,7 +98,7 @@
     "example": "Input: nums = [-1,0,3,5,9,12], target = 9\nOutput: 4\nExplanation: 9 exists in nums and its index is 4; Input: nums = [-1,0,3,5,9,12], target = 2\nOutput: -1\nExplanation: 2 does not exist in nums so return -1",
     "level": "easy",
     "solution": {
-      "content": "private static int binarySearch(int[] sortedArray, int target) {\n        int left = 0;\n        int right = sortedArray.length - 1;\n        int result = -1;\n        while (left <= right) {\n            int mid = left + (right - left) / 2;\n            if (sortedArray[mid] == target) {\n                result = mid;\n                right = mid - 1;\n            } else if (sortedArray[mid] < target) {\n                left = mid + 1;\n            } else {\n                right = mid - 1;\n            }\n        }\n\n        return result;\n    }"
+      "content": "public static int binarySearch(int[] sortedArray, int target) {\n        int left = 0;\n        int right = sortedArray.length - 1;\n        int result = -1;\n        while (left <= right) {\n            int mid = left + (right - left) / 2;\n            if (sortedArray[mid] == target) {\n                result = mid;\n                right = mid - 1;\n            } else if (sortedArray[mid] < target) {\n                left = mid + 1;\n            } else {\n                right = mid - 1;\n            }\n        }\n\n        return result;\n    }"
     }
   },
   {
@@ -114,7 +114,10 @@
     "title": "Calculate Character",
     "body": "Count the number of occurrences of a char in a String in Java",
     "example": "test => {t-2, e-1, s-1}",
-    "level": "easy"
+    "level": "easy",
+    "solution": {
+      "content": "public Map<Character, Long> countCharsStream(final String text) {\n        return text.chars()\n                .mapToObj(i -> (char) i)\n                .collect(Collectors.groupingBy(Function.identity(),\n                        Collectors.counting()));\n    }"
+    }
   },
   {
     "title": "Compare Version Numbers",
@@ -174,7 +177,10 @@
     "title": "Find sum of elements in array",
     "body": "Calculate all elements in the array and return a result",
     "example": "{1,2,3} => result = 6",
-    "level": "easy"
+    "level": "easy",
+    "solution": {
+      "content": "public static int findNumberOfPair(final int[] inputNumber, final int sumElements) {\n        if (inputNumber.length < sumElements) {\n            return inputNumber.length;\n        }\n        int count = 0;\n        for (int i = 0; i < inputNumber.length; i++) {\n            for (int j = i + 1; j < inputNumber.length; j++) {\n                if ((inputNumber[i] + inputNumber[j]) == sumElements) {\n                    count++;\n                }\n            }\n        }\n        return count;\n    }"
+    }
   },
   {
     "title": "FizzBuzz. Loop and Stream.",
@@ -189,7 +195,10 @@
     "title": "Flip array",
     "body": "Returns an array in flip order",
     "example": "{1,2,3,4} => {4,3,2,1}",
-    "level": "easy"
+    "level": "easy",
+    "solution": {
+      "content": "public int[] flipArrayDeclarativeApproach(final int[] inputArray) {\n        Objects.requireNonNull(inputArray, \"Input array must not be null\");\n\n        if (inputArray.length < 2) {\n            throw new IllegalArgumentException(\"Input array must contain at least two elements\");\n        }\n\n\n        return IntStream.range(0, inputArray.length)\n                .map(i -> inputArray[inputArray.length - 1 - i])\n                .toArray();\n\n    }"
+    }
   },
   {
     "title": "Length in array",
