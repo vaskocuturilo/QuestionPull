@@ -204,19 +204,28 @@
     "title": "Length in array",
     "body": "Count a length array",
     "example": " {1,2,3,4}  result = 4",
-    "level": "easy"
+    "level": "easy",
+    "solution": {
+      "content": " public static int countArrayLength(final int[] inputArray) {\n        Objects.requireNonNull(inputArray, \"The array cannot be null\");\n        \n        return inputArray.length;\n    }"
+    }
   },
   {
     "title": "LuckyTicket. With arguments string and numeric",
     "body": "Bus ticket numbers consist of 6 decimal digits. It is considered lucky when the sum of the first three digits equals the sum of the last three digits. ",
     "example": "123321 = > is lucky, 123322 => is not lucky",
-    "level": "easy"
+    "level": "easy",
+    "solution": {
+      "content": "public boolean isLuckyTicket1(final String text) {\n        Objects.requireNonNull(text, \"The sentence cannot be null\");\n\n        final String trimmed = text.trim();\n\n        if (trimmed.isEmpty()) {\n            throw new IllegalArgumentException(\"The sentence contains only space\");\n        }\n\n        if (trimmed.length() != 6 && !trimmed.matches(\"\\\\d{6}\")) {\n            throw new IllegalArgumentException(\"Ticket must contain exactly 6 digits\");\n        }\n\n        int firstSum = 0;\n\n        int secondSum = 0;\n\n        for (int i = 0; i < 3; i++) {\n            firstSum += Character.getNumericValue(text.charAt(i));\n            secondSum += Character.getNumericValue(text.charAt(i + 3));\n        }\n        return firstSum == secondSum;\n    }"
+    }
   },
   {
     "title": "Matrix diagonal sum",
     "body": "Given a square matrix mat, return the sum of the matrix diagonals.\n\nOnly include the sum of all the elements on the primary diagonal and all the elements on the secondary diagonal that are not part of the primary diagonal.",
     "example": "Input: mat = [[1,2,3],\n              [4,5,6],\n              [7,8,9]], Output: 25\nExplanation: Diagonals sum: 1 + 5 + 9 + 3 + 7 = 25; Input: mat = [[1,1,1,1],\n              [1,1,1,1],\n              [1,1,1,1],\n              [1,1,1,1]], Output: 8; Input: mat = [[5]], Output: 5",
-    "level": "easy"
+    "level": "easy",
+    "solution": {
+      "content": "public int matrixDiagonalSum(final int[][] inputMatrixData) {\n        int result = 0;\n\n        Objects.requireNonNull(inputMatrixData, \"The matrix data cannot be null\");\n\n        for (int[] row : inputMatrixData) {\n            if (row.length != inputMatrixData.length) {\n                throw new IllegalArgumentException(\"Matrix must be square\");\n            }\n        }\n\n        for (int i = 0; i < inputMatrixData.length; i++) {\n            result += inputMatrixData[i][i];\n\n            if (i != inputMatrixData.length - 1 - i) {\n                result += inputMatrixData[i][inputMatrixData.length - 1 - i];\n            }\n        }\n        return result;\n    }"
+    }
   },
   {
     "title": "Merge arrays",
