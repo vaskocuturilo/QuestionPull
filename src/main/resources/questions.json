@@ -63,7 +63,10 @@
     "title": "Search Insert Position",
     "body": "Given a sorted array of distinct integers and a target value, return the index if the target is found. If not, return the index where it would be if it were inserted in order.\n\nYou must write an algorithm with O(log n) runtime complexity.",
     "example": "Input: nums = [1,3,5,6], target = 5, Output: 2; Input: nums = [1,3,5,6], target = 2, Output: 1; Input: nums = [1,3,5,6], target = 7, Output: 4",
-    "level": "easy"
+    "level": "easy",
+    "solution": {
+      "content": "public static int binarySearch(int[] sortedArray, int target) {\n        int left = 0;\n        int right = sortedArray.length - 1;\n        int result = -1;\n        while (left <= right) {\n            int mid = left + (right - left) / 2;\n            if (sortedArray[mid] == target) {\n                result = mid;\n                right = mid - 1;\n            } else if (sortedArray[mid] < target) {\n                left = mid + 1;\n            } else {\n                right = mid - 1;\n            }\n        }\n\n        return result;\n    }"
+    }
   },
   {
     "title": "Plus One",
@@ -231,13 +234,19 @@
     "title": "Merge arrays",
     "body": "The merge two arrays",
     "example": "array1 = {1,2,3}, array2= {4,5,6}, result = {1,2,3,4,5,6}",
-    "level": "easy"
+    "level": "easy",
+    "solution": {
+      "content": "public String[] mergeArrays(final String[] first, final String... second) {\n        Objects.requireNonNull(first, \"The first array cannot be null\");\n        Objects.requireNonNull(second, \"The second array cannot be null\");\n\n        List<String> mergedList = new ArrayList<>(first.length + second.length);\n\n        Collections.addAll(mergedList, first);\n        Collections.addAll(mergedList, second);\n        return mergedList.toArray(new String[0]);\n    }"
+    }
   },
   {
     "title": "Find min and max values in array",
     "body": "Given an array of size N. The task is to find the maximum and the minimum element of the array using the minimum number of comparisons.",
-    "example": "nput: arr[] = {3, 5, 4, 1, 9}\nOutput: Minimum element is: 1\n              Maximum element is: 9; Input: arr[] = {22, 14, 8, 17, 35, 3}\nOutput:  Minimum element is: 3\n              Maximum element is: 35",
-    "level": "easy"
+    "example": "Input: arr[] = {3, 5, 4, 1, 9}\nOutput: Minimum element is: 1\n              Maximum element is: 9; Input: arr[] = {22, 14, 8, 17, 35, 3}\nOutput:  Minimum element is: 3\n              Maximum element is: 35",
+    "level": "easy",
+    "solution": {
+      "content": ""
+    }
   },
   {
     "title": "Missing Number",
