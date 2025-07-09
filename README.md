@@ -37,9 +37,9 @@ You will need the following technologies available to try it out:
 - Will be adding X-API-KEY.
 - Will be adding a one-time password.
 - Will be adding docker-compose :heavy_check_mark:
-- Will be adding integration tests.
+- Will be adding integration tests. :heavy_check_mark:
 - Will be adding unit tests. :heavy_check_mark:
-- Will be adding functionality for deployment to VPS.
+- Will be adding functionality for deployment to VPS. :heavy_check_mark:
 
 ### How to run via Spring Boot.
 
