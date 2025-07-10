@@ -5,7 +5,7 @@ services:
     image: mariadb:10.11.13
     restart: always
     ports:
-      - "127.0.0.1:3307:3306"
+      - "3307:3306"
 
     logging:
       #limit logs to 200MB (4 rotations of 50M each)
@@ -17,7 +17,7 @@ services:
     environment:
       MYSQL_USER: mysql
       MYSQL_PASSWORD: password
-      MYSQL_DATABASE: regions
+      MYSQL_DATABASE: testdb
       MYSQL_ROOT_PASSWORD: password
 
     healthcheck:
