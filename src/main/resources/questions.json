@@ -252,19 +252,28 @@
     "title": "Missing Number",
     "body": "Given an array nums containing n distinct numbers in the range [0, n], return the only number in the range that is missing from the array.",
     "example": "Example 1:\n\nInput: nums = [3,0,1]\n\nOutput: 2\n\nExplanation:\n\nn = 3 since there are 3 numbers, so all numbers are in the range [0,3]. 2 is the missing number in the range since it does not appear in nums.; Example 2:\n\nInput: nums = [0,1]\n\nOutput: 2\n\nExplanation:\n\nn = 2 since there are 2 numbers, so all numbers are in the range [0,2]. 2 is the missing number in the range since it does not appear in nums.Example 3:\n\nInput: nums = [9,6,4,2,3,5,7,0,1]\n\nOutput: 8\n\nExplanation:\n\nn = 9 since there are 9 numbers, so all numbers are in the range [0,9]. 8 is the missing number in the range since it does not appear in nums.",
-    "level": "easy"
+    "level": "easy",
+    "solution": {
+      "content": "public int[] missingNumber(final int[] inputArray) {\n        Objects.requireNonNull(inputArray, \"An array cannot be null\");\n\n        List<Integer> missing = new ArrayList<>();\n\n        int[] array = Arrays.stream(inputArray).distinct().sorted().toArray();\n\n        for (int i = 0; i < array.length - 1; i++) {\n            int current = array[i];\n            int next = array[i + 1];\n            if (next - current > 1) {\n                for (int j = current + 1; j < next; j++) {\n                    missing.add(j);\n                }\n            }\n        }\n        return missing.stream().mapToInt(Integer::intValue).toArray();\n    }"
+    }
   },
   {
     "title": "Move zeroes",
     "body": "Given an integer array nums, move all 0's to the end of it while maintaining the relative order of the non-zero elements.\n\nNote that you must do this in-place without making a copy of the array.",
     "example": "Input: nums = [0,1,0,3,12]\nOutput: [1,3,12,0,0]; Input: nums = [0]\nOutput: [0]",
-    "level": "easy"
+    "level": "easy",
+    "solution": {
+      "content": "public int[] moveZeroes(final int[] inputArray) {\n        Objects.requireNonNull(inputArray, \"The array cannot be null\");\n\n        if (inputArray.length < 2) {\n            throw new IllegalArgumentException(\"The array must contain at least two elements.\");\n        }\n\n        int nonZeroPos = 0;\n        for (int i = 0; i < inputArray.length; i++) {\n            if (inputArray[i] != 0) {\n                inputArray[nonZeroPos++] = inputArray[i];\n            }\n        }\n\n        while (nonZeroPos < inputArray.length) {\n            inputArray[nonZeroPos++] = 0;\n        }\n\n        return inputArray;\n    }"
+    }
   },
   {
     "title": "Find Number of Element. Line Method.",
     "body": "Need to find index element in the array",
     "example": "{10,20,30,40} => target = 30, result = 2, because this is a index of element 30",
-    "level": "easy"
+    "level": "easy",
+    "solution": {
+      "content": "private static int binarySearch(int[] sortedArray, int target) {\n        int left = 0;\n        int right = sortedArray.length - 1;\n        int result = -1;\n        while (left <= right) {\n            int mid = left + (right - left) / 2;\n            if (sortedArray[mid] == target) {\n                result = mid;\n                right = mid - 1;\n            } else if (sortedArray[mid] < target) {\n                left = mid + 1;\n            } else {\n                right = mid - 1;\n            }\n        }\n\n        return result;\n    }"
+    }
   },
   {
     "title": "ParseString. Full version",
@@ -276,19 +285,28 @@
     "title": "Valid Palindrome. The argument string and numeric",
     "body": "A phrase is a palindrome if, after converting all uppercase letters into lowercase letters and removing all non-alphanumeric characters, it reads the same forward and backward. Alphanumeric characters include letters and numbers.\n\nGiven a string s, return true if it is a palindrome, or false otherwise.",
     "example": "Input: s = \"A man, a plan, a canal: Panama\"\nOutput: true\nExplanation: \"amanaplanacanalpanama\" is a palindrome. Input: s = \"race a car\"\nOutput: false\nExplanation: \"raceacar\" is not a palindrome. Input: s = \" \"\nOutput: true\nExplanation: s is an empty string \"\" after removing non-alphanumeric characters.\nSince an empty string reads the same forward and backward, it is a palindrome.",
-    "level": "easy"
+    "level": "easy",
+    "solution": {
+      "content": "public static boolean isPoly(final String inputText) {\n        char[] newString = inputText\n                .replaceAll(\"^A-Za-z0-9]\", \"\")\n                .toLowerCase()\n                .toCharArray();\n\n        char[] reverseString = new char[newString.length];\n\n        for (int i = 0; i < newString.length; i++) {\n            reverseString[(newString.length - 1) - i] = newString[i];\n        }\n\n        return new String(reverseString).equalsIgnoreCase(inputText);\n    }    public boolean checkPalindromeNumber(final int number) {\n        if (number < 0 || (number != 0 && number % 10 == 0)) {\n            return false;\n        }\n\n        int reversed = 0;\n        int n = number;\n\n        while (n != 0) {\n            int digit = n % 10;\n            reversed = reversed * 10 + digit;\n            n /= 10;\n        }\n\n        return reversed == number;\n    }"
+    }
   },
   {
     "title": "Quick Sort",
     "body": "Quicksort is a divide-and-conquer algorithm",
     "example": "",
-    "level": "easy"
+    "level": "easy",
+    "solution": {
+      "content": "public static int[] quickSort(int[] inputNumber, int begin, int end) {\n        if (begin < end) {\n            int partitionIndex = partition(inputNumber, begin, end);\n\n            quickSort(inputNumber, begin, partitionIndex - 1);\n            quickSort(inputNumber, partitionIndex + 1, end);\n        }\n        return inputNumber;\n    }    private static int partition(int[] inputNumber, int begin, int end) {\n        int pivot = inputNumber[end];\n        int i = (begin - 1);\n\n        for (int j = begin; j < end; j++) {\n            if (inputNumber[j] <= pivot) {\n                i++;\n\n                int swapTemp = inputNumber[i];\n                inputNumber[i] = inputNumber[j];\n                inputNumber[j] = swapTemp;\n            }\n        }\n\n        int swapTemp = inputNumber[i + 1];\n        inputNumber[i + 1] = inputNumber[end];\n        inputNumber[end] = swapTemp;\n\n        return i + 1;\n    }"
+    }
   },
   {
     "title": "Remove First Letter from ich word from list and sort",
     "body": "Remove the first character",
     "example": "{Tony, Anna, Tom}, result => {nna, ony, om}",
-    "level": "easy"
+    "level": "easy",
+    "solution": {
+      "content": "public static List<String> removeFirstLetter(final List<String> names) {\n        return names.stream()\n                .map(name -> name.substring(1))\n                .sorted()\n                .toList();\n    }"
+    }
   },
   {
     "title": "Reverse string",
