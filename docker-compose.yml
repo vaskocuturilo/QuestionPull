@@ -27,7 +27,7 @@ services:
       resources:
         limits:
           cpus: "0.5"
-          memory: 512M
+          memory: 256M
     networks:
       - app-network
 
@@ -56,7 +56,7 @@ services:
       resources:
         limits:
           cpus: "0.75"
-          memory: 200M
+          memory: 100M
     labels:
       - "com.centurylinklabs.watchtower.enable=true"
     networks:
@@ -78,7 +78,7 @@ services:
       resources:
         limits:
           cpus: "0.5"
-          memory: 200M
+          memory: 100M
     labels:
       - "com.centurylinklabs.watchtower.enable=true"
     networks:
@@ -98,8 +98,8 @@ services:
     deploy:
       resources:
         limits:
-          cpus: "0.3"
-          memory: 150M
+          cpus: "0.5"
+          memory: 100M
     networks:
       - app-network
 
@@ -118,7 +118,7 @@ services:
     deploy:
       resources:
         limits:
-          cpus: "0.3"
+          cpus: "0.5"
           memory: 100M
     networks:
       - app-network
@@ -136,7 +136,7 @@ services:
     deploy:
       resources:
         limits:
-          cpus: "0.3"
+          cpus: "0.5"
           memory: 100M
     networks:
       - app-network
@@ -159,7 +159,7 @@ services:
     deploy:
       resources:
         limits:
-          cpus: "0.2"
+          cpus: "0.5"
           memory: 50M
     networks:
       - app-network
