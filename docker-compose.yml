@@ -1,32 +1,5 @@
 services:
-  database:
-    hostname: database-questions
-    container_name: database-questions
-    image: mariadb:10.11.13
-    restart: always
-    ports:
-      - "3306:3306"
-
-    logging:
-      #limit logs to 200MB (4 rotations of 50M each)
-      driver: "json-file"
-      options:
-        max-size: "50m"
-        max-file: "4"
-
-    environment:
-      MYSQL_USER: mysql
-      MYSQL_PASSWORD: password
-      MYSQL_DATABASE: testdb
-      MYSQL_ROOT_PASSWORD: password
-
-    healthcheck:
-      test: [ "CMD", "healthcheck.sh", "--connect", "--innodb_initialized" ]
-      interval: 40s
-      timeout: 4m
-      retries: 10
-
-  question:
+  questions:
     hostname: questions
     image: vaskocuturilo/questionpull:latest
     restart: always
