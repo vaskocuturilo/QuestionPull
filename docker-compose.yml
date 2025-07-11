@@ -5,7 +5,7 @@ services:
     image: mariadb:10.11.13
     restart: always
     ports:
-      - "3307:3306"
+      - "3306:3306"
 
     logging:
       #limit logs to 200MB (4 rotations of 50M each)
