@@ -1,87 +1,145 @@
+version: "3.8"
+
 services:
   database:
-    hostname: database-regions
-    container_name: database-regions
     image: mariadb:10.11.13
+    container_name: database-regions
+    hostname: database-regions
     restart: always
     ports:
       - "3306:3306"
-
+    environment:
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+    healthcheck:
+      test: [ "CMD", "mysqladmin", "ping", "-h", "localhost" ]
+      interval: 30s
+      timeout: 10s
+      retries: 5
     logging:
-      #limit logs to 200MB (4 rotations of 50M each)
       driver: "json-file"
       options:
         max-size: "50m"
         max-file: "4"
-
-    environment:
-      MYSQL_USER: mysql
-      MYSQL_PASSWORD: password
-      MYSQL_DATABASE: testdb
-      MYSQL_ROOT_PASSWORD: password
-
-    healthcheck:
-      test: [ "CMD", "healthcheck.sh", "--connect", "--innodb_initialized" ]
-      interval: 40s
-      timeout: 4m
-      retries: 10
+    deploy:
+      resources:
+        limits:
+          cpus: "0.5"
+          memory: 512M
+    networks:
+      - app-network
 
   questions:
-    hostname: questions
-    image: vaskocuturilo/questionpull:latest
+    image: vaskocuturilo/interview-dude:latest
+    container_name: interview-dude
+    hostname: interview-dude
     restart: always
-    labels:
-      - "com.centurylinklabs.watchtower.enable=true"
-
+    depends_on:
+      - database
     environment:
       BOT_NAME: ${BOT_NAME}
       BOT_API_KEY: ${BOT_API_KEY}
       DONATE_LINK: ${DONATE_LINK}
       BOT_FILE_NAME: classpath:questions.json
+      SPRING_PROFILES_ACTIVE: docker
     volumes:
-      - ./src/main/resources/questions.json:/absolute/path/to/questions.json
-      - ./logs:/logs
-
+      - ./src/main/resources/questions.json:/usr/app/resources/questions.json
+      - ./logs:/usr/app/logs
     logging:
-      #limit logs to 200MB (4 rotations of 50M each)
       driver: "json-file"
       options:
         max-size: "50m"
         max-file: "4"
-    build:
-      context: .
-      dockerfile: Dockerfile
     deploy:
       resources:
         limits:
-          cpus: '0.75'
-          memory: 100M
+          cpus: "0.75"
+          memory: 200M
+    labels:
+      - "com.centurylinklabs.watchtower.enable=true"
+    networks:
+      - app-network
 
   grafana:
     image: grafana/grafana
+    container_name: grafana
     ports:
       - "3000:3000"
+    volumes:
+      - grafana-data:/var/lib/grafana
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "50m"
+        max-file: "4"
+    deploy:
+      resources:
+        limits:
+          cpus: "0.5"
+          memory: 200M
     labels:
       - "com.centurylinklabs.watchtower.enable=true"
+    networks:
+      - app-network
 
   loki:
     image: grafana/loki:2.9.3
+    container_name: loki
     ports:
       - "3100:3100"
     command: -config.file=/etc/loki/local-config.yaml
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "50m"
+        max-file: "4"
+    deploy:
+      resources:
+        limits:
+          cpus: "0.3"
+          memory: 150M
+    networks:
+      - app-network
 
   promtail:
     image: grafana/promtail:2.9.3
+    container_name: promtail
     volumes:
       - ./promtail-config.yaml:/etc/promtail/promtail-config.yaml
       - ./logs:/app/logs
     command: -config.file=/etc/promtail/promtail-config.yaml
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "50m"
+        max-file: "4"
+    deploy:
+      resources:
+        limits:
+          cpus: "0.3"
+          memory: 100M
+    networks:
+      - app-network
 
   redis:
     image: redis:7.2
     container_name: redis
     ports:
       - "6379:6379"
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "50m"
+        max-file: "4"
+    deploy:
+      resources:
+        limits:
+          cpus: "0.3"
+          memory: 100M
+    networks:
+      - app-network
 
   watchtower:
     image: containrrr/watchtower
@@ -91,6 +149,23 @@ services:
       - "--label-enable"
       - "--rolling-restart"
       - "--cleanup"
-
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "20m"
+        max-file: "2"
+    deploy:
+      resources:
+        limits:
+          cpus: "0.2"
+          memory: 50M
+    networks:
+      - app-network
+
+networks:
+  app-network:
+
+volumes:
+  grafana-data:
