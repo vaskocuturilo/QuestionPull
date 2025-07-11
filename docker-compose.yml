@@ -31,7 +31,7 @@ services:
     networks:
       - app-network
 
-  questions:
+  interview-dude:
     image: vaskocuturilo/interview-dude:latest
     container_name: interview-dude
     hostname: interview-dude

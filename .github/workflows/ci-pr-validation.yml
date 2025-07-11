@@ -1,6 +1,5 @@
-name: CI - Build Backend
+name: CI - PR Validation
 on:
-  workflow_dispatch:
   pull_request:
     branches:
       - main
@@ -16,11 +15,6 @@ jobs:
           java-version: '17'
           distribution: adopt
           cache: maven
-      - name: Login to Docker Hub
-        uses: docker/login-action@v2
-        with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_ACCESS_TOKEN }}
 
       - name: Build and run Unit/Integration Tests with Maven
-        run: mvn -ntp -B verify jib:build
+        run: mvn -ntp -B verify
