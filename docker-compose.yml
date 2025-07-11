@@ -14,7 +14,7 @@ services:
       MYSQL_DATABASE: ${MYSQL_DATABASE}
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
     healthcheck:
-      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      test: [ "CMD", "mysqladmin", "ping", "-h", "localhost" ]
       interval: 30s
       timeout: 10s
       retries: 5
@@ -32,9 +32,9 @@ services:
       - app-network
 
   questions:
-    image: vaskocuturilo/questionpull:latest
-    container_name: questions
-    hostname: questions
+    image: vaskocuturilo/interview-dude:latest
+    container_name: interview-dude
+    hostname: interview-dude
     restart: always
     depends_on:
       - database
