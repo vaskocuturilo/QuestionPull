@@ -20,8 +20,10 @@ WORKDIR $APP_HOME
 
 COPY --from=temp_build_image $APP_HOME/target/$ARTIFACT_NAME app.jar
 
-ENTRYPOINT ["java", "-jar", "app.jar"]
-
-RUN addgroup -S app && adduser -S app -G app
+RUN addgroup --system app && adduser --system --ingroup app app \
+    && mkdir -p /usr/app/logs \
+    && chown -R app:app /usr/app
 
 USER app
+
+ENTRYPOINT ["java", "-Dspring.profiles.active=docker", "-jar", "app.jar"]
