@@ -25,4 +25,4 @@ jobs:
           password: ${{ secrets.DOCKERHUB_ACCESS_TOKEN }}
 
       - name: Build and Push Image with Jib
-        run: mvn -ntp -B jib:build
+        run: mvn -ntp -B package jib:build
