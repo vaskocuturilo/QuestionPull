@@ -156,11 +156,7 @@ services:
       options:
         max-size: "20m"
         max-file: "2"
-    deploy:
-      resources:
-        limits:
-          cpus: "0.5"
-          memory: 50M
+
     networks:
       - app-network
 
