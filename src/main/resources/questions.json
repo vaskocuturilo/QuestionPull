@@ -573,6 +573,15 @@
     }
   },
   {
+    "title": "Greatest Common Divisor of Strings",
+    "body": "For two strings s and t, we say \"t divides s\" if and only if s = t + t + t + ... + t + t (i.e., t is concatenated with itself one or more times).\n\nGiven two strings str1 and str2, return the largest string x such that x divides both str1 and str2.",
+    "example": "Input: str1 = \"ABCABC\", str2 = \"ABC\"\nOutput: \"ABC\", Input: str1 = \"ABABAB\", str2 = \"ABAB\"\nOutput: \"AB\", Input: str1 = \"LEET\", str2 = \"CODE\"\nOutput: \"\"",
+    "level": "easy",
+    "solution": {
+      "content": ""
+    }
+  },
+  {
     "title": "The shortest path",
     "body": "A string consisting of the letters 'X', 'Y' and '0' is given.\nIt is necessary to find the shortest distance between the letters 'X' and 'y' to get the value 0 if 'X' or 'Y' are missing.",
     "example": "\"үү\" -> Ө\n\"XX\" -> Ө\n\"XY\" -> 1\n\"YOX\" -> 2\n\"000XOOYOXO\" -> 2\n\"000X0OY\" -> 2",
