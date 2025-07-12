@@ -15,4 +15,4 @@ scrape_configs:
           - localhost
         labels:
           job: my-app
-          __path__: /app/logs/*.log
+          __path__: /usr/app/logs/*.log
