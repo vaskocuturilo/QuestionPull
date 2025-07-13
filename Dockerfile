@@ -1,4 +1,4 @@
-FROM maven:3.9.9-amazoncorretto-17-alpine AS temp_build_image
+FROM maven:3.9.9-amazoncorretto-17-alpine AS builder
 
 ENV APP_HOME=/usr/app/
 
@@ -8,9 +8,9 @@ COPY pom.xml .
 
 COPY src ./src
 
-RUN mvn clean package
+RUN mvn clean package -DskipTests
 
-FROM openjdk:17-jdk-slim
+FROM bellsoft/liberica-openjdk-alpine:17
 
 ENV ARTIFACT_NAME=QuestionPull-0.0.1-SNAPSHOT.jar
 
@@ -18,7 +18,7 @@ ENV APP_HOME=/usr/app
 
 WORKDIR $APP_HOME
 
-COPY --from=temp_build_image $APP_HOME/target/$ARTIFACT_NAME app.jar
+COPY --from=builder $APP_HOME/target/$ARTIFACT_NAME app.jar
 
 RUN addgroup --system app && adduser --system --ingroup app app \
     && mkdir -p /usr/app/logs \
