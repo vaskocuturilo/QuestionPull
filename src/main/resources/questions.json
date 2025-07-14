@@ -342,7 +342,10 @@
     "title": "Remove one array from another array",
     "body": "Implement function for remove all the elements of the array1 from array2",
     "example": "elements in first array [100, 200, 300, 400, 500, 600]\nelements in second array [300, 500]\nfirst array after removing second array from first array\n[100, 200, 400, 600]",
-    "level": "easy"
+    "level": "easy",
+    "solution": {
+      "content": "public static int[] subtractSecondArrayFromFirst(final int[] firstArray, final int... secondArray) {\n        List<Integer> firstList = new ArrayList<>(Arrays.stream(firstArray).boxed().toList());\n        List<Integer> secondList = Arrays.stream(secondArray).boxed().toList();\n\n        firstList.removeAll(secondList);\n\n        return firstList.stream().mapToInt(Integer::intValue).toArray();\n    }"
+    }
   },
   {
     "title": "Find second min and max value in array",
@@ -411,7 +414,10 @@
     "title": "3Sum",
     "body": "Given an integer array nums, return all the triplets [nums[i], nums[j], nums[k]] such that i != j, i != k, and j != k, and nums[i] + nums[j] + nums[k] == 0.\n\nNotice that the solution set must not contain duplicate triplets.",
     "example": "Input: nums = [-1,0,1,2,-1,-4]\nOutput: [[-1,-1,2],[-1,0,1]], Input: nums = [0,1,1]\nOutput: [], Input: nums = [0,0,0]\nOutput: [[0,0,0]]",
-    "level": "easy"
+    "level": "easy",
+    "solution": {
+      "content": "public List<List<Integer>> threeSum(int[] inputArray) {\n        Objects.requireNonNull(inputArray, \"Input array cannot be null\");\n        List<List<Integer>> result = new ArrayList<>();\n\n        if (inputArray.length < 3) return result;\n\n        Arrays.sort(inputArray);\n\n        for (int i = 0; i < inputArray.length - 2; i++) {\n            if (i > 0 && inputArray[i] == inputArray[i - 1]) continue; // Skip duplicates for i\n\n            int left = i + 1;\n            int right = inputArray.length - 1;\n\n            while (left < right) {\n                int sum = inputArray[i] + inputArray[left] + inputArray[right];\n\n                if (sum == 0) {\n                    result.add(Arrays.asList(inputArray[i], inputArray[left], inputArray[right]));\n                    left++;\n                    right--;\n\n                    while (left < right && inputArray[left] == inputArray[left - 1]) left++;\n                    while (left < right && inputArray[right] == inputArray[right + 1]) right--;\n                } else if (sum < 0) {\n                    left++;\n                } else {\n                    right--;\n                }\n            }\n        }\n\n        return result;\n    }"
+    }
   },
   {
     "title": "Warm days",
