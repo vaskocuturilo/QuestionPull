@@ -330,7 +330,10 @@
     "title": "Stack",
     "body": "Implement stack",
     "example": "",
-    "level": "easy"
+    "level": "easy",
+    "solution": {
+      "content": "public class Stack {\n    private final int[] stackArray;\n    private final int capacity;\n    private int top;\n\n    public Stack(int capacity) {\n        if (capacity <= 0) {\n            throw new IllegalArgumentException(\"The stack capacity must be greater than zero\");\n        }\n\n        this.capacity = capacity;\n\n        this.stackArray = new int[capacity];\n\n        this.top = -1;\n    }\n\n    public void push(int element) {\n        if (isFull()) {\n            throw new IllegalStateException(\"Stack is full\");\n        }\n        stackArray[++top] = element;\n    }\n\n    public int pop() {\n        if (isEmpty()) {\n            throw new NoSuchElementException(\"Stack is empty\");\n        }\n        return stackArray[top--];\n    }\n\n    public int peek() {\n        if (isEmpty()) {\n            throw new NoSuchElementException(\"Stack is empty\");\n        }\n        return stackArray[top];\n    }\n\n    public boolean isEmpty() {\n        return top == -1;\n    }\n\n    public boolean isFull() {\n        return top == capacity - 1;\n    }"
+    }
   },
   {
     "title": "Queue",
