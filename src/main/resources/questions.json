@@ -312,13 +312,19 @@
     "title": "Reverse string",
     "body": "Write a function that reverses a string. The input string is given as an array of characters s.\n\nYou must do this by modifying the input array in-place with O(1) extra memory.",
     "example": "Input: s = [\"h\",\"e\",\"l\",\"l\",\"o\"]\nOutput: [\"o\",\"l\",\"l\",\"e\",\"h\"]; Input: s = [\"H\",\"a\",\"n\",\"n\",\"a\",\"h\"]\nOutput: [\"h\",\"a\",\"n\",\"n\",\"a\",\"H\"]",
-    "level": "easy"
+    "level": "easy",
+    "solution": {
+      "content": "public static String reverseText(final String inputText) {\n        Objects.requireNonNull(inputText, \"The input text cannot be null\");\n\n        final String trimmed = inputText.trim();\n\n        if (trimmed.isEmpty()) {\n            throw new IllegalArgumentException(\"The input text contains only spaces\");\n        }\n\n        if (trimmed.length() < 2) {\n            throw new IllegalArgumentException(\"The input must contain at least two characters\");\n        }\n\n        final char[] inputArray = trimmed.toCharArray();\n        final char[] reversed = new char[inputArray.length];\n\n        for (int i = 0; i < inputArray.length; i++) {\n            reversed[inputArray.length - i - 1] = inputArray[i];\n        }\n\n        return new String(reversed);\n    }"
+    }
   },
   {
     "title": "Selection Sort",
     "body": "Implement Selection Sort is a comparison-based sorting algorithm",
     "example": "",
-    "level": "easy"
+    "level": "easy",
+    "solution": {
+      "content": "public static int[] selectionSorting(final int... inputArray) {\n        Objects.requireNonNull(inputArray, \"The array cannot be null\");\n\n        if (inputArray.length < 2) {\n            throw new IllegalArgumentException(\"The array must contain at least two elements.\");\n        }\n\n        for (int i = 0; i < inputArray.length - 1; i++) {\n            int minimalValue = i;\n            for (int j = i + 1; j < inputArray.length; j++) {\n                if (inputArray[j] < inputArray[minimalValue]) {\n                    minimalValue = j;\n                }\n            }\n\n            if (minimalValue != i) {\n                final int temp = inputArray[minimalValue];\n                inputArray[minimalValue] = inputArray[i];\n                inputArray[i] = temp;\n            }\n        }\n\n        return Arrays.copyOf(inputArray, inputArray.length);\n    }"
+    }
   },
   {
     "title": "Singleton",
