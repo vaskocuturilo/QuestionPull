@@ -7,7 +7,7 @@ The Spring Boot REST service for question pull.
 - Use any *object-oriented language*.
 - Use the latest Spring Boot version.
 - Use the latest PostgreSQL database version.
-- Create Ra EST API service.
+- Create a REST API service.
 - Create a Docker Compose to run the service.
 - Provide code and clear instructions on how to run it.
 
@@ -33,6 +33,7 @@ You will need the following technologies available to try it out:
 - Will be adding functionality for taking a ticket via difficulty. :heavy_check_mark:
 - Will be adding functionality for taking a ticket via category.
 - Will be adding functionality for a quiz with the most popular questions.
+- Will be adding a solution functionality 
 - Will be adding JWT.
 - Will be adding X-API-KEY.
 - Will be adding a one-time password.
