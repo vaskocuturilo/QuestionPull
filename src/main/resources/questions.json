@@ -330,7 +330,10 @@
     "title": "Singleton",
     "body": "Implement a singleton pattern",
     "example": "",
-    "level": "easy"
+    "level": "easy",
+    "solution": {
+      "content": "public class Singleton {\n\n    private static volatile Singleton instance;\n\n    private Singleton() {}\n\n    public static Singleton getInstance() {\n        if (instance == null) {\n            synchronized (Singleton.class) {\n                if (instance == null) {\n                    instance = new Singleton();\n                }\n            }\n        }\n\n        return instance;\n    }\n}"
+    }
   },
   {
     "title": "Stack",
@@ -675,7 +678,10 @@
     "title": "Implement a Thread-Safe Singleton Logger",
     "body": "Create a singleton Logger class that ensures only one instance is used throughout the application. The logger should be thread-safe and lazily initialized. Add a method to write messages to a log file with timestamps.",
     "example": "",
-    "level": "medium"
+    "level": "medium",
+    "solution": {
+      "content": "public class SingletonLogger {\n    private static final Logger logger = Logger.getLogger(SingletonLogger.class.getName());\n\n    private static SingletonLogger log;\n\n    private static final String LOG_FILE = \"singleton_log.txt\";\n\n    private SingletonLogger() {\n        try {\n            FileHandler fileHandler = new FileHandler(LOG_FILE, true);\n            fileHandler.setFormatter(new SimpleFormatter());\n            if (logger.getHandlers().length == 0) {\n                logger.addHandler(fileHandler);\n            }\n        } catch (IOException exception) {\n            logger.log(Level.WARNING, \"Failed to set up file handler: {0}\", exception.getMessage());\n        }\n    }\n\n    public static synchronized SingletonLogger getLog() {\n        if (log == null) {\n            log = new SingletonLogger();\n        }\n        return log;\n    }\n\n    public void log(Level level, String message) {\n        logger.log(level, message);\n    }\n}"
+    }
   },
   {
     "title": "Create a Custom HashMap Implementation",
