@@ -348,7 +348,10 @@
     "title": "Queue",
     "body": "Implement queue",
     "example": "",
-    "level": "easy"
+    "level": "easy",
+    "solution": {
+      "content": "public class Queue {\n\n    private final int[] arr;\n    private int front;\n    private int rear;\n    private final int capacity;\n    private int count;\n\n\n    Queue(int size) {\n        arr = new int[size];\n        capacity = size;\n        front = 0;\n        rear = -1;\n        count = 0;\n    }\n\n    public void dequeue() {\n        if (isEmpty()) {\n            System.out.println(\"Underflow\\nProgram Terminated\");\n            System.exit(-1);\n        }\n\n        int x = arr[front];\n\n        System.out.println(\"Removing \" + x);\n\n        front = (front + 1) % capacity;\n        count--;\n\n    }\n\n    public void enqueue(int item) {\n        if (isFull()) {\n            System.out.println(\"Overflow\\nProgram Terminated\");\n            System.exit(-1);\n        }\n\n        System.out.println(\"Inserting \" + item);\n\n        rear = (rear + 1) % capacity;\n        arr[rear] = item;\n        count++;\n    }\n\n    public int peek() {\n        if (isEmpty()) {\n            System.out.println(\"Underflow\\nProgram Terminated\");\n            System.exit(-1);\n        }\n        return arr[front];\n    }\n\n    public int size() {\n        return count;\n    }\n\n    public boolean isEmpty() {\n        return (size() == 0);\n    }\n\n    public boolean isFull() {\n        return (size() == capacity);\n    }"
+    }
   },
   {
     "title": "Remove one array from another array",
