@@ -44,7 +44,7 @@ services:
       SPRING_PROFILES_ACTIVE: docker
     volumes:
       - ./src/main/resources/questions.json:/usr/app/resources/questions.json
-      - ./logs:/usr/app/logs
+      - logs:/usr/app/logs
     logging:
       driver: "json-file"
       options:
@@ -98,7 +98,7 @@ services:
     container_name: promtail
     volumes:
       - ./promtail-config.yaml:/etc/promtail/promtail-config.yaml
-      - ./logs:/app/logs
+      - logs:/app/logs
     command: -config.file=/etc/promtail/promtail-config.yaml
     logging:
       driver: "json-file"
@@ -147,3 +147,4 @@ networks:
 
 volumes:
   grafana-data:
+  logs:
