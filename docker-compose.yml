@@ -42,6 +42,8 @@ services:
       DONATE_LINK: ${DONATE_LINK}
       BOT_FILE_NAME: classpath:questions.json
       SPRING_PROFILES_ACTIVE: docker
+      LOG_PATH: /usr/app/logs/application.log
+
     volumes:
       - ./src/main/resources/questions.json:/usr/app/resources/questions.json
       - logs:/usr/app/logs
