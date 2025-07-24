@@ -30,3 +30,7 @@ README.md
 hs_err_pid*
 replay_pid*
 
+# any env's
+.env
+
+
