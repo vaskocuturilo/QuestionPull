@@ -98,7 +98,7 @@ services:
     container_name: promtail
     volumes:
       - ./promtail-config.yaml:/etc/promtail/promtail-config.yaml
-      - ./logs:/app/logs
+      - ./logs:/usr/app/logs
     command: -config.file=/etc/promtail/promtail-config.yaml
     logging:
       driver: "json-file"
