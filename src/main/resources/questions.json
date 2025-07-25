@@ -245,7 +245,16 @@
     "example": "Input: arr[] = {3, 5, 4, 1, 9}\nOutput: Minimum element is: 1\n              Maximum element is: 9; Input: arr[] = {22, 14, 8, 17, 35, 3}\nOutput:  Minimum element is: 3\n              Maximum element is: 35",
     "level": "easy",
     "solution": {
-      "content": ""
+      "content": "public static int[] findMinMax(int[] array) {\n        Objects.requireNonNull(array, \"An array must not be null\");\n\n        Integer min = null; \n        Integer max = null;\n        \n        for (Integer value : array) {\n            if (value == null) continue;\n            if (min == null || value < min) min = value;\n            if (max == null || value > max) max = value;\n        }\n\n        if (min == null || max == null) {\n            return new int[]{};\n        }\n\n        return new int[]{min, max};\n    }"
+    }
+  },
+  {
+    "title": "Find min and max values in list",
+    "body": "Given a list of size N. The task is to find the maximum and the minimum element of the array using the minimum number of comparisons.",
+    "example": "Input: List<Integer> = List.of(3, 5, 4, 1, 9)\nOutput: Minimum element is: 1\n              Maximum element is: 9; \n Input: List<Integer> = List.of(22, 14, 8, 17, 35, 3)\nOutput:  Maximum element is: 35 \n, Minimum element is: 3\n              Maximum element is: 35",
+    "level": "easy",
+    "solution": {
+      "content": "public record MinMax(Integer min, Integer max) {}\n\npublic static MinMax findMinMax(List<Integer> list) {\n    Objects.requireNonNull(list, \"List must not be null\");\n\n    Integer min = null, max = null;\n    for (Integer val : list) {\n        if (val == null) continue;\n        if (min == null || val < min) min = val;\n        if (max == null || val > max) max = val;\n    }\n\n    if (min == null || max == null) {\n        throw new IllegalArgumentException(\"List contains only nulls or is empty\");\n    }\n\n    return new MinMax(min, max);\n}"
     }
   },
   {
