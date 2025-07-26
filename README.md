@@ -19,9 +19,9 @@ You will need the following technologies available to try it out:
 
 * Git
 * Spring Boot 3+
-* PostgreSQL 16.* +
+* MySQL *.* +
 * Maven 3+
-* JDK 21+
+* JDK 24+
 * Docker
 * Docker compose
 * IDE of your choice
