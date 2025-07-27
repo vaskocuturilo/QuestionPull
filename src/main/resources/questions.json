@@ -281,7 +281,7 @@
     "example": "{10,20,30,40} => target = 30, result = 2, because this is a index of element 30",
     "level": "easy",
     "solution": {
-      "content": "private static int binarySearch(int[] sortedArray, int target) {\n        int left = 0;\n        int right = sortedArray.length - 1;\n        int result = -1;\n        while (left <= right) {\n            int mid = left + (right - left) / 2;\n            if (sortedArray[mid] == target) {\n                result = mid;\n                right = mid - 1;\n            } else if (sortedArray[mid] < target) {\n                left = mid + 1;\n            } else {\n                right = mid - 1;\n            }\n        }\n\n        return result;\n    }"
+      "content": "public static int binarySearch(int[] sortedArray, int target) {\n        int left = 0;\n        int right = sortedArray.length - 1;\n        int result = -1;\n        while (left <= right) {\n            int mid = left + (right - left) / 2;\n            if (sortedArray[mid] == target) {\n                result = mid;\n                right = mid - 1;\n            } else if (sortedArray[mid] < target) {\n                left = mid + 1;\n            } else {\n                right = mid - 1;\n            }\n        }\n\n        return result;\n    }"
     }
   },
   {
@@ -678,7 +678,10 @@
     "title": "Validate IP Address",
     "body": "Write a method that takes a string and determines whether it is a valid IPv4 or IPv6 address. Return \"IPv4\" if valid IPv4, \"IPv6\" if valid IPv6, or \"Neither\" if invalid.",
     "example": "\"172.16.254.1\" → \"IPv4\", \"2001:0db8:85a3:0000:0000:8a2e:0370:7334\" → \"IPv6, \"256.256.256.256\" → \"Neither\"",
-    "level": "medium"
+    "level": "medium",
+    "solution": {
+      "content": "public class ValidateIPAddress {\n    public String validateIPAddress(final String ipAddress) {\n        Objects.requireNonNull(ipAddress, \"The sentence cannot be null\");\n        final String trimmed = ipAddress.trim().toLowerCase();\n\n        if (trimmed.isEmpty()) return \"Neither\";\n\n        if (isIpV4Valid(trimmed)) return \"IPv4\";\n        if (isIpV6Valid(trimmed)) return \"IPv6\";\n\n        return \"Neither\";\n    }\n\n    private boolean isIpV4Valid(final String text) {\n        String[] items = text.split(\"\\\\.\", -1);\n        if (items.length != 4) return false;\n\n        for (String item : items) {\n            if (item.isEmpty() || (item.length() > 1 && item.startsWith(\"0\"))) return false;\n            try {\n                int value = Integer.parseInt(item);\n                if (value < 0 || value > 255) return false;\n            } catch (NumberFormatException exception) {\n                return false;\n            }\n\n        }\n        return true;\n    }\n\n    private boolean isIpV6Valid(final String text) {\n        String[] items = text.split(\":\", -1);\n        if (items.length != 8) return false;\n\n        for (String item : items) {\n            if (item.isEmpty() || item.length() > 4) return false;\n\n            for (char symbol : item.toCharArray()) {\n                if ((!Character.isDigit(symbol) && ((Character.toLowerCase(symbol) < 'a') || (Character.toLowerCase(symbol) > 'f')))) {\n                    return false;\n                }\n            }\n        }\n        return true;\n    }\n}"
+    }
   },
   {
     "title": "Implement a Custom Stack with Min Function",
