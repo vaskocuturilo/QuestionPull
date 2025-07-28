@@ -654,7 +654,10 @@
     "title": "Daily Temperatures",
     "body": "Given an array of integers temperatures represents the daily temperatures, return an array answer such that answer[i] is the number of days you have to wait after the ith day to get a warmer temperature. If there is no future day for which this is possible, keep answer[i] == 0 instead.",
     "example": "Input: temperatures = [73,74,75,71,69,72,76,73], Output: [1,1,4,2,1,1,0,0] \n Input: temperatures = [30,40,50,60], Output: [1,1,1,0] \n Input: temperatures = [30,60,90], Output: [1,1,0]",
-    "level": "medium"
+    "level": "medium",
+    "solution": {
+      "content": "public static int[] dailyTemperatures(final int[] temps) {\n        Objects.requireNonNull(temps, \"The array cannot be null\");\n\n        int[] result = new int[temps.length];\n        Deque<Integer> stack = new ArrayDeque<>();\n\n        for (int i = 0; i < temps.length; i++) {\n\n            while (!stack.isEmpty() && temps[i] > temps[stack.peek()]) {\n                final int index = stack.pop();\n                result[index] = i - index;\n            }\n            stack.push(i);\n        }\n        return result;\n    }"
+    }
   },
   {
     "title": "Longest Word in Dictionary",
