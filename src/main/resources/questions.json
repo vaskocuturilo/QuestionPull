@@ -96,6 +96,15 @@
     }
   },
   {
+    "title": "Word Frequency Counter",
+    "body": "Write a program that takes a block of text input (as a single String) and calculates how many times each word appears. Words should be treated as case-insensitive. The output should display each word along with its frequency in descending order.",
+    "example": "Input: Hello word word and word \n, Output: {word=3, and=1, hello=1}",
+    "level": "easy",
+    "solution": {
+      "content": "public Map<String, Integer> counterWordFrequency(final String inputWords) {\n        Objects.requireNonNull(inputWords, \"The sentence cannot be null\");\n\n        final Map<String, Integer> frequencyMap = new HashMap<>();\n\n        final String trimmed = inputWords.trim();\n\n        if (trimmed.isEmpty()) {\n            throw new IllegalArgumentException(\"The sentence contains only spaces\");\n        }\n\n        final boolean hasLetter = trimmed.chars().anyMatch(Character::isAlphabetic);\n\n        if (!hasLetter) {\n            throw new IllegalArgumentException(\"The sentence contains no letters\");\n        }\n\n        final String[] words = trimmed.split(\"\\\\s+\");\n\n        for (final String word : words) {\n            final String cleanWord = word.toLowerCase().replaceAll(\"[^a-z]\", \"\");\n\n            frequencyMap.merge(cleanWord, 1, Integer::sum);\n        }\n\n        return frequencyMap.entrySet().stream().sorted(Map.Entry.<String, Integer>comparingByValue().reversed())\n                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e1, LinkedHashMap::new));\n    }"
+    }
+  },
+  {
     "title": "Binary Search",
     "body": "Given an array of integers nums which is sorted in ascending order, and an integer target, write a function to search target in nums. If target exists, then return its index. Otherwise, return -1. You must write an algorithm with O(log n) runtime complexity.\n\n",
     "example": "Input: nums = [-1,0,3,5,9,12], target = 9\nOutput: 4\nExplanation: 9 exists in nums and its index is 4; Input: nums = [-1,0,3,5,9,12], target = 2\nOutput: -1\nExplanation: 2 does not exist in nums so return -1",
