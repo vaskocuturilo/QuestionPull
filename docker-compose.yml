@@ -39,6 +39,7 @@ services:
     environment:
       MYSQL_USER: ${MYSQL_USER}
       MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_PASSWORD}
       BOT_NAME: ${BOT_NAME}
       BOT_API_KEY: ${BOT_API_KEY}
       DONATE_LINK: ${DONATE_LINK}
