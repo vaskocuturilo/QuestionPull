@@ -37,11 +37,11 @@ services:
     depends_on:
       - database
     environment:
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
       BOT_NAME: ${BOT_NAME}
       BOT_API_KEY: ${BOT_API_KEY}
       DONATE_LINK: ${DONATE_LINK}
-      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
-      MYSQL_DATABASE: ${MYSQL_DATABASE}
       BOT_FILE_NAME: classpath:questions.json
       SPRING_PROFILES_ACTIVE: docker
       LOG_PATH: /usr/app/logs/application.log
