@@ -632,7 +632,7 @@
   {
     "title": "Temperature Converter",
     "body": "Create a console application that converts temperatures between Celsius and Fahrenheit. The program should:\n 1. Prompt the user to enter a temperature value. \n 2. Prompt the user to specify the original unit (Celsius or Fahrenheit). \n 3. Perform the conversion using the appropriate formulas: \n  -> Celsius to Fahrenheit: F=C×9/5+32 \n -> Fahrenheit to Celsius: C=(F−32)×5/9 \n 4. Display the converted temperature in the new unit. \n 5. Allow the user to perform multiple conversions until they choose to exit.",
-    "example": "",
+    "example": "Implement robust input validation to ensure numeric input and valid unit choices.",
     "level": "easy",
     "solution": {
       "content": "public class TemperatureConverter {\n\n    private static final Scanner SCANNER = new Scanner(System.in);\n    private static final Logger LOGGER = Logger.getLogger(TemperatureConverter.class.getName());\n\n    public static void main(String[] args) {\n        userInput();\n    }\n\n    private static void userInput() {\n        boolean keepLooping = true;\n\n        while (keepLooping) {\n            System.out.println(\"Enter a temperature number or 'Q' to quit:\");\n            String temperatureInput = SCANNER.next().trim();\n            if (temperatureInput.equalsIgnoreCase(\"q\")) {\n                LOGGER.log(Level.INFO, \"Exit\");\n                return;\n            }\n\n            double temperature;\n            try {\n                temperature = Double.parseDouble(temperatureInput);\n            } catch (NumberFormatException e) {\n                System.err.println(\"Invalid temperature input. Please enter a numeric value.\");\n                LOGGER.warning(\"Invalid temperature input: \" + temperatureInput);\n                continue;\n            }\n\n            SCANNER.nextLine();\n\n            System.out.println(\"Is the temperature in Celsius or Fahrenheit? (Type 'C' or 'F' or 'Q' to quit)\");\n            String operation = SCANNER.nextLine().trim().toLowerCase();\n            if (operation.equalsIgnoreCase(\"q\")) {\n                LOGGER.log(Level.INFO, \"User quit at temperature input\");\n                return;\n            }\n\n            try {\n                final double convertedTemperature = converter(temperature, operation);\n                String targetUnit = \"\";\n                if (operation.equals(\"celsius\") || operation.equalsIgnoreCase(\"c\")) {\n                    targetUnit = \"Fahrenheit\";\n                } else if (operation.equals(\"fahrenheit\") || operation.equalsIgnoreCase(\"f\")) {\n                    targetUnit = \"Celsius\";\n                } else {\n                    targetUnit = \"Unknown Unit\";\n                }\n                System.out.printf(\"The convertion temperature: %.3f to %s%n\".formatted(convertedTemperature, targetUnit));\n            } catch (ArithmeticException | IllegalArgumentException e) {\n                System.err.println(\"Error: Invalid conversion unit provided. Please choose 'Celsius' or 'Fahrenheit'.\");\n                LOGGER.log(Level.WARNING, \"Converter error: {0}\", e.getMessage());\n            }\n        }\n        SCANNER.nextLine();\n    }\n\n    public static double converter(final double temperature, final String operation) {\n        return switch (operation) {\n            case \"celsius\", \"c\" -> (temperature * 9.0 / 5.0) + 32.0;\n            case \"fahrenheit\", \"f\" -> (temperature - 32.0) * 5.0 / 9.0;\n            default -> throw new IllegalArgumentException(\"Invalid operation: \" + operation);\n        };\n    }\n}"
@@ -641,7 +641,16 @@
   {
     "title": "Simple Command-Line To-Do List",
     "body": "Create a basic command-line application that allows users to manage a to-do list. The application should support the following commands: \n add <task description>: Adds a new task to the list. \n list: Displays all tasks with their corresponding numbers. \n mark <task number>: Marks a task as completed. \n delete <task number>: Removes a task from the list. \n exit: Quits the application.",
-    "example": "",
+    "example": "Use a List (e.g., ArrayList) to store String tasks. Consider how to handle invalid task numbers or commands.",
+    "level": "easy",
+    "solution": {
+      "content": ""
+    }
+  },
+  {
+    "title": "Basic File Operations (Copy & Rename)",
+    "body": "Write a Java program that allows a user to perform basic file operations. The program should: \n 1. Prompt the user for a source file path. \n 2. Prompt the user for a destination file path. \n 3. Implement a feature to copy the content of the source file to the destination file. \n 4. Implement a feature to rename the source file to a new name provided by the user (after copying, or as a separate operation).",
+    "example": "Handle potential IOExceptions (e.g., file not found, permission denied) and provide informative messages to the user. Use java.io.File or java.nio.file.Path and Files for operations.",
     "level": "easy",
     "solution": {
       "content": ""
