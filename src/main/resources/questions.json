@@ -657,6 +657,15 @@
     }
   },
   {
+    "title": "Basic E-commerce Shopping Cart",
+    "body": "Design a console application that simulates a simple e-commerce shopping cart. The application should allow users to: \n 1. View available products (each product having an ID, name, price, and perhaps a category). \n 2. Add products to the cart by product ID and quantity. \n 3. View items in the cart with their quantities and subtotal for each. \n  4. Remove items from the cart by product ID. \n  5. Calculate the total cost of all items in the cart.",
+    "example": "You'll need a Product class and a ShoppingCart class. The ShoppingCart should manage a collection of products (e.g., using a Map where the key is product ID and the value is the quantity, or a custom CartItem class).",
+    "level": "easy",
+    "solution": {
+      "content": ""
+    }
+  },
+  {
     "title": "The shortest path",
     "body": "A string consisting of the letters 'X', 'Y' and '0' is given.\nIt is necessary to find the shortest distance between the letters 'X' and 'y' to get the value 0 if 'X' or 'Y' are missing.",
     "example": "\"үү\" -> Ө\n\"XX\" -> Ө\n\"XY\" -> 1\n\"YOX\" -> 2\n\"000XOOYOXO\" -> 2\n\"000X0OY\" -> 2",
