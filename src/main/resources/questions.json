@@ -801,6 +801,15 @@
     }
   },
   {
+    "title": "RESTful API Client",
+    "body": "Create a Java application that interacts with a third-party RESTful API. A good choice would be the GitHub API to retrieve information about a user's repositories or the OpenWeatherMap API to get weather data for a city.",
+    "example": "HTTP Communication: Use a modern HTTP client library like OkHttp or java.net.http.HttpClient (from Java 11+) to make GET requests to the API endpoints. \n JSON Parsing: The API responses will be in JSON format. Use a library such as Jackson or Gson to deserialize the JSON into custom Java objects (POJOs or records). \n Object-Oriented Design: Create a dedicated class for each resource you're retrieving (e.g., a Repository class or a Weather class). \n  Error Handling: Implement robust error handling for different HTTP status codes (e.g., 404 Not Found, 401 Unauthorized, 500 Internal Server Error).",
+    "level": "medium",
+    "solution": {
+      "content": ""
+    }
+  },
+  {
     "title": "Top K Frequent Elements",
     "body": "Given an integer array and an integer k, return the k most frequent elements. Optimize for time complexity better than O(n log n)",
     "example": "Input: nums = [1,1,1,2,2,3], k = 2, Output: [1,2]",
