@@ -822,6 +822,15 @@
     }
   },
   {
+    "title": "Simple In-Memory Messaging Queue",
+    "body": "Design and implement a basic, thread-safe, in-memory messaging queue. The queue should be able to store a fixed number of messages and be used by multiple threads simultaneously.",
+    "example": "Concurrency: Your queue must be thread-safe. It should support a put() method for producers to add messages and a take() method for consumers to retrieve messages. \n Blocking Operations:\n\nIf the queue is full, the put() method should block until space becomes available.\n\nIf the queue is empty, the take() method should block until a message is added.\n\n  Implementation: The best way to implement this is by using Java's built-in concurrency utilities. A BlockingQueue (like ArrayBlockingQueue or LinkedBlockingQueue) is a perfect fit for this task. Alternatively, for a deeper challenge, you could use a lower-level approach with wait(), notifyAll(), and ReentrantLock to build the blocking behavior yourself.",
+    "level": "medium",
+    "solution": {
+      "content": ""
+    }
+  },
+  {
     "title": "Top K Frequent Elements",
     "body": "Given an integer array and an integer k, return the k most frequent elements. Optimize for time complexity better than O(n log n)",
     "example": "Input: nums = [1,1,1,2,2,3], k = 2, Output: [1,2]",
