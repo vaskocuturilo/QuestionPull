@@ -822,6 +822,15 @@
     }
   },
   {
+    "title": "Database Interaction with JDBC",
+    "body": "Build a Java application that uses the Java Database Connectivity (JDBC) API to interact with a relational database. You can use an in-memory database like H2 or SQLite to avoid a complex setup.",
+    "example": "CRUD Operations: The application should be able to perform all CRUD (Create, Read, Update, Delete) operations on a single table (e.g., a Product table with columns like id, name, price, stock). \n Resource Management: You must use the try-with-resources statement to ensure that Connection, Statement, and ResultSet objects are always closed properly, preventing resource leaks. \n Prepared Statements: To prevent SQL injection vulnerabilities, use PreparedStatement for all database queries that involve user input. \n Configuration: Externalize the database connection details (URL, username, password) into a configuration file (e.g., config.properties) and load them at runtime.",
+    "level": "medium",
+    "solution": {
+      "content": ""
+    }
+  },
+  {
     "title": "Simple In-Memory Messaging Queue",
     "body": "Design and implement a basic, thread-safe, in-memory messaging queue. The queue should be able to store a fixed number of messages and be used by multiple threads simultaneously.",
     "example": "Concurrency: Your queue must be thread-safe. It should support a put() method for producers to add messages and a take() method for consumers to retrieve messages. \n Blocking Operations:\n\nIf the queue is full, the put() method should block until space becomes available.\n\nIf the queue is empty, the take() method should block until a message is added.\n\n  Implementation: The best way to implement this is by using Java's built-in concurrency utilities. A BlockingQueue (like ArrayBlockingQueue or LinkedBlockingQueue) is a perfect fit for this task. Alternatively, for a deeper challenge, you could use a lower-level approach with wait(), notifyAll(), and ReentrantLock to build the blocking behavior yourself.",
