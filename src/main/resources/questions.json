@@ -840,6 +840,15 @@
     }
   },
   {
+    "title": "Basic Spring Boot Microservice (CRUD)",
+    "body": "Create a simple RESTful API using the Spring Boot framework. The microservice should manage a single resource (e.g., a Book resource with properties like title, author, and isbn). \n API Endpoints: Implement REST endpoints for basic CRUD operations: \n POST /api/books - Create a new book. \n GET /api/books/{id} - Read a book by its ID. \n GET /api/books - Read all books. \n  PUT /api/books/{id} - Update an existing book. \n DELETE /api/books/{id} - Delete a book by its ID.",
+    "example": "Persistence: Use Spring Data JPA with an in-memory database like H2 to manage the data persistence layer.\n\nDependency Injection: Leverage Spring's dependency injection (@Autowired) to manage the components of your application (Controller, Service, Repository).\n\nError Handling: Use @ControllerAdvice or @ExceptionHandler annotations to provide custom, meaningful error responses for scenarios like \"resource not found\" or \"invalid input.\"",
+    "level": "medium",
+    "solution": {
+      "content": ""
+    }
+  },
+  {
     "title": "Top K Frequent Elements",
     "body": "Given an integer array and an integer k, return the k most frequent elements. Optimize for time complexity better than O(n log n)",
     "example": "Input: nums = [1,1,1,2,2,3], k = 2, Output: [1,2]",
