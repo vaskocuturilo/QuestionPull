@@ -858,6 +858,15 @@
     }
   },
   {
+    "title": "Implement a Simple In-Memory Library System",
+    "body": "Build a small book management system in Java. \n Implement a Book class with:\n\nUUID id\n\nString title\n\nString author\n\nLong isbn\n\nint availableCopies \n mplement a LibraryService class with methods:\n\nBook addBook(Book book) – Adds a new book (if isbn already exists, increase availableCopies).\n\nOptional<Book> findBookByIsbn(Long isbn) – Finds a book by ISBN.\n\nList<Book> searchByAuthor(String author) – Returns all books by a given author (case-insensitive).\n\nboolean borrowBook(Long isbn) – Decreases availableCopies by 1 if available.\n\nvoid returnBook(Long isbn) – Increases availableCopies by 1.\n\nList<Book> getAllBooksSortedByTitle() – Returns all books sorted alphabetically. \n  Constraints:\n\nUse Java Streams where appropriate.\n\nEnsure thread safety of the service (multiple users may borrow/return books at the same time).\n\nWrite unit tests for at least borrowBook and returnBook.",
+    "example": "LibraryService library = new LibraryService();\n\nlibrary.addBook(new Book(UUID.randomUUID(), \"Clean Code\", \"Robert Martin\", 12345L, 3));\nlibrary.addBook(new Book(UUID.randomUUID(), \"Effective Java\", \"Joshua Bloch\", 54321L, 2));\n\nlibrary.borrowBook(12345L); // now \"Clean Code\" has 2 copies\nlibrary.borrowBook(12345L); // now \"Clean Code\" has 1 copy\nlibrary.returnBook(12345L); // now \"Clean Code\" has 2 copies again",
+    "level": "medium",
+    "solution": {
+      "content": ""
+    }
+  },
+  {
     "title": "Top K Frequent Elements",
     "body": "Given an integer array and an integer k, return the k most frequent elements. Optimize for time complexity better than O(n log n)",
     "example": "Input: nums = [1,1,1,2,2,3], k = 2, Output: [1,2]",
