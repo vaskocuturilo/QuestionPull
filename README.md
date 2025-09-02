@@ -8,6 +8,7 @@ The Spring Boot REST service for question pull.
 - Use the latest Spring Boot version.
 - Use the latest PostgreSQL database version.
 - Create a REST API service.
+- Add logs.
 - Create a Docker Compose to run the service.
 - Provide code and clear instructions on how to run it.
 
@@ -46,7 +47,7 @@ You will need the following technologies available to try it out:
 
 ```mvn spring-boot:run```
 
-### How to run via docker-compose.
+### How to run via Docker Compose.
 
 ``` docker-compose -f "docker-compose.yml" up --detach --build```
 
