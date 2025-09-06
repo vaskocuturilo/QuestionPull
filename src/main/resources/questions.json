@@ -867,6 +867,15 @@
     }
   },
   {
+    "title": "A continuous subsequence",
+    "body": "Given an array of integers, find a non-empty subarray (a continuous subsequence) with a given sum target, or return -1 if not available.",
+    "example": "findTarget([9, -6, 5, 1, 4, -2], 10) -> (2, 4), (-1, -1) if not available",
+    "level": "medium",
+    "solution": {
+      "content": ""
+    }
+  },
+  {
     "title": "Top K Frequent Elements",
     "body": "Given an integer array and an integer k, return the k most frequent elements. Optimize for time complexity better than O(n log n)",
     "example": "Input: nums = [1,1,1,2,2,3], k = 2, Output: [1,2]",
