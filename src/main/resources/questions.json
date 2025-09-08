@@ -1,5 +1,23 @@
 [
   {
+    "title": "Make Middle",
+    "body": "Given an array of ints of even length, return a new array length 2 containing the middle two elements from the original array. The original array will be length 2 or more.",
+    "example": "makeMiddle([1, 2, 3, 4]) → [2, 3] \n  makeMiddle([7, 1, 2, 3, 4, 9]) → [2, 3] \n makeMiddle([1, 2]) → [1, 2]",
+    "level": "easy",
+    "solution": {
+      "content": "public int[] makeMiddle(int[] inputArray) {\n        Objects.requireNonNull(inputArray, \"The array cannot be null\");\n\n        if (inputArray.length < 2) {\n            throw new IllegalArgumentException(\"The array must contain at least two elements.\");\n        }\n\n        final int middleIndex = inputArray.length / 2;\n        return new int[]{inputArray[middleIndex - 1], inputArray[middleIndex]};\n    }"
+    }
+  },
+  {
+    "title": "Same Ends",
+    "body": "Return true if the group of N numbers at the start and end of the array are the same. For example, with {5, 6, 45, 99, 13, 5, 6}, the ends are the same for n=0 and n=2, and false for n=1 and n=3. You may assume that n is in the range 0..nums.length inclusive.",
+    "example": "sameEnds([5, 6, 45, 99, 13, 5, 6], 1) → false \n sameEnds([5, 6, 45, 99, 13, 5, 6], 2) → true \n sameEnds([5, 6, 45, 99, 13, 5, 6], 3) → false",
+    "level": "easy",
+    "solution": {
+      "content": "public boolean sameEnds(int[] inputArray, final int len) {\n        Objects.requireNonNull(inputArray, \"The array cannot be null\");\n\n        if (len < 1) {\n            throw new IllegalArgumentException(\"The len variable cannot be less than one\");\n        }\n        if (inputArray.length < len) {\n            throw new IllegalArgumentException(\"The array length cannot be less than the len variable\");\n        }\n\n        for (int i = 0; i < len; i++) {\n            if (inputArray[i] != inputArray[inputArray.length - len + i]) {\n                return false;\n            }\n        }\n        \n        return true;\n    }"
+    }
+  },
+  {
     "title": "The zero max",
     "body": "Return a version of the given array where each zero value in the array is replaced by the\n    largest odd value to the right of the zero in the array.\n    If there is no odd value to the right of the zero, leave the zero as a zero.",
     "example": "zeroMax([0, 5, 0, 3]) → [5, 5, 3, 3] \n zeroMax([0, 4, 0, 3]) → [3, 4, 3, 3] \n zeroMax([0, 1, 0]) → [1, 1, 0]",
