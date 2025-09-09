@@ -1,5 +1,14 @@
 [
   {
+    "title": "Big Diff",
+    "body": "Given an array of numbers, find the largest difference between elements in the array. For example, for the array [1,2,3], the following differences can be calculated: 2-1 = 1, 3-2 = 1, 3-1 = 2.\n\nThe largest difference between elements in this array is 2.\n\nThe solution will be checked for performance, so think about efficiency.",
+    "example": "bigDiff([10, 3, 5, 6]) = 7 \n bigDiff([7, 2, 10, 9]) = 8",
+    "level": "easy",
+    "solution": {
+      "content": "public int bigDiff(int[] inputArray) {\n        if (Objects.isNull(inputArray)) {\n            throw new IllegalArgumentException(\"The input array cannot be null\");\n        }\n\n        if (inputArray.length < 2) {\n            throw new IllegalArgumentException(\"The input array must contain at least two elements.\");\n        }\n\n        int minValue = Integer.MAX_VALUE;\n        int maxValue = Integer.MIN_VALUE;\n\n        for (int element : inputArray) {\n            minValue = Math.min(element, minValue);\n            maxValue = Math.max(element, maxValue);\n        }\n        return (maxValue - minValue);\n    }"
+    }
+  },
+  {
     "title": "Make Middle",
     "body": "Given an array of ints of even length, return a new array length 2 containing the middle two elements from the original array. The original array will be length 2 or more.",
     "example": "makeMiddle([1, 2, 3, 4]) → [2, 3] \n  makeMiddle([7, 1, 2, 3, 4, 9]) → [2, 3] \n makeMiddle([1, 2]) → [1, 2]",
