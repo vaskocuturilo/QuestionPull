@@ -1,5 +1,14 @@
 [
   {
+    "title": "Sorting on planet Twisted-3-7",
+    "body": "There is a planet... in a galaxy far far away. It is exactly like our planet, but it has one difference:  the values of the digits 3 and 7 are twisted. Our 3 means 7 on the planet Twisted-3-7. And 7 means 3.\n\nYour task is to create a method, that can sort an array the way it would be sorted on Twisted-3-7.",
+    "example": "1,2,3,4,5,6,7,8,9] -> [1,2,7,4,5,6,3,8,9]\n[12,13,14] -> [12,14,13]\n[9,2,4,7,3] -> [2,7,4,3,9] \n There is no need for a precheck. The array will always be not null and will always contain at least one number.\n\nYou should not modify the input array!",
+    "level": "easy",
+    "solution": {
+      "content": "public static Integer[] sortTwisted(Integer[] array) {\n        if (Objects.isNull(array)) {\n            throw new IllegalArgumentException(\"The array cannot be null\");\n        }\n\n        if (array.length < 2) {\n            throw new IllegalArgumentException(\"he array must contain at least two elements.\");\n        }\n        final Integer[] resultArray = Arrays.copyOf(array, array.length);\n\n        Arrays.sort(resultArray, Comparator.comparing((o1, o2) -> {\n            String s1 = String.valueOf(o1);\n            String s2 = String.valueOf(o2);\n\n            s1 = s1.replaceAll(\"7\", \"X\");\n            s1 = s1.replaceAll(\"3\", \"7\");\n            s1 = s1.replaceAll(\"X\", \"3\");\n            s2 = s2.replaceAll(\"7\", \"X\");\n            s2 = s2.replaceAll(\"3\", \"7\");\n            s2 = s2.replaceAll(\"X\", \"3\");\n\n            return Integer.valueOf(s1).compareTo(Integer.valueOf(s2));\n        }));\n\n        return resultArray;\n    }"
+    }
+  },
+  {
     "title": "Big Diff",
     "body": "Given an array of numbers, find the largest difference between elements in the array. For example, for the array [1,2,3], the following differences can be calculated: 2-1 = 1, 3-2 = 1, 3-1 = 2.\n\nThe largest difference between elements in this array is 2.\n\nThe solution will be checked for performance, so think about efficiency.",
     "example": "bigDiff([10, 3, 5, 6]) = 7 \n bigDiff([7, 2, 10, 9]) = 8",
