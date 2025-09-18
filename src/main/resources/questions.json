@@ -9,6 +9,15 @@
     }
   },
   {
+    "title": "Keyboard Row",
+    "body": "Given an array of strings words, return the words that can be typed using letters of the alphabet on only one row of American keyboard like the image below.\n\nNote that the strings are case-insensitive, both lowercased and uppercased of the same letter are treated as if they are at the same row.\n\nIn the American keyboard:\n\nthe first row consists of the characters \"qwertyuiop\",\nthe second row consists of the characters \"asdfghjkl\", and\nthe third row consists of the characters \"zxcvbnm\".\n",
+    "example": "Input: words = [\"Hello\",\"Alaska\",\"Dad\",\"Peace\"]\n\nOutput: [\"Alaska\",\"Dad\"]\n\nExplanation:\n\nBoth \"a\" and \"A\" are in the 2nd row of the American keyboard due to case insensitivity.  Input: words = [\"omk\"]\n\nOutput: [] \n Input: words = [\"adsdf\",\"sfd\"]\n\nOutput: [\"adsdf\",\"sfd\"]",
+    "level": "easy",
+    "solution": {
+      "content": "public String[] findWords(String[] words) {\n        final List<String> tempResultList = new ArrayList<>();\n\n        if (Objects.isNull(words)) {\n            throw new IllegalArgumentException(\"The array cannot be a null\");\n        }\n\n        for (final String word : words) {\n\n            final String wordLowerCase = word.toLowerCase();\n\n            if (wordLowerCase.matches(\"^[qwertyuiop]+$\")\n                    || wordLowerCase.matches(\"^[asdfghjkl]+$\")\n                    || wordLowerCase.matches(\"^[zxcvbnm]+$\")) {\n\n                tempResultList.add(word);\n            }\n        }\n\n        final String[] result = new String[tempResultList.size()];\n        for (int i = 0; i < tempResultList.size(); i++) {\n            result[i] = tempResultList.get(i);\n        }\n        return result;\n    }"
+    }
+  },
+  {
     "title": "Big Diff",
     "body": "Given an array of numbers, find the largest difference between elements in the array. For example, for the array [1,2,3], the following differences can be calculated: 2-1 = 1, 3-2 = 1, 3-1 = 2.\n\nThe largest difference between elements in this array is 2.\n\nThe solution will be checked for performance, so think about efficiency.",
     "example": "bigDiff([10, 3, 5, 6]) = 7 \n bigDiff([7, 2, 10, 9]) = 8",
