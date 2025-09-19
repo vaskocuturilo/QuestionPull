@@ -9,6 +9,15 @@
     }
   },
   {
+    "title": "Longest Harmonious Subsequence",
+    "body": "We define a harmonious array as an array where the difference between its maximum value and its minimum value is exactly 1.\n\nGiven an integer array nums, return the length of its longest harmonious subsequence among all its possible subsequences.",
+    "example": "Input: nums = [1,3,2,2,5,2,3,7]\n\nOutput: 5\n\nExplanation:\n\nThe longest harmonious subsequence is [3,2,2,2,3] \n Input: nums = [1,2,3,4]\n\nOutput: 2\n\nExplanation:\n\nThe longest harmonious subsequences are [1,2], [2,3], and [3,4], all of which have a length of 2. \n Input: nums = [1,1,1,1]\n\nOutput: 0\n\nExplanation:\n\nNo harmonic subsequence exists.",
+    "level": "easy",
+    "solution": {
+      "content": "public int findLHS(int[] nums) {\n        if (Objects.isNull(nums)) {\n            throw new IllegalStateException(\"The array cannot be null\");\n        }\n\n        final Map<Integer, Integer> frequencyMap = new HashMap<>();\n\n        for (int number : nums) {\n            frequencyMap.merge(number, 1, Integer::sum);\n        }\n\n        int maxLength = 0;\n\n        for (var items : frequencyMap.entrySet()) {\n            int currentKey = items.getKey();\n            int currentValue = items.getValue();\n\n            if (frequencyMap.containsKey(currentKey + 1)) {\n                final int harmonic = currentValue + frequencyMap.getOrDefault(currentKey + 1, 1);\n                maxLength = Math.max(maxLength, harmonic);\n            }\n        }\n        return maxLength;\n    }"
+    }
+  },
+  {
     "title": "Keyboard Row",
     "body": "Given an array of strings words, return the words that can be typed using letters of the alphabet on only one row of American keyboard like the image below.\n\nNote that the strings are case-insensitive, both lowercased and uppercased of the same letter are treated as if they are at the same row.\n\nIn the American keyboard:\n\nthe first row consists of the characters \"qwertyuiop\",\nthe second row consists of the characters \"asdfghjkl\", and\nthe third row consists of the characters \"zxcvbnm\".\n",
     "example": "Input: words = [\"Hello\",\"Alaska\",\"Dad\",\"Peace\"]\n\nOutput: [\"Alaska\",\"Dad\"]\n\nExplanation:\n\nBoth \"a\" and \"A\" are in the 2nd row of the American keyboard due to case insensitivity.  Input: words = [\"omk\"]\n\nOutput: [] \n Input: words = [\"adsdf\",\"sfd\"]\n\nOutput: [\"adsdf\",\"sfd\"]",
