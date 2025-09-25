@@ -1,5 +1,14 @@
 [
   {
+    "title": "Number Frequency Counter",
+    "body": "• There is a list of integers at the input (it can contain null numbers — we ignore them).\n• It is necessary to return a list of the k most frequently occurring numbers, sorted:\n        1. descending frequency;\n        2. If the frequency is equal, the number itself increases.\n• If numbers == null or an empty list, then return an empty list.\n• If k <= 0, return an empty list.\n• If the unique numbers are less than k, return all of them.",
+    "example": "List.of(\"1\", \"2\", \"1\", \"2\", \"3\", \"3\", \"3\", \"3\");, return => Map.of(3, 4, 2, 2, 1, 1);",
+    "level": "easy",
+    "solution": {
+      "content": "public Map<Integer, Integer> counterNumberFrequency(final List<Integer> sentence, final int k) {}"
+    }
+  },
+  {
     "title": "Sorting on planet Twisted-3-7",
     "body": "There is a planet... in a galaxy far far away. It is exactly like our planet, but it has one difference:  the values of the digits 3 and 7 are twisted. Our 3 means 7 on the planet Twisted-3-7. And 7 means 3.\n\nYour task is to create a method, that can sort an array the way it would be sorted on Twisted-3-7.",
     "example": "1,2,3,4,5,6,7,8,9] -> [1,2,7,4,5,6,3,8,9]\n[12,13,14] -> [12,14,13]\n[9,2,4,7,3] -> [2,7,4,3,9] \n There is no need for a precheck. The array will always be not null and will always contain at least one number.\n\nYou should not modify the input array!",
