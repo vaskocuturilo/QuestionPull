@@ -9,12 +9,21 @@
     }
   },
   {
-    "title": " Maximum Average Subarray",
+    "title": "Maximum Average Subarray",
     "body": "You are given an integer array nums consisting of n elements, and an integer k.\n\nFind a contiguous subarray whose length is equal to k that has the maximum average value and return this value. Any answer with a calculation error less than 10-5 will be accepted.",
     "example": "Input: nums = [1,12,-5,-6,50,3], k = 4\nOutput: 12.75000\nExplanation: Maximum average is (12 - 5 - 6 + 50) / 4 = 51 / 4 = 12.75 \n Input: nums = [5], k = 1\nOutput: 5.00000",
     "level": "easy",
     "solution": {
       "content": "public double findMaxAverage(int[] nums, int k) {\n        Objects.requireNonNull(nums, \"The array cannot be null\");\n\n        if (k < 1) {\n            throw new IllegalArgumentException(\"less than 1\");\n        }\n\n        if (k > nums.length) {\n            throw new IllegalArgumentException(\"k cannot be larger than the array length\");\n        }\n\n        int windowSum = 0;\n        for (int i = 0; i < k; i++) {\n            windowSum += nums[i];\n        }\n\n        int maxSum = windowSum;\n\n        for (int i = k; i < nums.length; i++) {\n            windowSum += nums[i] - nums[i - k];\n\n            maxSum = Math.max(maxSum, windowSum);\n        }\n        return (double) maxSum / k;\n    }"
+    }
+  },
+  {
+    "title": "Degree of an Array",
+    "body": "Given a non-empty array of non-negative integers nums, the degree of this array is defined as the maximum frequency of any one of its elements.\n\nYour task is to find the smallest possible length of a (contiguous) subarray of nums, that has the same degree as nums.\n\n",
+    "example": "Input: nums = [1,2,2,3,1]\nOutput: 2\nExplanation: \nThe input array has a degree of 2 because both elements 1 and 2 appear twice.\nOf the subarrays that have the same degree:\n[1, 2, 2, 3, 1], [1, 2, 2, 3], [2, 2, 3, 1], [1, 2, 2], [2, 2, 3], [2, 2]\nThe shortest length is 2. So return 2.  \n Input: nums = [1,2,2,3,1,4,2]\nOutput: 6\nExplanation: \nThe degree is 3 because the element 2 is repeated 3 times.\nSo [2,2,3,1,4,2] is the shortest subarray, therefore returning 6.",
+    "level": "easy",
+    "solution": {
+      "content": "public int findShortestSubArray(int[] nums) {\n        Objects.requireNonNull(nums, \"The array cannot be null\");\n\n        final Map<Integer, Integer> frequencyElement = new HashMap<>();\n        final Map<Integer, Integer> firstIndexMap = new HashMap<>();\n        final Map<Integer, Integer> lastIndexMap = new HashMap<>();\n\n        int maxFrequency = 0;\n        for (int i = 0; i < nums.length; i++) {\n            int currentItem = nums[i];\n            frequencyElement.merge(currentItem, 1, Integer::sum);\n            maxFrequency = Math.max(maxFrequency, frequencyElement.get(currentItem));\n\n            int elementIndex = i;\n\n            firstIndexMap.computeIfAbsent(currentItem, key -> elementIndex);\n\n            lastIndexMap.put(currentItem, elementIndex);\n        }\n\n        int theMostMinLength = Integer.MAX_VALUE;\n\n        for (final int num : nums) {\n            if (frequencyElement.get(num) == maxFrequency) {\n                final int subArrayLength = lastIndexMap.get(num) - firstIndexMap.get(num) + 1;\n\n                if (subArrayLength < theMostMinLength) {\n                    theMostMinLength = subArrayLength;\n                }\n            }\n        }\n\n        return theMostMinLength;\n    }"
     }
   },
   {
