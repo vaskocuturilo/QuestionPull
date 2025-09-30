@@ -1,7 +1,16 @@
 [
   {
+    "title": "Find Smallest Letter Greater Than Target",
+    "body": "You are given an array of characters letters that is sorted in non-decreasing order, and a character target. There are at least two different characters in letters.\n\nReturn the smallest character in letters that is lexicographically greater than target. If such a character does not exist, return the first character in letters.",
+    "example": "Input: letters = [\"c\",\"f\",\"j\"], target = \"a\"\nOutput: \"c\"\nExplanation: The smallest character that is lexicographically greater than 'a' in letters is 'c'.",
+    "level": "easy",
+    "solution": {
+      "content": ""
+    }
+  },
+  {
     "title": "Number Frequency Counter",
-    "body": "• There is a list of integers at the input (it can contain null numbers — we ignore them).\n• It is necessary to return a list of the k most frequently occurring numbers, sorted:\n        1. descending frequency;\n        2. If the frequency is equal, the number itself increases.\n• If numbers == null or an empty list, then return an empty list.\n• If k <= 0, return an empty list.\n• If the unique numbers are less than k, return all of them.",
+    "body": "There is a list of integers at the input (it can contain null numbers — we ignore them).\n• It is necessary to return a list of the k most frequently occurring numbers, sorted:\n        1. descending frequency;\n        2. If the frequency is equal, the number itself increases.\n• If numbers == null or an empty list, then return an empty list.\n• If k <= 0, return an empty list.\n• If the unique numbers are less than k, return all of them.",
     "example": "List.of(\"1\", \"2\", \"1\", \"2\", \"3\", \"3\", \"3\", \"3\");, return => Map.of(3, 4, 2, 2, 1, 1);",
     "level": "easy",
     "solution": {
