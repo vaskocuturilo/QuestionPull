@@ -9,6 +9,15 @@
     }
   },
   {
+    "title": "Maximum unloaded of truck",
+    "body": "At the truck loading station, it is necessary to implement an algorithm for distributing the load to the truck. It is necessary to load cargo onto trucks and then output the maximum amount of underloading.",
+    "example": "private int calcTrucks(int[] weights, int trucksCount, int truckMaxCapacity), Params:\n- weights - an array of loads\n- trucksCount - number of trucks\n- truckMaxCapacity - maximum load capacity \n Example:\nInput - [10, 100, 20, 30, 40, 10], 4, 100\nOutput - 90\n\nInput - [10, 100, 20, 30, 40], 4, 100\nOutput - 0",
+    "level": "easy",
+    "solution": {
+      "content": ""
+    }
+  },
+  {
     "title": "Number Frequency Counter",
     "body": "There is a list of integers at the input (it can contain null numbers — we ignore them).\n• It is necessary to return a list of the k most frequently occurring numbers, sorted:\n        1. descending frequency;\n        2. If the frequency is equal, the number itself increases.\n• If numbers == null or an empty list, then return an empty list.\n• If k <= 0, return an empty list.\n• If the unique numbers are less than k, return all of them.",
     "example": "List.of(\"1\", \"2\", \"1\", \"2\", \"3\", \"3\", \"3\", \"3\");, return => Map.of(3, 4, 2, 2, 1, 1);",
