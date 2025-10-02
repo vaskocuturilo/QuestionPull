@@ -1,5 +1,14 @@
 [
   {
+    "title": "Summary Ranges",
+    "body": "You are given a sorted unique integer array nums.\n\nA range [a,b] is the set of all integers from a to b (inclusive).\n\nReturn the smallest sorted list of ranges that cover all the numbers in the array exactly. That is, each element of nums is covered by exactly one of the ranges, and there is no integer x such that x is in one of the ranges but not in nums.\n\nEach range [a,b] in the list should be output as:\n\n\"a->b\" if a != b\n\"a\" if a == b",
+    "example": "Input: nums = [0,1,2,4,5,7]\nOutput: [\"0->2\",\"4->5\",\"7\"]\nExplanation: The ranges are:\n[0,2] --> \"0->2\"\n[4,5] --> \"4->5\"\n[7,7] --> \"7\" \n Input: nums = [0,2,3,4,6,8,9]\nOutput: [\"0\",\"2->4\",\"6\",\"8->9\"]\nExplanation: The ranges are:\n[0,0] --> \"0\"\n[2,4] --> \"2->4\"\n[6,6] --> \"6\"\n[8,9] --> \"8->9\"",
+    "level": "easy",
+    "solution": {
+      "content": "public List<String> summaryRanges(int[] nums) {\n        final List<String> result = new ArrayList<>();\n        if (nums.length == 0) return result;\n\n        int start = nums[0];\n        for (int i = 1; i <= nums.length; i++) {\n            if (i == nums.length || nums[i] != nums[i - 1] + 1) {\n                if (start == nums[i - 1]) {\n                    result.add(Integer.toString(start));\n                } else {\n                    result.add(start + \"->\" + nums[i - 1]);\n                }\n                if (i < nums.length) {\n                    start = nums[i];\n                }\n            }\n        }\n        return result;\n    }"
+    }
+  },
+  {
     "title": "Find Smallest Letter Greater Than Target",
     "body": "You are given an array of characters letters that is sorted in non-decreasing order, and a character target. There are at least two different characters in letters.\n\nReturn the smallest character in letters that is lexicographically greater than target. If such a character does not exist, return the first character in letters.",
     "example": "Input: letters = [\"c\",\"f\",\"j\"], target = \"a\"\nOutput: \"c\"\nExplanation: The smallest character that is lexicographically greater than 'a' in letters is 'c'.",
