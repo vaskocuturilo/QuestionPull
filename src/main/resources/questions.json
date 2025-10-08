@@ -1,5 +1,14 @@
 [
   {
+    "title": "1-bit and 2-bit Characters",
+    "body": "We have two special characters:\n\nThe first character can be represented by one bit 0.\nThe second character can be represented by two bits (10 or 11).\nGiven a binary array bits that ends with 0, return true if the last character must be a one-bit character.\n\n",
+    "example": "Input: bits = [1,0,0]\nOutput: true\nExplanation: The only way to decode it is two-bit character and one-bit character.\nSo the last character is one-bit character. \n Input: bits = [1,1,1,0]\nOutput: false\nExplanation: The only way to decode it is two-bit character and two-bit character.\nSo the last character is not one-bit character.",
+    "level": "easy",
+    "solution": {
+      "content": "public boolean isOneBitCharacter(int[] bits) {\n        Objects.requireNonNull(bits, \"The array cannot be null\");\n\n        if (bits.length < 2) {\n            throw new IllegalArgumentException(\"The sentence must contain at least two elements.\");\n        }\n\n        int left = 0;\n        final int right = bits.length - 1;\n\n        while (left < right) {\n            left += bits[left] + 1;\n        }\n\n        return left == right;\n    }"
+    }
+  },
+  {
     "title": "Summary Ranges",
     "body": "You are given a sorted unique integer array nums.\n\nA range [a,b] is the set of all integers from a to b (inclusive).\n\nReturn the smallest sorted list of ranges that cover all the numbers in the array exactly. That is, each element of nums is covered by exactly one of the ranges, and there is no integer x such that x is in one of the ranges but not in nums.\n\nEach range [a,b] in the list should be output as:\n\n\"a->b\" if a != b\n\"a\" if a == b",
     "example": "Input: nums = [0,1,2,4,5,7]\nOutput: [\"0->2\",\"4->5\",\"7\"]\nExplanation: The ranges are:\n[0,2] --> \"0->2\"\n[4,5] --> \"4->5\"\n[7,7] --> \"7\" \n Input: nums = [0,2,3,4,6,8,9]\nOutput: [\"0\",\"2->4\",\"6\",\"8->9\"]\nExplanation: The ranges are:\n[0,0] --> \"0\"\n[2,4] --> \"2->4\"\n[6,6] --> \"6\"\n[8,9] --> \"8->9\"",
