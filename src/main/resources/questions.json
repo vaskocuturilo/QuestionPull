@@ -1,5 +1,14 @@
 [
   {
+    "title": "Find Pivot Index",
+    "body": "Given an array of integers nums, calculate the pivot index of this array.\n\nThe pivot index is the index where the sum of all the numbers strictly to the left of the index is equal to the sum of all the numbers strictly to the index's right.\n\nIf the index is on the left edge of the array, then the left sum is 0 because there are no elements to the left. This also applies to the right edge of the array.\n\nReturn the leftmost pivot index. If no such index exists, return -1.",
+    "example": "Input: nums = [1,7,3,6,5,6]\nOutput: 3\nExplanation:\nThe pivot index is 3.\nLeft sum = nums[0] + nums[1] + nums[2] = 1 + 7 + 3 = 11\nRight sum = nums[4] + nums[5] = 5 + 6 = 11 \n Input: nums = [1,2,3]\nOutput: -1\nExplanation:\nThere is no index that satisfies the conditions in the problem statement. \n Input: nums = [2,1,-1]\nOutput: 0\nExplanation:\nThe pivot index is 0.\nLeft sum = 0 (no elements to the left of index 0)\nRight sum = nums[1] + nums[2] = 1 + -1 = 0",
+    "level": "easy",
+    "solution": {
+      "content": "public int pivotIndex(int[] nums) {\n        Objects.requireNonNull(nums, \"The array cannot be null\");\n\n        if (nums.length < 2) {\n            throw new IllegalArgumentException(\"The array must contain at least two elements.\");\n        }\n\n        int leftSum = 0;\n        int rightSum = 0;\n\n        for (int number : nums) {\n            rightSum += number;\n        }\n\n        for (int i = 0; i < nums.length; i++) {\n            rightSum -= nums[i];\n\n            if (leftSum == rightSum) {\n                return i;\n            }\n\n            leftSum += nums[i];\n        }\n\n        return -1;\n    }"
+    }
+  },
+  {
     "title": "1-bit and 2-bit Characters",
     "body": "We have two special characters:\n\nThe first character can be represented by one bit 0.\nThe second character can be represented by two bits (10 or 11).\nGiven a binary array bits that ends with 0, return true if the last character must be a one-bit character.\n\n",
     "example": "Input: bits = [1,0,0]\nOutput: true\nExplanation: The only way to decode it is two-bit character and one-bit character.\nSo the last character is one-bit character. \n Input: bits = [1,1,1,0]\nOutput: false\nExplanation: The only way to decode it is two-bit character and two-bit character.\nSo the last character is not one-bit character.",
