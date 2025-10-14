@@ -1,5 +1,14 @@
 [
   {
+    "title": "Word Pattern",
+    "body": "Given a pattern and a string s, find if s follows the same pattern.\n\nHere follow means a full match, such that there is a bijection between a letter in pattern and a non-empty word in s. Specifically:\n\nEach letter in pattern maps to exactly one unique word in s.\nEach unique word in s maps to exactly one letter in pattern.\nNo two letters map to the same word, and no two words map to the same letter.",
+    "example": "Example 1:\n\nInput: pattern = \"abba\", s = \"dog cat cat dog\"\n\nOutput: true\n\nExplanation:\n\nThe bijection can be established as:\n\n'a' maps to \"dog\".\n'b' maps to \"cat\". \n Example 2:\n\nInput: pattern = \"abba\", s = \"dog cat cat fish\"\n\nOutput: false\n\nExample 3:\n\nInput: pattern = \"aaaa\", s = \"dog cat cat dog\"\n\nOutput: false",
+    "level": "easy",
+    "solution": {
+      "content": "public boolean wordPattern(String pattern, String s) {\n        final String[] words = s.split(\"\\\\s+\");\n        final Map<Character, String> characterStringMap = new HashMap<>();\n        final Map<String, Character> stringCharacterMap = new HashMap<>();\n\n        if (pattern.length() != words.length) {\n            return false;\n        }\n\n        for (int i = 0; i < words.length; i++) {\n            final Character patternCharacter = pattern.charAt(i);\n            String word = words[i];\n\n            if (!characterStringMap.getOrDefault(patternCharacter, word).equals(word) ||\n                    !stringCharacterMap.getOrDefault(word, patternCharacter).equals(patternCharacter)) {\n                return false;\n            }\n\n\n            characterStringMap.put(patternCharacter, word);\n            stringCharacterMap.put(word, patternCharacter);\n        }\n        return true;\n    }"
+    }
+  },
+  {
     "title": "Binary Tree Paths",
     "body": "Given the root of a binary tree, return all root-to-leaf paths in any order.\n\nA leaf is a node with no children.",
     "example": "Input: root = [1,2,3,null,5]\nOutput: [\"1->2->5\",\"1->3\"] \n Input: root = [1]\nOutput: [\"1\"]",
