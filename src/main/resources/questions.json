@@ -846,6 +846,15 @@
     }
   },
   {
+    "title": "Ransom Note",
+    "body": "Given two strings ransomNote and magazine, return true if ransomNote can be constructed by using the letters from magazine and false otherwise.\n\nEach letter in magazine can only be used once in ransomNote.",
+    "example": "Example 1:\n\nInput: ransomNote = \"a\", magazine = \"b\"\nOutput: false\nExample 2:\n\nInput: ransomNote = \"aa\", magazine = \"ab\"\nOutput: false\nExample 3:\n\nInput: ransomNote = \"aa\", magazine = \"aab\"\nOutput: true",
+    "level": "easy",
+    "solution": {
+      "content": "public boolean canConstruct(String ransomNote, String magazine) {\n        final Map<Character, Integer> frequencyLetter = new HashMap<>();\n\n        for (char letter : magazine.toCharArray()) {\n            frequencyLetter.merge(letter, 1, Integer::sum);\n        }\n\n        for (char letter : ransomNote.toCharArray()) {\n            if (frequencyLetter.getOrDefault(letter, 0) > 0) {\n                frequencyLetter.merge(letter, -1, Integer::sum);\n            } else {\n                return false;\n            }\n        }\n        return true;\n    }"
+    }
+  },
+  {
     "title": "Concurrent Web Scraper",
     "body": "Develop a Java application that concurrently scrapes data from a list of predefined URLs. For each URL, your application should download the HTML content and extract specific information, such as all links (<a> tags) and their href attributes.",
     "example": "Concurrency: Implement this using Java's Concurrency API. A good approach would be to use an ExecutorService to manage a pool of threads. Each thread should be a Callable that scrapes a single URL and returns the extracted links. \n Data Handling: The results from all threads should be collected into a single, thread-safe data structure (e.g., ConcurrentHashMap, CopyOnWriteArrayList). \n  Error Handling: The application must handle network-related issues gracefully, such as connection timeouts or IOExceptions. \n Implementation: Consider using a library like Jsoup to parse the HTML content, as it simplifies the process of traversing the DOM and extracting data.",
