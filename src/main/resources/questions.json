@@ -1,5 +1,23 @@
 [
   {
+    "title": "Reverse String",
+    "body": "Write a function that reverses a string. The input string is given as an array of characters s.\n\nYou must do this by modifying the input array in-place with O(1) extra memory.",
+    "example": "Example 1:\n\nInput: s = [\"h\",\"e\",\"l\",\"l\",\"o\"]\nOutput: [\"o\",\"l\",\"l\",\"e\",\"h\"]\n Example 2:\n\nInput: s = [\"H\",\"a\",\"n\",\"n\",\"a\",\"h\"]\nOutput: [\"h\",\"a\",\"n\",\"n\",\"a\",\"H\"]\n",
+    "level": "easy",
+    "solution": {
+      "content": "public static void reverseString(char[] s) {\n        int left = 0;\n        int right = s.length - 1;\n        while (left < right) {\n            char temp = s[left];\n            s[left] = s[right];\n            s[right] = temp;\n\n            left++;\n            right--;\n        }\n    }"
+    }
+  },
+  {
+    "title": "Reverse Vowels of a String",
+    "body": "Given a string s, reverse only all the vowels in the string and return it.\n\nThe vowels are 'a', 'e', 'i', 'o', and 'u', and they can appear in both lower and upper cases, more than once.",
+    "example": "Example 1:\n\nInput: s = \"IceCreAm\"\n\nOutput: \"AceCreIm\"\n\nExplanation:\n\nThe vowels in s are ['I', 'e', 'e', 'A']. On reversing the vowels, s becomes \"AceCreIm\". \n Example 2:\n\nInput: s = \"leetcode\"\n\nOutput: \"leotcede\"",
+    "level": "easy",
+    "solution": {
+      "content": "public String reverseVowels(String s) {\n        Objects.requireNonNull(s, \"The string cannot be null\");\n\n        final boolean[] isVowel = new boolean[128];\n\n        final char[] vowels = \"aeiouAEIOU\".toCharArray();\n\n        for (char vowel : vowels) {\n            isVowel[vowel] = true;\n        }\n\n        final char[] charArray = s.toCharArray();\n\n        int left = 0;\n        int right = charArray.length - 1;\n\n        while (left < right) {\n            while (left < right && !isVowel[charArray[left]]) {\n                left++;\n            }\n\n            while (left < right && !isVowel[charArray[right]]) {\n                right--;\n            }\n\n            if (left < right) {\n                char temp = charArray[left];\n                charArray[left] = charArray[right];\n                charArray[right] = temp;\n\n                left++;\n                right--;\n            }\n        }\n\n        return String.valueOf(charArray);\n    }"
+    }
+  },
+  {
     "title": "Word Pattern",
     "body": "Given a pattern and a string s, find if s follows the same pattern.\n\nHere follow means a full match, such that there is a bijection between a letter in pattern and a non-empty word in s. Specifically:\n\nEach letter in pattern maps to exactly one unique word in s.\nEach unique word in s maps to exactly one letter in pattern.\nNo two letters map to the same word, and no two words map to the same letter.",
     "example": "Example 1:\n\nInput: pattern = \"abba\", s = \"dog cat cat dog\"\n\nOutput: true\n\nExplanation:\n\nThe bijection can be established as:\n\n'a' maps to \"dog\".\n'b' maps to \"cat\". \n Example 2:\n\nInput: pattern = \"abba\", s = \"dog cat cat fish\"\n\nOutput: false\n\nExample 3:\n\nInput: pattern = \"aaaa\", s = \"dog cat cat dog\"\n\nOutput: false",
