@@ -1,5 +1,23 @@
 [
   {
+    "title": "Add Strings",
+    "body": "Given two non-negative integers, num1 and num2 represented as string, return the sum of num1 and num2 as a string.\n\nYou must solve the problem without using any built-in library for handling large integers (such as BigInteger). You must also not convert the inputs to integers directly.",
+    "example": "Example 1:\n\nInput: num1 = \"11\", num2 = \"123\"\nOutput: \"134\"\nExample 2:\n\nInput: num1 = \"456\", num2 = \"77\"\nOutput: \"533\"\nExample 3:\n\nInput: num1 = \"0\", num2 = \"0\"\nOutput: \"0\"",
+    "level": "easy",
+    "solution": {
+      "content": "public String addStrings(String num1, String num2) {\n        int i = num1.length() - 1;\n        int j = num2.length() - 1;\n        int carry = 0;\n        final StringBuilder result = new StringBuilder();\n        while (i >= 0 || j >= 0 || carry > 0) {\n            if (i >= 0) carry += num1.charAt(i--) - '0';\n            if (j >= 0) carry += num2.charAt(j--) - '0';\n\n            result.append(carry % 10);\n            carry /= 10;\n        }\n        return result.reverse().toString();\n    }"
+    }
+  },
+  {
+    "title": "Number of Segments in a String",
+    "body": "Given a string s, return the number of segments in the string.\n\nA segment is defined to be a contiguous sequence of non-space characters.",
+    "example": "Example 1:\n\nInput: s = \"Hello, my name is John\"\nOutput: 5\nExplanation: The five segments are [\"Hello,\", \"my\", \"name\", \"is\", \"John\"]\nExample 2:\n\nInput: s = \"Hello\"\nOutput: 1",
+    "level": "easy",
+    "solution": {
+      "content": "public int countSegments(String s) {\n       int segments = 0;\n\n        final String[] tokens = s.split(\" \");\n        for (String token : tokens) {\n            if (!token.isEmpty()) {\n                segments++;\n            }\n        }\n\n        return segments;\n    }"
+    }
+  },
+  {
     "title": "Is Subsequence",
     "body": "Given two strings s and t, return true if s is a subsequence of t, or false otherwise.\n\nA subsequence of a string is a new string that is formed from the original string by deleting some (can be none) of the characters without disturbing the relative positions of the remaining characters. (i.e., \"ace\" is a subsequence of \"abcde\" while \"aec\" is not).",
     "example": "Example 1:\n\nInput: s = \"abc\", t = \"ahbgdc\"\nOutput: true\nExample 2:\n\nInput: s = \"axc\", t = \"ahbgdc\"\nOutput: false",
