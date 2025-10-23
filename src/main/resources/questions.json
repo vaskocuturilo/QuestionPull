@@ -1,5 +1,23 @@
 [
   {
+    "title": "License Key Formatting",
+    "body": "You are given a license key represented as a string s that consists of only alphanumeric characters and dashes. The string is separated into n + 1 groups by n dashes. You are also given an integer k.\n\nWe want to reformat the string s such that each group contains exactly k characters, except for the first group, which could be shorter than k but still must contain at least one character. Furthermore, there must be a dash inserted between two groups, and you should convert all lowercase letters to uppercase.\n\nReturn the reformatted license key.",
+    "example": "Example 1:\n\nInput: s = \"5F3Z-2e-9-w\", k = 4\nOutput: \"5F3Z-2E9W\"\nExplanation: The string s has been split into two parts, each part has 4 characters.\nNote that the two extra dashes are not needed and can be removed.\nExample 2:\n\nInput: s = \"2-5g-3-J\", k = 2\nOutput: \"2-5G-3J\"\nExplanation: The string s has been split into three parts, each part has 2 characters except the first part as it could be shorter as mentioned above.",
+    "level": "easy",
+    "solution": {
+      "content": "public String licenseKeyFormatting(String s, int k) {\n        final int length = s.length();\n        final int dashCount = (int) s.chars().filter(ch -> ch == '-').count();\n        final int alphaNumeric = length - dashCount;\n\n        int firstGroup = alphaNumeric % k;\n\n        if (firstGroup == 0) {\n            firstGroup = k;\n        }\n\n        StringBuilder result = new StringBuilder();\n        int currentGroup = firstGroup;\n\n        for (int i = 0; i < s.length(); i++) {\n            final char currentCharacter = s.charAt(i);\n\n            if (currentCharacter == '-') {\n                continue;\n            }\n\n            result.append(Character.toUpperCase(currentCharacter));\n            currentGroup--;\n\n            if (currentGroup == 0) {\n                currentGroup = k;\n\n                if (i != length - 1) {\n                    result.append('-');\n                }\n            }\n        }\n\n        if (!result.isEmpty() && result.charAt(result.length() - 1) == '-') {\n            result.deleteCharAt(result.length() - 1);\n        }\n        return result.toString();\n    }"
+    }
+  },
+  {
+    "title": "Repeated Substring Pattern",
+    "body": "Given a string s, check if it can be constructed by taking a substring of it and appending multiple copies of the substring together.\n\n",
+    "example": "Example 1:\n\nInput: s = \"abab\"\nOutput: true\nExplanation: It is the substring \"ab\" twice.\nExample 2:\n\nInput: s = \"aba\"\nOutput: false\nExample 3:\n\nInput: s = \"abcabcabcabc\"\nOutput: true\nExplanation: It is the substring \"abc\" four times or the substring \"abcabc\" twice.",
+    "level": "easy",
+    "solution": {
+      "content": "public boolean repeatedSubstringPattern(String s) {\n        final String concatStrings = s + s;\n\n        return concatStrings.substring(1, concatStrings.length() - 1).contains(s);\n    }"
+    }
+  },
+  {
     "title": "Add Strings",
     "body": "Given two non-negative integers, num1 and num2 represented as string, return the sum of num1 and num2 as a string.\n\nYou must solve the problem without using any built-in library for handling large integers (such as BigInteger). You must also not convert the inputs to integers directly.",
     "example": "Example 1:\n\nInput: num1 = \"11\", num2 = \"123\"\nOutput: \"134\"\nExample 2:\n\nInput: num1 = \"456\", num2 = \"77\"\nOutput: \"533\"\nExample 3:\n\nInput: num1 = \"0\", num2 = \"0\"\nOutput: \"0\"",
