@@ -1,5 +1,23 @@
 [
   {
+    "title": "Longest Uncommon Subsequence",
+    "body": "Given two strings a and b, return the length of the longest uncommon subsequence between a and b. If no such uncommon subsequence exists, return -1.\n\nAn uncommon subsequence between two strings is a string that is a subsequence of exactly one of them.\n\n",
+    "example": "Example 1:\n\nInput: a = \"aba\", b = \"cdc\"\nOutput: 3\nExplanation: One longest uncommon subsequence is \"aba\" because \"aba\" is a subsequence of \"aba\" but not \"cdc\".\nNote that \"cdc\" is also a longest uncommon subsequence.\nExample 2:\n\nInput: a = \"aaa\", b = \"bbb\"\nOutput: 3\nExplanation: The longest uncommon subsequences are \"aaa\" and \"bbb\".\nExample 3:\n\nInput: a = \"aaa\", b = \"aaa\"\nOutput: -1\nExplanation: Every subsequence of string a is also a subsequence of string b. Similarly, every subsequence of string b is also a subsequence of string a. So the answer would be -1.",
+    "level": "easy",
+    "solution": {
+      "content": "public int findLUSlength(String a, String b) {\n        return Objects.equals(a, b) ? -1 : Math.max(a.length(), b.length());\n    }"
+    }
+  },
+  {
+    "title": "Detect Capital",
+    "body": "We define the usage of capitals in a word to be right when one of the following cases holds:\n\nAll letters in this word are capitals, like \"USA\".\nAll letters in this word are not capitals, like \"leetcode\".\nOnly the first letter in this word is capital, like \"Google\".\nGiven a string word, return true if the usage of capitals in it is right.",
+    "example": "Example 1:\n\nInput: word = \"USA\"\nOutput: true\nExample 2:\n\nInput: word = \"FlaG\"\nOutput: false",
+    "level": "easy",
+    "solution": {
+      "content": "public boolean detectCapitalUse(String word) {\n        if (word.length() == 1 || word.length() == 0) {\n            return true;\n        }\n        \n        int upperCase = 0;\n\n        int lowerCase = 0;\n\n        for (int i = 0; i < word.length(); i++) {\n            char currentCharacter = word.charAt(i);\n            if (Character.isUpperCase(currentCharacter)) {\n                upperCase++;\n            } else if (!Character.isUpperCase(currentCharacter)) {\n                lowerCase++;\n            }\n        }\n\n        if (Character.isUpperCase(word.charAt(0)) && lowerCase == word.length() - 1) {\n            return true;\n        }\n\n        return upperCase == word.length() || lowerCase == word.length();\n    }"
+    }
+  },
+  {
     "title": "License Key Formatting",
     "body": "You are given a license key represented as a string s that consists of only alphanumeric characters and dashes. The string is separated into n + 1 groups by n dashes. You are also given an integer k.\n\nWe want to reformat the string s such that each group contains exactly k characters, except for the first group, which could be shorter than k but still must contain at least one character. Furthermore, there must be a dash inserted between two groups, and you should convert all lowercase letters to uppercase.\n\nReturn the reformatted license key.",
     "example": "Example 1:\n\nInput: s = \"5F3Z-2e-9-w\", k = 4\nOutput: \"5F3Z-2E9W\"\nExplanation: The string s has been split into two parts, each part has 4 characters.\nNote that the two extra dashes are not needed and can be removed.\nExample 2:\n\nInput: s = \"2-5g-3-J\", k = 2\nOutput: \"2-5G-3J\"\nExplanation: The string s has been split into three parts, each part has 2 characters except the first part as it could be shorter as mentioned above.",
