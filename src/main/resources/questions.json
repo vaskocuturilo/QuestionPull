@@ -9,6 +9,15 @@
     }
   },
   {
+    "title": "Reverse String II",
+    "body": "Given a string s and an integer k, reverse the first k characters for every 2k characters counting from the start of the string.\n\nIf there are fewer than k characters left, reverse all of them. If there are less than 2k but greater than or equal to k characters, then reverse the first k characters and leave the other as original.",
+    "example": "Example 1:\n\nInput: s = \"abcdefg\", k = 2\nOutput: \"bacdfeg\"\nExample 2:\n\nInput: s = \"abcd\", k = 2\nOutput: \"bacd\"",
+    "level": "easy",
+    "solution": {
+      "content": "public String reverseStr(String s, int k) {\n        final char[] charArray = s.toCharArray();\n\n        for (int start = 0; start < charArray.length; start += k * 2) {\n            int left = start;\n            int right = Math.min(start + k - 1, s.length() - 1);\n\n            while (left < right) {\n                final char temp = charArray[left];\n                charArray[left] = charArray[right];\n                charArray[right] = temp;\n\n                left++;\n                right--;\n            }\n        }\n\n        return new String(charArray);\n    }"
+    }
+  },
+  {
     "title": "Detect Capital",
     "body": "We define the usage of capitals in a word to be right when one of the following cases holds:\n\nAll letters in this word are capitals, like \"USA\".\nAll letters in this word are not capitals, like \"leetcode\".\nOnly the first letter in this word is capital, like \"Google\".\nGiven a string word, return true if the usage of capitals in it is right.",
     "example": "Example 1:\n\nInput: word = \"USA\"\nOutput: true\nExample 2:\n\nInput: word = \"FlaG\"\nOutput: false",
