@@ -1,5 +1,32 @@
 [
   {
+    "title": "Reverse String II",
+    "body": "Given a string s and an integer k, reverse the first k characters for every 2k characters counting from the start of the string.\n\nIf there are fewer than k characters left, reverse all of them. If there are less than 2k but greater than or equal to k characters, then reverse the first k characters and leave the other as original.",
+    "example": "Example 1:\n\nInput: s = \"abcdefg\", k = 2\nOutput: \"bacdfeg\"\nExample 2:\n\nInput: s = \"abcd\", k = 2\nOutput: \"bacd\"",
+    "level": "easy",
+    "solution": {
+      "content": "public String reverseStr(String s, int k) {\n        final char[] charArray = s.toCharArray();\n\n        for (int start = 0; start < charArray.length; start += k * 2) {\n            int left = start;\n            int right = Math.min(start + k - 1, s.length() - 1);\n\n            while (left < right) {\n                final char temp = charArray[left];\n                charArray[left] = charArray[right];\n                charArray[right] = temp;\n\n                left++;\n                right--;\n            }\n        }\n\n        return new String(charArray);\n    }"
+    }
+  },
+  {
+    "title": "Student Attendance Record I",
+    "body": "You are given a string s representing an attendance record for a student where each character signifies whether the student was absent, late, or present on that day. The record only contains the following three characters:\n\n'A': Absent.\n'L': Late.\n'P': Present.\nThe student is eligible for an attendance award if they meet both of the following criteria:\n\nThe student was absent ('A') for strictly fewer than 2 days total.\nThe student was never late ('L') for 3 or more consecutive days.\nReturn true if the student is eligible for an attendance award, or false otherwise.",
+    "example": "Example 1:\n\nInput: s = \"PPALLP\"\nOutput: true\nExplanation: The student has fewer than 2 absences and was never late 3 or more consecutive days.\nExample 2:\n\nInput: s = \"PPALLL\"\nOutput: false\nExplanation: The student was late 3 consecutive days in the last 3 days, so is not eligible for the award.",
+    "level": "easy",
+    "solution": {
+      "content": "public boolean checkRecord(String s) {\n       if (s.length() < 1) {\n            throw new IllegalArgumentException(\"The sentence must contain at least two words.\");\n        }\n\n        final var trimmed = s.trim();\n\n        if (trimmed.isEmpty()) {\n            throw new IllegalArgumentException(\"The sentence contains only spaces\");\n        }\n\n        boolean hasLetter = trimmed.chars().anyMatch(Character::isAlphabetic);\n\n        if (!hasLetter) {\n            throw new IllegalArgumentException(\"The sentence contains no letters\");\n        }\n\n        final boolean isAbsent = s.indexOf('A') == s.lastIndexOf('A');\n        final boolean isLate = !s.contains(\"LLL\");\n\n        return isAbsent && isLate; \n    }"
+    }
+  },
+  {
+    "title": "Reverse Words in a String III",
+    "body": "Given a string s, reverse the order of characters in each word within a sentence while still preserving whitespace and initial word order.",
+    "example": "Example 1:\n\nInput: s = \"Let's take LeetCode contest\"\nOutput: \"s'teL ekat edoCteeL tsetnoc\"\nExample 2:\n\nInput: s = \"Mr Ding\"\nOutput: \"rM gniD\"",
+    "level": "easy",
+    "solution": {
+      "content": "public String reverseWords(String s) {\n        if (s.length() < 2) {\n            throw new IllegalArgumentException(\"The sentence must contain at least two words.\");\n        }\n\n        final var trimmed = s.trim();\n\n        if (trimmed.isEmpty()) {\n            throw new IllegalArgumentException(\"The sentence contains only spaces\");\n        }\n        \n        final String[] splittedString = s.split(\" \");\n\n        for (int i = 0; i < splittedString.length; i++) {\n            splittedString[i] = new StringBuilder(splittedString[i]).reverse().toString();\n        }\n\n        return String.join(\" \", splittedString);\n    }"
+    }
+  },
+  {
     "title": "Longest Uncommon Subsequence",
     "body": "Given two strings a and b, return the length of the longest uncommon subsequence between a and b. If no such uncommon subsequence exists, return -1.\n\nAn uncommon subsequence between two strings is a string that is a subsequence of exactly one of them.\n\n",
     "example": "Example 1:\n\nInput: a = \"aba\", b = \"cdc\"\nOutput: 3\nExplanation: One longest uncommon subsequence is \"aba\" because \"aba\" is a subsequence of \"aba\" but not \"cdc\".\nNote that \"cdc\" is also a longest uncommon subsequence.\nExample 2:\n\nInput: a = \"aaa\", b = \"bbb\"\nOutput: 3\nExplanation: The longest uncommon subsequences are \"aaa\" and \"bbb\".\nExample 3:\n\nInput: a = \"aaa\", b = \"aaa\"\nOutput: -1\nExplanation: Every subsequence of string a is also a subsequence of string b. Similarly, every subsequence of string b is also a subsequence of string a. So the answer would be -1.",
