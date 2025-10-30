@@ -1,5 +1,41 @@
 [
   {
+    "title": "To Lower Case",
+    "body": "Given a string s, return the string after replacing every uppercase letter with the same lowercase letter.\n\n",
+    "example": "Example 1:\n\nInput: s = \"Hello\"\nOutput: \"hello\"\nExample 2:\n\nInput: s = \"here\"\nOutput: \"here\"\nExample 3:\n\nInput: s = \"LOVELY\"\nOutput: \"lovely\"",
+    "level": "easy",
+    "solution": {
+      "content": "public String toLowerCase(String s) {\n         return s.toLowerCase();\n    }"
+    }
+  },
+  {
+    "title": "Shortest Completing Word",
+    "body": "Given a string licensePlate and an array of strings words, find the shortest completing word in words.\n\nA completing word is a word that contains all the letters in licensePlate. Ignore numbers and spaces in licensePlate, and treat letters as case insensitive. If a letter appears more than once in licensePlate, then it must appear in the word the same number of times or more.\n\nFor example, if licensePlate = \"aBc 12c\", then it contains letters 'a', 'b' (ignoring case), and 'c' twice. Possible completing words are \"abccdef\", \"caaacab\", and \"cbca\".\n\nReturn the shortest completing word in words. It is guaranteed an answer exists. If there are multiple shortest completing words, return the first one that occurs in words.\n\n",
+    "example": "Example 1:\n\nInput: licensePlate = \"1s3 PSt\", words = [\"step\",\"steps\",\"stripe\",\"stepple\"]\nOutput: \"steps\"\nExplanation: licensePlate contains letters 's', 'p', 's' (ignoring case), and 't'.\n\"step\" contains 't' and 'p', but only contains 1 's'.\n\"steps\" contains 't', 'p', and both 's' characters.\n\"stripe\" is missing an 's'.\n\"stepple\" is missing an 's'.\nSince \"steps\" is the only word containing all the letters, that is the answer.\nExample 2:\n\nInput: licensePlate = \"1s3 456\", words = [\"looks\",\"pest\",\"stew\",\"show\"]\nOutput: \"pest\"\nExplanation: licensePlate only contains the letter 's'. All the words contain 's', but among these \"pest\", \"stew\", and \"show\" are shortest. The answer is \"pest\" because it is the word that appears earliest of the 3.",
+    "level": "easy",
+    "solution": {
+      "content": "public String shortestCompletingWord(String licensePlate, String[] words) {\n        Objects.requireNonNull(licensePlate, \"The sentence cannot be null\");\n        Objects.requireNonNull(words, \"The array cannot be null\");\n\n        if (licensePlate.isEmpty()) {\n            throw new IllegalArgumentException(\"The sentence cannot be is empty\");\n        }\n\n        final String trimmed = licensePlate.trim();\n\n        if (trimmed.isEmpty()) {\n            throw new IllegalArgumentException(\"The sentence contains spaces only\");\n        }\n\n        final int[] frequencyLettersInLicensePLate = new int[26];\n\n        for (int i = 0; i < trimmed.length(); i++) {\n            final char currentCharacter = trimmed.charAt(i);\n            if (Character.isLetter(currentCharacter)) {\n                frequencyLettersInLicensePLate[Character.toLowerCase(currentCharacter) - 'a']++;\n            }\n        }\n\n        String shortestWord = \"\";\n\n        for (String word : words) {\n            if (!shortestWord.isEmpty() && word.length() >= shortestWord.length()) {\n                continue;\n            }\n\n            final int[] frequencyLettersInWord = new int[26];\n\n            for (int i = 0; i < word.length(); i++) {\n                frequencyLettersInWord[word.charAt(i) - 'a']++;\n            }\n\n            boolean isCompletingWord = true;\n\n            for (int i = 0; i < 26; i++) {\n                if (frequencyLettersInWord[i] < frequencyLettersInLicensePLate[i]) {\n                    isCompletingWord = false;\n                    break;\n                }\n            }\n            if (isCompletingWord) {\n                shortestWord = word;\n            }\n        }\n\n\n        return shortestWord;\n    }"
+    }
+  },
+  {
+    "title": "Jewels and Stones",
+    "body": "You're given strings jewels representing the types of stones that are jewels, and stones representing the stones you have. Each character in stones is a type of stone you have. You want to know how many of the stones you have are also jewels.\n\nLetters are case sensitive, so \"a\" is considered a different type of stone from \"A\".",
+    "example": "Example 1:\n\nInput: jewels = \"aA\", stones = \"aAAbbbb\"\nOutput: 3\nExample 2:\n\nInput: jewels = \"z\", stones = \"ZZ\"\nOutput: 0",
+    "level": "easy",
+    "solution": {
+      "content": "public int numJewelsInStones(String jewels, String stones) {\n        int count = 0;\n        for (int i = 0; i < jewels.length(); i++) {\n            final char currentStone = jewels.charAt(i);\n\n            for (int j = 0; j < stones.length(); j++) {\n                final char currentCharacter = stones.charAt(j);\n\n                if (currentStone == currentCharacter) {\n                    count++;\n                }\n            }\n        }\n\n        return count;\n    }"
+    }
+  },
+  {
+    "title": "Rotate String",
+    "body": "Given two strings s and goal, return true if and only if s can become goal after some number of shifts on s.\n\nA shift on s consists of moving the leftmost character of s to the rightmost position.\n\nFor example, if s = \"abcde\", then it will be \"bcdea\" after one shift.",
+    "example": "Example 1:\n\nInput: s = \"abcde\", goal = \"cdeab\"\nOutput: true\nExample 2:\n\nInput: s = \"abcde\", goal = \"abced\"\nOutput: false",
+    "level": "easy",
+    "solution": {
+      "content": "public boolean rotateString(String s, String goal) {\n        return s.length() == goal.length() && (s + s).contains(goal);\n    }"
+    }
+  },
+  {
     "title": "Count Binary Substrings",
     "body": "Given a binary string s, return the number of non-empty substrings that have the same number of 0's and 1's, and all the 0's and all the 1's in these substrings are grouped consecutively.\n\nSubstrings that occur multiple times are counted the number of times they occur.",
     "example": "Example 1:\n\nInput: s = \"00110011\"\nOutput: 6\nExplanation: There are 6 substrings that have equal number of consecutive 1's and 0's: \"0011\", \"01\", \"1100\", \"10\", \"0011\", and \"01\".\nNotice that some of these substrings repeat and are counted the number of times they occur.\nAlso, \"00110011\" is not a valid substring because all the 0's (and 1's) are not grouped together.\nExample 2:\n\nInput: s = \"10101\"\nOutput: 4\nExplanation: There are 4 substrings: \"10\", \"01\", \"10\", \"01\" that have equal number of consecutive 1's and 0's.",
