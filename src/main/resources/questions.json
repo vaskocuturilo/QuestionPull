@@ -1,5 +1,50 @@
 [
   {
+    "title": "Move values A and B",
+    "body": "There are 2 variables and you need to swap the values in different ways",
+    "example": "",
+    "level": "easy",
+    "solution": {
+      "content": "public class A {\n    public static void main(String[] args) {\n        int a = 5;\n        int b = 10;\n}"
+    }
+  },
+  {
+    "title": "Remove a smile",
+    "body": "There are messages from the social network, for example:\n\"I work at Google :-)))\"",
+    "example": "I want to remove emoticons from messages that fall under the regular schedule \":-\\)+|:-\\(+\" in linear time.  That is, to do so:  \"I work at Google :-)))\" -> \"I work at Google \"\n\"lucky :-) and I failed the interview there:-((\" -> \"lucky and I\nfailed the interview there\"\n\"lol:)\" - >\"lol:)\"\n\"Aaaaa!!!!! :-))(())\" -> \" Aaaaa!!!!! (())\"\"",
+    "level": "easy",
+    "solution": {
+      "content": ""
+    }
+  },
+  {
+    "title": "Most Common Word",
+    "body": "Given a string paragraph and a string array of the banned words banned, return the most frequent word that is not banned. It is guaranteed there is at least one word that is not banned, and that the answer is unique.\n\nThe words in paragraph are case-insensitive and the answer should be returned in lowercase.\n\nNote that words can not contain punctuation symbols.",
+    "example": "Example 1:\n\nInput: paragraph = \"Bob hit a ball, the hit BALL flew far after it was hit.\", banned = [\"hit\"]\nOutput: \"ball\"\nExplanation: \n\"hit\" occurs 3 times, but it is a banned word.\n\"ball\" occurs twice (and no other word does), so it is the most frequent non-banned word in the paragraph. \nNote that words in the paragraph are not case sensitive,\nthat punctuation is ignored (even if adjacent to words, such as \"ball,\"), \nand that \"hit\" isn't the answer even though it occurs more because it is banned.\nExample 2:\n\nInput: paragraph = \"a.\", banned = []\nOutput: \"a\"",
+    "level": "easy",
+    "solution": {
+      "content": "public String mostCommonWord(String paragraph, String[] banned) {\n        Objects.requireNonNull(paragraph, \"The sentence cannot be null\");\n\n        Objects.requireNonNull(banned, \"The array cannot be null\");\n\n\n        final Map<String, Integer> frequency = new TreeMap<>();\n\n        final Set<String> set = new HashSet<>(Arrays.asList(banned));\n\n        for (String word : paragraph.toLowerCase().split(\"\\\\W+\")) {\n            if (!set.contains(word)) {\n                frequency.merge(word, 1, Integer::sum);\n            }\n        }\n\n        int maxFrequency = Integer.MIN_VALUE;\n        String mostCommonWord = null;\n\n        for (Map.Entry<String, Integer> frequencyWord : frequency.entrySet()) {\n            if (frequencyWord.getValue() > maxFrequency) {\n                maxFrequency = frequencyWord.getValue();\n                mostCommonWord = frequencyWord.getKey();\n            }\n        }\n\n        return mostCommonWord;\n    }"
+    }
+  },
+  {
+    "title": "Uniq Number",
+    "body": "An array of numbers is given in which all numbers except one have a pair (occur twice). \n Find a number that occurs only once",
+    "example": "[1, 0, 3, -2, 9, 9, 1, -2, 0]  => 3",
+    "level": "easy",
+    "solution": {
+      "content": "int find(int[] arr) {}"
+    }
+  },
+  {
+    "title": "The team leader's problem",
+    "body": "Write a function that, based on a given set of meeting intervals, returns whether it is possible to attend all meetings without intersections.",
+    "example": "Input: [[1,4], [2,5], [7,9]]   Output: false",
+    "level": "easy",
+    "solution": {
+      "content": "public class TeamLeadTask {\n    public static boolean canAttendAllMeetings(int[][] intervals) {\n  return false;\n    }\n}"
+    }
+  },
+  {
     "title": "To Lower Case",
     "body": "Given a string s, return the string after replacing every uppercase letter with the same lowercase letter.\n\n",
     "example": "Example 1:\n\nInput: s = \"Hello\"\nOutput: \"hello\"\nExample 2:\n\nInput: s = \"here\"\nOutput: \"here\"\nExample 3:\n\nInput: s = \"LOVELY\"\nOutput: \"lovely\"",
