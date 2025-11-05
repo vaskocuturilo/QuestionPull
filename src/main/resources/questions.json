@@ -9,6 +9,24 @@
     }
   },
   {
+    "title": " Unique Email Addresses",
+    "body": "Every valid email consists of a local name and a domain name, separated by the '@' sign. Besides lowercase letters, the email may contain one or more '.' or '+'.\n\nFor example, in \"alice@leetcode.com\", \"alice\" is the local name, and \"leetcode.com\" is the domain name.\nIf you add periods '.' between some characters in the local name part of an email address, mail sent there will be forwarded to the same address without dots in the local name. Note that this rule does not apply to domain names.\n\nFor example, \"alice.z@leetcode.com\" and \"alicez@leetcode.com\" forward to the same email address.\nIf you add a plus '+' in the local name, everything after the first plus sign will be ignored. This allows certain emails to be filtered. Note that this rule does not apply to domain names.\n\nFor example, \"m.y+name@email.com\" will be forwarded to \"my@email.com\".\nIt is possible to use both of these rules at the same time.\n\nGiven an array of strings emails where we send one email to each emails[i], return the number of different addresses that actually receive mails.",
+    "example": "Example 1:\n\nInput: emails = [\"test.email+alex@leetcode.com\",\"test.e.mail+bob.cathy@leetcode.com\",\"testemail+david@lee.tcode.com\"]\nOutput: 2\nExplanation: \"testemail@leetcode.com\" and \"testemail@lee.tcode.com\" actually receive mails.\nExample 2:\n\nInput: emails = [\"a@leetcode.com\",\"b@leetcode.com\",\"c@leetcode.com\"]\nOutput: 3",
+    "level": "easy",
+    "solution": {
+      "content": "public int numUniqueEmails(String[] emails) {\n        final Set<String> uniqEmails = new HashSet<>();\n\n        for (String email : emails) {\n            final String[] split = email.split(\"@\");\n            final String localName = split[0];\n            final String domainName = split[1];\n\n            final StringBuilder localNameAfterParse = new StringBuilder();\n            for (char name : localName.toCharArray()) {\n                if (name == '.') {\n                    continue;\n                } else if (name == '+') {\n                    break;\n                }\n\n                localNameAfterParse.append(name);\n            }\n            final String normalEmail = localNameAfterParse + \"@\" + domainName;\n            uniqEmails.add(normalEmail);\n\n        }\n        return uniqEmails.size();\n    }"
+    }
+  },
+  {
+    "title": "DI String Match",
+    "body": "A permutation perm of n + 1 integers of all the integers in the range [0, n] can be represented as a string s of length n where:\n\ns[i] == 'I' if perm[i] < perm[i + 1], and\ns[i] == 'D' if perm[i] > perm[i + 1].\nGiven a string s, reconstruct the permutation perm and return it. If there are multiple valid permutations perm, return any of them.",
+    "example": "",
+    "level": "easy",
+    "solution": {
+      "content": "public int[] diStringMatch(String s) {\n        final int length = s.length();\n        int smallestNumber = 0;\n        int largestNumber = length;\n\n        final int[] result = new int[length + 1];\n        for (int i = 0; i < length; i++) {\n            if (s.charAt(i) == 'I') {\n                result[i] = smallestNumber;\n                smallestNumber++;\n            } else {\n                result[i] = largestNumber;\n                largestNumber--;\n            }\n        }\n        result[length] = smallestNumber;\n        return result;\n    }"
+    }
+  },
+  {
     "title": "Uncommon Words from Two Sentences",
     "body": "A sentence is a string of single-space separated words where each word consists only of lowercase letters.\n\nA word is uncommon if it appears exactly once in one of the sentences, and does not appear in the other sentence.\n\nGiven two sentences s1 and s2, return a list of all the uncommon words. You may return the answer in any order.",
     "example": "Example 1:\n\nInput: s1 = \"this apple is sweet\", s2 = \"this apple is sour\"\n\nOutput: [\"sweet\",\"sour\"]\n\nExplanation:\n\nThe word \"sweet\" appears only in s1, while the word \"sour\" appears only in s2.\n\nExample 2:\n\nInput: s1 = \"apple apple\", s2 = \"banana\"\n\nOutput: [\"banana\"]",
