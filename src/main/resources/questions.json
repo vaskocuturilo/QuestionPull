@@ -1,5 +1,41 @@
 [
   {
+    "title": "Delete Columns to Make Sorted",
+    "body": "You are given an array of n strings strs, all of the same length.\n\nThe strings can be arranged such that there is one on each line, making a grid.\n\nFor example, strs = [\"abc\", \"bce\", \"cae\"] can be arranged as follows:\nabc\nbce\ncae\nYou want to delete the columns that are not sorted lexicographically. In the above example (0-indexed), columns 0 ('a', 'b', 'c') and 2 ('c', 'e', 'e') are sorted, while column 1 ('b', 'c', 'a') is not, so you would delete column 1.\n\nReturn the number of columns that you will delete.",
+    "example": "Example 1:\n\nInput: strs = [\"cba\",\"daf\",\"ghi\"]\nOutput: 1\nExplanation: The grid looks as follows:\n  cba\n  daf\n  ghi\nColumns 0 and 2 are sorted, but column 1 is not, so you only need to delete 1 column.\nExample 2:\n\nInput: strs = [\"a\",\"b\"]\nOutput: 0\nExplanation: The grid looks as follows:\n  a\n  b\nColumn 0 is the only column and is sorted, so you will not delete any columns.\nExample 3:\n\nInput: strs = [\"zyx\",\"wvu\",\"tsr\"]\nOutput: 3\nExplanation: The grid looks as follows:\n  zyx\n  wvu\n  tsr\nAll 3 columns are not sorted, so you will delete all 3.",
+    "level": "easy",
+    "solution": {
+      "content": "public int minDeletionSize(String[] strs) {\n        final int columnCount = strs[0].length();\n        final int rowCount = strs.length;\n        int deleteCount = 0;\n        for (int i = 0; i < columnCount; i++) {\n            for (int j = 1; j < rowCount; j++) {\n                if (strs[j].charAt(i) < strs[j - 1].charAt(i)) {\n                    deleteCount++;\n                    break;\n                }\n            }\n        }\n        return deleteCount;\n    }"
+    }
+  },
+  {
+    "title": "Verifying an Alien Dictionary",
+    "body": "In an alien language, surprisingly, they also use English lowercase letters, but possibly in a different order. The order of the alphabet is some permutation of lowercase letters.\n\nGiven a sequence of words written in the alien language, and the order of the alphabet, return true if and only if the given words are sorted lexicographically in this alien language.\n\n",
+    "example": "Example 1:\n\nInput: words = [\"hello\",\"leetcode\"], order = \"hlabcdefgijkmnopqrstuvwxyz\"\nOutput: true\nExplanation: As 'h' comes before 'l' in this language, then the sequence is sorted.\nExample 2:\n\nInput: words = [\"word\",\"world\",\"row\"], order = \"worldabcefghijkmnpqstuvxyz\"\nOutput: false\nExplanation: As 'd' comes after 'l' in this language, then words[0] > words[1], hence the sequence is unsorted.\nExample 3:\n\nInput: words = [\"apple\",\"app\"], order = \"abcdefghijklmnopqrstuvwxyz\"\nOutput: false\nExplanation: The first three characters \"app\" match, and the second string is shorter (in size.) According to lexicographical rules \"apple\" > \"app\", because 'l' > '∅', where '∅' is defined as the blank character which is less than any other character (More info).",
+    "level": "easy",
+    "solution": {
+      "content": "public boolean isAlienSorted(String[] words, String order) {\n       final int[] frequency = new int[26];\n\n        for (int i = 0; i < 26; i++) {\n            frequency[order.charAt(i) - 'a'] = i;\n        }\n\n        for (int j = 0; j < 20; j++) {\n            int previousChar = -1;\n            boolean charsDifferent = true;\n\n            for (String word : words) {\n                final int current = j >= word.length() ? -1 : frequency[word.charAt(j) - 'a'];\n\n                if (previousChar > current) {\n                    return false;\n                }\n\n                if (previousChar == current) {\n                    charsDifferent = false;\n                }\n\n                previousChar = current;\n            }\n\n            if (charsDifferent) {\n                break;\n            }\n        }\n\n        return true; \n    }"
+    }
+  },
+  {
+    "title": "Find Common Characters",
+    "body": "Given a string array words, return an array of all characters that show up in all strings within the words (including duplicates). You may return the answer in any order.",
+    "example": "Example 1:\n\nInput: words = [\"bella\",\"label\",\"roller\"]\nOutput: [\"e\",\"l\",\"l\"]\nExample 2:\n\nInput: words = [\"cool\",\"lock\",\"cook\"]\nOutput: [\"c\",\"o\"]",
+    "level": "easy",
+    "solution": {
+      "content": "public List<String> commonChars(String[] words) {\n        final int[] frequency = new int[26];\n        Arrays.fill(frequency, Integer.MAX_VALUE);\n        final List<String> list = new ArrayList<>();\n\n        for (String word : words) {\n            final int[] currentWordFrequency = new int[26];\n\n            for (int i = 0; i < word.length(); i++) {\n                currentWordFrequency[word.charAt(i) - 'a']++;\n            }\n\n            for (int i = 0; i < 26; i++) {\n                frequency[i] = Math.min(currentWordFrequency[i], frequency[i]);\n            }\n        }\n\n        for (int i = 0; i < 26; i++) {\n            list.addAll(Collections.nCopies(frequency[i], String.valueOf((char)('a' + i))));\n        }\n\n        return list;\n    }"
+    }
+  },
+  {
+    "title": "Happy Number",
+    "body": "Write an algorithm to determine if a number n is happy.\n\nA happy number is a number defined by the following process:\n\nStarting with any positive integer, replace the number by the sum of the squares of its digits.\nRepeat the process until the number equals 1 (where it will stay), or it loops endlessly in a cycle which does not include 1.\nThose numbers for which this process ends in 1 are happy.\nReturn true if n is a happy number, and false if not.",
+    "example": "Example 1:\n\nInput: n = 19\nOutput: true\nExplanation:\n12 + 92 = 82\n82 + 22 = 68\n62 + 82 = 100\n12 + 02 + 02 = 1\nExample 2:\n\nInput: n = 2\nOutput: false",
+    "level": "easy",
+    "solution": {
+      "content": "public boolean isHappy(int n) {\n        final Set<Integer> set = new HashSet<>();\n\n        while (n != 1 && !set.contains(n)) {\n            set.add(n);\n\n            int sum = 0;\n\n            while (n != 0) {\n                int digit = n % 10;\n\n                sum += (int) Math.pow(digit, 2);\n\n                n /= 10;\n            }\n            n = sum;\n        }\n        return n == 1;\n    }"
+    }
+  },
+  {
     "title": "Buddy Strings",
     "body": "Given two strings s and goal, return true if you can swap two letters in s so the result is equal to goal, otherwise, return false.\n\nSwapping letters is defined as taking two indices i and j (0-indexed) such that i != j and swapping the characters at s[i] and s[j].\n\nFor example, swapping at indices 0 and 2 in \"abcd\" results in \"cbad\".",
     "example": "Example 1:\n\nInput: s = \"ab\", goal = \"ba\"\nOutput: true\nExplanation: You can swap s[0] = 'a' and s[1] = 'b' to get \"ba\", which is equal to goal.\nExample 2:\n\nInput: s = \"ab\", goal = \"ab\"\nOutput: false\nExplanation: The only letters you can swap are s[0] = 'a' and s[1] = 'b', which results in \"ba\" != goal.\nExample 3:\n\nInput: s = \"aa\", goal = \"aa\"\nOutput: true\nExplanation: You can swap s[0] = 'a' and s[1] = 'a' to get \"aa\", which is equal to goal.",
