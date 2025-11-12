@@ -1,5 +1,23 @@
 [
   {
+    "title": "Check If N and Its Double Exist",
+    "body": "Given an array arr of integers, check if there exist two indices i and j such that :\n\ni != j\n0 <= i, j < arr.length\narr[i] == 2 * arr[j]",
+    "example": "Example 1:\n\nInput: arr = [10,2,5,3]\nOutput: true\nExplanation: For i = 0 and j = 2, arr[i] == 10 == 2 * 5 == 2 * arr[j]\nExample 2:\n\nInput: arr = [3,1,7,11]\nOutput: false\nExplanation: There is no i and j that satisfy the conditions.",
+    "level": "easy",
+    "solution": {
+      "content": "public boolean checkIfExist(int[] arr) {\n        final Set<Integer> set = new HashSet<>();\n\n        for (int number : arr) {\n            if (set.contains(number * 2) || (number % 2 == 0 && set.contains(number / 2))) {\n                return true;\n            }\n            set.add(number);\n        }\n        return false;\n    }"
+    }
+  },
+  {
+    "title": "How Many Numbers Are Smaller Than the Current Number",
+    "body": "Given the array nums, for each nums[i] find out how many numbers in the array are smaller than it. That is, for each nums[i] you have to count the number of valid j's such that j != i and nums[j] < nums[i].\n\nReturn the answer in an array.",
+    "example": "Example 1:\n\nInput: nums = [8,1,2,2,3]\nOutput: [4,0,1,1,3]\nExplanation: \nFor nums[0]=8 there exist four smaller numbers than it (1, 2, 2 and 3). \nFor nums[1]=1 does not exist any smaller number than it.\nFor nums[2]=2 there exist one smaller number than it (1). \nFor nums[3]=2 there exist one smaller number than it (1). \nFor nums[4]=3 there exist three smaller numbers than it (1, 2 and 2). \n Example 2:\n\nInput: nums = [6,5,4,8]\nOutput: [2,1,0,3]\nExample 3:\n\nInput: nums = [7,7,7,7]\nOutput: [0,0,0,0]",
+    "level": "easy",
+    "solution": {
+      "content": "public int[] smallerNumbersThanCurrent(int[] nums) {\n        int[] cloneArray = nums.clone();\n\n        Arrays.sort(cloneArray);\n\n        for (int i = 0; i < cloneArray.length; i++) {\n            nums[i] = binarySearch(cloneArray, nums[i]);\n        }\n        return nums;\n    }\n\n    private int binarySearch(final int[] array, final int target) {\n        int left = 0;\n        int right = array.length;\n        int result = -1;\n        while (left < right) {\n            int middle = (left + right) / 2;\n            if (array[middle] >= target) {\n                result = middle;\n                right = middle;\n            } else if (array[middle] < target) {\n                left = middle + 1;\n            } else {\n                right = middle - 1;\n            }\n        }\n        return result;\n    }"
+    }
+  },
+  {
     "title": "Maximum Number of Balloons",
     "body": "Given a string text, you want to use the characters of text to form as many instances of the word \"balloon\" as possible.\n\nYou can use each character in text at most once. Return the maximum number of instances that can be formed.",
     "example": "Input: text = \"nlaebolko\"\nOutput: 1 \n Input: text = \"loonbalxballpoon\"\nOutput: 2 \n Input: text = \"leetcode\"\nOutput: 0",
