@@ -1,5 +1,23 @@
 [
   {
+    "title": "Count Largest Group",
+    "body": "You are given an integer n.\n\nWe need to group the numbers from 1 to n according to the sum of its digits. For example, the numbers 14 and 5 belong to the same group, whereas 13 and 3 belong to different groups.\n\nReturn the number of groups that have the largest size, i.e. the maximum number of elements.",
+    "example": "Example 1:\n\nInput: n = 13\nOutput: 4\nExplanation: There are 9 groups in total, they are grouped according sum of its digits of numbers from 1 to 13:\n[1,10], [2,11], [3,12], [4,13], [5], [6], [7], [8], [9].\nThere are 4 groups with largest size.\nExample 2:\n\nInput: n = 2\nOutput: 2\nExplanation: There are 2 groups [1], [2] of size 1.",
+    "level": "easy",
+    "solution": {
+      "content": "public int countLargestGroup(int n) {\n        final int[] count = new int[40];\n        int max = 0;\n        int ans = 0;\n\n\n        for (int i = 1; i <= n; i++) {\n            int sum = 0;\n            int temp = i;\n\n            while (temp > 0) {\n                sum += temp % 10;\n                temp /= 10;\n            }\n            count[sum]++;\n\n            if (max < count[sum]) {\n                max = count[sum];\n                ans = 1;\n            } else if (max == count[sum]) {\n                ans++;\n            }\n        }\n        return ans;\n    }"
+    }
+  },
+  {
+    "title": "Find Lucky Integer in an Array",
+    "body": "Given an array of integers arr, a lucky integer is an integer that has a frequency in the array equal to its value.\n\nReturn the largest lucky integer in the array. If there is no lucky integer return -1.",
+    "example": "Example 1:\n\nInput: arr = [2,2,3,4]\nOutput: 2\nExplanation: The only lucky number in the array is 2 because frequency[2] == 2.\nExample 2:\n\nInput: arr = [1,2,2,3,3,3]\nOutput: 3\nExplanation: 1, 2 and 3 are all lucky numbers, return the largest of them.\nExample 3:\n\nInput: arr = [2,2,2,3,3]\nOutput: -1\nExplanation: There are no lucky numbers in the array.",
+    "level": "easy",
+    "solution": {
+      "content": "public int findLucky(int[] arr) {\n        Objects.requireNonNull(arr, \"The array cannot be null\");\n\n        if (arr.length < 1) {\n            throw new IllegalArgumentException(\"The array mus contain one element\");\n        }\n\n        final Map<Integer, Integer> frequency = new HashMap<>();\n\n        int luckyInteger = -1;\n\n        for (int number : arr) frequency.merge(number, 1, Integer::sum);\n\n        for (var bucket : frequency.entrySet()) {\n            final int key = bucket.getKey();\n            final int value = bucket.getValue();\n\n            if (key == value && key > luckyInteger) {\n                luckyInteger = key;\n            }\n        }\n\n        return luckyInteger;\n    }"
+    }
+  },
+  {
     "title": "Increasing Decreasing String",
     "body": "You are given a string s. Reorder the string using the following algorithm:\n\nRemove the smallest character from s and append it to the result.\nRemove the smallest character from s that is greater than the last appended character, and append it to the result.\nRepeat step 2 until no more characters can be removed.\nRemove the largest character from s and append it to the result.\nRemove the largest character from s that is smaller than the last appended character, and append it to the result.\nRepeat step 5 until no more characters can be removed.\nRepeat steps 1 through 6 until all characters from s have been removed.\nIf the smallest or largest character appears more than once, you may choose any occurrence to append to the result.\n\nReturn the resulting string after reordering s using this algorithm.",
     "example": "Example 1:\n\nInput: s = \"aaaabbbbcccc\"\nOutput: \"abccbaabccba\"\nExplanation: After steps 1, 2 and 3 of the first iteration, result = \"abc\"\nAfter steps 4, 5 and 6 of the first iteration, result = \"abccba\"\nFirst iteration is done. Now s = \"aabbcc\" and we go back to step 1\nAfter steps 1, 2 and 3 of the second iteration, result = \"abccbaabc\"\nAfter steps 4, 5 and 6 of the second iteration, result = \"abccbaabccba\"\nExample 2:\n\nInput: s = \"rat\"\nOutput: \"art\"\nExplanation: The word \"rat\" becomes \"art\" after re-ordering it with the mentioned algorithm.",
