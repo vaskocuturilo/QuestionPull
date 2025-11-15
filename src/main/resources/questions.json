@@ -1,5 +1,23 @@
 [
   {
+    "title": "Destination City",
+    "body": "You are given the array paths, where paths[i] = [cityAi, cityBi] means there exists a direct path going from cityAi to cityBi. Return the destination city, that is, the city without any path outgoing to another city.\n\nIt is guaranteed that the graph of paths forms a line without any loop, therefore, there will be exactly one destination city.",
+    "example": "Example 1:\n\nInput: paths = [[\"London\",\"New York\"],[\"New York\",\"Lima\"],[\"Lima\",\"Sao Paulo\"]]\nOutput: \"Sao Paulo\" \nExplanation: Starting at \"London\" city you will reach \"Sao Paulo\" city which is the destination city. Your trip consist of: \"London\" -> \"New York\" -> \"Lima\" -> \"Sao Paulo\".\nExample 2:\n\nInput: paths = [[\"B\",\"C\"],[\"D\",\"B\"],[\"C\",\"A\"]]\nOutput: \"A\"\nExplanation: All possible trips are: \n\"D\" -> \"B\" -> \"C\" -> \"A\". \n\"B\" -> \"C\" -> \"A\". \n\"C\" -> \"A\". \n\"A\". \nClearly the destination city is \"A\".\nExample 3:\n\nInput: paths = [[\"A\",\"Z\"]]\nOutput: \"Z\"",
+    "level": "easy",
+    "solution": {
+      "content": "public String destCity(List<List<String>> paths) {\n        final Set<String> cities = new HashSet<>();\n\n        for (List<String> path : paths) {\n            cities.add(path.getFirst());\n        }\n\n        for (int i = 0; ; i++) {\n            String destinationCity = paths.get(i).get(1);\n\n            if (!cities.contains(destinationCity)) {\n                return destinationCity;\n            }\n        }\n    }"
+    }
+  },
+  {
+    "title": "Make Two Arrays Equal by Reversing Subarrays",
+    "body": "You are given two integer arrays of equal length target and arr. In one step, you can select any non-empty subarray of arr and reverse it. You are allowed to make any number of steps.\n\nReturn true if you can make arr equal to target or false otherwise.",
+    "example": "Example 1:\n\nInput: target = [1,2,3,4], arr = [2,4,1,3]\nOutput: true\nExplanation: You can follow the next steps to convert arr to target:\n1- Reverse subarray [2,4,1], arr becomes [1,4,2,3]\n2- Reverse subarray [4,2], arr becomes [1,2,4,3]\n3- Reverse subarray [4,3], arr becomes [1,2,3,4]\nThere are multiple ways to convert arr to target, this is not the only way to do so.\nExample 2:\n\nInput: target = [7], arr = [7]\nOutput: true\nExplanation: arr is equal to target without any reverses.\nExample 3:\n\nInput: target = [3,7,9], arr = [3,7,11]\nOutput: false\nExplanation: arr does not have value 9 and it can never be converted to target.\n",
+    "level": "easy",
+    "solution": {
+      "content": "public boolean canBeEqual(int[] target, int[] arr) {\n        Arrays.sort(target);\n        Arrays.sort(arr);\n        return Arrays.equals(target, arr);\n    }"
+    }
+  },
+  {
     "title": "Count Largest Group",
     "body": "You are given an integer n.\n\nWe need to group the numbers from 1 to n according to the sum of its digits. For example, the numbers 14 and 5 belong to the same group, whereas 13 and 3 belong to different groups.\n\nReturn the number of groups that have the largest size, i.e. the maximum number of elements.",
     "example": "Example 1:\n\nInput: n = 13\nOutput: 4\nExplanation: There are 9 groups in total, they are grouped according sum of its digits of numbers from 1 to 13:\n[1,10], [2,11], [3,12], [4,13], [5], [6], [7], [8], [9].\nThere are 4 groups with largest size.\nExample 2:\n\nInput: n = 2\nOutput: 2\nExplanation: There are 2 groups [1], [2] of size 1.",
