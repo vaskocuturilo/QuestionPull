@@ -1,5 +1,23 @@
 [
   {
+    "title": "Count the Number of Consistent Strings",
+    "body": "You are given a string allowed consisting of distinct characters and an array of strings words. A string is consistent if all characters in the string appear in the string allowed.\n\nReturn the number of consistent strings in the array words.",
+    "example": "Example 1:\n\nInput: allowed = \"ab\", words = [\"ad\",\"bd\",\"aaab\",\"baa\",\"badab\"]\nOutput: 2\nExplanation: Strings \"aaab\" and \"baa\" are consistent since they only contain characters 'a' and 'b'.\nExample 2:\n\nInput: allowed = \"abc\", words = [\"a\",\"b\",\"c\",\"ab\",\"ac\",\"bc\",\"abc\"]\nOutput: 7\nExplanation: All strings are consistent.\nExample 3:\n\nInput: allowed = \"cad\", words = [\"cc\",\"acd\",\"b\",\"ba\",\"bac\",\"bad\",\"ac\",\"d\"]\nOutput: 4\nExplanation: Strings \"cc\", \"acd\", \"ac\", and \"d\" are consistent.",
+    "level": "easy",
+    "solution": {
+      "content": "public int countConsistentStrings(String allowed, String[] words) {\n        final Set<Character> setAllowed = new HashSet<>();\n\n        for (char word : allowed.toCharArray()) setAllowed.add(word);\n\n        int count = 0;\n\n        for (String s : words) {\n            for (int i = 0; i < s.length(); i++) {\n                if (!setAllowed.contains(s.charAt(i))) {\n                    break;\n                }\n\n                if (i == s.length() - 1) {\n                    count++;\n                }\n            }\n        }\n\n        return count;\n    }"
+    }
+  },
+  {
+    "title": "Check Array Formation Through Concatenation",
+    "body": "You are given an array of distinct integers arr and an array of integer arrays pieces, where the integers in pieces are distinct. Your goal is to form arr by concatenating the arrays in pieces in any order. However, you are not allowed to reorder the integers in each array pieces[i].\n\nReturn true if it is possible to form the array arr from pieces. Otherwise, return false.",
+    "example": "Example 1:\n\nInput: arr = [15,88], pieces = [[88],[15]]\nOutput: true\nExplanation: Concatenate [15] then [88]\nExample 2:\n\nInput: arr = [49,18,16], pieces = [[16,18,49]]\nOutput: false\nExplanation: Even though the numbers match, we cannot reorder pieces[0].\nExample 3:\n\nInput: arr = [91,4,64,78], pieces = [[78],[4,64],[91]]\nOutput: true\nExplanation: Concatenate [91] then [4,64] then [78]",
+    "level": "easy",
+    "solution": {
+      "content": "public boolean canFormArray(int[] arr, int[][] pieces) {\n       for (int i = 0; i < arr.length;) {\n            int index = 0;\n            while (index < pieces.length && pieces[index][0] != arr[i]) {\n                index++;\n            }\n\n            if (index == pieces.length) {\n                return false;\n            }\n\n            int elementIndex = 0;\n\n            while (elementIndex < pieces[index].length && i < arr.length && arr[i] == pieces[index][elementIndex]) {\n                i++;\n                elementIndex++;\n            }\n\n            if (elementIndex != pieces[index].length) {\n                return false;\n            }\n        }\n\n        return true;\n    }"
+    }
+  },
+  {
     "title": "Sort Array by Increasing Frequency",
     "body": "Given an array of integers nums, sort the array in increasing order based on the frequency of the values. If multiple values have the same frequency, sort them in decreasing order.\n\nReturn the sorted array.",
     "example": "Example 1:\n\nInput: nums = [1,1,2,2,2,3]\nOutput: [3,1,1,2,2,2]\nExplanation: '3' has a frequency of 1, '1' has a frequency of 2, and '2' has a frequency of 3.\nExample 2:\n\nInput: nums = [2,3,1,3,2]\nOutput: [1,3,3,2,2]\nExplanation: '2' and '3' both have a frequency of 2, so they are sorted in decreasing order.\nExample 3:\n\nInput: nums = [-1,1,-6,4,5,-6,1,4,1]\nOutput: [5,-1,4,4,-6,-6,1,1,1]\n",
