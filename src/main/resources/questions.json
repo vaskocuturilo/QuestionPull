@@ -9,6 +9,24 @@
     }
   },
   {
+    "title": "Check if One String Swap Can Make Strings Equal",
+    "body": "You are given two strings s1 and s2 of equal length. A string swap is an operation where you choose two indices in a string (not necessarily different) and swap the characters at these indices.\n\nReturn true if it is possible to make both strings equal by performing at most one string swap on exactly one of the strings. Otherwise, return false.",
+    "example": "Example 1:\n\nInput: s1 = \"bank\", s2 = \"kanb\"\nOutput: true\nExplanation: For example, swap the first character with the last character of s2 to make \"bank\".\nExample 2:\n\nInput: s1 = \"attack\", s2 = \"defend\"\nOutput: false\nExplanation: It is impossible to make them equal with one string swap.\nExample 3:\n\nInput: s1 = \"kelb\", s2 = \"kelb\"\nOutput: true\nExplanation: The two strings are already equal, so no string swap operation is required.",
+    "level": "easy",
+    "solution": {
+      "content": "public boolean areAlmostEqual(String s1, String s2) {\n      int differCount = 0;\n\n        int firstStringChar = 0;\n        int secondStringChar = 0;\n\n        for (int i = 0; i < s1.length(); i++) {\n            final char currentCharacterForFirstString = s1.charAt(i);\n            final char currentCharacterForSecondString = s2.charAt(i);\n\n            if (currentCharacterForFirstString != currentCharacterForSecondString) {\n                differCount++;\n\n                if (differCount > 2) {\n                    return false;\n                }\n\n                if (differCount == 2 && (currentCharacterForFirstString != secondStringChar || currentCharacterForSecondString != firstStringChar)) {\n                        return false;\n                    }\n\n\n                if (differCount == 1) {\n                    firstStringChar = currentCharacterForFirstString;\n                    secondStringChar = currentCharacterForSecondString;\n                }\n            }\n        }\n        return differCount != 1;\n    }"
+    }
+  },
+  {
+    "title": "Second Largest Digit in a String",
+    "body": "Given an alphanumeric string s, return the second largest numerical digit that appears in s, or -1 if it does not exist.\n\nAn alphanumeric string is a string consisting of lowercase English letters and digits.",
+    "example": "Example 1:\n\nInput: s = \"dfa12321afd\"\nOutput: 2\nExplanation: The digits that appear in s are [1, 2, 3]. The second largest digit is 2.\nExample 2:\n\nInput: s = \"abc1111\"\nOutput: -1\nExplanation: The digits that appear in s are [1]. There is no second largest digit. ",
+    "level": "easy",
+    "solution": {
+      "content": "public int secondHighest(String s) {\n        int a = -1;\n        int b = -1;\n        for (char symbol : s.toCharArray()) {\n            if (Character.isDigit(symbol)) {\n\n                int v = symbol - '0';\n\n                if (v > a) {\n                    b = a;\n                    a = v;\n                } else if (v > b && v < a) {\n                    b = v;\n                }\n            }\n        }\n        return b;\n    }"
+    }
+  },
+  {
     "title": "Longest Nice Substring",
     "body": "A string s is nice if, for every letter of the alphabet that s contains, it appears both in uppercase and lowercase. For example, \"abABB\" is nice because 'A' and 'a' appear, and 'B' and 'b' appear. However, \"abA\" is not because 'b' appears, but 'B' does not.\n\nGiven a string s, return the longest substring of s that is nice. If there are multiple, return the substring of the earliest occurrence. If there are none, return an empty string.",
     "example": "Example 1:\n\nInput: s = \"YazaAay\"\nOutput: \"aAa\"\nExplanation: \"aAa\" is a nice string because 'A/a' is the only letter of the alphabet in s, and both 'A' and 'a' appear.\n\"aAa\" is the longest nice substring.\nExample 2:\n\nInput: s = \"Bb\"\nOutput: \"Bb\"\nExplanation: \"Bb\" is a nice string because both 'B' and 'b' appear. The whole string is a substring.\nExample 3:\n\nInput: s = \"c\"\nOutput: \"\"\nExplanation: There are no nice substrings.\n",
