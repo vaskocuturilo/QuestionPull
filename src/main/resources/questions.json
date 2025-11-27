@@ -1,5 +1,23 @@
 [
   {
+    "title": "Number of Different Integers in a String",
+    "body": "You are given a string word that consists of digits and lowercase English letters.\n\nYou will replace every non-digit character with a space. For example, \"a123bc34d8ef34\" will become \" 123  34 8  34\". Notice that you are left with some integers that are separated by at least one space: \"123\", \"34\", \"8\", and \"34\".\n\nReturn the number of different integers after performing the replacement operations on word.\n\nTwo integers are considered different if their decimal representations without any leading zeros are different.",
+    "example": "Example 1:\n\nInput: word = \"a123bc34d8ef34\"\nOutput: 3\nExplanation: The three different integers are \"123\", \"34\", and \"8\". Notice that \"34\" is only counted once.\nExample 2:\n\nInput: word = \"leet1234code234\"\nOutput: 2\nExample 3:\n\nInput: word = \"a1b01c001\"\nOutput: 1\nExplanation: The three integers \"1\", \"01\", and \"001\" all represent the same integer because\nthe leading zeros are ignored when comparing their decimal values.",
+    "level": "easy",
+    "solution": {
+      "content": "public int numDifferentIntegers(String word) {\n        final Set<String> frequency = new HashSet<>();\n        final String[] digits = word.replaceAll(\"\\\\p{Alpha}\", \" \")\n                .trim()\n                .split(\"\\\\s+\");\n\n        for (String item : digits) {\n            if (!item.isEmpty()) {\n                frequency.add(item.replaceAll(\"^0*\", \"\"));\n            }\n        }\n        return frequency.size();\n    }"
+    }
+  },
+  {
+    "title": "Check if the Sentence Is Pangram",
+    "body": "A pangram is a sentence where every letter of the English alphabet appears at least once.\n\nGiven a string sentence containing only lowercase English letters, return true if sentence is a pangram, or false otherwise.",
+    "example": "Example 1:\n\nInput: sentence = \"thequickbrownfoxjumpsoverthelazydog\"\nOutput: true\nExplanation: sentence contains at least one of every letter of the English alphabet.\nExample 2:\n\nInput: sentence = \"leetcode\"\nOutput: false",
+    "level": "easy",
+    "solution": {
+      "content": "ublic boolean checkIfPangram(String sentence) {\n        Objects.requireNonNull(sentence, \"The sentence cannot be null\");\n\n        if (sentence.length() < 26) {\n            return false;\n        }\n\n        for (char ch = 'a'; ch <= 'z'; ch++) {\n            if (sentence.indexOf(ch) < 0) {\n                return false;\n            }\n        }\n        return true;\n    }"
+    }
+  },
+  {
     "title": "Second Largest Digit in a String",
     "body": "Given an alphanumeric string s, return the second largest numerical digit that appears in s, or -1 if it does not exist.\n\nAn alphanumeric string is a string consisting of lowercase English letters and digits.",
     "example": "Example 1:\n\nInput: s = \"dfa12321afd\"\nOutput: 2\nExplanation: The digits that appear in s are [1, 2, 3]. The second largest digit is 2.\nExample 2:\n\nInput: s = \"abc1111\"\nOutput: -1\nExplanation: The digits that appear in s are [1]. There is no second largest digit. ",
