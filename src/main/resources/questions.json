@@ -1,5 +1,14 @@
 [
   {
+    "title": "Substrings of Size Three with Distinct Characters",
+    "body": "A string is good if there are no repeated characters.\n\nGiven a string s\u200B\u200B\u200B\u200B\u200B, return the number of good substrings of length three in s\u200B\u200B\u200B\u200B\u200B\u200B.\n\nNote that if there are multiple occurrences of the same substring, every occurrence should be counted.\n\nA substring is a contiguous sequence of characters in a string.",
+    "example": "Example 1:\n\nInput: s = \"xyzzaz\"\nOutput: 1\nExplanation: There are 4 substrings of size 3: \"xyz\", \"yzz\", \"zza\", and \"zaz\". \nThe only good substring of length 3 is \"xyz\".\nExample 2:\n\nInput: s = \"aababcabc\"\nOutput: 4\nExplanation: There are 7 substrings of size 3: \"aab\", \"aba\", \"bab\", \"abc\", \"bca\", \"cab\", and \"abc\".\nThe good substrings are \"abc\", \"bca\", \"cab\", and \"abc\".\n",
+    "level": "easy",
+    "solution": {
+      "content": "public int countGoodSubstrings(String s) {\n        int count = 0;\n        for (int i = 0; i <= s.length() - 3; i++) {\n\n            if ((s.charAt(i) != s.charAt(i + 1)\n                    && s.charAt(i + 1) != s.charAt(i + 2)\n                    && s.charAt(i) != s.charAt(i + 2))) {\n                count++;\n            }\n        }\n        return count;\n    }"
+    }
+  },
+  {
     "title": "Number of Different Integers in a String",
     "body": "You are given a string word that consists of digits and lowercase English letters.\n\nYou will replace every non-digit character with a space. For example, \"a123bc34d8ef34\" will become \" 123  34 8  34\". Notice that you are left with some integers that are separated by at least one space: \"123\", \"34\", \"8\", and \"34\".\n\nReturn the number of different integers after performing the replacement operations on word.\n\nTwo integers are considered different if their decimal representations without any leading zeros are different.",
     "example": "Example 1:\n\nInput: word = \"a123bc34d8ef34\"\nOutput: 3\nExplanation: The three different integers are \"123\", \"34\", and \"8\". Notice that \"34\" is only counted once.\nExample 2:\n\nInput: word = \"leet1234code234\"\nOutput: 2\nExample 3:\n\nInput: word = \"a1b01c001\"\nOutput: 1\nExplanation: The three integers \"1\", \"01\", and \"001\" all represent the same integer because\nthe leading zeros are ignored when comparing their decimal values.",
