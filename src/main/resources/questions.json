@@ -1,5 +1,14 @@
 [
   {
+    "title": "Remove Duplicates from Sorted Array",
+    "body": "Given an integer array nums sorted in non-decreasing order, remove the duplicates in-place such that each unique element appears only once. The relative order of the elements should be kept the same.\n\nConsider the number of unique elements in nums to be k\u200B\u200B\u200B\u200B\u200B\u200B\u200B\u200B\u200B\u200B\u200B\u200B\u200B\u200B. After removing duplicates, return the number of unique elements k.\n\nThe first k elements of nums should contain the unique numbers in sorted order. The remaining elements beyond index k - 1 can be ignored.",
+    "example": "Example 1:\n\nInput: nums = [1,1,2]\nOutput: 2, nums = [1,2,_]\nExplanation: Your function should return k = 2, with the first two elements of nums being 1 and 2 respectively.\nIt does not matter what you leave beyond the returned k (hence they are underscores).\nExample 2:\n\nInput: nums = [0,0,1,1,1,2,2,3,3,4]\nOutput: 5, nums = [0,1,2,3,4,_,_,_,_,_]\nExplanation: Your function should return k = 5, with the first five elements of nums being 0, 1, 2, 3, and 4 respectively.\nIt does not matter what you leave beyond the returned k (hence they are underscores).",
+    "level": "easy",
+    "solution": {
+      "content": "public int removeDuplicates(int[] nums) {\n        Objects.requireNonNull(nums, \"The array cannot be null\");\n\n        if (nums.length == 0) return 0;\n\n        int index = 1;\n\n        for (int number : nums) {\n            if (number != nums[index - 1]) {\n                nums[index] = number;\n                index++;\n            }\n        }\n\n        return index;\n    }"
+    }
+  },
+  {
     "title": "Substrings of Size Three with Distinct Characters",
     "body": "A string is good if there are no repeated characters.\n\nGiven a string s\u200B\u200B\u200B\u200B\u200B, return the number of good substrings of length three in s\u200B\u200B\u200B\u200B\u200B\u200B.\n\nNote that if there are multiple occurrences of the same substring, every occurrence should be counted.\n\nA substring is a contiguous sequence of characters in a string.",
     "example": "Example 1:\n\nInput: s = \"xyzzaz\"\nOutput: 1\nExplanation: There are 4 substrings of size 3: \"xyz\", \"yzz\", \"zza\", and \"zaz\". \nThe only good substring of length 3 is \"xyz\".\nExample 2:\n\nInput: s = \"aababcabc\"\nOutput: 4\nExplanation: There are 7 substrings of size 3: \"aab\", \"aba\", \"bab\", \"abc\", \"bca\", \"cab\", and \"abc\".\nThe good substrings are \"abc\", \"bca\", \"cab\", and \"abc\".\n",
