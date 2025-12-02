@@ -9,6 +9,24 @@
     }
   },
   {
+    "title": "Best Time to Buy and Sell Stock II",
+    "body": "You are given an integer array prices where prices[i] is the price of a given stock on the ith day.\n\nOn each day, you may decide to buy and/or sell the stock. You can only hold at most one share of the stock at any time. However, you can sell and buy the stock multiple times on the same day, ensuring you never hold more than one share of the stock.\n\nFind and return the maximum profit you can achieve.",
+    "example": "Example 1:\n\nInput: prices = [7,1,5,3,6,4]\nOutput: 7\nExplanation: Buy on day 2 (price = 1) and sell on day 3 (price = 5), profit = 5-1 = 4.\nThen buy on day 4 (price = 3) and sell on day 5 (price = 6), profit = 6-3 = 3.\nTotal profit is 4 + 3 = 7.\nExample 2:\n\nInput: prices = [1,2,3,4,5]\nOutput: 4\nExplanation: Buy on day 1 (price = 1) and sell on day 5 (price = 5), profit = 5-1 = 4.\nTotal profit is 4.\nExample 3:\n\nInput: prices = [7,6,4,3,1]\nOutput: 0\nExplanation: There is no way to make a positive profit, so we never buy the stock to achieve the maximum profit of 0.",
+    "level": "easy",
+    "solution": {
+      "content": "public int maxProfit(int[] prices) {\n        Objects.requireNonNull(prices, \"The array cannot be null\");\n\n        if (prices.length < 1) {\n            throw new IllegalArgumentException(\"The array must contain at least one price.\");\n        }\n\n        int maxProfit = 0;\n\n        for (int i = 0; i < prices.length - 1; i++) {\n            final int a = prices[i];\n            final int b = prices[i + 1];\n            maxProfit += Math.max(0, (b - a));\n        }\n\n        return maxProfit;\n    }"
+    }
+  },
+  {
+    "title": "Remove Duplicates from Sorted Array",
+    "body": "Given an integer array nums sorted in non-decreasing order, remove the duplicates in-place such that each unique element appears only once. The relative order of the elements should be kept the same.\n\nConsider the number of unique elements in nums to be k\u200B\u200B\u200B\u200B\u200B\u200B\u200B\u200B\u200B\u200B\u200B\u200B\u200B\u200B. After removing duplicates, return the number of unique elements k.\n\nThe first k elements of nums should contain the unique numbers in sorted order. The remaining elements beyond index k - 1 can be ignored.",
+    "example": "Example 1:\n\nInput: nums = [1,1,2]\nOutput: 2, nums = [1,2,_]\nExplanation: Your function should return k = 2, with the first two elements of nums being 1 and 2 respectively.\nIt does not matter what you leave beyond the returned k (hence they are underscores).\nExample 2:\n\nInput: nums = [0,0,1,1,1,2,2,3,3,4]\nOutput: 5, nums = [0,1,2,3,4,_,_,_,_,_]\nExplanation: Your function should return k = 5, with the first five elements of nums being 0, 1, 2, 3, and 4 respectively.\nIt does not matter what you leave beyond the returned k (hence they are underscores).",
+    "level": "easy",
+    "solution": {
+      "content": "public int removeDuplicates(int[] nums) {\n        Objects.requireNonNull(nums, \"The array cannot be null\");\n\n        if (nums.length == 0) return 0;\n\n        int index = 1;\n\n        for (int number : nums) {\n            if (number != nums[index - 1]) {\n                nums[index] = number;\n                index++;\n            }\n        }\n\n        return index;\n    }"
+    }
+  },
+  {
     "title": "Substrings of Size Three with Distinct Characters",
     "body": "A string is good if there are no repeated characters.\n\nGiven a string s\u200B\u200B\u200B\u200B\u200B, return the number of good substrings of length three in s\u200B\u200B\u200B\u200B\u200B\u200B.\n\nNote that if there are multiple occurrences of the same substring, every occurrence should be counted.\n\nA substring is a contiguous sequence of characters in a string.",
     "example": "Example 1:\n\nInput: s = \"xyzzaz\"\nOutput: 1\nExplanation: There are 4 substrings of size 3: \"xyz\", \"yzz\", \"zza\", and \"zaz\". \nThe only good substring of length 3 is \"xyz\".\nExample 2:\n\nInput: s = \"aababcabc\"\nOutput: 4\nExplanation: There are 7 substrings of size 3: \"aab\", \"aba\", \"bab\", \"abc\", \"bca\", \"cab\", and \"abc\".\nThe good substrings are \"abc\", \"bca\", \"cab\", and \"abc\".\n",
