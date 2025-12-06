@@ -1,5 +1,14 @@
 [
   {
+    "title": "Delete Node in a Linked List",
+    "body": "There is a singly-linked list head and we want to delete a node node in it.\n\nYou are given the node to be deleted node. You will not be given access to the first node of head.\n\nAll the values of the linked list are unique, and it is guaranteed that the given node node is not the last node in the linked list.\n\nDelete the given node. Note that by deleting the node, we do not mean removing it from memory. We mean:\n\nThe value of the given node should not exist in the linked list.\nThe number of nodes in the linked list should decrease by one.\nAll the values before node should be in the same order.\nAll the values after node should be in the same order.\nCustom testing:\n\nFor the input, you should provide the entire linked list head and the node to be given node. node should not be the last node of the list and should be an actual node in the list.\nWe will build the linked list and pass the node to your function.\nThe output will be the entire list after calling your function.",
+    "example": "Input: head = [4,5,1,9], node = 5\nOutput: [4,1,9]\nExplanation: You are given the second node with value 5, the linked list should become 4 -> 1 -> 9 after calling your function.\n  Input: head = [4,5,1,9], node = 1\nOutput: [4,5,9]\nExplanation: You are given the third node with value 1, the linked list should become 4 -> 5 -> 9 after calling your function.",
+    "level": "easy",
+    "solution": {
+      "content": "public class ListNode {\n        int val;\n        ListNode next;\n\n        public ListNode() {\n        }\n\n        ListNode(int val) {\n            this.val = val;\n        }\n\n        ListNode(int val, ListNode next) {\n            this.val = val;\n            this.next = next;\n        }\n    }\n\n    public void deleteNode(ListNode node) {\n        node.val = node.next.val;\n        node.next = node.next.next;\n    }"
+    }
+  },
+  {
     "title": "Implement strStr()",
     "body": "Given two strings needle and haystack, return the index of the first occurrence of needle in haystack, or -1 if needle is not part of haystack.",
     "example": "Input: haystack = \"sadbutsad\", needle = \"sad\"\nOutput: 0\nExplanation: \"sad\" occurs at index 0 and 6.\nThe first occurrence is at index 0, so we return 0.  \n Input: haystack = \"leetcode\", needle = \"leeto\"\nOutput: -1\nExplanation: \"leeto\" did not occur in \"leetcode\", so we return -1.",
