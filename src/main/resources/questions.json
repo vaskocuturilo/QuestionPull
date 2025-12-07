@@ -1,5 +1,14 @@
 [
   {
+    "title": "Remove Nth Node From End of List",
+    "body": "Given the head of a linked list, remove the nth node from the end of the list and return its head.\n\n",
+    "example": "Example 1:\n\n\nInput: head = [1,2,3,4,5], n = 2\nOutput: [1,2,3,5]\nExample 2:\n\nInput: head = [1], n = 1\nOutput: []\nExample 3:\n\nInput: head = [1,2], n = 1\nOutput: [1]",
+    "level": "easy",
+    "solution": {
+      "content": "public ListNode removeNthFromEnd(ListNode head, int n) {\n        final ListNode dummy = new ListNode(0, head);\n\n        ListNode fastPointer = dummy;\n        \n        ListNode slowPointer = dummy;\n\n        while (n > 0) {\n            fastPointer = fastPointer.next;\n            n--;\n        }\n\n        while (fastPointer.next != null) {\n            slowPointer = slowPointer.next;\n            fastPointer = fastPointer.next;\n        }\n\n        slowPointer.next = slowPointer.next.next;\n\n        return dummy.next;\n    }"
+    }
+  },
+  {
     "title": "Delete Node in a Linked List",
     "body": "There is a singly-linked list head and we want to delete a node node in it.\n\nYou are given the node to be deleted node. You will not be given access to the first node of head.\n\nAll the values of the linked list are unique, and it is guaranteed that the given node node is not the last node in the linked list.\n\nDelete the given node. Note that by deleting the node, we do not mean removing it from memory. We mean:\n\nThe value of the given node should not exist in the linked list.\nThe number of nodes in the linked list should decrease by one.\nAll the values before node should be in the same order.\nAll the values after node should be in the same order.\nCustom testing:\n\nFor the input, you should provide the entire linked list head and the node to be given node. node should not be the last node of the list and should be an actual node in the list.\nWe will build the linked list and pass the node to your function.\nThe output will be the entire list after calling your function.",
     "example": "Input: head = [4,5,1,9], node = 5\nOutput: [4,1,9]\nExplanation: You are given the second node with value 5, the linked list should become 4 -> 1 -> 9 after calling your function.\n  Input: head = [4,5,1,9], node = 1\nOutput: [4,5,9]\nExplanation: You are given the third node with value 1, the linked list should become 4 -> 5 -> 9 after calling your function.",
