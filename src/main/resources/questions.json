@@ -1,5 +1,14 @@
 [
   {
+    "title": "Reverse Linked List",
+    "body": "Given the head of a singly linked list, reverse the list, and return the reversed list.\n\n",
+    "example": "Example 1:\n\n\nInput: head = [1,2,3,4,5]\nOutput: [5,4,3,2,1]\nExample 2:\n\n\nInput: head = [1,2]\nOutput: [2,1]\nExample 3:\n\nInput: head = []\nOutput: []",
+    "level": "easy",
+    "solution": {
+      "content": "public ListNode reverseList(ListNode head) {\n        final ListNode dummy = new ListNode();\n\n        ListNode current = head;\n\n        while (current != null) {\n            ListNode next = current.next;\n\n            current.next = dummy.next;\n            dummy.next = current;\n            current = next;\n\n        }\n\n        return dummy.next;\n    }"
+    }
+  },
+  {
     "title": "Remove Nth Node From End of List",
     "body": "Given the head of a linked list, remove the nth node from the end of the list and return its head.\n\n",
     "example": "Example 1:\n\n\nInput: head = [1,2,3,4,5], n = 2\nOutput: [1,2,3,5]\nExample 2:\n\nInput: head = [1], n = 1\nOutput: []\nExample 3:\n\nInput: head = [1,2], n = 1\nOutput: [1]",
