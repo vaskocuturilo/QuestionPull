@@ -1,5 +1,14 @@
 [
   {
+    "title": "Linked List Cycle",
+    "body": "Given head, the head of a linked list, determine if the linked list has a cycle in it.\n\nThere is a cycle in a linked list if there is some node in the list that can be reached again by continuously following the next pointer. Internally, pos is used to denote the index of the node that tail's next pointer is connected to. Note that pos is not passed as a parameter.\n\nReturn true if there is a cycle in the linked list. Otherwise, return false.",
+    "example": "Example 1:\n\n\nInput: head = [3,2,0,-4], pos = 1\nOutput: true\nExplanation: There is a cycle in the linked list, where the tail connects to the 1st node (0-indexed).\nExample 2:\n\n\nInput: head = [1,2], pos = 0\nOutput: true\nExplanation: There is a cycle in the linked list, where the tail connects to the 0th node.\nExample 3:\n\n\nInput: head = [1], pos = -1\nOutput: false\nExplanation: There is no cycle in the linked list.",
+    "level": "easy",
+    "solution": {
+      "content": "public boolean hasCycle(ListNode head) {\n        ListNode fast = head;\n        ListNode slow = head;\n\n        while (fast != null && fast.next != null) {\n            fast = fast.next.next;\n            slow = slow.next;\n\n            if (fast == slow) {\n                return true;\n            }\n        }\n        return false;\n    }"
+    }
+  },
+  {
     "title": "Palindrome Linked List",
     "body": "Given the head of a singly linked list, return true if it is a palindrome or false otherwise.\n\n",
     "example": "Example 1:\n\n\nInput: head = [1,2,2,1]\nOutput: true\nExample 2:\n\n\nInput: head = [1,2]\nOutput: false",
