@@ -1,5 +1,14 @@
 [
   {
+    "title": "Symmetric Tree",
+    "body": "Given the root of a binary tree, check whether it is a mirror of itself (i.e., symmetric around its center).",
+    "example": "Example 1:\n\n\nInput: root = [1,2,2,3,4,4,3]\nOutput: true\nExample 2:\n\n\nInput: root = [1,2,2,null,3,null,3]\nOutput: false",
+    "level": "easy",
+    "solution": {
+      "content": "public class TreeNode {\n        int val;\n        TreeNode left;\n        TreeNode right;\n\n        TreeNode() {\n        }\n\n        TreeNode(int val) {\n            this.val = val;\n        }\n\n        TreeNode(int val, TreeNode left, TreeNode right) {\n            this.val = val;\n            this.left = left;\n            this.right = right;\n        }\n    } public boolean isSymmetric(TreeNode root) {\n        return isSymmetric(root.left, root.right);\n    }\n\n    private boolean isSymmetric(TreeNode left, TreeNode right) {\n        if (left == right) return true;\n\n        if (left == null || right == null || left.val != right.val) {\n            return false;\n        }\n\n        return isSymmetric(left.left, right.right) && isSymmetric(left.right, right.left);\n    }"
+    }
+  },
+  {
     "title": "Validate Binary Search Tree",
     "body": "Given the root of a binary tree, determine if it is a valid binary search tree (BST).\n\nA valid BST is defined as follows:\n\nThe left subtree of a node contains only nodes with keys strictly less than the node's key.\nThe right subtree of a node contains only nodes with keys strictly greater than the node's key.\nBoth the left and right subtrees must also be binary search trees.",
     "example": "Example 1:\n\n\nInput: root = [2,1,3]\nOutput: true\nExample 2:\n\n\nInput: root = [5,1,4,null,null,3,6]\nOutput: false\nExplanation: The root node's value is 5 but its right child's value is 4.",
