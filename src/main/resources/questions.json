@@ -1,5 +1,14 @@
 [
   {
+    "title": "Binary Tree Level Order Traversal",
+    "body": "Given the root of a binary tree, return the level order traversal of its nodes' values. (i.e., from left to right, level by level).",
+    "example": "Example 1:\n\n\nInput: root = [3,9,20,null,null,15,7]\nOutput: [[3],[9,20],[15,7]]\nExample 2:\n\nInput: root = [1]\nOutput: [[1]]\nExample 3:\n\nInput: root = []\nOutput: []",
+    "level": "easy",
+    "solution": {
+      "content": "public class TreeNode {\n        int val;\n        TreeNode left;\n        TreeNode right;\n\n        TreeNode() {\n        }\n\n        TreeNode(int val) {\n            this.val = val;\n        }\n\n        TreeNode(int val, TreeNode left, TreeNode right) {\n            this.val = val;\n            this.left = left;\n            this.right = right;\n        }\n    }  public List<List<Integer>> levelOrder(TreeNode root) {\n        final List<List<Integer>> result = new ArrayList<>();\n        if (Objects.isNull(root)) {\n            return result;\n        }\n\n        final Deque<TreeNode> treeNodeDeque = new ArrayDeque<>();\n        treeNodeDeque.offer(root);\n\n        while (!treeNodeDeque.isEmpty()) {\n            final List<Integer> currentLevel = new ArrayList<>();\n            int levelSize = treeNodeDeque.size();\n\n            for (int i = 0; i < levelSize; i++) {\n                TreeNode currentNode = treeNodeDeque.poll();\n\n                if (Objects.nonNull(currentNode)) {\n                    currentLevel.add(currentNode.val);\n\n                    if (currentNode.left != null) {\n                        treeNodeDeque.add(currentNode.left);\n                    }\n\n                    if (currentNode.right != null) {\n                        treeNodeDeque.add(currentNode.right);\n                    }\n                }\n            }\n            result.add(currentLevel);\n        }\n        return result;"
+    }
+  },
+  {
     "title": "Symmetric Tree",
     "body": "Given the root of a binary tree, check whether it is a mirror of itself (i.e., symmetric around its center).",
     "example": "Example 1:\n\n\nInput: root = [1,2,2,3,4,4,3]\nOutput: true\nExample 2:\n\n\nInput: root = [1,2,2,null,3,null,3]\nOutput: false",
