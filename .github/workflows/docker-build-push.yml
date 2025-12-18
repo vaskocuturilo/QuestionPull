@@ -1,13 +1,23 @@
-name: CI - Build & Push Image on Merge
+name: 🧬 CI - Build & Push Image on Merge
 
 on:
   push:
     branches:
       - main
+    tags:
+      - 'latest'
+
+env:
+  DOCKER_IMAGE_NAME: interview-dude
+  DOCKERFILE_PATH: ./Dockerfile
+  BUILD_CONTEXT: .
 
 jobs:
-  build-and-push:
-    runs-on: ubuntu-latest
+  build_and_push:
+    strategy:
+      matrix:
+        os: [ ubuntu-latest, ubuntu-24.04-arm ]
+    runs-on: ${{ matrix.os }}
 
     steps:
       - uses: actions/checkout@v4
@@ -24,5 +34,35 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_ACCESS_TOKEN }}
 
-      - name: Build and Push Image with Jib
-        run: mvn -ntp -B package jib:build
+
+      - name: 🏷️ Generate tags and labels
+        id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: ${{ secrets.DOCKERHUB_USERNAME }}/${{ env.DOCKER_IMAGE_NAME }}
+          tags: |
+            # Conditionally apply 'arm' tag for ARM64 runners
+            type=raw,value=arm,enable=${{ runner.arch == 'ARM64' }}
+            # Conditionally apply 'latest' tag for X64 runners
+            type=raw,value=latest,enable=${{ runner.arch == 'X64' }}
+            # Automatically apply a tag based on the commit SHA
+            type=sha,format=longb
+
+      - name: 📦 Build and push Docker image
+        uses: docker/build-push-action@v5
+        with:
+          context: ${{ env.BUILD_CONTEXT }}
+          file: ${{ env.DOCKERFILE_PATH }}
+          push: true
+          tags: |
+            ${{ steps.meta.outputs.tags }}
+            ${{ secrets.DOCKERHUB_USERNAME }}/${{ env.DOCKER_IMAGE_NAME }}:latest
+
+          labels: ${{ steps.meta.outputs.labels }}
+
+      - name: ⤵️ Verify image pushed (optional)
+        run: |
+          echo "Docker image ${{ secrets.DOCKER_USERNAME }}/${{ env.DOCKER_IMAGE_NAME }}:${{ steps.meta.outputs.version }} pushed successfully!"
+          echo "Check it at: https://hub.docker.com/r/${{ secrets.DOCKER_USERNAME }}/${{ env.DOCKER_IMAGE_NAME }}/tags"
+
+
