@@ -1566,6 +1566,15 @@
     }
   },
   {
+    "title": "4Sum",
+    "body": "Given an array nums of n integers, return an array of all the unique quadruplets [nums[a], nums[b], nums[c], nums[d]] such that:\n\n0 <= a, b, c, d < n\na, b, c, and d are distinct.\nnums[a] + nums[b] + nums[c] + nums[d] == target\nYou may return the answer in any order.",
+    "example": "Example 1:\n\nInput: nums = [1,0,-1,0,-2,2], target = 0\nOutput: [[-2,-1,1,2],[-2,0,0,2],[-1,0,0,1]]\nExample 2:\n\nInput: nums = [2,2,2,2,2], target = 8\nOutput: [[2,2,2,2]]",
+    "level": "medium",
+    "solution": {
+      "content": "public List<List<Integer>> fourSum(int[] nums, int target) {\n        Objects.requireNonNull(nums, \"The array cannot be null\");\n        \n        final List<List<Integer>> result = new ArrayList<>();\n\n        if (nums.length < 4) {\n            return result;\n        }\n\n        Arrays.sort(nums);\n\n        for (int first = 0; first < nums.length - 3; first++) {\n            if (first > 0 && nums[first] == nums[first - 1]) {\n                continue;\n            }\n\n            for (int second = first + 1; second < nums.length - 2; second++) {\n                if (second > first + 1 && nums[second] == nums[second - 1]) {\n                    continue;\n                }\n                int left = second + 1;\n                int right = nums.length - 1;\n\n\n                while (left < right) {\n                    int sum = nums[first] + nums[second] + nums[left] + nums[right];\n\n                    if (sum < target) {\n                        left++;\n                    } else if (sum > target) {\n                        right--;\n                    } else {\n                        result.add(List.of(nums[first], nums[second], nums[left], nums[right]));\n                        left++;\n                        right--;\n                        while (left < right && nums[left] == nums[left - 1]) {\n                            left++;\n                        }\n                        while (left < right && nums[right] == nums[right + 1]) {\n                            right--;\n                        }\n                    }\n                }\n            }\n        }\n\n        return result;\n    }"
+    }
+  },
+  {
     "title": "3Sum Closest",
     "body": "Given an integer array nums of length n and an integer target, find three integers in nums such that the sum is closest to target.\n\nReturn the sum of the three integers.\n\nYou may assume that each input would have exactly one solution.",
     "example": "Example 1:\n\nInput: nums = [-1,2,1,-4], target = 1\nOutput: 2\nExplanation: The sum that is closest to the target is 2. (-1 + 2 + 1 = 2).\nExample 2:\n\nInput: nums = [0,0,0], target = 1\nOutput: 0\nExplanation: The sum that is closest to the target is 0. (0 + 0 + 0 = 0).",
