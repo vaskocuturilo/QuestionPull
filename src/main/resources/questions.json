@@ -1812,6 +1812,15 @@
     }
   },
   {
+    "title": "Rotate List",
+    "body": "Given the head of a linked list, rotate the list to the right by k places.",
+    "example": "Example 1:\n\n\nInput: head = [1,2,3,4,5], k = 2\nOutput: [4,5,1,2,3]\nExample 2:\n\n\nInput: head = [0,1,2], k = 4\nOutput: [2,0,1]",
+    "level": "medium",
+    "solution": {
+      "content": "public class ListNode {\n        int val;\n        ListNode next;\n\n        ListNode() {\n        }\n\n        ListNode(int val) {\n            this.val = val;\n        }\n\n        ListNode(int val, ListNode next) {\n            this.val = val;\n            this.next = next;\n        }\n    } public ListNode rotateRight(ListNode head, int k) {\n        if (head == null || head.next == null) {\n            return head;\n        }\n\n        ListNode currentNode = head;\n        int length = 0;\n        while (currentNode != null) {\n            length++;\n            currentNode = currentNode.next;\n        }\n\n        k = k % length;\n\n        if (k == 0) {\n            return head;\n        }\n\n        ListNode fastPointer = head;\n        ListNode slowFacter = head;\n\n        for (int i = 0; i < k; i++) {\n            fastPointer = fastPointer.next;\n        }\n\n        while (fastPointer.next != null) {\n            fastPointer = fastPointer.next;\n            slowFacter = slowFacter.next;\n        }\n\n        ListNode newHead = slowFacter.next;\n        slowFacter.next = null;\n        fastPointer.next = head;\n\n        return newHead;\n    }"
+    }
+  },
+  {
     "title": "Top K Frequent Elements",
     "body": "Given an integer array and an integer k, return the k most frequent elements. Optimize for time complexity better than O(n log n)",
     "example": "Input: nums = [1,1,1,2,2,3], k = 2, Output: [1,2]",
