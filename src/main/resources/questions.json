@@ -1830,6 +1830,15 @@
     }
   },
   {
+    "title": "Remove Duplicates from Sorted List II",
+    "body": "Given the head of a sorted linked list, delete all nodes that have duplicate numbers, leaving only distinct numbers from the original list. Return the linked list sorted as well.\n\n",
+    "example": "Example 1:\n\n\nInput: head = [1,2,3,3,4,4,5]\nOutput: [1,2,5]\nExample 2:\n\n\nInput: head = [1,1,1,2,3]\nOutput: [2,3]",
+    "level": "medium",
+    "solution": {
+      "content": "public ListNode deleteDuplicates(ListNode head) {\n        final ListNode dummy = new ListNode(0, head);\n\n        ListNode previous = dummy;\n\n        ListNode current = head;\n\n        while (current != null) {\n            while (current.next != null && current.next.val == current.val) {\n                current = current.next;\n            }\n\n            if (previous.next == current) {\n                previous = current;\n            } else {\n                previous.next = current.next;\n            }\n\n            current = current.next;\n        }\n        return dummy.next;\n    }"
+    }
+  },
+  {
     "title": "Top K Frequent Elements",
     "body": "Given an integer array and an integer k, return the k most frequent elements. Optimize for time complexity better than O(n log n)",
     "example": "Input: nums = [1,1,1,2,2,3], k = 2, Output: [1,2]",
