@@ -1839,6 +1839,15 @@
     }
   },
   {
+    "title": "Linked List Cycle II",
+    "body": "Given the head of a linked list, return the node where the cycle begins. If there is no cycle, return null.\n\nThere is a cycle in a linked list if there is some node in the list that can be reached again by continuously following the next pointer. Internally, pos is used to denote the index of the node that tail's next pointer is connected to (0-indexed). It is -1 if there is no cycle. Note that pos is not passed as a parameter.\n\nDo not modify the linked list.",
+    "example": "Example 1:\n\n\nInput: head = [3,2,0,-4], pos = 1\nOutput: tail connects to node index 1\nExplanation: There is a cycle in the linked list, where tail connects to the second node.\nExample 2:\n\n\nInput: head = [1,2], pos = 0\nOutput: tail connects to node index 0\nExplanation: There is a cycle in the linked list, where tail connects to the first node.\nExample 3:\n\n\nInput: head = [1], pos = -1\nOutput: no cycle\nExplanation: There is no cycle in the linked list.",
+    "level": "medium",
+    "solution": {
+      "content": "public class ListNode {\n        int val;\n        ListNode next;\n\n        ListNode() {\n        }\n\n        ListNode(int val) {\n            this.val = val;\n        }\n\n        ListNode(int val, ListNode next) {\n            this.val = val;\n            this.next = next;\n        }\n    }  public ListNode detectCycle(ListNode head) {\n        ListNode fastPoint = head;\n        ListNode slowPoint = head;\n\n        while (fastPoint != null && fastPoint.next != null) {\n            slowPoint = slowPoint.next;\n            fastPoint = fastPoint.next.next;\n\n            if (slowPoint == fastPoint) {\n                ListNode startPoint = head;\n\n                while (startPoint != slowPoint) {\n                    startPoint = startPoint.next;\n                    slowPoint = slowPoint.next;\n                }\n\n                return startPoint;\n            }\n        }\n        return null;\n    }"
+    }
+  },
+  {
     "title": "Top K Frequent Elements",
     "body": "Given an integer array and an integer k, return the k most frequent elements. Optimize for time complexity better than O(n log n)",
     "example": "Input: nums = [1,1,1,2,2,3], k = 2, Output: [1,2]",
