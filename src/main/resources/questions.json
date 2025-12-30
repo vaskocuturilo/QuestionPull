@@ -1848,6 +1848,15 @@
     }
   },
   {
+    "title": "Reorder List",
+    "body": "You are given the head of a singly linked-list. The list can be represented as:\n\nL0 → L1 → … → Ln - 1 → Ln\nReorder the list to be on the following form:\n\nL0 → Ln → L1 → Ln - 1 → L2 → Ln - 2 → …\nYou may not modify the values in the list's nodes. Only nodes themselves may be changed.",
+    "example": "Example 1:\n\n\nInput: head = [1,2,3,4]\nOutput: [1,4,2,3]\nExample 2:\n\n\nInput: head = [1,2,3,4,5]\nOutput: [1,5,2,4,3]",
+    "level": "medium",
+    "solution": {
+      "content": "public class ListNode {\n        int val;\n        ListNode next;\n\n        ListNode() {\n        }\n\n        ListNode(int val) {\n            this.val = val;\n        }\n\n        ListNode(int val, ListNode next) {\n            this.val = val;\n            this.next = next;\n        }\n    }  public void reorderList(ListNode head) {\n        ListNode fastPointer = head;\n        ListNode slowPointer = head;\n\n        while (fastPointer.next != null && fastPointer.next.next != null) {\n            slowPointer = slowPointer.next;\n            fastPointer = fastPointer.next.next;\n        }\n\n        ListNode secondHalfHead = slowPointer.next;\n        slowPointer.next = null;\n\n        ListNode previousNode = null;\n        ListNode currentNode = secondHalfHead;\n\n        while (currentNode != null) {\n            ListNode nextTemp = currentNode.next;\n            currentNode.next = previousNode;\n            previousNode = currentNode;\n            currentNode = nextTemp;\n        }\n\n        ListNode firstHalfCurrent = head;\n        ListNode secondHalfCurrent = previousNode;\n\n\n        while (secondHalfCurrent != null) {\n            ListNode firstHalfNext = firstHalfCurrent.next;\n            ListNode secondHalfNext = secondHalfCurrent.next;\n\n            firstHalfCurrent.next = secondHalfCurrent;\n            secondHalfCurrent.next = firstHalfNext;\n\n            firstHalfCurrent = firstHalfNext;\n            secondHalfCurrent = secondHalfNext;\n        }\n    }"
+    }
+  },
+  {
     "title": "Top K Frequent Elements",
     "body": "Given an integer array and an integer k, return the k most frequent elements. Optimize for time complexity better than O(n log n)",
     "example": "Input: nums = [1,1,1,2,2,3], k = 2, Output: [1,2]",
