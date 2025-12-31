@@ -32,6 +32,7 @@ You will need the following technologies available to try it out:
 - Will be adding functionality for working with the Telegram bot. :heavy_check_mark:
 - Will be adding functionality for taking a ticket from the pull. :heavy_check_mark:
 - Will be adding functionality for taking a ticket via difficulty. :heavy_check_mark:
+- Will be adding functionality for taking a random ticket. :heavy_check_mark:
 - Will be adding functionality for taking a ticket via category.
 - Will be adding functionality for a quiz with the most popular questions.
 - Will be adding a solution functionality 
