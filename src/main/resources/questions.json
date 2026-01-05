@@ -1032,15 +1032,6 @@
     }
   },
   {
-    "title": "Compare Version Numbers",
-    "body": "Given two version strings, version1 and version2, compare them. A version string consists of revisions separated by dots '.'. The value of the revision is its integer conversion ignoring leading zeros.\n\nTo compare version strings, compare their revision values in left-to-right order. If one of the version strings has fewer revisions, treat the missing revision values as 0. \n Return the following:\n\nIf version1 < version2, return -1.\nIf version1 > version2, return 1.\nOtherwise, return 0.",
-    "example": "Input: version1 = \"1.2\", version2 = \"1.10\"\n\nOutput: -1\n\nExplanation:\n\nversion1's second revision is \"2\" and version2's second revision is \"10\": 2 < 10, so version1 < version2.   Input: version1 = \"1.01\", version2 = \"1.001\"\n\nOutput: 0\n\nExplanation:\n\nIgnoring leading zeroes, both \"01\" and \"001\" represent the same integer \"1\".  Input: version1 = \"1.0\", version2 = \"1.0.0.0\"\n\nOutput: 0\n\nExplanation:\n\nversion1 has less revisions, which means every missing revision are treated as \"0\".",
-    "level": "easy",
-    "solution": {
-      "content": "public int compareVersions(final String version1, final String version2) {\n        Objects.requireNonNull(version1, \"Version1 cannot be null\");\n        Objects.requireNonNull(version2, \"Version2 cannot be null\");\n\n        if (version1.isEmpty() || version2.isEmpty()) {\n            throw new IllegalArgumentException(\"Version strings cannot be empty\");\n        }\n\n        final String[] v1Parts = version1.split(\"\\\\.\");\n        final String[] v2Parts = version2.split(\"\\\\.\");\n\n        final int maxLength = Math.max(v1Parts.length, v2Parts.length);\n\n        for (int i = 0; i < maxLength; i++) {\n            int v1 = i < v1Parts.length ? Integer.parseInt(v1Parts[i]) : 0;\n            int v2 = i < v2Parts.length ? Integer.parseInt(v2Parts[i]) : 0;\n\n            if (v1 != v2) {\n                return Integer.compare(v1, v2);\n            }\n        }\n\n        return 0;\n    }"
-    }
-  },
-  {
     "title": "Duplicate elements array and remove",
     "body": "Find all duplicates elements in array and remove them. Return a new array",
     "example": "{1,1,2,2,3,4,5,6} => result = {1,2,3,4,5,6}",
@@ -1376,19 +1367,19 @@
   {
     "title": "Double sort",
     "body": "Implement Double sorting, in the context of sorting algorithms, generally refers to sorting a list based on two criteria.",
-    "example": "",
+    "example": "public static Object[] dbSort(Object[] a) {\n\n        Objects.requireNonNull(a, \"The object cannot be null\");\n\n        Comparator<Object> comparator = ((o1, o2) -> {\n            if (o1 instanceof Integer && o2 instanceof String) {\n                return -1;\n            }\n\n            if (o1 instanceof String && o2 instanceof Integer) {\n                return 0;\n            }\n\n            if (o1 instanceof Integer var1 && o2 instanceof Integer var2) {\n                return (var1).compareTo(var2);\n            }\n            if (o1 instanceof String val1 && o2 instanceof String val2) {\n                return (val1).compareTo(val2);\n            }\n            return 0;\n        });\n\n        Arrays.sort(a, comparator);\n\n        return a;\n    }",
     "level": "easy"
   },
   {
     "title": "The decorator pattern",
     "body": "Implement Decorator is a structural design pattern",
-    "example": "",
+    "example": "public interface Developer {\n\n    public String makeJob();\n}\n  public class JavaDeveloper implements Developer {\n    @Override\n    public String makeJob() {\n        return \"write Java code.\";\n    }\n}  public class SeniorJavaDeveloper extends DeveloperDecorator {\n    public SeniorJavaDeveloper(Developer developer) {\n\n        super(developer);\n    }\n\n    public String makeCodeReview() {\n\n        return \" Make code review.\";\n    }\n\n    @Override\n    public String makeJob() {\n\n        return super.makeJob() + makeCodeReview();\n    }\n}  public class JavaTeamLead extends DeveloperDecorator {\n\n    public JavaTeamLead(Developer developer) {\n\n        super(developer);\n    }\n\n    public String sendWeekReport() {\n\n        return \" Send week report to customer.\";\n    }\n\n    @Override\n    public String makeJob() {\n\n        return super.makeJob() + sendWeekReport();\n    }\n} public class DeveloperDecorator implements Developer {\n\n    Developer developer;\n\n    public DeveloperDecorator(Developer developer) {\n\n        this.developer = developer;\n    }\n\n    @Override\n    public String makeJob() {\n\n        return developer.makeJob();\n    }\n}",
     "level": "easy"
   },
   {
     "title": "The builder pattern",
     "body": "Implement The builder pattern",
-    "example": "",
+    "example": "public class Employee {\n    private String firstName;\n    private String lastName;\n    private String phoneNumber;\n\n    public Employee(Builder builder) {\n        this.firstName = builder.firstName;\n        this.lastName = builder.lastName;\n        this.phoneNumber = builder.phoneNumber;\n    }\n    public static class Builder {\n        private String firstName;\n        private String lastName;\n        private String phoneNumber;\n\n        public Builder(String firstName, String lastName, String phoneNumber) {\n            this.firstName = firstName;\n            this.lastName = lastName;\n            this.phoneNumber = phoneNumber;\n        }\n\n        public String getFirstName() {\n            return firstName;\n        }\n\n        public String getLastName() {\n            return lastName;\n        }\n\n        public String getPhoneNumber() {\n            return phoneNumber;\n        }\n\n        public Employee build() {\n            return new Employee(this);\n        }\n    }\n}",
     "level": "easy"
   },
   {
@@ -1413,13 +1404,19 @@
     "title": "Counting Bits",
     "body": "Given an integer n, return an array ans of length n + 1 such that for each i (0 <= i <= n), ans[i] is the number of 1's in the binary representation of i.",
     "example": "Input: n = 2, Output: [0,1,1], Explanation:\n0 --> 0\n1 --> 1\n2 --> 10; Input: n = 5\nOutput: [0,1,1,2,1,2]\nExplanation:\n0 --> 0\n1 --> 1\n2 --> 10\n3 --> 11\n4 --> 100\n5 --> 101",
-    "level": "easy"
+    "level": "easy",
+    "solution": {
+      "content": "public int[] countBits(int n) {\n        if (n < 0) {\n            throw new IllegalArgumentException(\"The value must be zero or more\");\n        }\n        \n        final int[] result = new int[n + 1];\n\n        for (int i = 0; i <= n; i++) {\n            result[i] = Integer.bitCount(i);\n        }\n\n        return result;\n    }"
+    }
   },
   {
     "title": "Valid Boomerang",
     "body": "Given an array points where points[i] = [xi, yi] represents a point on the X-Y plane, return true if these points are a boomerang.\n\nA boomerang is a set of three points that are all distinct and not in a straight line.",
     "example": "Example 1:\n\nInput: points = [[1,1],[2,3],[3,2]]\nOutput: true; Example 2:\n\nInput: points = [[1,1],[2,2],[3,3]]\nOutput: false",
-    "level": "easy"
+    "level": "easy",
+    "solution": {
+      "content": "public boolean isBoomerang(int[][] points) {\n        Objects.requireNonNull(points, \"The array cannot be null\");\n        \n        if (points.length < 3) {\n            return false;\n        }\n\n        int x1 = points[0][0];\n        int y1 = points[0][1];\n\n        int x2 = points[1][0];\n        int y2 = points[1][1];\n\n        int x3 = points[2][0];\n        int y3 = points[2][1];\n\n        return (y2 - y1) * (x3 - x2) != (y3 - y2) * (x2 - x1);\n    }"
+    }
   },
   {
     "title": "Count Vowels in a String",
@@ -1563,6 +1560,15 @@
     "level": "easy",
     "solution": {
       "content": "public boolean canConstruct(String ransomNote, String magazine) {\n        final Map<Character, Integer> frequencyLetter = new HashMap<>();\n\n        for (char letter : magazine.toCharArray()) {\n            frequencyLetter.merge(letter, 1, Integer::sum);\n        }\n\n        for (char letter : ransomNote.toCharArray()) {\n            if (frequencyLetter.getOrDefault(letter, 0) > 0) {\n                frequencyLetter.merge(letter, -1, Integer::sum);\n            } else {\n                return false;\n            }\n        }\n        return true;\n    }"
+    }
+  },
+  {
+    "title": "Compare Version Numbers",
+    "body": "Given two version strings, version1 and version2, compare them. A version string consists of revisions separated by dots '.'. The value of the revision is its integer conversion ignoring leading zeros.\n\nTo compare version strings, compare their revision values in left-to-right order. If one of the version strings has fewer revisions, treat the missing revision values as 0. \n Return the following:\n\nIf version1 < version2, return -1.\nIf version1 > version2, return 1.\nOtherwise, return 0.",
+    "example": "Input: version1 = \"1.2\", version2 = \"1.10\"\n\nOutput: -1\n\nExplanation:\n\nversion1's second revision is \"2\" and version2's second revision is \"10\": 2 < 10, so version1 < version2.   Input: version1 = \"1.01\", version2 = \"1.001\"\n\nOutput: 0\n\nExplanation:\n\nIgnoring leading zeroes, both \"01\" and \"001\" represent the same integer \"1\".  Input: version1 = \"1.0\", version2 = \"1.0.0.0\"\n\nOutput: 0\n\nExplanation:\n\nversion1 has less revisions, which means every missing revision are treated as \"0\".",
+    "level": "easy",
+    "solution": {
+      "content": "public int compareVersions(final String version1, final String version2) {\n        Objects.requireNonNull(version1, \"Version1 cannot be null\");\n        Objects.requireNonNull(version2, \"Version2 cannot be null\");\n\n        if (version1.isEmpty() || version2.isEmpty()) {\n            throw new IllegalArgumentException(\"Version strings cannot be empty\");\n        }\n\n        final String[] v1Parts = version1.split(\"\\\\.\");\n        final String[] v2Parts = version2.split(\"\\\\.\");\n\n        final int maxLength = Math.max(v1Parts.length, v2Parts.length);\n\n        for (int i = 0; i < maxLength; i++) {\n            int v1 = i < v1Parts.length ? Integer.parseInt(v1Parts[i]) : 0;\n            int v2 = i < v2Parts.length ? Integer.parseInt(v2Parts[i]) : 0;\n\n            if (v1 != v2) {\n                return Integer.compare(v1, v2);\n            }\n        }\n\n        return 0;\n    }"
     }
   },
   {
