@@ -1514,7 +1514,7 @@
     "example": "Input: str1 = \"ABCABC\", str2 = \"ABC\"\nOutput: \"ABC\", Input: str1 = \"ABABAB\", str2 = \"ABAB\"\nOutput: \"AB\", Input: str1 = \"LEET\", str2 = \"CODE\"\nOutput: \"\"",
     "level": "easy",
     "solution": {
-      "content": ""
+      "content": "public String gcdOfStrings(String str1, String str2) {\n        if (!(str1 + str2).equals(str2 + str1)) {\n            return \"\";\n        }\n        final int result = gcd(str1.length(), str2.length());\n\n        return str1.substring(0, result);\n    }\n\n    private int gcd(int a, int b) {\n        while (b != 0) {\n            int temp = b;\n            b = a % b;\n            a = temp;\n        }\n        return a;\n    }"
     }
   },
   {
