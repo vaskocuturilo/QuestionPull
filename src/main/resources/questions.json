@@ -1881,6 +1881,15 @@
     }
   },
   {
+    "title": "Reverse Words in a String",
+    "body": "Given an input string s, reverse the order of the words.\n\nA word is defined as a sequence of non-space characters. The words in s will be separated by at least one space.\n\nReturn a string of the words in reverse order concatenated by a single space.\n\nNote that s may contain leading or trailing spaces or multiple spaces between two words. The returned string should only have a single space separating the words. Do not include any extra spaces. \n Follow-up: If the string data type is mutable in your language, can you solve it in-place with O(1) extra space?\n\n",
+    "example": "Example 1:\n\nInput: s = \"the sky is blue\"\nOutput: \"blue is sky the\"\nExample 2:\n\nInput: s = \"  hello world  \"\nOutput: \"world hello\"\nExplanation: Your reversed string should not contain leading or trailing spaces.\nExample 3:\n\nInput: s = \"a good   example\"\nOutput: \"example good a\"\nExplanation: You need to reduce multiple spaces between two words to a single space in the reversed string.",
+    "level": "medium",
+    "solution": {
+      "content": "public String reverseWords(String s) {\n        Objects.requireNonNull(s, \"The sentence cannot be null\");\n\n        return cleanSpaces(reverseWord(s.toCharArray()));\n    }\n\n    private String cleanSpaces(char[] wordsArray) {\n        int i = 0;\n\n        int j = 0;\n\n        int n = wordsArray.length;\n\n        while (j < n) {\n            while (j < n && wordsArray[j] == ' ') j++;\n            while (j < n && wordsArray[j] != ' ') wordsArray[i++] = wordsArray[j++];\n            while (j < n && wordsArray[j] == ' ') j++;\n            if (j < n) wordsArray[i++] = ' ';\n        }\n\n        return new String(wordsArray).substring(0, i);\n    }\n\n    private char[] reverseWord(char[] wordsArray) {\n        int length = wordsArray.length;\n        int wordstart = 0;\n\n        for (int currentIndex = 0; currentIndex < length; currentIndex++) {\n            if (wordsArray[currentIndex] == ' ') {\n                reverseRange(wordsArray, wordstart, currentIndex - 1);\n                wordstart = currentIndex + 1;\n            } else if (currentIndex == length - 1) {\n                reverseRange(wordsArray, wordstart, currentIndex);\n            }\n        }\n\n        reverseRange(wordsArray, 0, length - 1);\n\n        return wordsArray;\n    }\n\n    private void reverseRange(char[] sentence, int left, int right) {\n        while (left < right) {\n            char temp = sentence[left];\n            sentence[left++] = sentence[right];\n            sentence[right--] = temp;\n        }\n    }"
+    }
+  },
+  {
     "title": "Top K Frequent Elements",
     "body": "Given an integer array and an integer k, return the k most frequent elements. Optimize for time complexity better than O(n log n)",
     "example": "Input: nums = [1,1,1,2,2,3], k = 2, Output: [1,2]",
