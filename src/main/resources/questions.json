@@ -1899,6 +1899,15 @@
     }
   },
   {
+    "title": "String Compression",
+    "body": "Given an array of characters chars, compress it using the following algorithm:\n\nBegin with an empty string s. For each group of consecutive repeating characters in chars:\n\nIf the group's length is 1, append the character to s.\nOtherwise, append the character followed by the group's length.\nThe compressed string s should not be returned separately, but instead, be stored in the input character array chars. Note that group lengths that are 10 or longer will be split into multiple characters in chars.\n\nAfter you are done modifying the input array, return the new length of the array.\n\nYou must write an algorithm that uses only constant extra space.\n\nNote: The characters in the array beyond the returned length do not matter and should be ignored.",
+    "example": "Example 1:\n\nInput: chars = [\"a\",\"a\",\"b\",\"b\",\"c\",\"c\",\"c\"]\nOutput: Return 6, and the first 6 characters of the input array should be: [\"a\",\"2\",\"b\",\"2\",\"c\",\"3\"]\nExplanation: The groups are \"aa\", \"bb\", and \"ccc\". This compresses to \"a2b2c3\".\nExample 2:\n\nInput: chars = [\"a\"]\nOutput: Return 1, and the first character of the input array should be: [\"a\"]\nExplanation: The only group is \"a\", which remains uncompressed since it's a single character.\nExample 3:\n\nInput: chars = [\"a\",\"b\",\"b\",\"b\",\"b\",\"b\",\"b\",\"b\",\"b\",\"b\",\"b\",\"b\",\"b\"]\nOutput: Return 4, and the first 4 characters of the input array should be: [\"a\",\"b\",\"1\",\"2\"].\nExplanation: The groups are \"a\" and \"bbbbbbbbbbbb\". This compresses to \"ab12\".",
+    "level": "medium",
+    "solution": {
+      "content": "public int compress(char[] chars) {\n        Objects.requireNonNull(chars, \"The char array cannot be null\");\n\n        if (chars.length < 1 || chars.length >= 2000) {\n            throw new IllegalArgumentException(\"The char array mus be between 1 and 2000\");\n        }\n\n        int writeIndex = 0;\n        int currentIndex = 0;\n        int arrayLength = chars.length;\n\n        while (currentIndex < arrayLength) {\n            int nextIndex = currentIndex + 1;\n\n            while (nextIndex < arrayLength && chars[nextIndex] == chars[currentIndex]) {\n                nextIndex++;\n            }\n\n            chars[writeIndex++] = chars[currentIndex];\n            int count = nextIndex - currentIndex;\n\n            if (count > 1) {\n                String countString = String.valueOf(count);\n                for (char digit : countString.toCharArray()) {\n                    chars[writeIndex++] = digit;\n                }\n            }\n            currentIndex = nextIndex;\n        }\n\n        return writeIndex;\n    }"
+    }
+  },
+  {
     "title": "Top K Frequent Elements",
     "body": "Given an integer array and an integer k, return the k most frequent elements. Optimize for time complexity better than O(n log n)",
     "example": "Input: nums = [1,1,1,2,2,3], k = 2, Output: [1,2]",
