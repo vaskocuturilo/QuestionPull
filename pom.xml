@@ -5,7 +5,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.4.4</version>
+        <version>3.5.9</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.example</groupId>
@@ -14,7 +14,7 @@
     <name>QuestionPull</name>
     <description>QuestionPull</description>
     <properties>
-        <java.version>17</java.version>
+        <java.version>24</java.version>
         <docker.username>vaskocuturilo</docker.username>
         <docker.image.name>interview-dude</docker.image.name>
         <docker.image.tag>latest</docker.image.tag>
@@ -65,11 +65,6 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-            <version>8.0.33</version>
-        </dependency>
-        <dependency>
             <groupId>org.junit.platform</groupId>
             <artifactId>junit-platform-launcher</artifactId>
             <scope>test</scope>
@@ -99,7 +94,7 @@
                 <version>3.4.6</version>
                 <configuration>
                     <from>
-                        <image>eclipse-temurin:17</image>
+                        <image>eclipse-temurin:24</image>
                         <platforms>
                             <platform>
                                 <architecture>arm64</architecture>
