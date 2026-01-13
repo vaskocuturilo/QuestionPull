@@ -1,4 +1,4 @@
-name: CI - PR Validation
+name: CI - PR Validation 👔
 on:
   pull_request:
     branches:
@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Set up JDK 24
+      - name: Set up JDK 24 🚂
         uses: actions/setup-java@v4
         with:
           java-version: '24'

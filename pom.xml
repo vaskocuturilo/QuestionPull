@@ -65,11 +65,6 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-            <version>8.0.33</version>
-        </dependency>
-        <dependency>
             <groupId>org.junit.platform</groupId>
             <artifactId>junit-platform-launcher</artifactId>
             <scope>test</scope>
@@ -99,7 +94,7 @@
                 <version>3.4.6</version>
                 <configuration>
                     <from>
-                        <image>eclipse-temurin:17</image>
+                        <image>eclipse-temurin:24</image>
                         <platforms>
                             <platform>
                                 <architecture>arm64</architecture>
