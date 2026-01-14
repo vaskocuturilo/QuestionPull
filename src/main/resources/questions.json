@@ -1572,6 +1572,15 @@
     }
   },
   {
+    "title": "First Bad Version",
+    "body": "You are a product manager and currently leading a team to develop a new product. Unfortunately, the latest version of your product fails the quality check. Since each version is developed based on the previous version, all the versions after a bad version are also bad.\n\nSuppose you have n versions [1, 2, ..., n] and you want to find out the first bad one, which causes all the following ones to be bad.\n\nYou are given an API bool isBadVersion(version) which returns whether version is bad. Implement a function to find the first bad version. You should minimize the number of calls to the API.",
+    "example": "Example 1:\n\nInput: n = 5, bad = 4\nOutput: 4\nExplanation:\ncall isBadVersion(3) -> false\ncall isBadVersion(5) -> true\ncall isBadVersion(4) -> true\nThen 4 is the first bad version.\nExample 2:\n\nInput: n = 1, bad = 1\nOutput: 1",
+    "level": "easy",
+    "solution": {
+      "content": "public int firstBadVersion(int n) {\n        int left = 1;\n        int right = n;\n        int index = -1;\n\n        while (left <= right) {\n            int middle = left + (right - left) / 2;\n            if (isBadVersion(middle)) {\n                index = middle;\n                right = middle - 1;\n            } else {\n                left = middle + 1;\n            }\n        }\n\n        return index;\n    }"
+    }
+  },
+  {
     "title": "4Sum",
     "body": "Given an array nums of n integers, return an array of all the unique quadruplets [nums[a], nums[b], nums[c], nums[d]] such that:\n\n0 <= a, b, c, d < n\na, b, c, and d are distinct.\nnums[a] + nums[b] + nums[c] + nums[d] == target\nYou may return the answer in any order.",
     "example": "Example 1:\n\nInput: nums = [1,0,-1,0,-2,2], target = 0\nOutput: [[-2,-1,1,2],[-2,0,0,2],[-1,0,0,1]]\nExample 2:\n\nInput: nums = [2,2,2,2,2], target = 8\nOutput: [[2,2,2,2]]",
