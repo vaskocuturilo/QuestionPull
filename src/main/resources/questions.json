@@ -1581,6 +1581,15 @@
     }
   },
   {
+    "title": "Longest Uncommon Subsequence II",
+    "body": "Given an array of strings strs, return the length of the longest uncommon subsequence between them. If the longest uncommon subsequence does not exist, return -1.\n\nAn uncommon subsequence between an array of strings is a string that is a subsequence of one string but not the others.\n\nA subsequence of a string s is a string that can be obtained after deleting any number of characters from s.\n\nFor example, \"abc\" is a subsequence of \"aebdc\" because you can delete the underlined characters in \"aebdc\" to get \"abc\". Other subsequences of \"aebdc\" include \"aebdc\", \"aeb\", and \"\" (empty string).",
+    "example": "Example 1:\n\nInput: strs = [\"aba\",\"cdc\",\"eae\"]\nOutput: 3\nExample 2:\n\nInput: strs = [\"aaa\",\"aaa\",\"aa\"]\nOutput: -1",
+    "level": "medium",
+    "solution": {
+      "content": "public int findLUSlength(String[] strs) {\n        int length = -1;\n        for (int i = 0, j = 0, n = strs.length; i < n; i++) {\n            for (j = 0; j < n; j++) {\n                if (i == j) {\n                    continue;\n                }\n                if (check(strs[j], strs[i])) {\n                    break;\n                }\n            }\n            if (j == n) {\n                length = Math.max(length, strs[i].length());\n            }\n        }\n        return length;\n    }\n\n    private boolean check(String a, String b) {\n        int j = 0;\n        for (int i = 0; i < a.length() && j < b.length(); i++) {\n            if (a.charAt(i) == b.charAt(j)) {\n                j++;\n            }\n        }\n        return j == b.length();\n    }"
+    }
+  },
+  {
     "title": "4Sum",
     "body": "Given an array nums of n integers, return an array of all the unique quadruplets [nums[a], nums[b], nums[c], nums[d]] such that:\n\n0 <= a, b, c, d < n\na, b, c, and d are distinct.\nnums[a] + nums[b] + nums[c] + nums[d] == target\nYou may return the answer in any order.",
     "example": "Example 1:\n\nInput: nums = [1,0,-1,0,-2,2], target = 0\nOutput: [[-2,-1,1,2],[-2,0,0,2],[-1,0,0,1]]\nExample 2:\n\nInput: nums = [2,2,2,2,2], target = 8\nOutput: [[2,2,2,2]]",
