@@ -1581,6 +1581,15 @@
     }
   },
   {
+    "title": "Longest Word in Dictionary through Deleting",
+    "body": "Given a string s and a string array dictionary, return the longest string in the dictionary that can be formed by deleting some of the given string characters. If there is more than one possible result, return the longest word with the smallest lexicographical order. If there is no possible result, return the empty string.",
+    "example": "Example 1:\n\nInput: s = \"abpcplea\", dictionary = [\"ale\",\"apple\",\"monkey\",\"plea\"]\nOutput: \"apple\"\nExample 2:\n\nInput: s = \"abpcplea\", dictionary = [\"a\",\"b\",\"c\"]\nOutput: \"a\"\n",
+    "level": "medium",
+    "solution": {
+      "content": "public String findLongestWord(String s, List<String> dictionary) {\n        Objects.requireNonNull(dictionary, \"The list cannot be null\");\n\n        String result = \"\";\n\n        for (String word : dictionary) {\n            int resultLength = result.length();\n            int wordLength = word.length();\n\n            if (isCheck(word, s) && ((resultLength < wordLength) || (resultLength == wordLength && word.compareTo(result) < 0))) {\n                result = word;\n            }\n        }\n        return result;\n    }\n\n    private boolean isCheck(String s, String t) {\n        int j = 0;\n        for (int i = 0; j < s.length() && i < t.length(); i++) {\n            if (s.charAt(j) == t.charAt(i)) {\n                j++;\n            }\n        }\n        return j == s.length();\n    }"
+    }
+  },
+  {
     "title": "Longest Uncommon Subsequence II",
     "body": "Given an array of strings strs, return the length of the longest uncommon subsequence between them. If the longest uncommon subsequence does not exist, return -1.\n\nAn uncommon subsequence between an array of strings is a string that is a subsequence of one string but not the others.\n\nA subsequence of a string s is a string that can be obtained after deleting any number of characters from s.\n\nFor example, \"abc\" is a subsequence of \"aebdc\" because you can delete the underlined characters in \"aebdc\" to get \"abc\". Other subsequences of \"aebdc\" include \"aebdc\", \"aeb\", and \"\" (empty string).",
     "example": "Example 1:\n\nInput: strs = [\"aba\",\"cdc\",\"eae\"]\nOutput: 3\nExample 2:\n\nInput: strs = [\"aaa\",\"aaa\",\"aa\"]\nOutput: -1",
