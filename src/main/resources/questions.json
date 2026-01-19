@@ -1944,6 +1944,15 @@
     }
   },
   {
+    "title": "Permutation in String",
+    "body": "Given two strings s1 and s2, return true if s2 contains a permutation of s1, or false otherwise.\n\nIn other words, return true if one of s1's permutations is the substring of s2.",
+    "example": "Example 1:\n\nInput: s1 = \"ab\", s2 = \"eidbaooo\"\nOutput: true\nExplanation: s2 contains one permutation of s1 (\"ba\").\nExample 2:\n\nInput: s1 = \"ab\", s2 = \"eidboaoo\"\nOutput: false",
+    "level": "medium",
+    "solution": {
+      "content": "public boolean checkInclusion(String s1, String s2) {\n        Objects.requireNonNull(s1, \"The sentence cannot be null\");\n        Objects.requireNonNull(s2, \"The sentence cannot be null\");\n\n        if (s1.length() > s2.length()) {\n            return false;\n        }\n\n        int count = 0;\n\n        int[] charFrequency = new int[26];\n\n        for (char currentCharacter : s1.toCharArray()) {\n            int currentIndexFirstSentence = currentCharacter - 'a';\n\n            charFrequency[currentIndexFirstSentence]++;\n\n            if (charFrequency[currentIndexFirstSentence] == 1) {\n                count++;\n            }\n        }\n\n        int firstSentenceLength = s1.length();\n\n        int secondSentenceLength = s2.length();\n\n        for (int i = 0; i < secondSentenceLength; i++) {\n            int currentIndexSecondSentence = s2.charAt(i) - 'a';\n\n            charFrequency[currentIndexSecondSentence]--;\n\n            if (charFrequency[currentIndexSecondSentence] == 0) {\n                count--;\n            }\n\n            if (i >= firstSentenceLength) {\n                int index = s2.charAt(i - firstSentenceLength) - 'a';\n                charFrequency[index]++;\n\n                if (charFrequency[index] == 1) {\n                    count++;\n                }\n            }\n\n            if (count == 0) {\n                return true;\n            }\n        }\n\n\n        return false;\n    }"
+    }
+  },
+  {
     "title": "Top K Frequent Elements",
     "body": "Given an integer array and an integer k, return the k most frequent elements. Optimize for time complexity better than O(n log n)",
     "example": "Input: nums = [1,1,1,2,2,3], k = 2, Output: [1,2]",
