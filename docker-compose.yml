@@ -129,7 +129,7 @@ services:
       - app-network
 
   watchtower:
-    image: containrrr/watchtower
+    image: nickfedor/watchtower
     container_name: watchtower
     command:
       - "--interval=30"
