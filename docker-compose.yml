@@ -134,7 +134,6 @@ services:
     command:
       - "--interval=30"
       - "--label-enable"
-      - "--rolling-restart"
       - "--cleanup"
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
