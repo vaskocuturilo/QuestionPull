@@ -1962,6 +1962,15 @@
     }
   },
   {
+    "title": "Next Greater Element III",
+    "body": "Given a positive integer n, find the smallest integer which has exactly the same digits existing in the integer n and is greater in value than n. If no such positive integer exists, return -1.\n\nNote that the returned integer should fit in 32-bit integer, if there is a valid answer but it does not fit in 32-bit integer, return -1.",
+    "example": "Example 1:\n\nInput: n = 12\nOutput: 21\nExample 2:\n\nInput: n = 21\nOutput: -1",
+    "level": "medium",
+    "solution": {
+      "content": "public int nextGreaterElement(int n) {\n        final char[] charArray = String.valueOf(n).toCharArray();\n\n        int start = charArray.length - 2;\n\n        while (start >= 0 && charArray[start] >= charArray[start + 1]) {\n            start--;\n        }\n\n        if (start < 0) {\n            return -1;\n        }\n\n        int end = charArray.length - 1;\n\n        while (charArray[start] >= charArray[end]) {\n            end--;\n        }\n\n        swapElements(charArray, start, end);\n\n        reverseElements(charArray, start + 1, charArray.length - 1);\n\n        final long result = Long.parseLong(String.valueOf(charArray));\n\n        return result > Integer.MAX_VALUE ? -1 : (int) result;\n    }\n\n    private void swapElements(char[] array, int i, int j) {\n        char temp = array[i];\n        array[i] = array[j];\n        array[j] = temp;\n    }\n\n    private void reverseElements(char[] array, int left, int right) {\n        while (left < right) {\n            swapElements(array, left, right);\n            left++;\n            right--;\n        }\n    }"
+    }
+  },
+  {
     "title": "Top K Frequent Elements",
     "body": "Given an integer array and an integer k, return the k most frequent elements. Optimize for time complexity better than O(n log n)",
     "example": "Input: nums = [1,1,1,2,2,3], k = 2, Output: [1,2]",
