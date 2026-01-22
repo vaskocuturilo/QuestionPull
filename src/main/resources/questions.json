@@ -1971,6 +1971,15 @@
     }
   },
   {
+    "title": "Palindromic Substrings",
+    "body": "Given a string s, return the number of palindromic substrings in it.\n\nA string is a palindrome when it reads the same backward as forward.\n\nA substring is a contiguous sequence of characters within the string.\n\n",
+    "example": "Example 1:\n\nInput: s = \"abc\"\nOutput: 3\nExplanation: Three palindromic strings: \"a\", \"b\", \"c\".\nExample 2:\n\nInput: s = \"aaa\"\nOutput: 6\nExplanation: Six palindromic strings: \"a\", \"a\", \"a\", \"aa\", \"aa\", \"aaa\".",
+    "level": "medium",
+    "solution": {
+      "content": "public int countSubstrings(String s) {\n        Objects.requireNonNull(s, \"The string cannot be null\");\n\n        int result = 0;\n\n        for (int i = 0; i < s.length(); i++) {\n            result += countPalindrome(s, i, i);\n            result += countPalindrome(s, i, i + 1);\n        }\n\n        return result;\n    }\n\n    private int countPalindrome(final String s, int i, int j) {\n        int count = 0;\n\n        final int lengthString = s.length();\n\n        while (i >= 0 && j < lengthString && s.charAt(i) == s.charAt(j)) {\n            count++;\n            i--;\n            j++;\n        }\n        return count;\n    }"
+    }
+  },
+  {
     "title": "Top K Frequent Elements",
     "body": "Given an integer array and an integer k, return the k most frequent elements. Optimize for time complexity better than O(n log n)",
     "example": "Input: nums = [1,1,1,2,2,3], k = 2, Output: [1,2]",
