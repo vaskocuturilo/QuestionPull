@@ -1989,6 +1989,15 @@
     }
   },
   {
+    "title": "Find First and Last Position of Element in Sorted Array",
+    "body": "Given an array of integers nums sorted in non-decreasing order, find the starting and ending position of a given target value.\n\nIf target is not found in the array, return [-1, -1].\n\nYou must write an algorithm with O(log n) runtime complexity.",
+    "example": "Example 1:\n\nInput: nums = [5,7,7,8,8,10], target = 8\nOutput: [3,4]\nExample 2:\n\nInput: nums = [5,7,7,8,8,10], target = 6\nOutput: [-1,-1]\nExample 3:\n\nInput: nums = [], target = 0\nOutput: [-1,-1]",
+    "level": "medium",
+    "solution": {
+      "content": "public int[] searchRange(int[] nums, int target) {\n        Objects.requireNonNull(nums, \"The array cannot be null\");\n\n        int left = 0;\n        int right = nums.length - 1;\n\n        int first = -1;\n        int last = -1;\n        \n        //Finding first occurrence\n        while (left <= right) {\n            int middle = (left + right) / 2;\n\n            if (nums[middle] < target) {\n                left = middle + 1;\n            } else if (nums[middle] > target) {\n                right = middle - 1;\n            } else {\n                right = middle - 1;\n                first = middle;\n            }\n        }\n\n        left = 0;\n        right = nums.length - 1;\n\n        //Finding last occurrence\n        while (left <= right) {\n            final int middle = (left + right) / 2;\n\n            if (nums[middle] < target) {\n                left = middle + 1;\n            } else if (nums[middle] > target) {\n                right = middle - 1;\n            } else {\n                left = middle + 1;\n                last = middle;\n            }\n        }\n        return new int[]{first, last};\n    }"
+    }
+  },
+  {
     "title": "Top K Frequent Elements",
     "body": "Given an integer array and an integer k, return the k most frequent elements. Optimize for time complexity better than O(n log n)",
     "example": "Input: nums = [1,1,1,2,2,3], k = 2, Output: [1,2]",
