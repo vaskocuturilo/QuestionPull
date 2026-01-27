@@ -1,5 +1,14 @@
 [
   {
+    "title": "Sqrt(x)",
+    "body": "Given a non-negative integer x, return the square root of x rounded down to the nearest integer. The returned integer should be non-negative as well.\n\nYou must not use any built-in exponent function or operator.\n\nFor example, do not use pow(x, 0.5) in c++ or x ** 0.5 in python.",
+    "example": "Example 1:\n\nInput: x = 4\nOutput: 2\nExplanation: The square root of 4 is 2, so we return 2.\nExample 2:\n\nInput: x = 8\nOutput: 2\nExplanation: The square root of 8 is 2.82842..., and since we round it down to the nearest integer, 2 is returned.",
+    "level": "easy",
+    "solution": {
+      "content": "public int mySqrt(int x) {\n        if (x == 0) {\n            return 0;\n        }\n\n        int left = 1;\n        int right = x;\n        int index = -1;\n\n        while (left <= right) {\n            int middle = (left + right) / 2;\n            if (middle > x / middle) {\n                index = middle;\n                right = middle - 1;\n            } else {\n                left = middle + 1;\n            }\n        }\n\n        return index == -1 ? x : index - 1;\n    }"
+    }
+  },
+  {
     "title": "Convert Sorted Array to Binary Search Tree",
     "body": "Given an integer array nums where the elements are sorted in ascending order, convert it to a height-balanced binary search tree.",
     "example": "Example 1:\n\n\nInput: nums = [-10,-3,0,5,9]\nOutput: [0,-3,9,-10,null,5]\nExplanation: [0,-10,5,null,-3,null,9] is also accepted:\n\nExample 2:\n\n\nInput: nums = [1,3]\nOutput: [3,1]\nExplanation: [1,null,3] and [3,1] are both height-balanced BSTs.",
