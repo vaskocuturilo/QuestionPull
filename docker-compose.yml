@@ -69,7 +69,7 @@ services:
     image: grafana/grafana
     container_name: grafana
     ports:
-      - "3000:3000"
+      - "3001:3000"
     volumes:
       - grafana-data:/var/lib/grafana
     logging:
@@ -132,9 +132,14 @@ services:
     image: nickfedor/watchtower
     container_name: watchtower
     command:
-      - "--interval=30"
+      - "--debug"
+      - "--interval=300"
+      - "--include-stopped"
+      - "--revive-stopped"
       - "--label-enable"
       - "--cleanup"
+      - "--remove-volumes"
+
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     logging:
