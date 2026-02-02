@@ -2025,6 +2025,15 @@
     }
   },
   {
+    "title": "Minimum Size Subarray Sum",
+    "body": "Given an array of positive integers nums and a positive integer target, return the minimal length of a subarray whose sum is greater than or equal to target. If there is no such subarray, return 0 instead.",
+    "example": "Example 1:\n\nInput: target = 7, nums = [2,3,1,2,4,3]\nOutput: 2\nExplanation: The subarray [4,3] has the minimal length under the problem constraint.\nExample 2:\n\nInput: target = 4, nums = [1,4,4]\nOutput: 1\nExample 3:\n\nInput: target = 11, nums = [1,1,1,1,1,1,1,1]\nOutput: 0",
+    "level": "medium",
+    "solution": {
+      "content": "public int minSubArrayLen(int target, int[] nums) {\n            int n = nums.length;\n\n        long[] prefixSum = new long[n + 1];\n\n        for (int i = 0; i < n; i++) {\n            prefixSum[i + 1] = prefixSum[i] + nums[i];\n        }\n\n        int result = n + 1;\n\n        for (int i = 0; i <= n; i++) {\n            int left = i;\n            int right = n;\n\n            int index = -1;\n\n            while (left <= right) {\n                int middle = (left + right) / 2;\n\n                if (prefixSum[middle] >= prefixSum[i] + target) {\n                    index = middle;\n                    right = middle - 1;\n                } else {\n                    left = middle + 1;\n                }\n\n                if (index != -1) {\n                    result = Math.min(result, index - i);\n                }\n\n            }\n        }\n\n\n        return result <= n ? result : 0;\n        }"
+    }
+  },
+  {
     "title": "Top K Frequent Elements",
     "body": "Given an integer array and an integer k, return the k most frequent elements. Optimize for time complexity better than O(n log n)",
     "example": "Input: nums = [1,1,1,2,2,3], k = 2, Output: [1,2]",
