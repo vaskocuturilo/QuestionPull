@@ -22,7 +22,7 @@ public interface QuestionPullRepository extends CrudRepository<QuestionEntity, U
     @Query("SELECT q from QuestionEntity q WHERE q.body LIKE CONCAT('%', :body, '%') ORDER BY q.body asc ")
     Optional<QuestionEntity> findByBody(@Param("body") final String body);
 
-    @Query("SELECT q FROM QuestionEntity q WHERE q.level = :level AND q.uuid NOT IN :excludedIds ORDER BY function('rand()') LIMIT 1")
+    @Query("SELECT q FROM QuestionEntity q WHERE q.level = :level AND q.uuid NOT IN :excludedIds ORDER BY RANDOM() LIMIT 1")
     Optional<QuestionEntity> findRandomByDifficultyExcludingIds(@Param("level") String level, @Param("excludedIds") List<UUID> excludedIds);
 
     @Query("SELECT q.level, COUNT(q) FROM QuestionEntity q GROUP BY q.level")
