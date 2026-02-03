@@ -29,14 +29,19 @@ services:
         max-size: "50m"
         max-file: "4"
 
+    networks:
+      - app-network
+
   interview-dude:
     image: vaskocuturilo/interview-dude:latest
     container_name: interview-dude
     hostname: interview-dude
     restart: always
     environment:
-      MYSQL_USER: ${POSTGRES_USER}
-      MYSQL_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+
       BOT_NAME: ${BOT_NAME}
       BOT_API_KEY: ${BOT_API_KEY}
       DONATE_LINK: ${DONATE_LINK}
