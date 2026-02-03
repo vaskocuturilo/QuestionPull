@@ -45,6 +45,25 @@ class QuestionPullRepositoryTest {
     }
 
     @Test
+    void itShouldSelectByUUID() {
+        QuestionEntity question = QuestionEntity
+                .builder()
+                .title("Test")
+                .body("Test")
+                .example("Example")
+                .level("easy")
+                .build();
+
+        underTest.save(question);
+
+        Optional<QuestionEntity> optionalPaste = underTest.findByUuid(question.getUuid());
+
+        assertThat(optionalPaste).isPresent().hasValueSatisfying(c -> assertThat(c)
+                .usingRecursiveComparison()
+                .isEqualTo(question));
+    }
+
+    @Test
     void itShouldSelectByTitle() {
         QuestionEntity question = QuestionEntity
                 .builder()
@@ -84,8 +103,8 @@ class QuestionPullRepositoryTest {
 
     @Test
     void itNotShouldSelectQuestionByIdWhenIdDoesNotExist() {
-        UUID uuid = UUID.randomUUID();
-        Optional<QuestionEntity> optionalPaste = underTest.findById(uuid);
+        final UUID uuid = UUID.randomUUID();
+        Optional<QuestionEntity> optionalPaste = underTest.findByUuid(uuid);
         assertThat(optionalPaste).isNotPresent();
     }
 

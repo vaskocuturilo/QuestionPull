@@ -13,13 +13,16 @@ import java.util.UUID;
 @Repository
 public interface QuestionPullRepository extends CrudRepository<QuestionEntity, UUID> {
 
+    @Query("SELECT q from QuestionEntity q WHERE q.uuid = :uuid ORDER BY q.uuid asc")
+    Optional<QuestionEntity> findByUuid(@Param("uuid") final UUID uuid);
+
     @Query("SELECT q from QuestionEntity q WHERE q.title = :title ORDER BY q.title asc")
     Optional<QuestionEntity> findByTitle(@Param("title") final String title);
 
     @Query("SELECT q from QuestionEntity q WHERE q.body LIKE CONCAT('%', :body, '%') ORDER BY q.body asc ")
     Optional<QuestionEntity> findByBody(@Param("body") final String body);
 
-    @Query("SELECT q FROM QuestionEntity q WHERE q.level = :level AND q.uuid NOT IN :excludedIds ORDER BY function('RAND') LIMIT 1")
+    @Query("SELECT q FROM QuestionEntity q WHERE q.level = :level AND q.uuid NOT IN :excludedIds ORDER BY RANDOM() LIMIT 1")
     Optional<QuestionEntity> findRandomByDifficultyExcludingIds(@Param("level") String level, @Param("excludedIds") List<UUID> excludedIds);
 
     @Query("SELECT q.level, COUNT(q) FROM QuestionEntity q GROUP BY q.level")

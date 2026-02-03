@@ -1,45 +1,42 @@
 services:
-  database:
-    image: mariadb:10.11.13
-    container_name: questions-regions
-    hostname: questions-regions
-    restart: always
+  postgres:
+    container_name: postgres
+    image: postgres:17-alpine3.19
+    restart: unless-stopped
     ports:
-      - "3306:3306"
+      - "5432:5432"
+
     environment:
-      MYSQL_USER: ${MYSQL_USER}
-      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
-      MYSQL_DATABASE: ${MYSQL_DATABASE}
-      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+      PGDATA: "/var/lib/postgresql/data/pgdata"
+    volumes:
+      - ../2. Init Database:/docker-entrypoint-initdb.d
+      - postgres-data:/var/lib/postgresql/data
+
     healthcheck:
-      test: [ "CMD", "mysqladmin", "ping", "-h", "localhost" ]
-      interval: 30s
-      timeout: 10s
+      test: [ "CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}" ]
+      interval: 10s
+      timeout: 5s
       retries: 5
+      start_period: 10s
+
     logging:
+      #limit logs to 200MB (4 rotations of 50M each)
       driver: "json-file"
       options:
         max-size: "50m"
         max-file: "4"
-    deploy:
-      resources:
-        limits:
-          cpus: "0.5"
-          memory: 256M
-    networks:
-      - app-network
 
   interview-dude:
     image: vaskocuturilo/interview-dude:latest
     container_name: interview-dude
     hostname: interview-dude
     restart: always
-    depends_on:
-      - database
     environment:
-      MYSQL_USER: ${MYSQL_USER}
-      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
-      MYSQL_ROOT_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_USER: ${POSTGRES_USER}
+      MYSQL_PASSWORD: ${POSTGRES_PASSWORD}
       BOT_NAME: ${BOT_NAME}
       BOT_API_KEY: ${BOT_API_KEY}
       DONATE_LINK: ${DONATE_LINK}
@@ -64,6 +61,9 @@ services:
       - "com.centurylinklabs.watchtower.enable=true"
     networks:
       - app-network
+
+    depends_on:
+      - postgres
 
   grafana:
     image: grafana/grafana
@@ -128,6 +128,21 @@ services:
     networks:
       - app-network
 
+  redis-insight:
+    image: redis/redisinsight:latest
+    restart: always
+    ports:
+      - "5540:5540"
+
+    networks:
+      - app-network
+
+    volumes:
+      - redis-insight:/data
+
+    depends_on:
+      - redis
+
   watchtower:
     image: nickfedor/watchtower
     container_name: watchtower
@@ -156,4 +171,6 @@ networks:
 
 volumes:
   grafana-data:
+  redis-insight:
+  postgres-data:
   logs:

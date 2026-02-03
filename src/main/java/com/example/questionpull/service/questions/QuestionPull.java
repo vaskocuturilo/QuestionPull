@@ -10,5 +10,7 @@ import java.util.UUID;
 public interface QuestionPull {
     Optional<QuestionEntity> getRandomQuestionExcludingIds(String level, List<UUID> history);
 
+    Optional<QuestionEntity> getQuestionById(UUID uuid);
+
     Map<String, Long> getQuestionCountsByLevel();
 }

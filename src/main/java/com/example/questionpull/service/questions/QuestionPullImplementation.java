@@ -44,8 +44,7 @@ public class QuestionPullImplementation implements QuestionPull {
         }
 
         log.info("Fetching random question from DB for level [{}] (cache empty or all questions used)", level);
-        Optional<QuestionEntity> dbQuestion =
-                questionPullRepository.findRandomByDifficultyExcludingIds(level, excludedIds);
+        Optional<QuestionEntity> dbQuestion = questionPullRepository.findRandomByDifficultyExcludingIds(level, excludedIds);
 
         dbQuestion.ifPresent(question -> {
             cacheService.cacheQuestion(question);
@@ -53,6 +52,11 @@ public class QuestionPullImplementation implements QuestionPull {
         });
 
         return dbQuestion;
+    }
+
+    @Override
+    public Optional<QuestionEntity> getQuestionById(UUID uuid) {
+        return questionPullRepository.findByUuid(uuid);
     }
 
     @Override
