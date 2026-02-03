@@ -24,6 +24,7 @@ public class QuestionPullService {
     private static final String BUTTON_NEXT_QUESTION_MEDIUM = "⭐ Next Medium Question ";
     private static final String BUTTON_NEXT_QUESTION_HARD = "\uD83D\uDD25 Next Hard Question ";
     private static final String BUTTON_COMPARE_MY_SOLUTION = "\uD83C\uDD9A Compare solutions";
+    private static final String BUTON_CHECK_BIG_O = "🧮 Check Big O";
     private static final String BUTTON_NEXT_QUESTION_RANDOM = "\uD83C\uDFB2 Next Random Question ";
     private static final String BUTTON_SHOW_STATISTIC = "\uD83D\uDCCA Show Statistic";
     private static final String BUTTON_STOP_QUESTION = "⛔ Stop Questions";
@@ -31,6 +32,7 @@ public class QuestionPullService {
     private static final String BUTTON_HELP_INFO_QUESTION = "ℹ️ Help & Info";
     private static final String NEXT_QUESTION_EASY = "NEXT_QUESTION_EASY";
     private static final String NEXT_QUESTION_MEDIUM = "NEXT_QUESTION_MEDIUM";
+    private static final String CHECK_BIG_O = "CHECK_BIG_O";
     private static final String COMPARE_MY_SOLUTION = "COMPARE_MY_SOLUTION";
     private static final String NEXT_QUESTION_RANDOM = "NEXT_QUESTION_RANDOM";
     private static final String NEXT_QUESTION_HARD = "NEXT_QUESTION_HARD";
@@ -100,6 +102,7 @@ public class QuestionPullService {
                 .addRow().addButton(BUTTON_PASS, passCallback)
                 .addRow().addButton(BUTTON_FAIL, failCallback)
                 .addRow().addButton(BUTTON_COMPARE_MY_SOLUTION, COMPARE_MY_SOLUTION)
+                .addRow().addButton(BUTON_CHECK_BIG_O, CHECK_BIG_O)
                 .addRow().addButton(BUTTON_NEXT_QUESTION_RANDOM, NEXT_QUESTION_RANDOM)
                 .addRow().addButton(BUTTON_CHANGE_THE_LEVEL, CallbackData.CHANGE_LEVEL.name())
                 .addRow().addButton(BUTTON_SHOW_STATISTIC, CallbackData.SHOW_STATISTIC.name())
@@ -118,6 +121,7 @@ public class QuestionPullService {
                 .addRow().addButton(BUTTON_NEXT_QUESTION_MEDIUM + "(" + mediumCount + ")", CallbackData.NEXT_QUESTION_MEDIUM.name())
                 .addRow().addButton(BUTTON_NEXT_QUESTION_HARD + "(" + hardCount + ")", CallbackData.NEXT_QUESTION_HARD.name())
                 .addRow().addButton(BUTTON_COMPARE_MY_SOLUTION, CallbackData.COMPARE_MY_SOLUTION.name())
+                .addRow().addButton(BUTON_CHECK_BIG_O, CallbackData.CHECK_BIG_O.name())
                 .addRow().addButton(BUTTON_NEXT_QUESTION_RANDOM, CallbackData.NEXT_QUESTION_RANDOM.name())
                 .addRow().addButton(BUTTON_SHOW_STATISTIC, CallbackData.SHOW_STATISTIC.name())
                 .addRow().addButton(BUTTON_STOP_QUESTION, CallbackData.STOP_QUESTION.name())

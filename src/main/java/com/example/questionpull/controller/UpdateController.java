@@ -6,6 +6,7 @@ import com.example.questionpull.service.questions.QuestionPullImplementation;
 import com.example.questionpull.service.questions.QuestionPullService;
 import com.example.questionpull.service.users.UserService;
 import com.example.questionpull.util.CallbackData;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -122,6 +123,7 @@ public class UpdateController {
         tempMap.put(CallbackData.BUTTON_PASS, this::handleChangeLevelCommand);
         tempMap.put(CallbackData.BUTTON_FAIL, this::handleChangeLevelCommand);
         tempMap.put(CallbackData.COMPARE_MY_SOLUTION, this::handleCompareWithMySolutionCallback);
+        tempMap.put(CallbackData.CHECK_BIG_O, this::handleCheckBigO);
         tempMap.put(CallbackData.CHANGE_LEVEL, this::handleChangeLevelCommand);
         tempMap.put(CallbackData.SHOW_STATISTIC, this::handleShowStatisticCommand);
         tempMap.put(CallbackData.STOP_QUESTION, this::handleStopCommand);
@@ -197,9 +199,30 @@ public class UpdateController {
         telegramBot.send(message);
     }
 
-    private void handleCompareWithMySolutionCallback(long chatId) {
+    private void handleCheckBigO(long chatId) {
         final String reply = "❌ This functionality is not available yet";
-        log.warn("Use compare with my solution functionality for chatId: {}", chatId);
+        SendMessage message = new SendMessage();
+        message.setChatId(chatId);
+        message.setText(reply);
+        telegramBot.send(message);
+    }
+
+    private void handleCompareWithMySolutionCallback(long chatId) {
+        final String withoutSolution = "For this question, doesn't have solution yet";
+
+        log.info("Use compare with my solution functionality for chatId: {}", chatId);
+
+        final var existedUser = userService
+                .getUserByChatId(chatId)
+                .orElseThrow(() -> new EntityNotFoundException(String.format("The user with chatId not found:  %d", chatId)));
+
+        final var currentQuestionId = existedUser.getCurrentQId();
+
+        final var question = questionPullService.getQuestionById(currentQuestionId).orElseThrow(() -> new EntityNotFoundException("The question not found"));
+
+        final var reply = Objects.isNull(question.getSolution()) ? withoutSolution : question.getSolution().getContent();
+
+        log.info("my solution functionality for question with title: {}", question.getTitle());
 
         SendMessage message = new SendMessage();
         message.setChatId(chatId);
