@@ -83,6 +83,9 @@ services:
     networks:
       - app-network
 
+    depends_on:
+      - interview-dude
+
   loki:
     image: grafana/loki:2.9.3
     container_name: loki
@@ -97,6 +100,9 @@ services:
 
     networks:
       - app-network
+
+    depends_on:
+      - interview-dude
 
   promtail:
     image: grafana/promtail:2.9.3
@@ -114,6 +120,9 @@ services:
     networks:
       - app-network
 
+    depends_on:
+      - interview-dude
+
   redis:
     image: redis:7.2
     container_name: redis
@@ -127,6 +136,9 @@ services:
 
     networks:
       - app-network
+
+    depends_on:
+      - postgres
 
   redis-insight:
     image: redis/redisinsight:latest
@@ -165,6 +177,9 @@ services:
 
     networks:
       - app-network
+
+    depends_on:
+      - interview-dude
 
 networks:
   app-network:
