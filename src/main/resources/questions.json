@@ -1,5 +1,14 @@
 [
   {
+    "title": "Count Complete Tree Nodes",
+    "body": "Given the root of a complete binary tree, return the number of the nodes in the tree.\n\nAccording to Wikipedia, every level, except possibly the last, is completely filled in a complete binary tree, and all nodes in the last level are as far left as possible. It can have between 1 and 2h nodes inclusive at the last level h.\n\nDesign an algorithm that runs in less than O(n) time complexity.",
+    "example": "Example 1:\n\n\nInput: root = [1,2,3,4,5,6]\nOutput: 6\nExample 2:\n\nInput: root = []\nOutput: 0\nExample 3:\n\nInput: root = [1]\nOutput: 1",
+    "level": "easy",
+    "solution": {
+      "content": "if (root == null) {\n            return 0;\n        }\n\n        return 1 + countNodes(root.left) + countNodes(root.right);"
+    }
+  },
+  {
     "title": "Sqrt(x)",
     "body": "Given a non-negative integer x, return the square root of x rounded down to the nearest integer. The returned integer should be non-negative as well.\n\nYou must not use any built-in exponent function or operator.\n\nFor example, do not use pow(x, 0.5) in c++ or x ** 0.5 in python.",
     "example": "Example 1:\n\nInput: x = 4\nOutput: 2\nExplanation: The square root of 4 is 2, so we return 2.\nExample 2:\n\nInput: x = 8\nOutput: 2\nExplanation: The square root of 8 is 2.82842..., and since we round it down to the nearest integer, 2 is returned.",
