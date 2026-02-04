@@ -1,5 +1,6 @@
 package com.example.questionpull.controller;
 
+import com.example.questionpull.entity.SolutionEntity;
 import com.example.questionpull.entity.UserEntity;
 import com.example.questionpull.service.TelegramBot;
 import com.example.questionpull.service.questions.QuestionPullImplementation;
@@ -193,40 +194,49 @@ public class UpdateController {
 
     private void handleUnknownCommand(long chatId, String command) {
         final String reply = "❓ Unknown command: " + command + "\n\nType /help to see available commands.";
-        SendMessage message = new SendMessage();
-        message.setChatId(chatId);
-        message.setText(reply);
-        telegramBot.send(message);
+        sendText(chatId, reply);
     }
 
     private void handleCheckBigO(long chatId) {
         final String reply = "❌ This functionality is not available yet";
-        SendMessage message = new SendMessage();
-        message.setChatId(chatId);
-        message.setText(reply);
-        telegramBot.send(message);
+        sendText(chatId, reply);
     }
 
     private void handleCompareWithMySolutionCallback(long chatId) {
-        final String withoutSolution = "For this question, doesn't have solution yet";
+        log.info("Compare-with-solution requested for chatId={}", chatId);
+
+        final String withoutSolution = "Haven't solution for this question yet";
 
         log.info("Use compare with my solution functionality for chatId: {}", chatId);
 
         final var existedUser = userService
                 .getUserByChatId(chatId)
-                .orElseThrow(() -> new EntityNotFoundException(String.format("The user with chatId not found:  %d", chatId)));
+                .orElseThrow(() -> new EntityNotFoundException("User not found for chatId=" + chatId));
 
         final var currentQuestionId = existedUser.getCurrentQId();
 
-        final var question = questionPullService.getQuestionById(currentQuestionId).orElseThrow(() -> new EntityNotFoundException("The question not found"));
+        if (currentQuestionId == null) {
+            sendText(chatId, withoutSolution);
+            return;
+        }
 
-        final var reply = Objects.isNull(question.getSolution()) ? withoutSolution : question.getSolution().getContent();
+        final var question = questionPullService.getQuestionById(currentQuestionId).orElseThrow(() -> new EntityNotFoundException("The question not found: " + currentQuestionId));
 
-        log.info("my solution functionality for question with title: {}", question.getTitle());
+        final SolutionEntity solution = question.getSolution();
 
+        if (Objects.isNull(solution) || Objects.isNull(solution.getContent()) || solution.getContent().isEmpty()) {
+            log.info("No solution found for question [{}]", question.getUuid());
+            return;
+        }
+        log.info("Sending solution for question [{}]", question.getUuid());
+
+        sendText(chatId, withoutSolution);
+    }
+
+    private void sendText(long chatId, String text) {
         SendMessage message = new SendMessage();
         message.setChatId(chatId);
-        message.setText(reply);
+        message.setText(text);
         telegramBot.send(message);
     }
 }
