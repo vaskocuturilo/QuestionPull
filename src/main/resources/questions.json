@@ -1296,13 +1296,19 @@
     "title": "Find second min and max value in array",
     "body": "Given an array arr[] of size N, find the second max and second smallest element in an array.",
     "example": "nput: arr[] = {12, 13, 1, 10, 34, 1}; Output: 10 13",
-    "level": "easy"
+    "level": "easy",
+    "solution": {
+      "content": ""
+    }
   },
   {
     "title": "Count words in String",
     "body": "Given a string, count the number of words in it. The words are separated by the following characters: space (' ') or new line ('\\n') or tab ('\\t') or a combination of these.",
     "example": "text = Hello world, result = 2",
-    "level": "easy"
+    "level": "easy",
+    "solution": {
+      "content": ""
+    }
   },
   {
     "title": "Change the first word with last in String",
@@ -1317,7 +1323,10 @@
     "title": "Change the first element with last in Array",
     "body": "Implement a function which Change the first element with last in Array",
     "example": "[1,2,3,4], result => [4,2,3,1]",
-    "level": "easy"
+    "level": "easy",
+    "solution": {
+      "content": ""
+    }
   },
   {
     "title": "Number of Armstrong",
@@ -1386,19 +1395,28 @@
     "title": "Double sort",
     "body": "Implement Double sorting, in the context of sorting algorithms, generally refers to sorting a list based on two criteria.",
     "example": "public static Object[] dbSort(Object[] a) {\n\n        Objects.requireNonNull(a, \"The object cannot be null\");\n\n        Comparator<Object> comparator = ((o1, o2) -> {\n            if (o1 instanceof Integer && o2 instanceof String) {\n                return -1;\n            }\n\n            if (o1 instanceof String && o2 instanceof Integer) {\n                return 0;\n            }\n\n            if (o1 instanceof Integer var1 && o2 instanceof Integer var2) {\n                return (var1).compareTo(var2);\n            }\n            if (o1 instanceof String val1 && o2 instanceof String val2) {\n                return (val1).compareTo(val2);\n            }\n            return 0;\n        });\n\n        Arrays.sort(a, comparator);\n\n        return a;\n    }",
-    "level": "easy"
+    "level": "easy",
+    "solution": {
+      "content": ""
+    }
   },
   {
     "title": "The decorator pattern",
     "body": "Implement Decorator is a structural design pattern",
     "example": "public interface Developer {\n\n    public String makeJob();\n}\n  public class JavaDeveloper implements Developer {\n    @Override\n    public String makeJob() {\n        return \"write Java code.\";\n    }\n}  public class SeniorJavaDeveloper extends DeveloperDecorator {\n    public SeniorJavaDeveloper(Developer developer) {\n\n        super(developer);\n    }\n\n    public String makeCodeReview() {\n\n        return \" Make code review.\";\n    }\n\n    @Override\n    public String makeJob() {\n\n        return super.makeJob() + makeCodeReview();\n    }\n}  public class JavaTeamLead extends DeveloperDecorator {\n\n    public JavaTeamLead(Developer developer) {\n\n        super(developer);\n    }\n\n    public String sendWeekReport() {\n\n        return \" Send week report to customer.\";\n    }\n\n    @Override\n    public String makeJob() {\n\n        return super.makeJob() + sendWeekReport();\n    }\n} public class DeveloperDecorator implements Developer {\n\n    Developer developer;\n\n    public DeveloperDecorator(Developer developer) {\n\n        this.developer = developer;\n    }\n\n    @Override\n    public String makeJob() {\n\n        return developer.makeJob();\n    }\n}",
-    "level": "easy"
+    "level": "easy",
+    "solution": {
+      "content": ""
+    }
   },
   {
     "title": "The builder pattern",
     "body": "Implement The builder pattern",
     "example": "public class Employee {\n    private String firstName;\n    private String lastName;\n    private String phoneNumber;\n\n    public Employee(Builder builder) {\n        this.firstName = builder.firstName;\n        this.lastName = builder.lastName;\n        this.phoneNumber = builder.phoneNumber;\n    }\n    public static class Builder {\n        private String firstName;\n        private String lastName;\n        private String phoneNumber;\n\n        public Builder(String firstName, String lastName, String phoneNumber) {\n            this.firstName = firstName;\n            this.lastName = lastName;\n            this.phoneNumber = phoneNumber;\n        }\n\n        public String getFirstName() {\n            return firstName;\n        }\n\n        public String getLastName() {\n            return lastName;\n        }\n\n        public String getPhoneNumber() {\n            return phoneNumber;\n        }\n\n        public Employee build() {\n            return new Employee(this);\n        }\n    }\n}",
-    "level": "easy"
+    "level": "easy",
+    "solution": {
+      "content": ""
+    }
   },
   {
     "title": "The reverse integer",
@@ -1665,31 +1683,46 @@
     "title": "The shortest path",
     "body": "A string consisting of the letters 'X', 'Y' and '0' is given.\nIt is necessary to find the shortest distance between the letters 'X' and 'y' to get the value 0 if 'X' or 'Y' are missing.",
     "example": "\"үү\" -> Ө\n\"XX\" -> Ө\n\"XY\" -> 1\n\"YOX\" -> 2\n\"000XOOYOXO\" -> 2\n\"000X0OY\" -> 2",
-    "level": "medium"
+    "level": "medium",
+    "solution": {
+      "content": ""
+    }
   },
   {
     "title": "Binary Tree Right Side View",
     "body": "Given the root of a binary tree, imagine yourself standing on the right side of it, return the values of the nodes you can see ordered from top to bottom.",
     "example": "Input: root = [1,2,3,null,5,null,4]\nOutput: [1,3,4];   Input: root = [1,null,3]\nOutput: [1,3];    Input: root = []\nOutput: []",
-    "level": "medium"
+    "level": "medium",
+    "solution": {
+      "content": ""
+    }
   },
   {
     "title": "House Robber",
     "body": "You are a professional robber planning to rob houses along a street. Each house has a certain amount of money stashed, the only constraint stopping you from robbing each of them is that adjacent houses have security systems connected and it will automatically contact the police if two adjacent houses were broken into on the same night.\n\nGiven an integer array nums representing the amount of money of each house, return the maximum amount of money you can rob tonight without alerting the police.",
     "example": "Input: nums = [1,2,3,1]\nOutput: 4\nExplanation: Rob house 1 (money = 1) and then rob house 3 (money = 3).\nTotal amount you can rob = 1 + 3 = 4;   Input: nums = [2,7,9,3,1]\nOutput: 12\nExplanation: Rob house 1 (money = 2), rob house 3 (money = 9) and rob house 5 (money = 1).\nTotal amount you can rob = 2 + 9 + 1 = 12.",
-    "level": "medium"
+    "level": "medium",
+    "solution": {
+      "content": ""
+    }
   },
   {
     "title": "Rotate Array",
     "body": "Given an integer array nums, rotate the array to the right by k steps, where k is non-negative.\n\n",
     "example": "Input: nums = [1,2,3,4,5,6,7], k = 3\nOutput: [5,6,7,1,2,3,4]\nExplanation:\nrotate 1 steps to the right: [7,1,2,3,4,5,6]\nrotate 2 steps to the right: [6,7,1,2,3,4,5]\nrotate 3 steps to the right: [5,6,7,1,2,3,4]\n; Input: nums = [-1,-100,3,99], k = 2\nOutput: [3,99,-1,-100]\nExplanation: \nrotate 1 steps to the right: [99,-1,-100,3]\nrotate 2 steps to the right: [3,99,-1,-100]",
-    "level": "medium"
+    "level": "medium",
+    "solution": {
+      "content": ""
+    }
   },
   {
     "title": "Repeated DNA Sequences",
     "body": "The DNA sequence is composed of a series of nucleotides abbreviated as 'A', 'C', 'G', and 'T'.\n\nFor example, \"ACGAATTCCG\" is a DNA sequence.\nWhen studying DNA, it is useful to identify repeated sequences within the DNA.\n\nGiven a string s that represents a DNA sequence, return all the 10-letter-long sequences (substrings) that occur more than once in a DNA molecule. You may return the answer in any order.",
     "example": "Input: s = \"AAAAACCCCCAAAAACCCCCCAAAAAGGGTTT\"\nOutput: [\"AAAAACCCCC\",\"CCCCCAAAAA\"]; Input: s = \"AAAAAAAAAAAAA\"\nOutput: [\"AAAAAAAAAA\"]",
-    "level": "medium"
+    "level": "medium",
+    "solution": {
+      "content": ""
+    }
   },
   {
     "title": "Daily Temperatures",
@@ -1710,7 +1743,10 @@
     "title": "Reverse Words in a String",
     "body": "Given an input string s, reverse the order of the words. A word is defined as a sequence of non-space characters. The words in s will be separated by at least one space. Return a string of the words in reverse order concatenated by a single space. Note that s may contain leading or trailing spaces or multiple spaces between two words. The returned string should only have a single space separating the words. Do not include any extra spaces.",
     "example": "Input: s = \"the sky is blue\", Output: \"blue is sky the\";\n Input: s = \"  hello world  \", Output: \"world hello\", Explanation: Your reversed string should not contain leading or trailing spaces.;\n Input: s = \"a good   example\", Output: \"example good a\", Explanation: You need to reduce multiple spaces between two words to a single space in the reversed string.",
-    "level": "medium"
+    "level": "medium",
+    "solution": {
+      "content": ""
+    }
   },
   {
     "title": "The Truck problem",
@@ -1734,13 +1770,19 @@
     "title": "Implement a Custom Stack with Min Function",
     "body": "Design and implement a CustomStack class that supports push(int), pop(), peek(), and getMin() — all in constant time.\nThe getMin() method should return the smallest element in the stack.",
     "example": "Concepts Tested:\n\nStack implementation\n\nConstant-time algorithms\n\nAuxiliary data structures",
-    "level": "medium"
+    "level": "medium",
+    "solution": {
+      "content": ""
+    }
   },
   {
     "title": "Group Anagrams",
     "body": "Given a list of strings, group them by anagrams. Return a list of grouped anagrams, where each group contains strings that are anagrams of each other.",
     "example": "Example Input: [\"eat\", \"tea\", \"tan\", \"ate\", \"nat\", \"bat\"], Expected Output Format: [\n  [\"eat\", \"tea\", \"ate\"],\n  [\"tan\", \"nat\"],\n  [\"bat\"]\n]; Concepts Tested:\n\nString manipulation\n\nHashing and grouping\n\nWorking with Map and List collections",
-    "level": "medium"
+    "level": "medium",
+    "solution": {
+      "content": ""
+    }
   },
   {
     "title": "Implement a Thread-Safe Singleton Logger",
@@ -1755,13 +1797,19 @@
     "title": "Create a Custom HashMap Implementation",
     "body": "Implement a simplified version of HashMap<K, V> using an array of buckets and linked lists for collision handling. Provide support for basic operations: put(), get(), remove(), and containsKey()",
     "example": "",
-    "level": "medium"
+    "level": "medium",
+    "solution": {
+      "content": ""
+    }
   },
   {
     "title": "Implement an Event Scheduler System",
     "body": "Design and implement a class EventScheduler that allows scheduling tasks to run at a specified future time. Each task should be a Runnable. Provide functionality to cancel scheduled tasks.",
     "example": "",
-    "level": "medium"
+    "level": "medium",
+    "solution": {
+      "content": ""
+    }
   },
   {
     "title": "Build a File Search Utility",
@@ -2043,6 +2091,15 @@
     }
   },
   {
+    "title": "Find Peak Element",
+    "body": "A peak element is an element that is strictly greater than its neighbors.\n\nGiven a 0-indexed integer array nums, find a peak element, and return its index. If the array contains multiple peaks, return the index to any of the peaks.\n\nYou may imagine that nums[-1] = nums[n] = -∞. In other words, an element is always considered to be strictly greater than a neighbor that is outside the array.\n\nYou must write an algorithm that runs in O(log n) time.",
+    "example": "Example 1:\n\nInput: nums = [1,2,3,1]\nOutput: 2\nExplanation: 3 is a peak element and your function should return the index number 2.\nExample 2:\n\nInput: nums = [1,2,1,3,5,6,4]\nOutput: 5\nExplanation: Your function can return either index number 1 where the peak element is 2, or index number 5 where the peak element is 6.",
+    "level": "medium",
+    "solution": {
+      "content": "public int findPeakElement(int[] nums) {\n        Objects.requireNonNull(nums, \"The array cannot be null\");\n\n        int left = 0;\n        int right = nums.length - 1;\n        int index = -1;\n\n        while (left <= right) {\n            final int middle = (left + right) / 2;\n\n            if (middle == nums.length - 1 || nums[middle] > nums[middle + 1]) {\n                index = middle;\n                right = middle - 1;\n            } else {\n\n                left = middle + 1;\n            }\n        }\n\n        return index;\n    }"
+    }
+  },
+  {
     "title": "Top K Frequent Elements",
     "body": "Given an integer array and an integer k, return the k most frequent elements. Optimize for time complexity better than O(n log n)",
     "example": "Input: nums = [1,1,1,2,2,3], k = 2, Output: [1,2]",
@@ -2055,37 +2112,55 @@
     "title": "Best Time to Buy and Sell Stock IV",
     "body": "You are given an integer array prices where prices[i] is the price of a given stock on the ith day, and an integer k.\n\nFind the maximum profit you can achieve. You may complete at most k transactions: i.e. you may buy at most k times and sell at most k times.\n\nNote: You may not engage in multiple transactions simultaneously (i.e., you must sell the stock before you buy again).",
     "example": "Input: k = 2, prices = [2,4,1]\nOutput: 2\nExplanation: Buy on day 1 (price = 2) and sell on day 2 (price = 4), profit = 4-2 = 2; Input: k = 2, prices = [3,2,6,5,0,3]\nOutput: 7\nExplanation: Buy on day 2 (price = 2) and sell on day 3 (price = 6), profit = 6-2 = 4. Then buy on day 5 (price = 0) and sell on day 6 (price = 3), profit = 3-0 = 3.",
-    "level": "hard"
+    "level": "hard",
+    "solution": {
+      "content": ""
+    }
   },
   {
     "title": "Insert Delete GetRandom O(1) - Duplicates allowed",
     "body": "RandomizedCollection is a data structure that contains a collection of numbers, possibly duplicates (i.e., a multiset). It should support inserting and removing specific elements and also reporting a random element.\n\nImplement the RandomizedCollection class:\n\nRandomizedCollection() Initializes the empty RandomizedCollection object.\nbool insert(int val) Inserts an item val into the multiset, even if the item is already present. Returns true if the item is not present, false otherwise.\nbool remove(int val) Removes an item val from the multiset if present. Returns true if the item is present, false otherwise. Note that if val has multiple occurrences in the multiset, we only remove one of them.\nint getRandom() Returns a random element from the current multiset of elements. The probability of each element being returned is linearly related to the number of the same values the multiset contains.\nYou must implement the functions of the class such that each function works on average O(1) time complexity.\n\nNote: The test cases are generated such that getRandom will only be called if there is at least one item in the RandomizedCollection.\n\n",
     "example": "Input\n[\"RandomizedCollection\", \"insert\", \"insert\", \"insert\", \"getRandom\", \"remove\", \"getRandom\"]\n[[], [1], [1], [2], [], [1], []]\nOutput\n[null, true, false, true, 2, true, 1]",
-    "level": "hard"
+    "level": "hard",
+    "solution": {
+      "content": ""
+    }
   },
   {
     "title": "Longest Increasing Path in a Matrix",
     "body": "Given an m x n integers matrix, return the length of the longest increasing path in matrix., From each cell, you can either move in four directions: left, right, up, or down. You may not move diagonally or move outside the boundary (i.e., wrap-around is not allowed).\n\n",
     "example": "Input: matrix = [[9,9,4],[6,6,8],[2,1,1]], Output: 4, Explanation: The longest increasing path is [1, 2, 6, 9]; Input: matrix = [[3,4,5],[3,2,6],[2,2,1]], Output: 4, Explanation: The longest increasing path is [3, 4, 5, 6]. Moving diagonally is not allowed.; Input: matrix = [[1]], Output: 1",
-    "level": "hard"
+    "level": "hard",
+    "solution": {
+      "content": ""
+    }
   },
   {
     "title": "Concatenated Words",
     "body": "Given an array of strings words (without duplicates), return all the concatenated words in the given list of words.\n\nA concatenated word is defined as a string that is comprised entirely of at least two shorter words (not necessarily distinct) in the given array.",
     "example": "Input: words = [\"cat\",\"cats\",\"catsdogcats\",\"dog\",\"dogcatsdog\",\"hippopotamuses\",\"rat\",\"ratcatdogcat\"], Output: [\"catsdogcats\",\"dogcatsdog\",\"ratcatdogcat\"], Explanation: \"catsdogcats\" can be concatenated by \"cats\", \"dog\" and \"cats\"; \n\"dogcatsdog\" can be concatenated by \"dog\", \"cats\" and \"dog\"; \n\"ratcatdogcat\" can be concatenated by \"rat\", \"cat\", \"dog\" and \"cat\"; Input: words = [\"cat\",\"dog\",\"catdog\"], Output: [\"catdog\"]",
-    "level": "hard"
+    "level": "hard",
+    "solution": {
+      "content": ""
+    }
   },
   {
     "title": "Longest Substring Without Repeating Characters",
     "body": "Given a string, find the length of the longest substring without repeating characters.",
     "example": "Input: \"abcabcbb\", Output: 3 (substring is \"abc\")",
-    "level": "hard"
+    "level": "hard",
+    "solution": {
+      "content": ""
+    }
   },
   {
     "title": "Word Ladder (Transform Words with Dictionary)",
     "body": "A transformation sequence from word beginWord to word endWord using a dictionary wordList is a sequence of words beginWord -> s1 -> s2 -> ... -> sk such that:\n\nEvery adjacent pair of words differs by a single letter.\nEvery si for 1 <= i <= k is in wordList. Note that beginWord does not need to be in wordList.\nsk == endWord\nGiven two words, beginWord and endWord, and a dictionary wordList, return the number of words in the shortest transformation sequence from beginWord to endWord, or 0 if no such sequence exists.",
     "example": "Example 1:\n\nInput: beginWord = \"hit\", endWord = \"cog\", wordList = [\"hot\",\"dot\",\"dog\",\"lot\",\"log\",\"cog\"]\nOutput: 5\nExplanation: One shortest transformation sequence is \"hit\" -> \"hot\" -> \"dot\" -> \"dog\" -> cog\", which is 5 words long \n Example 2:\n\nInput: beginWord = \"hit\", endWord = \"cog\", wordList = [\"hot\",\"dot\",\"dog\",\"lot\",\"log\"]\nOutput: 0\nExplanation: The endWord \"cog\" is not in wordList, therefore there is no valid transformation sequence.",
-    "level": "hard"
+    "level": "hard",
+    "solution": {
+      "content": ""
+    }
   },
   {
     "title": "Find Minimum in Rotated Sorted Array II",
