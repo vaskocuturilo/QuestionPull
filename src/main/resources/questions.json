@@ -2100,6 +2100,15 @@
     }
   },
   {
+    "title": "Longest Increasing Subsequence",
+    "body": "Given an integer array nums, return the length of the longest strictly increasing subsequence. (A subsequence is an array that can be derived from another array by deleting some or no elements without changing the order of the remaining elements)",
+    "example": "Example 1:\n\nInput: nums = [10,9,2,5,3,7,101,18]\nOutput: 4\nExplanation: The longest increasing subsequence is [2,3,7,101], therefore the length is 4.\nExample 2:\n\nInput: nums = [0,1,0,3,2,3]\nOutput: 4\nExample 3:\n\nInput: nums = [7,7,7,7,7,7,7]\nOutput: 1",
+    "level": "medium",
+    "solution": {
+      "content": "public int lengthOfLIS(int[] nums) {\n    Objects.requireNonNull(nums, \"The array cannot be null\");\n\n        int[] array = new int[nums.length];\n\n        int result = 0;\n\n        for (int number : nums) {\n\n            int left = 0;\n\n            int right = result;\n\n            while (left != right) {\n                int middle = (left + right) / 2;\n\n                if (array[middle] < number) {\n                    left = middle + 1;\n                } else {\n                    right = middle;\n                }\n            }\n\n            array[left] = number;\n            if (left == result) result++;\n        }\n\n        return result;\n    }"
+    }
+  },
+  {
     "title": "Top K Frequent Elements",
     "body": "Given an integer array and an integer k, return the k most frequent elements. Optimize for time complexity better than O(n log n)",
     "example": "Input: nums = [1,1,1,2,2,3], k = 2, Output: [1,2]",
