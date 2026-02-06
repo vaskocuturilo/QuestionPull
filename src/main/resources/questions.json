@@ -2179,5 +2179,14 @@
     "solution": {
       "content": "public int findMin(int[] nums) {\n        int left = 0;\n        int right = nums.length - 1;\n\n        while (left <= right) {\n            int middle = (left + right) / 2;\n            if (nums[middle] > nums[right]) {\n                left = middle + 1;\n            } else if (nums[middle] < nums[right]) {\n                right = middle;\n            } else {\n                right--;\n            }\n        }\n        return nums[left];\n    }"
     }
+  },
+  {
+    "title": "Count of Smaller Numbers After Self",
+    "body": "Given an integer array nums, return an integer array counts where counts[i] is the number of smaller elements to the right of nums[i].\n\n",
+    "example": "Example 1:\n\nInput: nums = [5,2,6,1]\nOutput: [2,1,1,0]\nExplanation:\nTo the right of 5 there are 2 smaller elements (2 and 1).\nTo the right of 2 there is only 1 smaller element (1).\nTo the right of 6 there is 1 smaller element (1).\nTo the right of 1 there is 0 smaller element.\nExample 2:\n\nInput: nums = [-1]\nOutput: [0]\nExample 3:\n\nInput: nums = [-1,-1]\nOutput: [0,0]",
+    "level": "hard",
+    "solution": {
+      "content": "public List<Integer> countSmaller(int[] nums) {\n        Objects.requireNonNull(nums, \"The array cannot be null\");\n\n        final Set<Integer> uniqNumbers = new HashSet<>();\n\n        for (int number : nums) uniqNumbers.add(number);\n\n        var uniqElements = new ArrayList<>(uniqNumbers);\n\n        uniqElements.sort(Comparator.comparingInt(a -> a));\n\n        final int count = uniqElements.size();\n\n        final Map<Integer, Integer> values = HashMap.newHashMap(count);\n\n        for (int i = 0; i < count; i++) {\n            values.put(uniqElements.get(i), i + 1);\n        }\n\n        final BinaryIndexedTree binaryIndexedTree = new BinaryIndexedTree(count);\n\n        final List<Integer> result = new LinkedList<>();\n\n        for (int i = nums.length - 1; i >= 0; i--) {\n            final Integer index = values.get(nums[i]);\n\n            binaryIndexedTree.update(index, 1);\n\n            result.addFirst(binaryIndexedTree.query(index - 1));\n        }\n\n        return result;\n    }\n\n    static class BinaryIndexedTree {\n        private final int size;\n        private final int[] tree;\n\n        public BinaryIndexedTree(int size) {\n            this.size = size;\n            this.tree = new int[size + 1];\n        }\n\n        public void update(int x, int delta) {\n            while (x <= size) {\n                tree[x] += delta;\n                x += lowBit(x);\n            }\n        }\n\n        public int query(int x) {\n            int sum = 0;\n            while (x > 0) {\n                sum += tree[x];\n                x -= lowBit(x);\n            }\n            return sum;\n        }\n\n        public static int lowBit(int x) {\n            return x & -x;\n        }\n    }"
+    }
   }
 ]
