@@ -1,5 +1,14 @@
 [
   {
+    "title": "Valid Perfect Square",
+    "body": "Given a positive integer num, return true if num is a perfect square or false otherwise.\n\nA perfect square is an integer that is the square of an integer. In other words, it is the product of some integer with itself.\n\nYou must not use any built-in library function, such as sqrt.",
+    "example": "Example 1:\n\nInput: num = 16\nOutput: true\nExplanation: We return true because 4 * 4 = 16 and 4 is an integer.\nExample 2:\n\nInput: num = 14\nOutput: false\nExplanation: We return false because 3.742 * 3.742 = 14 and 3.742 is not an integer.",
+    "level": "easy",
+    "solution": {
+      "content": "public boolean isPerfectSquare(int num) {\n       int left = 1;\n        int right = num;\n\n        while (left <= right) {\n            int middle = (left + right) / 2;\n            long square = (long) middle * middle;\n            if (square > num) {\n                right = middle - 1;\n            } else if (square < num) {\n                left = middle + 1;\n            } else {\n                return true;\n            }\n        }\n        return false;\n    }"
+    }
+  },
+  {
     "title": "Count Complete Tree Nodes",
     "body": "Given the root of a complete binary tree, return the number of the nodes in the tree.\n\nAccording to Wikipedia, every level, except possibly the last, is completely filled in a complete binary tree, and all nodes in the last level are as far left as possible. It can have between 1 and 2h nodes inclusive at the last level h.\n\nDesign an algorithm that runs in less than O(n) time complexity.",
     "example": "Example 1:\n\n\nInput: root = [1,2,3,4,5,6]\nOutput: 6\nExample 2:\n\nInput: root = []\nOutput: 0\nExample 3:\n\nInput: root = [1]\nOutput: 1",
