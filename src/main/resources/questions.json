@@ -1,5 +1,14 @@
 [
   {
+    "title": "Guess Number Higher or Lower",
+    "body": "We are playing the Guess Game. The game is as follows:\n\nI pick a number from 1 to n. You have to guess which number I picked (the number I picked stays the same throughout the game).\n\nEvery time you guess wrong, I will tell you whether the number I picked is higher or lower than your guess.\n\nYou call a pre-defined API int guess(int num), which returns three possible results:\n\n-1: Your guess is higher than the number I picked (i.e. num > pick).\n1: Your guess is lower than the number I picked (i.e. num < pick).\n0: your guess is equal to the number I picked (i.e. num == pick).\nReturn the number that I picked.",
+    "example": "Example 1:\n\nInput: n = 10, pick = 6\nOutput: 6\nExample 2:\n\nInput: n = 1, pick = 1\nOutput: 1\nExample 3:\n\nInput: n = 2, pick = 1\nOutput: 1",
+    "level": "easy",
+    "solution": {
+      "content": "public int guessNumber(int n) {\n        int left = 1;\n        int right = n;\n\n        int result = -1;\n\n        while (left <= right) {\n            int middle = left + (right - left) / 2;\n            if (guess(middle) <= 0) {\n                result = middle;\n                right = middle - 1;\n            } else {\n                left = middle + 1;\n            }\n        }\n        return result;\n    }"
+    }
+  },
+  {
     "title": "Valid Perfect Square",
     "body": "Given a positive integer num, return true if num is a perfect square or false otherwise.\n\nA perfect square is an integer that is the square of an integer. In other words, it is the product of some integer with itself.\n\nYou must not use any built-in library function, such as sqrt.",
     "example": "Example 1:\n\nInput: num = 16\nOutput: true\nExplanation: We return true because 4 * 4 = 16 and 4 is an integer.\nExample 2:\n\nInput: num = 14\nOutput: false\nExplanation: We return false because 3.742 * 3.742 = 14 and 3.742 is not an integer.",
