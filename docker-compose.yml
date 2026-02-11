@@ -165,13 +165,9 @@ services:
     image: nickfedor/watchtower
     container_name: watchtower
     command:
-      - "--debug"
       - "--interval=300"
-      - "--include-stopped"
-      - "--revive-stopped"
       - "--label-enable"
       - "--cleanup"
-      - "--remove-volumes"
 
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
