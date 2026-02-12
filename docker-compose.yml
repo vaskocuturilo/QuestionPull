@@ -51,7 +51,6 @@ services:
       LOG_PATH: /usr/app/logs/application.log
 
     volumes:
-      - ./src/main/resources/questions.json:/usr/app/resources/questions.json
       - logs:/usr/app/logs
     logging:
       driver: "json-file"
