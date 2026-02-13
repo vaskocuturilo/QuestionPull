@@ -2136,6 +2136,15 @@
     }
   },
   {
+    "title": "Heaters",
+    "body": "Winter is coming! During the contest, your first job is to design a standard heater with a fixed warm radius to warm all the houses.\n\nEvery house can be warmed, as long as the house is within the heater's warm radius range. \n\nGiven the positions of houses and heaters on a horizontal line, return the minimum radius standard of heaters so that those heaters could cover all houses.\n\nNotice that all the heaters follow your radius standard, and the warm radius will be the same.",
+    "example": "Example 1:\n\nInput: houses = [1,2,3], heaters = [2]\nOutput: 1\nExplanation: The only heater was placed in the position 2, and if we use the radius 1 standard, then all the houses can be warmed.\nExample 2:\n\nInput: houses = [1,2,3,4], heaters = [1,4]\nOutput: 1\nExplanation: The two heaters were placed at positions 1 and 4. We need to use a radius 1 standard, then all the houses can be warmed.\nExample 3:\n\nInput: houses = [1,5], heaters = [2]\nOutput: 3",
+    "level": "medium",
+    "solution": {
+      "content": "public int findRadius(int[] houses, int[] heaters) {\n        int left = 0;\n        int right = 1000000000;\n\n        Arrays.sort(houses);\n        Arrays.sort(heaters);\n\n        int result = -1;\n\n        while (left <= right) {\n            int middle = (left + right) / 2;\n\n            if (feasible(houses, heaters, middle)) {\n                result = middle;\n                right = middle - 1;\n            } else {\n                left = middle + 1;\n            }\n\n        }\n        return result;\n    }\n\n    private boolean feasible(int[] houses, int[] heaters, int radius) {\n        int houseIndex = 0;\n        int heaterIndex = 0;\n\n        while (houseIndex < houses.length) {\n            if (heaterIndex >= heaters.length) {\n                return false;\n            }\n            int minCoverage = heaters[heaterIndex] - radius;\n            int maxCoverage = heaters[heaterIndex] + radius;\n\n            if (houses[houseIndex] < minCoverage) {\n                return false;\n            }\n\n            if (houses[houseIndex] > maxCoverage) {\n                heaterIndex++;\n            } else {\n                houseIndex++;\n            }\n        }\n        return true;\n    }"
+    }
+  },
+  {
     "title": "Top K Frequent Elements",
     "body": "Given an integer array and an integer k, return the k most frequent elements. Optimize for time complexity better than O(n log n)",
     "example": "Input: nums = [1,1,1,2,2,3], k = 2, Output: [1,2]",
