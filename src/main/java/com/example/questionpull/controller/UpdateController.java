@@ -211,7 +211,7 @@ public class UpdateController {
 
         final var existedUser = userService
                 .getUserByChatId(chatId)
-                .orElseThrow(() -> new EntityNotFoundException("User not found for chatId=" + chatId));
+                .orElseThrow(() -> new EntityNotFoundException("User not found for chatId = " + chatId));
 
         final var currentQuestionId = existedUser.getCurrentQId();
 
@@ -220,17 +220,20 @@ public class UpdateController {
             return;
         }
 
-        final var question = questionPullService.getQuestionById(currentQuestionId).orElseThrow(() -> new EntityNotFoundException("The question not found: " + currentQuestionId));
+        final var question = questionPullService
+                .getQuestionById(currentQuestionId)
+                .orElseThrow(() -> new EntityNotFoundException("The question not found: " + currentQuestionId));
 
         final SolutionEntity solution = question.getSolution();
 
         if (Objects.isNull(solution) || Objects.isNull(solution.getContent()) || solution.getContent().isEmpty()) {
             log.info("No solution found for question [{}]", question.getUuid());
+            sendText(chatId, withoutSolution);
             return;
         }
         log.info("Sending solution for question [{}]", question.getUuid());
 
-        sendText(chatId, withoutSolution);
+        sendText(chatId, solution.getContent());
     }
 
     private void sendText(long chatId, String text) {
