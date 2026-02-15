@@ -2145,6 +2145,15 @@
     }
   },
   {
+    "title": "Repeated DNA Sequences",
+    "body": "The DNA sequence is composed of a series of nucleotides abbreviated as 'A', 'C', 'G', and 'T'.\n\nFor example, \"ACGAATTCCG\" is a DNA sequence.\nWhen studying DNA, it is useful to identify repeated sequences within the DNA.\n\nGiven a string s that represents a DNA sequence, return all the 10-letter-long sequences (substrings) that occur more than once in a DNA molecule. You may return the answer in any order.",
+    "example": "Example 1:\n\nInput: s = \"AAAAACCCCCAAAAACCCCCCAAAAAGGGTTT\"\nOutput: [\"AAAAACCCCC\",\"CCCCCAAAAA\"]\nExample 2:\n\nInput: s = \"AAAAAAAAAAAAA\"\nOutput: [\"AAAAAAAAAA\"]",
+    "level": "medium",
+    "solution": {
+      "content": "public List<String> findRepeatedDnaSequences(String s) {\n        if (s == null || s.length() < 10) return new ArrayList<>();\n        \n        final Set<String> appear = new HashSet<>();\n        final Set<String> repeated = new HashSet<>();\n\n        for (int i = 0; i<= s.length() - 10; i++) {\n            final String substring = s.substring(i, i + 10);\n            if (!appear.add(substring)) {\n                repeated.add(substring);\n            }\n        }\n        return new ArrayList<>(repeated);\n    }"
+    }
+  },
+  {
     "title": "Top K Frequent Elements",
     "body": "Given an integer array and an integer k, return the k most frequent elements. Optimize for time complexity better than O(n log n)",
     "example": "Input: nums = [1,1,1,2,2,3], k = 2, Output: [1,2]",
