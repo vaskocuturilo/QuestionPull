@@ -2242,5 +2242,14 @@
     "solution": {
       "content": "public int splitArray(int[] nums, int k) {\n        int left = 0;\n        int right = 0;\n        int result = -1;\n\n        for (int num : nums) {\n            left = Math.max(left, num);\n            right += num;\n        }\n\n        while (left <= right) {\n            int middle = left + (right - left) / 2;\n\n            if (feasible(nums, middle, k)) {\n                result = middle;\n                right = middle - 1;\n            } else {\n                left = middle + 1;\n            }\n        }\n        return result;\n    }\n\n    private boolean feasible(int[] nums, int maxSum, int k) {\n        int currentSum = 0;\n        int subarrayCount = 1;\n\n        for (int num : nums) {\n            if (currentSum + num > maxSum) {\n                currentSum = num;\n                subarrayCount++;\n            } else {\n                currentSum += num;\n            }\n        }\n\n        return subarrayCount <= k;\n    }"
     }
+  },
+  {
+    "title": "Contains Duplicate III",
+    "body": "You are given an integer array nums and two integers indexDiff and valueDiff.\n\nFind a pair of indices (i, j) such that:\n\ni != j,\nabs(i - j) <= indexDiff.\nabs(nums[i] - nums[j]) <= valueDiff, and\nReturn true if such pair exists or false otherwise.",
+    "example": "Example 1:\n\nInput: nums = [1,2,3,1], indexDiff = 3, valueDiff = 0\nOutput: true\nExplanation: We can choose (i, j) = (0, 3).\nWe satisfy the three conditions:\ni != j --> 0 != 3\nabs(i - j) <= indexDiff --> abs(0 - 3) <= 3\nabs(nums[i] - nums[j]) <= valueDiff --> abs(1 - 1) <= 0\nExample 2:\n\nInput: nums = [1,5,9,1,5,9], indexDiff = 2, valueDiff = 3\nOutput: false\nExplanation: After trying all the possible pairs (i, j), we cannot satisfy the three conditions, so we return false.",
+    "level": "hard",
+    "solution": {
+      "content": "public boolean containsNearbyAlmostDuplicate(int[] nums, int indexDiff, int valueDiff) {\n        Objects.requireNonNull(nums, \"The array cannot be null\");\n\n        if (indexDiff <= 0 || valueDiff < 0) return false;\n\n        final TreeSet<Long> sortedSet = new TreeSet<>();\n\n        for (int i = 0; i < nums.length; i++) {\n\n            final long currentValue = nums[i];\n\n            final Long ceilingValue = sortedSet.ceiling(currentValue - valueDiff);\n\n            if (ceilingValue != null && ceilingValue <= currentValue + valueDiff) {\n                return true;\n            }\n            sortedSet.add(currentValue);\n\n            if (i >= indexDiff) {\n                 sortedSet.remove((long) nums[i - indexDiff]);\n            }\n        }\n\n        return false;\n    }"
+    }
   }
 ]
