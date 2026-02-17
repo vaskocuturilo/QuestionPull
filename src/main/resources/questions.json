@@ -1,5 +1,14 @@
 [
   {
+    "title": "Minimum Difference Between Highest and Lowest of K Scores",
+    "body": "You are given a 0-indexed integer array nums, where nums[i] represents the score of the ith student. You are also given an integer k.\n\nPick the scores of any k students from the array so that the difference between the highest and the lowest of the k scores is minimized.\n\nReturn the minimum possible difference.",
+    "example": "Example 1:\n\nInput: nums = [90], k = 1\nOutput: 0\nExplanation: There is one way to pick score(s) of one student:\n- [90]. The difference between the highest and lowest score is 90 - 90 = 0.\nThe minimum possible difference is 0.\nExample 2:\n\nInput: nums = [9,4,1,7], k = 2\nOutput: 2\nExplanation: There are six ways to pick score(s) of two students:\n- [9,4,1,7]. The difference between the highest and lowest score is 9 - 4 = 5.\n- [9,4,1,7]. The difference between the highest and lowest score is 9 - 1 = 8.\n- [9,4,1,7]. The difference between the highest and lowest score is 9 - 7 = 2.\n- [9,4,1,7]. The difference between the highest and lowest score is 4 - 1 = 3.\n- [9,4,1,7]. The difference between the highest and lowest score is 7 - 4 = 3.\n- [9,4,1,7]. The difference between the highest and lowest score is 7 - 1 = 6.\nThe minimum possible difference is 2.",
+    "level": "easy",
+    "solution": {
+      "content": "public int minimumDifference(int[] nums, int k) {\n        Objects.requireNonNull(nums, \"The array cannot be null\");\n\n        if (nums.length < k || k <= 0) {\n            throw new IllegalArgumentException(\"Invalid input: nums length must be >= k\");\n        }\n\n        final int[] sortedNums = nums.clone();\n\n        Arrays.sort(sortedNums);\n\n        int minValue = Integer.MAX_VALUE;\n\n        for (int i = 0; i < sortedNums.length - k + 1; i++) {\n            minValue = Math.min(minValue, sortedNums[i + k - 1] - sortedNums[i]);\n        }\n        \n        return minValue;\n    }"
+    }
+  },
+  {
     "title": "Guess Number Higher or Lower",
     "body": "We are playing the Guess Game. The game is as follows:\n\nI pick a number from 1 to n. You have to guess which number I picked (the number I picked stays the same throughout the game).\n\nEvery time you guess wrong, I will tell you whether the number I picked is higher or lower than your guess.\n\nYou call a pre-defined API int guess(int num), which returns three possible results:\n\n-1: Your guess is higher than the number I picked (i.e. num > pick).\n1: Your guess is lower than the number I picked (i.e. num < pick).\n0: your guess is equal to the number I picked (i.e. num == pick).\nReturn the number that I picked.",
     "example": "Example 1:\n\nInput: n = 10, pick = 6\nOutput: 6\nExample 2:\n\nInput: n = 1, pick = 1\nOutput: 1\nExample 3:\n\nInput: n = 2, pick = 1\nOutput: 1",
