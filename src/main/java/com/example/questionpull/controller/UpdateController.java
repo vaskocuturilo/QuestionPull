@@ -123,7 +123,7 @@ public class UpdateController {
         tempMap.put(CallbackData.NEXT_QUESTION_RANDOM, chatId -> sendNextQuestion(chatId, "random"));
         tempMap.put(CallbackData.BUTTON_PASS, this::handleChangeLevelCommand);
         tempMap.put(CallbackData.BUTTON_FAIL, this::handleChangeLevelCommand);
-        tempMap.put(CallbackData.COMPARE_MY_SOLUTION, this::handleCompareWithMySolutionCallback);
+        tempMap.put(CallbackData.COMPARE_MY_SOLUTION, this::handleCompareSolutionsCallback);
         tempMap.put(CallbackData.CHECK_BIG_O, this::handleCheckBigO);
         tempMap.put(CallbackData.CHANGE_LEVEL, this::handleChangeLevelCommand);
         tempMap.put(CallbackData.SHOW_STATISTIC, this::handleShowStatisticCommand);
@@ -202,10 +202,13 @@ public class UpdateController {
         sendText(chatId, reply);
     }
 
-    private void handleCompareWithMySolutionCallback(long chatId) {
+    private void handleCompareSolutionsCallback(long chatId) {
         log.info("Compare-with-solution requested for chatId={}", chatId);
 
-        final String withoutSolution = "Haven't solution for this question yet";
+        final String notSolutionMessage = "There is no solution for this question yet.";
+
+        final String notEnoughPointsMessage = "You don't have enough points to view this solution.";
+        final String noActiveQuestionMessage = "You haven't selected a question yet.";
 
         log.info("Use compare with my solution functionality for chatId: {}", chatId);
 
@@ -213,10 +216,17 @@ public class UpdateController {
                 .getUserByChatId(chatId)
                 .orElseThrow(() -> new EntityNotFoundException("User not found for chatId = " + chatId));
 
+        final Integer totalStatistic = existedUser.getStatisticArray();
+
+        if (Objects.isNull(totalStatistic) || totalStatistic <= 0) {
+            sendText(chatId, notEnoughPointsMessage);
+            return;
+        }
+
         final var currentQuestionId = existedUser.getCurrentQId();
 
         if (currentQuestionId == null) {
-            sendText(chatId, withoutSolution);
+            sendText(chatId, noActiveQuestionMessage);
             return;
         }
 
@@ -228,12 +238,16 @@ public class UpdateController {
 
         if (Objects.isNull(solution) || Objects.isNull(solution.getContent()) || solution.getContent().isEmpty()) {
             log.info("No solution found for question [{}]", question.getUuid());
-            sendText(chatId, withoutSolution);
+            sendText(chatId, notSolutionMessage);
             return;
         }
         log.info("Sending solution for question [{}]", question.getUuid());
 
         sendText(chatId, solution.getContent());
+
+        existedUser.setStatisticArray(totalStatistic - 1);
+
+        userService.updateUser(existedUser);
     }
 
     private void sendText(long chatId, String text) {
