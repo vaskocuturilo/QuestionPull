@@ -46,7 +46,6 @@ public class StorageUtils {
                 return;
             }
 
-            questionPullRepository.deleteAll();
             log.info("Cleared old questions to sync with latest JSON.");
 
             Resource resource = resourceLoader.getResource(filename);
