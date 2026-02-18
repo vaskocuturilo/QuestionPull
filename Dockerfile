@@ -12,7 +12,7 @@ RUN mvn clean package -DskipTests
 
 FROM bellsoft/liberica-openjdk-alpine:17
 
-ENV ARTIFACT_NAME=QuestionPull-0.0.1-SNAPSHOT.jar
+ENV ARTIFACT_NAME=QuestionPull-1.0.0.jar
 
 ENV APP_HOME=/usr/app
 
