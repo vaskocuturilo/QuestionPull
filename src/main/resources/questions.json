@@ -1,5 +1,14 @@
 [
   {
+    "title": "Minimum Recolors to Get K Consecutive Black Blocks",
+    "body": "You are given a 0-indexed string blocks of length n, where blocks[i] is either 'W' or 'B', representing the color of the ith block. The characters 'W' and 'B' denote the colors white and black, respectively.\n\nYou are also given an integer k, which is the desired number of consecutive black blocks.\n\nIn one operation, you can recolor a white block such that it becomes a black block.\n\nReturn the minimum number of operations needed such that there is at least one occurrence of k consecutive black blocks",
+    "example": "Example 1:\n\nInput: blocks = \"WBBWWBBWBW\", k = 7\nOutput: 3\nExplanation:\nOne way to achieve 7 consecutive black blocks is to recolor the 0th, 3rd, and 4th blocks\nso that blocks = \"BBBBBBBWBW\". \nIt can be shown that there is no way to achieve 7 consecutive black blocks in less than 3 operations.\nTherefore, we return 3.\nExample 2:\n\nInput: blocks = \"WBWBBBW\", k = 2\nOutput: 0\nExplanation:\nNo changes need to be made, since 2 consecutive black blocks already exist.\nTherefore, we return 0.",
+    "level": "easy",
+    "solution": {
+      "content": "public int minimumRecolors(String blocks, int k) {\n        int whiteCount = 0;\n        \n        for (int i = 0; i < k; i++) {\n            if (blocks.charAt(i) == 'W') whiteCount++;\n        }\n\n        int ans = whiteCount;\n\n        for (int i = k; i < blocks.length(); i++) {\n            if (blocks.charAt(i) == 'W') whiteCount++;\n            if (blocks.charAt(i - k) == 'W') whiteCount--;\n\n            ans = Math.min(ans, whiteCount);\n        }\n\n\n        return ans;\n    }"
+    }
+  },
+  {
     "title": "Find the K-Beauty of a Number",
     "body": "The k-beauty of an integer num is defined as the number of substrings of num when it is read as a string that meet the following conditions:\n\nIt has a length of k.\nIt is a divisor of num.\nGiven integers num and k, return the k-beauty of num.\n\nNote:\n\nLeading zeros are allowed.\n0 is not a divisor of any value.\nA substring is a contiguous sequence of characters in a string.",
     "example": "Example 1:\n\nInput: num = 240, k = 2\nOutput: 2\nExplanation: The following are the substrings of num of length k:\n- \"24\" from \"240\": 24 is a divisor of 240.\n- \"40\" from \"240\": 40 is a divisor of 240.\nTherefore, the k-beauty is 2.\nExample 2:\n\nInput: num = 430043, k = 2\nOutput: 2\nExplanation: The following are the substrings of num of length k:\n- \"43\" from \"430043\": 43 is a divisor of 430043.\n- \"30\" from \"430043\": 30 is not a divisor of 430043.\n- \"00\" from \"430043\": 0 is not a divisor of 430043.\n- \"04\" from \"430043\": 4 is not a divisor of 430043.\n- \"43\" from \"430043\": 43 is a divisor of 430043.\nTherefore, the k-beauty is 2.",
