@@ -34,6 +34,7 @@ services:
       - app-network
 
   interview-dude:
+    image: vaskocuturilo/interview-dude:latest
     container_name: interview-dude
     hostname: interview-dude
     restart: always
@@ -66,10 +67,6 @@ services:
       - "com.centurylinklabs.watchtower.enable=true"
     networks:
       - app-network
-
-    build:
-      context: .
-      dockerfile: ./Dockerfile
 
     depends_on:
       - postgres
