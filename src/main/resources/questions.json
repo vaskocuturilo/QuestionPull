@@ -1,5 +1,14 @@
 [
   {
+    "title": "Combine Two Tables",
+    "body": "Write a solution to report the first name, last name, city, and state of each person in the Person table. If the address of a personId is not present in the Address table, report null instead.\n\nReturn the result table in any order.\n\nThe result format is in the following example.",
+    "example": "Create table If Not Exists Person (personId int, firstName varchar(255), lastName varchar(255))\nCreate table If Not Exists Address (addressId int, personId int, city varchar(255), state varchar(255))\nTruncate table Person\ninsert into Person (personId, lastName, firstName) values ('1', 'Wang', 'Allen')\ninsert into Person (personId, lastName, firstName) values ('2', 'Alice', 'Bob')\nTruncate table Address\ninsert into Address (addressId, personId, city, state) values ('1', '2', 'New York City', 'New York')\ninsert into Address (addressId, personId, city, state) values ('2', '3', ’Texas, 'California')",
+    "level": "easy",
+    "solution": {
+      "content": "SELECT p.firstname, p.lastname, a.city, a.state\nFROM person p\nLEFT JOIN address a\nUSING (personid)"
+    }
+  },
+  {
     "title": "Minimum Positive Sum Subarray",
     "body": "You are given an integer array nums and two integers l and r. Your task is to find the minimum sum of a subarray whose size is between l and r (inclusive) and whose sum is greater than 0.\n\nReturn the minimum sum of such a subarray. If no such subarray exists, return -1.\n\nA subarray is a contiguous non-empty sequence of elements within an array.",
     "example": "Example 1:\n\nInput: nums = [3, -2, 1, 4], l = 2, r = 3\n\nOutput: 1\n\nExplanation:\n\nThe subarrays of length between l = 2 and r = 3 where the sum is greater than 0 are:\n\n[3, -2] with a sum of 1\n[1, 4] with a sum of 5\n[3, -2, 1] with a sum of 2\n[-2, 1, 4] with a sum of 3\nOut of these, the subarray [3, -2] has a sum of 1, which is the smallest positive sum. Hence, the answer is 1.\n\nExample 2:\n\nInput: nums = [-2, 2, -3, 1], l = 2, r = 3\n\nOutput: -1\n\nExplanation:\n\nThere is no subarray of length between l and r that has a sum greater than 0. So, the answer is -1.\n\nExample 3:\n\nInput: nums = [1, 2, 3, 4], l = 2, r = 4\n\nOutput: 3\n\nExplanation:\n\nThe subarray [1, 2] has a length of 2 and the minimum sum greater than 0. So, the answer is 3.",
