@@ -1,5 +1,14 @@
 [
   {
+    "title": "Second Highest Salary",
+    "body": "Write a solution to find the second highest distinct salary from the Employee table. If there is no second highest salary, return null (return None in Pandas).\n\nThe result format is in the following example.",
+    "example": "Create table If Not Exists Employee (id int, salary int)\nTruncate table Employee\ninsert into Employee (id, salary) values ('1', '100')\ninsert into Employee (id, salary) values ('2', '200')\ninsert into Employee (id, salary) values ('3', '300')",
+    "level": "easy",
+    "solution": {
+      "content": "SELECT MAX(employee_salaries.salary) as SecondHighestSalary\nFROM (SELECT e.salary, dense_rank() OVER (ORDER BY e.salary desc) as rank FROM employee e) employee_salaries\nWHERE rank = 2;"
+    }
+  },
+  {
     "title": "Combine Two Tables",
     "body": "Write a solution to report the first name, last name, city, and state of each person in the Person table. If the address of a personId is not present in the Address table, report null instead.\n\nReturn the result table in any order.\n\nThe result format is in the following example.",
     "example": "Create table If Not Exists Person (personId int, firstName varchar(255), lastName varchar(255))\nCreate table If Not Exists Address (addressId int, personId int, city varchar(255), state varchar(255))\nTruncate table Person\ninsert into Person (personId, lastName, firstName) values ('1', 'Wang', 'Allen')\ninsert into Person (personId, lastName, firstName) values ('2', 'Alice', 'Bob')\nTruncate table Address\ninsert into Address (addressId, personId, city, state) values ('1', '2', 'New York City', 'New York')\ninsert into Address (addressId, personId, city, state) values ('2', '3', ’Texas, 'California')",
