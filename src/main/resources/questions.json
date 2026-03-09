@@ -2280,6 +2280,15 @@
     }
   },
   {
+    "title": "Consecutive Numbers",
+    "body": "Find all numbers that appear at least three times consecutively.\n\nReturn the result table in any order.\n\nThe result format is in the following example. \n Create table If Not Exists Logs (id int, num int)\nTruncate table Logs\ninsert into Logs (id, num) values ('1', '1')\ninsert into Logs (id, num) values ('2', '1')\ninsert into Logs (id, num) values ('3', '1')\ninsert into Logs (id, num) values ('4', '2')\ninsert into Logs (id, num) values ('5', '1')\ninsert into Logs (id, num) values ('6', '2')\ninsert into Logs (id, num) values ('7', '2')",
+    "example": "Example 1:\n\nInput: \nLogs table:\n+----+-----+\n| id | num |\n+----+-----+\n| 1  | 1   |\n| 2  | 1   |\n| 3  | 1   |\n| 4  | 2   |\n| 5  | 1   |\n| 6  | 2   |\n| 7  | 2   |\n+----+-----+\nOutput: \n+-----------------+\n| ConsecutiveNums |\n+-----------------+\n| 1               |\n+-----------------+\nExplanation: 1 is the only number that appears consecutively for at least three times.",
+    "level": "medium",
+    "solution": {
+      "content": "SELECT DISTINCT num as ConsecutiveNums\nFROM (SELECT Logs.num,\n             lag(Logs.num, 1) OVER (ORDER BY id) as prev1,\n             lag(Logs.num, 2) OVER (ORDER BY id) as prev2\n      FROM Logs) as temp\nWHERE num = prev1\n  AND num = prev2"
+    }
+  },
+  {
     "title": "Top K Frequent Elements",
     "body": "Given an integer array and an integer k, return the k most frequent elements. Optimize for time complexity better than O(n log n)",
     "example": "Input: nums = [1,1,1,2,2,3], k = 2, Output: [1,2]",
