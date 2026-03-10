@@ -2289,6 +2289,15 @@
     }
   },
   {
+    "title": "Longest Substring with At Least K Repeating Characters",
+    "body": "Given a string s and an integer k, return the length of the longest substring of s such that the frequency of each character in this substring is greater than or equal to k.\n\nif no such substring exists, return 0.",
+    "example": "Example 1:\n\nInput: s = \"aaabb\", k = 3\nOutput: 3\nExplanation: The longest substring is \"aaa\", as 'a' is repeated 3 times.\nExample 2:\n\nInput: s = \"ababbc\", k = 2\nOutput: 5\nExplanation: The longest substring is \"ababb\", as 'a' is repeated 2 times and 'b' is repeated 3 times.",
+    "level": "medium",
+    "solution": {
+      "content": "class Solution {\n     private String inputString;\n     private int minFrequency;\n\n    public int longestSubstring(String s, int k) {\n        this.inputString = s;\n        this.minFrequency = k;\n\n        return divideAndConquer(0, s.length() - 1);\n    }\n\n    private int divideAndConquer(final int left, final int right) {\n        int[] frequency = new int[26];\n\n        for (int i = left; i <= right; i++) {\n            frequency[inputString.charAt(i) - 'a']++;\n        }\n\n        char splitChar = 0;\n\n        for (int i = 0; i < 26; i++) {\n            if (frequency[i] > 0 && frequency[i] < minFrequency) {\n                splitChar = (char) (i + 'a');\n                break;\n            }\n        }\n\n        if (splitChar == 0) {\n            return right - left + 1;\n        }\n\n        int currentIndex = left;\n        int maxLength = 0;\n\n        while (currentIndex <= right) {\n            while (currentIndex <= right && inputString.charAt(currentIndex) == splitChar) {\n                currentIndex++;\n            }\n\n            if (currentIndex > right) {\n                break;\n            }\n            int segmentEnd = currentIndex;\n\n            while (segmentEnd <= right && inputString.charAt(segmentEnd) != splitChar) {\n                segmentEnd++;\n            }\n\n            int segmentLength = divideAndConquer(currentIndex, segmentEnd - 1);\n            maxLength = Math.max(maxLength, segmentLength);\n\n            currentIndex = segmentEnd;\n        }\n\n        return maxLength;\n    }\n}"
+    }
+  },
+  {
     "title": "Top K Frequent Elements",
     "body": "Given an integer array and an integer k, return the k most frequent elements. Optimize for time complexity better than O(n log n)",
     "example": "Input: nums = [1,1,1,2,2,3], k = 2, Output: [1,2]",
