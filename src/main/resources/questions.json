@@ -1,5 +1,14 @@
 [
   {
+    "title": "Alternating Groups I",
+    "body": "There is a circle of red and blue tiles. You are given an array of integers colors. The color of tile i is represented by colors[i]:\n\ncolors[i] == 0 means that tile i is red.\ncolors[i] == 1 means that tile i is blue.\nEvery 3 contiguous tiles in the circle with alternating colors (the middle tile has a different color from its left and right tiles) is called an alternating group.\n\nReturn the number of alternating groups.\n\nNote that since colors represents a circle, the first and the last tiles are considered to be next to each other.",
+    "example": "Example 1:\n\nInput: colors = [1,1,1]\n\nOutput: 0 \n Example 2:\n\nInput: colors = [0,1,0,0,1]\n\nOutput: 3",
+    "level": "easy",
+    "solution": {
+      "content": "public int numberOfAlternatingGroups(int[] colors) {\n        Objects.requireNonNull(colors, \"The array cannot be null\");\n\n        int k = 3;\n        int n = colors.length;\n        int count = 0;\n        int ans = 0;\n\n        for (int i = 0; i < 2 * n; i++) {\n            int currentIndex = i % n;\n            int previousIndex = (i - 1) % n;\n            \n            if (i > 0 && colors[currentIndex] == colors[previousIndex]) {\n                count = 1;\n            } else {\n                count++;\n            }\n            if (i >= n && count >= k) {\n                ans++;\n            }\n        }\n        \n        return ans;\n    }"
+    }
+  },
+  {
     "title": "Combine Two Tables",
     "body": "Write a solution to report the first name, last name, city, and state of each person in the Person table. If the address of a personId is not present in the Address table, report null instead.\n\nReturn the result table in any order.\n\nThe result format is in the following example.",
     "example": "Create table If Not Exists Person (personId int, firstName varchar(255), lastName varchar(255))\nCreate table If Not Exists Address (addressId int, personId int, city varchar(255), state varchar(255))\nTruncate table Person\ninsert into Person (personId, lastName, firstName) values ('1', 'Wang', 'Allen')\ninsert into Person (personId, lastName, firstName) values ('2', 'Alice', 'Bob')\nTruncate table Address\ninsert into Address (addressId, personId, city, state) values ('1', '2', 'New York City', 'New York')\ninsert into Address (addressId, personId, city, state) values ('2', '3', ’Texas, 'California')",
