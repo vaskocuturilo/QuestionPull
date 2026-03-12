@@ -1,5 +1,14 @@
 [
   {
+    "title": "Defuse the Bomb",
+    "body": "You have a bomb to defuse, and your time is running out! Your informer will provide you with a circular array code of length of n and a key k.\n\nTo decrypt the code, you must replace every number. All the numbers are replaced simultaneously.\n\nIf k > 0, replace the ith number with the sum of the next k numbers.\nIf k < 0, replace the ith number with the sum of the previous -k numbers.\nIf k == 0, replace the ith number with 0.\nAs code is circular, the next element of code[n-1] is code[0], and the previous element of code[0] is code[n-1].\n\nGiven the circular array code and an integer key k, return the decrypted code to defuse the bomb!",
+    "example": "Example 1:\n\nInput: code = [5,7,1,4], k = 3\nOutput: [12,10,16,13]\nExplanation: Each number is replaced by the sum of the next 3 numbers. The decrypted code is [7+1+4, 1+4+5, 4+5+7, 5+7+1]. Notice that the numbers wrap around.\nExample 2:\n\nInput: code = [1,2,3,4], k = 0\nOutput: [0,0,0,0]\nExplanation: When k is zero, the numbers are replaced by 0. \nExample 3:\n\nInput: code = [2,4,9,3], k = -2\nOutput: [12,5,6,13]\nExplanation: The decrypted code is [3+9, 2+3, 4+2, 9+4]. Notice that the numbers wrap around again. If k is negative, the sum is of the previous numbers.",
+    "level": "easy",
+    "solution": {
+      "content": "public int[] decrypt(int[] code, int k) {\n        int n = code.length;\n        int[] answer = new int[n];\n\n        Objects.requireNonNull(code, \"Tha array cannot be null\");\n        \n        if (k == 0) return answer;\n\n        for (int i = 0; i < n; i++) {\n            if (k > 0) {\n                for (int j = i + 1; j < i + k + 1; j++) {\n                    answer[i] += code[j % n];\n                }\n            } else {\n                for (int j = i + k; j < i; j++) {\n                    int i1 = j + n;\n                    answer[i] += code[i1 % n];\n                }\n            }\n        }\n\n        return answer;\n    }"
+    }
+  },
+  {
     "title": "Alternating Groups I",
     "body": "There is a circle of red and blue tiles. You are given an array of integers colors. The color of tile i is represented by colors[i]:\n\ncolors[i] == 0 means that tile i is red.\ncolors[i] == 1 means that tile i is blue.\nEvery 3 contiguous tiles in the circle with alternating colors (the middle tile has a different color from its left and right tiles) is called an alternating group.\n\nReturn the number of alternating groups.\n\nNote that since colors represents a circle, the first and the last tiles are considered to be next to each other.",
     "example": "Example 1:\n\nInput: colors = [1,1,1]\n\nOutput: 0 \n Example 2:\n\nInput: colors = [0,1,0,0,1]\n\nOutput: 3",
