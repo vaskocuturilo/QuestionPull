@@ -2343,6 +2343,15 @@
     }
   },
   {
+    "title": "Combination Sum",
+    "body": "Given an array of distinct integers candidates and a target integer target, return a list of all unique combinations of candidates where the chosen numbers sum to target. You may return the combinations in any order.\n\nThe same number may be chosen from candidates an unlimited number of times. Two combinations are unique if the frequency of at least one of the chosen numbers is different.\n\nThe test cases are generated such that the number of unique combinations that sum up to target is less than 150 combinations for the given input.",
+    "example": "Example 1:\n\nInput: candidates = [2,3,6,7], target = 7\nOutput: [[2,2,3],[7]]\nExplanation:\n2 and 3 are candidates, and 2 + 2 + 3 = 7. Note that 2 can be used multiple times.\n7 is a candidate, and 7 = 7.\nThese are the only two combinations.\nExample 2:\n\nInput: candidates = [2,3,5], target = 8\nOutput: [[2,2,2,2],[2,3,3],[3,5]]\nExample 3:\n\nInput: candidates = [2], target = 1\nOutput: []",
+    "level": "medium",
+    "solution": {
+      "content": "class Solution {\n    private final List<List<Integer>> result = new ArrayList<>();\n\n    private final List<Integer> currentCombination = new ArrayList<>();\n\n    private int[] candidates;\n    \n    public List<List<Integer>> combinationSum(int[] candidates, int target) {\n        Arrays.sort(candidates);\n        this.candidates = candidates;\n\n        depthFirstSearch(0, target);\n\n        return result;\n    }\n\n    private void depthFirstSearch(final int startIndex, int target) {\n        if (target == 0) {\n            result.add(new ArrayList<>(currentCombination));\n            return;\n        }\n\n        if (target < candidates[startIndex]) {\n            return;\n        }\n\n        for (int i = startIndex; i < candidates.length; i++) {\n            currentCombination.add(candidates[i]);\n            depthFirstSearch(i, target - candidates[i]);\n            currentCombination.removeLast();\n        }\n    }\n}"
+    }
+  },
+  {
     "title": "Top K Frequent Elements",
     "body": "Given an integer array and an integer k, return the k most frequent elements. Optimize for time complexity better than O(n log n)",
     "example": "Input: nums = [1,1,1,2,2,3], k = 2, Output: [1,2]",
