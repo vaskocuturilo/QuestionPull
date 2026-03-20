@@ -2458,5 +2458,14 @@
     "solution": {
       "content": "public boolean containsNearbyAlmostDuplicate(int[] nums, int indexDiff, int valueDiff) {\n        Objects.requireNonNull(nums, \"The array cannot be null\");\n\n        if (indexDiff <= 0 || valueDiff < 0) return false;\n\n        final TreeSet<Long> sortedSet = new TreeSet<>();\n\n        for (int i = 0; i < nums.length; i++) {\n\n            final long currentValue = nums[i];\n\n            final Long ceilingValue = sortedSet.ceiling(currentValue - valueDiff);\n\n            if (ceilingValue != null && ceilingValue <= currentValue + valueDiff) {\n                return true;\n            }\n            sortedSet.add(currentValue);\n\n            if (i >= indexDiff) {\n                 sortedSet.remove((long) nums[i - indexDiff]);\n            }\n        }\n\n        return false;\n    }"
     }
+  },
+  {
+    "title": "First Missing Positive",
+    "body": "Given an unsorted integer array nums. Return the smallest positive integer that is not present in nums.\n\nYou must implement an algorithm that runs in O(n) time and uses O(1) auxiliary space.",
+    "example": "Example 1:\n\nInput: nums = [1,2,0]\nOutput: 3\nExplanation: The numbers in the range [1,2] are all in the array.\nExample 2:\n\nInput: nums = [3,4,-1,1]\nOutput: 2\nExplanation: 1 is in the array but 2 is missing.\nExample 3:\n\nInput: nums = [7,8,9,11,12]\nOutput: 1\nExplanation: The smallest positive integer 1 is missing.",
+    "level": "hard",
+    "solution": {
+      "content": "public int firstMissingPositive(int[] nums) {\n        int n = nums.length;\n\n        for (int i = 0; i < n; i++) {\n            while (nums[i] > 0 && nums[i] <= n && nums[i] != nums[nums[i] - 1]) {\n                int j = nums[i] - 1;\n                swap(nums, i, j);\n            }\n        }\n\n        for (int i = 0; i < n; i++) {\n            if (nums[i] != i + 1) {\n                return i + 1;\n            }\n        }\n        return n + 1;\n    }\n\n    private void swap(int[] nums, int i, int j) {\n        int temp = nums[i];\n        nums[i] = nums[j];\n        nums[j] = temp;\n    }"
+    }
   }
 ]
