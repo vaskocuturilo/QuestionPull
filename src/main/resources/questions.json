@@ -1,5 +1,14 @@
 [
   {
+    "title": "Find Smallest Letter Greater Than Target",
+    "body": "You are given an array of characters letters that is sorted in non-decreasing order, and a character target. There are at least two different characters in letters.\n\nReturn the smallest character in letters that is lexicographically greater than target. If such a character does not exist, return the first character in letters.",
+    "example": "Example 1:\n\nInput: letters = [\"c\",\"f\",\"j\"], target = \"a\"\nOutput: \"c\"\nExplanation: The smallest character that is lexicographically greater than 'a' in letters is 'c'.\nExample 2:\n\nInput: letters = [\"c\",\"f\",\"j\"], target = \"c\"\nOutput: \"f\"\nExplanation: The smallest character that is lexicographically greater than 'c' in letters is 'f'.\nExample 3:\n\nInput: letters = [\"x\",\"x\",\"y\",\"y\"], target = \"z\"\nOutput: \"x\"\nExplanation: There are no characters in letters that is lexicographically greater than 'z' so we return letters[0].",
+    "level": "easy",
+    "solution": {
+      "content": "public char nextGreatestLetter(char[] letters, char target) {\n       Objects.requireNonNull(letters, \"The array cannot be null\");\n       \n       int low = 0;\n        int high = letters.length - 1;\n\n        int index = -1;\n\n        while (low <= high) {\n            int mid = (low + high) / 2;\n            if (target < letters[mid]) {\n                high = mid - 1;\n                index = mid;\n            } else {\n                low = mid + 1;\n            }\n        }\n        return index != -1 ? letters[index] : letters[0];\n    }"
+    }
+  },
+  {
     "title": "Maximum Subarray With Equal Products",
     "body": "You are given an array of positive integers nums.\n\nAn array arr is called product equivalent if prod(arr) == lcm(arr) * gcd(arr), where:\n\nprod(arr) is the product of all elements of arr.\ngcd(arr) is the GCD of all elements of arr.\nlcm(arr) is the LCM of all elements of arr.\nReturn the length of the longest product equivalent subarray of nums.",
     "example": "Input: nums = [2,3,4,5,6]\n\nOutput: 3\n\nExplanation: \n\nThe longest product equivalent subarray is [3, 4, 5].\n\nExample 3:\n\nInput: nums = [1,2,3,1,4,5,1]\n\nOutput: 5",
