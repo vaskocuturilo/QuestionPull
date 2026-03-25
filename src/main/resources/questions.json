@@ -2379,6 +2379,15 @@
     }
   },
   {
+    "title": "Generate Parentheses",
+    "body": "Given n pairs of parentheses, write a function to generate all combinations of well-formed parentheses.\n\n",
+    "example": "Example 1:\n\nInput: n = 3\nOutput: [\"((()))\",\"(()())\",\"(())()\",\"()(())\",\"()()()\"]\nExample 2:\n\nInput: n = 1\nOutput: [\"()\"]\n",
+    "level": "medium",
+    "solution": {
+      "content": "class Solution {\n    List<String> result = new ArrayList<>();\n    \n    private int count;\n\n    public List<String> generateParenthesis(int n) {\n        this.count = n;\n        dfs(0, 0, \"\");\n        return result;\n    }\n\n    private void dfs(int left, int right, String text) {\n        if (left > count || right > count || left < right) {\n            return;\n        }\n\n        if (left == count && right == count) {\n            result.add(text);\n            return;\n        }\n\n        dfs(left + 1, right, text + \"(\");\n        dfs(left, right + 1, text + \")\");\n    }\n}"
+    }
+  },
+  {
     "title": "Top K Frequent Elements",
     "body": "Given an integer array and an integer k, return the k most frequent elements. Optimize for time complexity better than O(n log n)",
     "example": "Input: nums = [1,1,1,2,2,3], k = 2, Output: [1,2]",
