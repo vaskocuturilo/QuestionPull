@@ -38,13 +38,6 @@ public class StorageUtils {
     @Transactional
     public void loadQuestionsPull() {
         try {
-            if (questionPullRepository.count() > 0) {
-                log.info("Questions are already loaded in the database.");
-                return;
-            }
-
-            log.info("Cleared old questions to sync with latest JSON.");
-
             Resource resource = resourceLoader.getResource(filename);
             if (!resource.exists()) {
                 log.error("Resource file {} not found!", filename);
