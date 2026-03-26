@@ -2388,6 +2388,15 @@
     }
   },
   {
+    "title": "Count and Say",
+    "body": "The count-and-say sequence is a sequence of digit strings defined by the recursive formula:\n\ncountAndSay(1) = \"1\"\ncountAndSay(n) is the run-length encoding of countAndSay(n - 1).\nRun-length encoding (RLE) is a string compression method that works by replacing consecutive identical characters (repeated 2 or more times) with the concatenation of the character and the number marking the count of the characters (length of the run). For example, to compress the string \"3322251\" we replace \"33\" with \"23\", replace \"222\" with \"32\", replace \"5\" with \"15\" and replace \"1\" with \"11\". Thus the compressed string becomes \"23321511\".\n\nGiven a positive integer n, return the nth element of the count-and-say sequence.",
+    "example": "Example 1:\n\nInput: n = 4\n\nOutput: \"1211\"\n\nExplanation:\n\ncountAndSay(1) = \"1\"\ncountAndSay(2) = RLE of \"1\" = \"11\"\ncountAndSay(3) = RLE of \"11\" = \"21\"\ncountAndSay(4) = RLE of \"21\" = \"1211\"\nExample 2:\n\nInput: n = 1\n\nOutput: \"1\"\n\nExplanation:\n\nThis is the base case.",
+    "level": "medium",
+    "solution": {
+      "content": "public String countAndSay(int n) {\n        String result = \"1\";\n\n        while (--n > 0) {\n            StringBuilder builder = new StringBuilder();\n\n            for (int i = 0; i < result.length();) {\n                int currentIndex = i;\n                while (currentIndex < result.length() && result.charAt(currentIndex) == result.charAt(i))\n                    currentIndex++;\n\n                int count = currentIndex - i;\n                builder.append(count);\n                builder.append(result.charAt(i));\n                i = currentIndex;\n            }\n            result = builder.toString();\n        }\n\n        return result;\n    }"
+    }
+  },
+  {
     "title": "Top K Frequent Elements",
     "body": "Given an integer array and an integer k, return the k most frequent elements. Optimize for time complexity better than O(n log n)",
     "example": "Input: nums = [1,1,1,2,2,3], k = 2, Output: [1,2]",
