@@ -2397,6 +2397,15 @@
     }
   },
   {
+    "title": "Multiply Strings",
+    "body": "Given two non-negative integers num1 and num2 represented as strings, return the product of num1 and num2, also represented as a string.\n\nNote: You must not use any built-in BigInteger library or convert the inputs to integer directly.",
+    "example": "Example 1:\n\nInput: num1 = \"2\", num2 = \"3\"\nOutput: \"6\"\nExample 2:\n\nInput: num1 = \"123\", num2 = \"456\"\nOutput: \"56088\"",
+    "level": "medium",
+    "solution": {
+      "content": "public String multiply(String num1, String num2) {\n        if (Objects.equals(num1, \"0\") || Objects.equals(num2, \"0\")) return \"0\";\n\n        final int n = num1.length();\n        final int m = num2.length();\n\n        final int[] array = new int[n + m];\n        \n        for (int i = n - 1; i >= 0; i--) {\n            int currentDigitsFirstLoop = num1.charAt(i) - '0';\n            for (int j = m - 1; j >= 0; j--) {\n                int currentDigitsSecondLoop = num2.charAt(j) - '0';\n\n                array[i + j + 1] += currentDigitsFirstLoop * currentDigitsSecondLoop;\n            }\n        }\n\n        for (int i = array.length - 1; i > 0; i--) {\n            array[i - 1] += array[i] / 10;\n            array[i] %= 10;\n        }\n\n        final int currentIndex = array[0] == 0 ? 1 : 0;\n\n        final StringBuilder result = new StringBuilder();\n        for (int i = currentIndex; i < array.length; i++) {\n            result.append(array[i]);\n        }\n\n        return result.toString();\n    }"
+    }
+  },
+  {
     "title": "Top K Frequent Elements",
     "body": "Given an integer array and an integer k, return the k most frequent elements. Optimize for time complexity better than O(n log n)",
     "example": "Input: nums = [1,1,1,2,2,3], k = 2, Output: [1,2]",
