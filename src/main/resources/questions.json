@@ -1505,7 +1505,7 @@
     "example": "Example 1:\n\nInput: a = \"11\", b = \"1\"\nOutput: \"100\"; Example 2:\n\nInput: a = \"1010\", b = \"1011\"\nOutput: \"10101\"",
     "level": "easy",
     "solution": {
-      "content": "private static String addBinary(final String a, final String b) {\n        return Integer.toBinaryString(Integer.parseInt(a, 2) + Integer.parseInt(b, 2));\n    }"
+      "content": "StringBuilder result = new StringBuilder();\n\n        int carry = 0;\n\n        int i = a.length() - 1;\n        int j = b.length() - 1;\n\n        while (i >= 0 || j >= 0 || carry > 0) {\n            int sumA = i >= 0 ? a.charAt(i) - '0' : 0;\n            int sumB = j >= 0 ? b.charAt(j) - '0' : 0;\n\n            int sum = sumA + sumB + carry;\n\n            result.append(sum % 2);\n\n            carry = sum / 2;\n\n            i--;\n            j--;\n        }\n        return result.reverse().toString();"
     }
   },
   {
