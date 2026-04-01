@@ -2415,6 +2415,15 @@
     }
   },
   {
+    "title": "Group Anagrams",
+    "body": "Given an array of strings strs, group the anagrams together. You can return the answer in any order.\n\n",
+    "example": "Example 1:\n\nInput: strs = [\"eat\",\"tea\",\"tan\",\"ate\",\"nat\",\"bat\"]\n\nOutput: [[\"bat\"],[\"nat\",\"tan\"],[\"ate\",\"eat\",\"tea\"]]\n\nExplanation:\n\nThere is no string in strs that can be rearranged to form \"bat\".\nThe strings \"nat\" and \"tan\" are anagrams as they can be rearranged to form each other.\nThe strings \"ate\", \"eat\", and \"tea\" are anagrams as they can be rearranged to form each other.\nExample 2:\n\nInput: strs = [\"\"]\n\nOutput: [[\"\"]]\n\nExample 3:\n\nInput: strs = [\"a\"]\n\nOutput: [[\"a\"]]",
+    "level": "medium",
+    "solution": {
+      "content": "public List<List<String>> groupAnagrams(String[] strs) {\n        Objects.requireNonNull(strs, \"The array cannot be null\");\n        \n        final Map<String, List<String>> result = new HashMap<>();\n\n        for (String key : strs) {\n            final char[] currentCharKey = key.toCharArray();\n\n            Arrays.sort(currentCharKey);\n\n            final String currentStringKey = String.valueOf(currentCharKey);\n\n            result.computeIfAbsent(currentStringKey, k -> new ArrayList<>()).add(key);\n        }\n\n        return new ArrayList<>(result.values());\n    }"
+    }
+  },
+  {
     "title": "Top K Frequent Elements",
     "body": "Given an integer array and an integer k, return the k most frequent elements. Optimize for time complexity better than O(n log n)",
     "example": "Input: nums = [1,1,1,2,2,3], k = 2, Output: [1,2]",
