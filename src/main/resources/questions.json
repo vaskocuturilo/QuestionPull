@@ -2424,6 +2424,15 @@
     }
   },
   {
+    "title": "Simplify Path",
+    "body": "You are given an absolute path for a Unix-style file system, which always begins with a slash '/'. Your task is to transform this absolute path into its simplified canonical path.\n\nThe rules of a Unix-style file system are as follows:\n\nA single period '.' represents the current directory.\nA double period '..' represents the previous/parent directory.\nMultiple consecutive slashes such as '//' and '///' are treated as a single slash '/'.\nAny sequence of periods that does not match the rules above should be treated as a valid directory or file name. For example, '...' and '....' are valid directory or file names.\nThe simplified canonical path should follow these rules:\n\nThe path must start with a single slash '/'.\nDirectories within the path must be separated by exactly one slash '/'.\nThe path must not end with a slash '/', unless it is the root directory.\nThe path must not have any single or double periods ('.' and '..') used to denote current or parent directories.\nReturn the simplified canonical path.",
+    "example": "Example 1:\n\nInput: path = \"/home/\"\n\nOutput: \"/home\"\n\nExplanation:\n\nThe trailing slash should be removed.\n\nExample 2:\n\nInput: path = \"/home//foo/\"\n\nOutput: \"/home/foo\"\n\nExplanation:\n\nMultiple consecutive slashes are replaced by a single one.\n\nExample 3:\n\nInput: path = \"/home/user/Documents/../Pictures\"\n\nOutput: \"/home/user/Pictures\"\n\nExplanation:\n\nA double period \"..\" refers to the directory up a level (the parent directory).\n\nExample 4:\n\nInput: path = \"/../\"\n\nOutput: \"/\"\n\nExplanation:\n\nGoing one level up from the root directory is not possible.\n\nExample 5:\n\nInput: path = \"/.../a/../b/c/../d/./\"\n\nOutput: \"/.../b/d\"\n\nExplanation:\n\n\"...\" is a valid name for a directory in this problem.",
+    "level": "medium",
+    "solution": {
+      "content": "public String simplifyPath(String path) {\n        final ArrayDeque<String> deque = new ArrayDeque<>();\n\n        final String[] values = path.split(\"/\");\n\n        for (String value : values) {\n            if (value.isEmpty() || value.equals(\".\")) {\n                continue;\n            }\n            if (value.equals(\"..\")) {\n                deque.pollLast();\n            } else {\n                deque.offerLast(value);\n            }\n        }\n        return \"/\" + String.join(\"/\", deque);\n    }"
+    }
+  },
+  {
     "title": "Top K Frequent Elements",
     "body": "Given an integer array and an integer k, return the k most frequent elements. Optimize for time complexity better than O(n log n)",
     "example": "Input: nums = [1,1,1,2,2,3], k = 2, Output: [1,2]",
