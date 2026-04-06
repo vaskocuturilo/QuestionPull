@@ -2442,6 +2442,15 @@
     }
   },
   {
+    "title": "Restore IP Addresses",
+    "body": "A valid IP address consists of exactly four integers separated by single dots. Each integer is between 0 and 255 (inclusive) and cannot have leading zeros.\n\nFor example, \"0.1.2.201\" and \"192.168.1.1\" are valid IP addresses, but \"0.011.255.245\", \"192.168.1.312\" and \"192.168@1.1\" are invalid IP addresses.\nGiven a string s containing only digits, return all possible valid IP addresses that can be formed by inserting dots into s. You are not allowed to reorder or remove any digits in s. You may return the valid IP addresses in any order.",
+    "example": "Example 1:\n\nInput: s = \"25525511135\"\nOutput: [\"255.255.11.135\",\"255.255.111.35\"]\nExample 2:\n\nInput: s = \"0000\"\nOutput: [\"0.0.0.0\"]\nExample 3:\n\nInput: s = \"101023\"\nOutput: [\"1.0.10.23\",\"1.0.102.3\",\"10.1.0.23\",\"10.10.2.3\",\"101.0.2.3\"]",
+    "level": "medium",
+    "solution": {
+      "content": "class Solution {\n\n    private int stringLength;\n\n    private String inputString;\n\n    private List<String> result = new ArrayList<>();\n\n    private List<String> currentSegments = new ArrayList<>();\n    \n    public List<String> restoreIpAddresses(String s) {\n        stringLength = s.length();\n        this.inputString = s;\n        dfs(0);\n        return result;\n    }\n\n    private void dfs(int startIndex) {\n        if (startIndex >= stringLength && currentSegments.size() == 4) {\n            result.add(String.join(\".\", currentSegments));\n            return;\n        }\n\n        if (startIndex >= stringLength || currentSegments.size() >= 4) {\n            return;\n        }\n\n        int currentNumber = 0;\n        for (int endIndex = startIndex; endIndex < Math.min(startIndex + 3, stringLength); ++endIndex) {\n            currentNumber = currentNumber * 10 + inputString.charAt(endIndex) - '0';\n\n            if (currentNumber > 255 || (inputString.charAt(startIndex) == '0' && startIndex != endIndex)) {\n                break;\n            }\n\n            currentSegments.add(inputString.substring(startIndex, endIndex + 1));\n\n            dfs(endIndex + 1);\n\n            currentSegments.remove(currentSegments.size() - 1);\n        }\n    }\n}"
+    }
+  },
+  {
     "title": "Top K Frequent Elements",
     "body": "Given an integer array and an integer k, return the k most frequent elements. Optimize for time complexity better than O(n log n)",
     "example": "Input: nums = [1,1,1,2,2,3], k = 2, Output: [1,2]",
