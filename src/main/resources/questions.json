@@ -2451,6 +2451,15 @@
     }
   },
   {
+    "title": "Palindrome Partitioning",
+    "body": "Given a string s, partition s such that every substring of the partition is a palindrome. Return all possible palindrome partitioning of s.\n\n",
+    "example": "Example 1:\n\nInput: s = \"aab\"\nOutput: [[\"a\",\"a\",\"b\"],[\"aa\",\"b\"]]\nExample 2:\n\nInput: s = \"a\"\nOutput: [[\"a\"]]\n",
+    "level": "medium",
+    "solution": {
+      "content": "class Solution {\n     private int inputLength;\n\n    private String inputString;\n\n    private boolean[][] isPalindrome;\n\n    private List<String> currentPartition = new ArrayList<>();\n\n    private List<List<String>> allPartitions = new ArrayList<>();\n\n    public List<List<String>> partition(String s) {\n        inputLength = s.length();\n        inputString = s;\n        isPalindrome = new boolean[inputLength][inputLength];\n\n        for (int i = 0; i < inputLength; i++) {\n            Arrays.fill(isPalindrome[i], true);\n        }\n\n        for (int startIndex = inputLength - 1; startIndex >= 0; startIndex--) {\n            for (int endIndex = startIndex + 1; endIndex < inputLength; endIndex++) {\n                isPalindrome[startIndex][endIndex] = s.charAt(startIndex) == s.charAt(endIndex) &&\n                        isPalindrome[startIndex + 1][endIndex - 1];\n            }\n        }\n\n        findPartitions(0);\n\n        return allPartitions;\n    }\n\n    private void findPartitions(int startIndex) {\n        if (startIndex == inputString.length()) {\n            allPartitions.add(new ArrayList<>(currentPartition));\n            return;\n        }\n\n        for (int endIndex = startIndex; endIndex < inputLength; ++endIndex) {\n            if (isPalindrome[startIndex][endIndex]) {\n                currentPartition.add(inputString.substring(startIndex, endIndex + 1));\n\n                findPartitions(endIndex + 1);\n\n                currentPartition.removeLast();\n            }\n        }\n    }\n}"
+    }
+  },
+  {
     "title": "Top K Frequent Elements",
     "body": "Given an integer array and an integer k, return the k most frequent elements. Optimize for time complexity better than O(n log n)",
     "example": "Input: nums = [1,1,1,2,2,3], k = 2, Output: [1,2]",
