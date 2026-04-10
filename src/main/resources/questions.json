@@ -2469,6 +2469,15 @@
     }
   },
   {
+    "title": "Fraction to Recurring Decimal",
+    "body": "Given two integers representing the numerator and denominator of a fraction, return the fraction in string format.\n\nIf the fractional part is repeating, enclose the repeating part in parentheses\n\nIf multiple answers are possible, return any of them.\n\nIt is guaranteed that the length of the answer string is less than 104 for all the given inputs.\n\nNote that if the fraction can be represented as a finite length string, you must return it.",
+    "example": "Example 1:\n\nInput: numerator = 1, denominator = 2\nOutput: \"0.5\"\nExample 2:\n\nInput: numerator = 2, denominator = 1\nOutput: \"2\"\nExample 3:\n\nInput: numerator = 4, denominator = 333\nOutput: \"0.(012)\"",
+    "level": "medium",
+    "solution": {
+      "content": "public String fractionToDecimal(int numerator, int denominator) {\n        final StringBuilder result = new StringBuilder();\n\n        final Map<Long, Integer> positions = new HashMap<>();\n\n\n        if (numerator == 0) return \"0\";\n        if ((numerator > 0) ^ (denominator > 0)) result.append(\"-\");\n\n        long a = Math.abs((long) numerator);\n        long b = Math.abs((long) denominator);\n\n        result.append(a / b);\n\n        a %= b;\n\n        if (a == 0) return result.toString();\n\n        result.append(\".\");\n\n        while (a != 0) {\n            positions.put(a, result.length());\n\n            a *= 10;\n\n            result.append(a / b);\n            a %= b;\n\n            if (positions.containsKey(a)) {\n                final Integer repeatPosition = positions.get(a);\n                result.insert(repeatPosition, \"(\");\n                result.append(\")\");\n                break;\n            }\n        }\n\n        return result.toString();\n    }"
+    }
+  },
+  {
     "title": "Top K Frequent Elements",
     "body": "Given an integer array and an integer k, return the k most frequent elements. Optimize for time complexity better than O(n log n)",
     "example": "Input: nums = [1,1,1,2,2,3], k = 2, Output: [1,2]",
