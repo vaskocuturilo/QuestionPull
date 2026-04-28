@@ -2523,6 +2523,15 @@
     }
   },
   {
+    "title": "Word Break",
+    "body": "Given a string s and a dictionary of strings wordDict, return true if s can be segmented into a space-separated sequence of one or more dictionary words.\n\nNote that the same word in the dictionary may be reused multiple times in the segmentation.",
+    "example": "Example 1:\n\nInput: s = \"leetcode\", wordDict = [\"leet\",\"code\"]\nOutput: true\nExplanation: Return true because \"leetcode\" can be segmented as \"leet code\".\nExample 2:\n\nInput: s = \"applepenapple\", wordDict = [\"apple\",\"pen\"]\nOutput: true\nExplanation: Return true because \"applepenapple\" can be segmented as \"apple pen apple\".\nNote that you are allowed to reuse a dictionary word.\nExample 3:\n\nInput: s = \"catsandog\", wordDict = [\"cats\",\"dog\",\"sand\",\"and\",\"cat\"]\nOutput: false",
+    "level": "medium",
+    "solution": {
+      "content": "public boolean wordBreak(String s, List<String> wordDict) {\n        final Set<String> hasSet = new HashSet<>(wordDict);\n        final int n = s.length();\n        boolean[] f = new boolean[n + 1];\n\n        f[0] = true;\n\n        for (int i = 1; i <= n; i++) {\n            for (int j = 0; j < i; j++) {\n                if (f[j] && hasSet.contains(s.substring(j, i))) {\n                    f[i] = true;\n                    break;\n                }\n            }\n        }\n\n        return f[n];\n    }"
+    }
+  },
+  {
     "title": "Top K Frequent Elements",
     "body": "Given an integer array and an integer k, return the k most frequent elements. Optimize for time complexity better than O(n log n)",
     "example": "Input: nums = [1,1,1,2,2,3], k = 2, Output: [1,2]",
