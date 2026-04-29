@@ -2532,6 +2532,15 @@
     }
   },
   {
+    "title": "Majority Element II",
+    "body": "Given an integer array of size n, find all elements that appear more than ⌊ n/3 ⌋ times.\n\n",
+    "example": "Example 1:\n\nInput: nums = [3,2,3]\nOutput: [3]\nExample 2:\n\nInput: nums = [1]\nOutput: [1]\nExample 3:\n\nInput: nums = [1,2]\nOutput: [1,2]\n",
+    "level": "medium",
+    "solution": {
+      "content": "public List<Integer> majorityElement(int[] nums) {\n        int n1 = 0;\n        int n2 = 0;\n        int m1 = 0;\n        int m2 = 1;\n\n        for (int num : nums) {\n            if (num == m1) {\n                n1++;\n            } else if (num == m2) {\n                n2++;\n            } else if (n1 == 0) {\n                m1 = num;\n                n1++;\n            } else if (n2 == 0) {\n                m2 = num;\n                n2++;\n            } else {\n                n1--;\n                n2--;\n            }\n        }\n\n        final List<Integer> result = new ArrayList<>();\n        n1 = 0;\n        n2 = 0;\n\n        for (int num : nums) {\n            if (num == m1) {\n                n1++;\n            } else if (num == m2) {\n                n2++;\n            }\n        }\n\n        if (n1 > nums.length / 3) {\n            result.add(m1);\n        }\n\n        if (n2 > nums.length / 3) {\n            result.add(m2);\n        }\n        return result;\n    }"
+    }
+  },
+  {
     "title": "Top K Frequent Elements",
     "body": "Given an integer array and an integer k, return the k most frequent elements. Optimize for time complexity better than O(n log n)",
     "example": "Input: nums = [1,1,1,2,2,3], k = 2, Output: [1,2]",
