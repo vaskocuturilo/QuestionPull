@@ -2541,6 +2541,15 @@
     }
   },
   {
+    "title": "Ugly Number II",
+    "body": "An ugly number is a positive integer whose prime factors are limited to 2, 3, and 5.\n\nGiven an integer n, return the nth ugly number.\n\n",
+    "example": "Example 1:\n\nInput: n = 10\nOutput: 12\nExplanation: [1, 2, 3, 4, 5, 6, 8, 9, 10, 12] is the sequence of the first 10 ugly numbers.\nExample 2:\n\nInput: n = 1\nOutput: 1\nExplanation: 1 has no prime factors, therefore all of its prime factors are limited to 2, 3, and 5.",
+    "level": "medium",
+    "solution": {
+      "content": "public int nthUglyNumber(int n) {\n        final Set<Long> set = new HashSet<>();\n        final PriorityQueue<Long> queue = new PriorityQueue<>();\n        final int[] primeNumber = new int[]{2, 3, 5};\n\n        queue.offer(1L);\n        set.add(1L);\n\n        long currentNumber = 0;\n\n        while (n-- > 0) {\n            currentNumber = queue.poll();\n\n            for (int number : primeNumber) {\n                final long nextNumber = currentNumber * number;\n\n                if (set.add(nextNumber)) {\n                    queue.offer(nextNumber);\n                }\n            }\n        }\n        return (int) currentNumber;\n    }"
+    }
+  },
+  {
     "title": "Top K Frequent Elements",
     "body": "Given an integer array and an integer k, return the k most frequent elements. Optimize for time complexity better than O(n log n)",
     "example": "Input: nums = [1,1,1,2,2,3], k = 2, Output: [1,2]",
