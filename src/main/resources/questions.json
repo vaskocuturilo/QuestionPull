@@ -2559,6 +2559,15 @@
     }
   },
   {
+    "title": " Maximum XOR of Two Numbers in an Array",
+    "body": "Given an integer array nums, return the maximum result of nums[i] XOR nums[j], where 0 <= i <= j < n.\n\n",
+    "example": "Example 1:\n\nInput: nums = [3,10,5,25,2,8]\nOutput: 28\nExplanation: The maximum result is 5 XOR 25 = 28.\nExample 2:\n\nInput: nums = [14,70,53,83,49,91,36,80,92,51,66,70]\nOutput: 127",
+    "level": "medium",
+    "solution": {
+      "content": "class Trie {\n    private final Trie[] children = new Trie[2];\n\n    public void insert(int x) {\n        Trie currentNode = this;\n\n        for (int bitPosition = 30; bitPosition >= 0; --bitPosition) {\n            int bitValue = (x >> bitPosition) & 1;\n\n            if (currentNode.children[bitValue] == null) {\n                currentNode.children[bitValue] = new Trie();\n            }\n\n            currentNode = currentNode.children[bitValue];\n        }\n    }\n\n    public int search(int x) {\n        Trie currentNode = this;\n        int maxXorValue = 0;\n\n        for (int bitPosition = 30; bitPosition >= 0; --bitPosition) {\n            int bitValue = (x >> bitPosition) & 1;\n\n            int oppositeBit = bitValue ^ 1;\n\n            if (currentNode.children[oppositeBit] != null) {\n                maxXorValue |= (1 << bitPosition);\n                currentNode = currentNode.children[oppositeBit];\n            } else {\n                currentNode = currentNode.children[bitValue];\n            }\n        }\n\n        return maxXorValue;\n    }\n} public int findMaximumXOR(int[] nums) {\n       Trie trie = new Trie();\n        int maximumXor = 0;\n\n        for (int currentNum : nums) {\n            trie.insert(currentNum);\n\n            maximumXor = Math.max(maximumXor, trie.search(currentNum));\n        }\n\n        return maximumXor; \n    }"
+    }
+  },
+  {
     "title": "Top K Frequent Elements",
     "body": "Given an integer array and an integer k, return the k most frequent elements. Optimize for time complexity better than O(n log n)",
     "example": "Input: nums = [1,1,1,2,2,3], k = 2, Output: [1,2]",
