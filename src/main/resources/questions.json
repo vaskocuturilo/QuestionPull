@@ -1,5 +1,14 @@
 [
   {
+    "title": "Fair Candy Swap",
+    "body": "Alice and Bob have a different total number of candies. You are given two integer arrays aliceSizes and bobSizes where aliceSizes[i] is the number of candies of the ith box of candy that Alice has and bobSizes[j] is the number of candies of the jth box of candy that Bob has.\n\nSince they are friends, they would like to exchange one candy box each so that after the exchange, they both have the same total amount of candy. The total amount of candy a person has is the sum of the number of candies in each box they have.\n\nReturn an integer array answer where answer[0] is the number of candies in the box that Alice must exchange, and answer[1] is the number of candies in the box that Bob must exchange. If there are multiple answers, you may return any one of them. It is guaranteed that at least one answer exists.",
+    "example": "Example 1:\n\nInput: aliceSizes = [1,1], bobSizes = [2,2]\nOutput: [1,2]\nExample 2:\n\nInput: aliceSizes = [1,2], bobSizes = [2,3]\nOutput: [1,2]\nExample 3:\n\nInput: aliceSizes = [2], bobSizes = [1,3]\nOutput: [2,3]",
+    "level": "easy",
+    "solution": {
+      "content": "public int[] fairCandySwap(int[] aliceSizes, int[] bobSizes) {\n        final Set<Integer> set = new HashSet<>();\n        \n        for (int i : bobSizes) set.add(i);\n\n        int sumAliceSizes = 0;\n\n        int sumBobSizes = 0;\n\n        for (int i : aliceSizes) {\n            sumAliceSizes += i;\n        }\n\n        for (int i : bobSizes) {\n            sumBobSizes += i;\n        }\n\n        final int diff = (sumAliceSizes - sumBobSizes) / 2;\n\n        for (int aliceCandy : aliceSizes) {\n            final int bobCandy = aliceCandy - diff;\n\n            if (set.contains(bobCandy)) {\n                return new int[]{aliceCandy, bobCandy};\n            }\n        }\n\n        return new int[0];\n    }"
+    }
+  },
+  {
     "title": "Defanging an IP Address",
     "body": "Given a valid (IPv4) IP address, return a defanged version of that IP address.\n\nA defanged IP address replaces every period \".\" with \"[.]\".",
     "example": "Example 1:\n\nInput: address = \"1.1.1.1\"\nOutput: \"1[.]1[.]1[.]1\"\nExample 2:\n\nInput: address = \"255.100.50.0\"\nOutput: \"255[.]100[.]50[.]0\"",
