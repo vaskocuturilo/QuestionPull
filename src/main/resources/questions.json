@@ -9,6 +9,15 @@
     }
   },
   {
+    "title": "Redistribute Characters to Make All Strings Equal",
+    "body": "You are given an array of strings words (0-indexed).\n\nIn one operation, pick two distinct indices i and j, where words[i] is a non-empty string, and move any character from words[i] to any position in words[j].\n\nReturn true if you can make every string in words equal using any number of operations, and false otherwise.",
+    "example": "Example 1:\n\nInput: words = [\"abc\",\"aabc\",\"bc\"]\nOutput: true\nExplanation: Move the first 'a' in words[1] to the front of words[2],\nto make words[1] = \"abc\" and words[2] = \"abc\".\nAll the strings are now equal to \"abc\", so return true.\nExample 2:\n\nInput: words = [\"ab\",\"a\"]\nOutput: false\nExplanation: It is impossible to make all the strings equal using the operation.",
+    "level": "easy",
+    "solution": {
+      "content": "public boolean makeEqual(String[] words) {\n        Objects.requireNonNull(words, \"The array cannot be null\");\n        \n        int[] characterCount = new int[26];\n      \n        for (String word : words) {\n            for (char character : word.toCharArray()) {\n                characterCount[character - 'a']++;\n            }\n        }\n      \n        int numberOfWords = words.length;\n      \n        for (int count : characterCount) {\n            if (count % numberOfWords != 0) {\n                return false;\n            }\n        }\n      \n        return true;\n    }"
+    }
+  },
+  {
     "title": "Defanging an IP Address",
     "body": "Given a valid (IPv4) IP address, return a defanged version of that IP address.\n\nA defanged IP address replaces every period \".\" with \"[.]\".",
     "example": "Example 1:\n\nInput: address = \"1.1.1.1\"\nOutput: \"1[.]1[.]1[.]1\"\nExample 2:\n\nInput: address = \"255.100.50.0\"\nOutput: \"255[.]100[.]50[.]0\"",
