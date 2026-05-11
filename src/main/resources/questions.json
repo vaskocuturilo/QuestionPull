@@ -1,5 +1,14 @@
 [
   {
+    "title": "Count Special Quadruplets",
+    "body": "Given a 0-indexed integer array nums, return the number of distinct quadruplets (a, b, c, d) such that:\n\nnums[a] + nums[b] + nums[c] == nums[d], and\na < b < c < d",
+    "example": "Example 1:\n\nInput: nums = [1,2,3,6]\nOutput: 1\nExplanation: The only quadruplet that satisfies the requirement is (0, 1, 2, 3) because 1 + 2 + 3 == 6.\nExample 2:\n\nInput: nums = [3,3,6,4,5]\nOutput: 0\nExplanation: There are no such quadruplets in [3,3,6,4,5].\nExample 3:\n\nInput: nums = [1,1,1,3,5]\nOutput: 4\nExplanation: The 4 quadruplets that satisfy the requirement are:\n- (0, 1, 2, 3): 1 + 1 + 1 == 3\n- (0, 1, 3, 4): 1 + 1 + 3 == 5\n- (0, 2, 3, 4): 1 + 1 + 3 == 5\n- (1, 2, 3, 4): 1 + 1 + 3 == 5",
+    "level": "easy",
+    "solution": {
+      "content": "public int countQuadruplets(int[] nums) {\n        Objects.requireNonNull(nums, \"The array cannot be null\");\n\n        int result = 0;\n\n        int n = nums.length;\n\n        for (int a = 0; a < n - 3; a++) {\n            for (int b = a + 1; b < n - 2; b++) {\n                for (int c = b + 1; c < n - 1; c++) {\n                    for (int d = c + 1; d < n; d++) {\n                        if (nums[a] + nums[b] + nums[c] == nums[d]) {\n                            result++;\n                        }\n                    }\n                }\n            }\n        }\n        return result;\n    }"
+    }
+  },
+  {
     "title": "Fair Candy Swap",
     "body": "Alice and Bob have a different total number of candies. You are given two integer arrays aliceSizes and bobSizes where aliceSizes[i] is the number of candies of the ith box of candy that Alice has and bobSizes[j] is the number of candies of the jth box of candy that Bob has.\n\nSince they are friends, they would like to exchange one candy box each so that after the exchange, they both have the same total amount of candy. The total amount of candy a person has is the sum of the number of candies in each box they have.\n\nReturn an integer array answer where answer[0] is the number of candies in the box that Alice must exchange, and answer[1] is the number of candies in the box that Bob must exchange. If there are multiple answers, you may return any one of them. It is guaranteed that at least one answer exists.",
     "example": "Example 1:\n\nInput: aliceSizes = [1,1], bobSizes = [2,2]\nOutput: [1,2]\nExample 2:\n\nInput: aliceSizes = [1,2], bobSizes = [2,3]\nOutput: [1,2]\nExample 3:\n\nInput: aliceSizes = [2], bobSizes = [1,3]\nOutput: [2,3]",
