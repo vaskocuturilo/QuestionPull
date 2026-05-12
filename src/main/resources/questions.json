@@ -1,5 +1,14 @@
 [
   {
+    "title": "Design HashSet",
+    "body": "Design a HashSet without using any built-in hash table libraries.\n\nImplement MyHashSet class:\n\nvoid add(key) Inserts the value key into the HashSet.\nbool contains(key) Returns whether the value key exists in the HashSet or not.\nvoid remove(key) Removes the value key in the HashSet. If key does not exist in the HashSet, do nothing.",
+    "example": "Example 1:\n\nInput\n[\"MyHashSet\", \"add\", \"add\", \"contains\", \"contains\", \"add\", \"contains\", \"remove\", \"contains\"]\n[[], [1], [2], [1], [3], [2], [2], [2], [2]]\nOutput\n[null, null, null, true, false, null, true, null, false]\n\nExplanation\nMyHashSet myHashSet = new MyHashSet();\nmyHashSet.add(1);      // set = [1]\nmyHashSet.add(2);      // set = [1, 2]\nmyHashSet.contains(1); // return True\nmyHashSet.contains(3); // return False, (not found)\nmyHashSet.add(2);      // set = [1, 2]\nmyHashSet.contains(2); // return True\nmyHashSet.remove(2);   // set = [1]\nmyHashSet.contains(2); // return False, (already removed)",
+    "level": "easy",
+    "solution": {
+      "content": "class MyHashSet {\n\nprivate final boolean[] data;\n    private static final int MAX_SIZE = 100_000_1;\n\n    public MyHashSet() {\n        data = new boolean[MAX_SIZE];\n    }\n\n    public void add(int key) {\n        data[key] = true;\n    }\n\n    public void remove(int key) {\n        data[key] = false;\n    }\n\n    public boolean contains(int key) {\n        return data[key];\n    }\n}"
+    }
+  },
+  {
     "title": "Count Special Quadruplets",
     "body": "Given a 0-indexed integer array nums, return the number of distinct quadruplets (a, b, c, d) such that:\n\nnums[a] + nums[b] + nums[c] == nums[d], and\na < b < c < d",
     "example": "Example 1:\n\nInput: nums = [1,2,3,6]\nOutput: 1\nExplanation: The only quadruplet that satisfies the requirement is (0, 1, 2, 3) because 1 + 2 + 3 == 6.\nExample 2:\n\nInput: nums = [3,3,6,4,5]\nOutput: 0\nExplanation: There are no such quadruplets in [3,3,6,4,5].\nExample 3:\n\nInput: nums = [1,1,1,3,5]\nOutput: 4\nExplanation: The 4 quadruplets that satisfy the requirement are:\n- (0, 1, 2, 3): 1 + 1 + 1 == 3\n- (0, 1, 3, 4): 1 + 1 + 3 == 5\n- (0, 2, 3, 4): 1 + 1 + 3 == 5\n- (1, 2, 3, 4): 1 + 1 + 3 == 5",
