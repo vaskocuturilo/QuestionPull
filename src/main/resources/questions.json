@@ -2649,6 +2649,15 @@
     }
   },
   {
+    "title": "Minimum Genetic Mutation",
+    "body": "A gene string can be represented by an 8-character long string, with choices from 'A', 'C', 'G', and 'T'.\n\nSuppose we need to investigate a mutation from a gene string startGene to a gene string endGene where one mutation is defined as one single character changed in the gene string.\n\nFor example, \"AACCGGTT\" --> \"AACCGGTA\" is one mutation.\nThere is also a gene bank bank that records all the valid gene mutations. A gene must be in bank to make it a valid gene string.\n\nGiven the two gene strings startGene and endGene and the gene bank bank, return the minimum number of mutations needed to mutate from startGene to endGene. If there is no such a mutation, return -1.\n\nNote that the starting point is assumed to be valid, so it might not be included in the bank.",
+    "example": "Example 1:\n\nInput: startGene = \"AACCGGTT\", endGene = \"AACCGGTA\", bank = [\"AACCGGTA\"]\nOutput: 1\nExample 2:\n\nInput: startGene = \"AACCGGTT\", endGene = \"AAACGGTA\", bank = [\"AACCGGTA\",\"AACCGCTA\",\"AAACGGTA\"]\nOutput: 2",
+    "level": "medium",
+    "solution": {
+      "content": "public int minMutation(String startGene, String endGene, String[] bank) {\n        final Deque<String> queue = new ArrayDeque<>();\n        queue.offer(startGene);\n\n        final Set<String> visited = new HashSet<>();\n        visited.add(startGene);\n\n        int mutationSteps = 0;\n\n        while (!queue.isEmpty()) {\n            final int levelSize = queue.size();\n            for (int i = 0; i < levelSize; i++) {\n                final String currentGene = queue.poll();\n\n\n                assert currentGene != null;\n                if (currentGene.equals(endGene)) {\n                    return mutationSteps;\n                }\n\n                for (String candidateGene : bank) {\n                    int allowedDifferences = 2;\n                    for (int j = 0; j < 8 && allowedDifferences > 0; j++) {\n                        if (currentGene.charAt(j) != candidateGene.charAt(j)) {\n                            allowedDifferences--;\n                        }\n                    }\n\n                    if (allowedDifferences > 0 && !visited.contains(candidateGene)) {\n                        queue.offer(candidateGene);\n                        visited.add(candidateGene);\n                    }\n                }\n            }\n            mutationSteps++;\n        }\n\n        return -1;\n    }"
+    }
+  },
+  {
     "title": "Top K Frequent Elements",
     "body": "Given an integer array and an integer k, return the k most frequent elements. Optimize for time complexity better than O(n log n)",
     "example": "Input: nums = [1,1,1,2,2,3], k = 2, Output: [1,2]",
