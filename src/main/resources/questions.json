@@ -9,6 +9,15 @@
     }
   },
   {
+    "title": "Island Perimeter",
+    "body": "You are given row x col grid representing a map where grid[i][j] = 1 represents land and grid[i][j] = 0 represents water.\n\nGrid cells are connected horizontally/vertically (not diagonally). The grid is completely surrounded by water, and there is exactly one island (i.e., one or more connected land cells).\n\nThe island doesn't have \"lakes\", meaning the water inside isn't connected to the water around the island. One cell is a square with side length 1. The grid is rectangular, width and height don't exceed 100. Determine the perimeter of the island.",
+    "example": "Example 1: Input: grid = [[0,1,0,0],[1,1,1,0],[0,1,0,0],[1,1,0,0]]\nOutput: 16\nExplanation: The perimeter is the 16 yellow stripes in the image above. \n Example 2:\n\nInput: grid = [[1]]\nOutput: 4\nExample 3:\n\nInput: grid = [[1,0]]\nOutput: 4",
+    "level": "easy",
+    "solution": {
+      "content": "public int islandPerimeter(int[][] grid) {\n        Objects.requireNonNull(grid, \"The array cannot be null\");\n\n        int rows = grid.length;\n        int columns = grid[0].length;\n        int result = 0;\n\n        for (int row = 0; row < rows; row++) {\n            for (int column = 0; column < columns; column++) {\n\n                if (grid[row][column] == 1) {\n                    result += 4;\n\n                    if (row < rows - 1 && grid[row + 1][column] == 1) {\n                        result -= 2;\n                    }\n\n                    if (column < columns - 1 && grid[row][column + 1] == 1) {\n                        result -= 2;\n                    }\n                }\n            }\n        }\n        return result;\n    }"
+    }
+  },
+  {
     "title": "Design HashSet",
     "body": "Design a HashSet without using any built-in hash table libraries.\n\nImplement MyHashSet class:\n\nvoid add(key) Inserts the value key into the HashSet.\nbool contains(key) Returns whether the value key exists in the HashSet or not.\nvoid remove(key) Removes the value key in the HashSet. If key does not exist in the HashSet, do nothing.",
     "example": "Example 1:\n\nInput\n[\"MyHashSet\", \"add\", \"add\", \"contains\", \"contains\", \"add\", \"contains\", \"remove\", \"contains\"]\n[[], [1], [2], [1], [3], [2], [2], [2], [2]]\nOutput\n[null, null, null, true, false, null, true, null, false]\n\nExplanation\nMyHashSet myHashSet = new MyHashSet();\nmyHashSet.add(1);      // set = [1]\nmyHashSet.add(2);      // set = [1, 2]\nmyHashSet.contains(1); // return True\nmyHashSet.contains(3); // return False, (not found)\nmyHashSet.add(2);      // set = [1, 2]\nmyHashSet.contains(2); // return True\nmyHashSet.remove(2);   // set = [1]\nmyHashSet.contains(2); // return False, (already removed)",
