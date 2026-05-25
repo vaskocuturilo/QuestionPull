@@ -1,5 +1,14 @@
 [
   {
+    "title": "Squares of a Sorted Array",
+    "body": "Given an integer array nums sorted in non-decreasing order, return an array of the squares of each number sorted in non-decreasing order.",
+    "example": "Example 1:\n\nInput: nums = [-4,-1,0,3,10]\nOutput: [0,1,9,16,100]\nExplanation: After squaring, the array becomes [16,1,0,9,100].\nAfter sorting, it becomes [0,1,9,16,100].\nExample 2:\n\nInput: nums = [-7,-3,2,3,11]\nOutput: [4,9,9,49,121]",
+    "level": "easy",
+    "solution": {
+      "content": "public int[] sortedSquares(int[] nums) {\n        Objects.requireNonNull(nums, \"The array cannot be null\");\n        \n        if (nums.length < 1) {\n            throw new IllegalArgumentException(\"Input array must contain at least two elements\");\n        }\n\n        int left = 0;\n        int right = nums.length - 1;\n        final int[] newArray = new int[nums.length];\n        int index = nums.length - 1;\n\n        while (left <= right) {\n            final int leftSquare = nums[left] * nums[left];\n            final int rightSquare = nums[right] * nums[right];\n\n            if (leftSquare > rightSquare) {\n                newArray[index--] = leftSquare;\n                left++;\n            } else {\n                newArray[index--] = rightSquare;\n                right--;\n            }\n        }\n\n        return newArray;\n    }"
+    }
+  },
+  {
     "title": "Two Sum IV - Input is a BST",
     "body": "Given the root of a binary search tree and an integer k, return true if there exist two elements in the BST such that their sum is equal to k, or false otherwise.\n\n",
     "example": "Example 1:\n\n\nInput: root = [5,3,6,2,4,null,7], k = 9\nOutput: true\nExample 2:\n\n\nInput: root = [5,3,6,2,4,null,7], k = 28\nOutput: false",
