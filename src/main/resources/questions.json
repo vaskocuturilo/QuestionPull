@@ -1,5 +1,14 @@
 [
   {
+    "title": "Design HashMap",
+    "body": "Design a HashMap without using any built-in hash table libraries.\n\nImplement the MyHashMap class:\n\nMyHashMap() initializes the object with an empty map.\nvoid put(int key, int value) inserts a (key, value) pair into the HashMap. If the key already exists in the map, update the corresponding value.\nint get(int key) returns the value to which the specified key is mapped, or -1 if this map contains no mapping for the key.\nvoid remove(key) removes the key and its corresponding value if the map contains the mapping for the key.",
+    "example": "Example 1:\n\nInput\n[\"MyHashMap\", \"put\", \"put\", \"get\", \"get\", \"put\", \"get\", \"remove\", \"get\"]\n[[], [1, 1], [2, 2], [1], [3], [2, 1], [2], [2], [2]]\nOutput\n[null, null, null, 1, -1, null, 1, null, -1]\n\nExplanation\nMyHashMap myHashMap = new MyHashMap();\nmyHashMap.put(1, 1); // The map is now [[1,1]]\nmyHashMap.put(2, 2); // The map is now [[1,1], [2,2]]\nmyHashMap.get(1);    // return 1, The map is now [[1,1], [2,2]]\nmyHashMap.get(3);    // return -1 (i.e., not found), The map is now [[1,1], [2,2]]\nmyHashMap.put(2, 1); // The map is now [[1,1], [2,1]] (i.e., update the existing value)\nmyHashMap.get(2);    // return 1, The map is now [[1,1], [2,1]]\nmyHashMap.remove(2); // remove the mapping for 2, The map is now [[1,1]]\nmyHashMap.get(2);    // return -1 (i.e., not found), The map is now [[1,1]]  ",
+    "level": "easy",
+    "solution": {
+      "content": "class MyHashMap {\n    private final int[] data;\n    private static final int MAX_SIZE = 100_000_1;\n    private static final int EMPTY_VALUE = -1;\n\n    public MyHashMap() {\n        this.data = new int[MAX_SIZE];\n        Arrays.fill(data, EMPTY_VALUE);\n    }\n\n    public void put(int key, int value) {\n        this.data[key] = value;\n    }\n\n    public int get(int key) {\n        return this.data[key];\n    }\n\n    public void remove(int key) {\n        this.data[key] = EMPTY_VALUE;\n    }\n}"
+    }
+  },
+  {
     "title": "Squares of a Sorted Array",
     "body": "Given an integer array nums sorted in non-decreasing order, return an array of the squares of each number sorted in non-decreasing order.",
     "example": "Example 1:\n\nInput: nums = [-4,-1,0,3,10]\nOutput: [0,1,9,16,100]\nExplanation: After squaring, the array becomes [16,1,0,9,100].\nAfter sorting, it becomes [0,1,9,16,100].\nExample 2:\n\nInput: nums = [-7,-3,2,3,11]\nOutput: [4,9,9,49,121]",
