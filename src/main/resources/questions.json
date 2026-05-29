@@ -1,5 +1,14 @@
 [
   {
+    "title": "Excel Sheet Column Title",
+    "body": "Given an integer columnNumber, return its corresponding column title as it appears in an Excel sheet.\n\n For example:\n\nA -> 1\nB -> 2\nC -> 3\n...\nZ -> 26\nAA -> 27\nAB -> 28 \n...\n",
+    "example": "Example 1:\n\nInput: columnNumber = 1\nOutput: \"A\"\nExample 2:\n\nInput: columnNumber = 28\nOutput: \"AB\"\nExample 3:\n\nInput: columnNumber = 701\nOutput: \"ZY\"",
+    "level": "easy",
+    "solution": {
+      "content": "public String convertToTitle(int columnNumber) {\n        final StringBuilder stringBuilder = new StringBuilder();\n\n        while (columnNumber != 0) {\n            columnNumber--;\n\n            char currentChar = (char) ('A' + columnNumber % 26);\n\n            stringBuilder.append(currentChar);\n\n            columnNumber /= 26;\n        }\n\n        return stringBuilder.reverse().toString();\n    }"
+    }
+  },
+  {
     "title": "Find the Town Judge",
     "body": "In a town, there are n people labeled from 1 to n. There is a rumor that one of these people is secretly the town judge.\n\nIf the town judge exists, then:\n\nThe town judge trusts nobody.\nEverybody (except for the town judge) trusts the town judge.\nThere is exactly one person that satisfies properties 1 and 2.\nYou are given an array trust where trust[i] = [ai, bi] representing that the person labeled ai trusts the person labeled bi. If a trust relationship does not exist in trust array, then such a trust relationship does not exist.\n\nReturn the label of the town judge if the town judge exists and can be identified, or return -1 otherwise.",
     "example": "Example 1:\n\nInput: n = 2, trust = [[1,2]]\nOutput: 2\nExample 2:\n\nInput: n = 3, trust = [[1,3],[2,3]]\nOutput: 3\nExample 3:\n\nInput: n = 3, trust = [[1,3],[2,3],[3,1]]\nOutput: -1",
