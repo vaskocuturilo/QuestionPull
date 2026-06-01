@@ -2712,6 +2712,15 @@
     }
   },
   {
+    "title": "Zigzag Conversion",
+    "body": "The string \"PAYPALISHIRING\" is written in a zigzag pattern on a given number of rows like this: (you may want to display this pattern in a fixed font for better legibility)\n\nP   A   H   N\nA P L S I I G\nY   I   R\nAnd then read line by line: \"PAHNAPLSIIGYIR\"\n\nWrite the code that will take a string and make this conversion given a number of rows:\n\nstring convert(string s, int numRows);",
+    "example": "Example 1:\n\nInput: s = \"PAYPALISHIRING\", numRows = 3\nOutput: \"PAHNAPLSIIGYIR\"\nExample 2:\n\nInput: s = \"PAYPALISHIRING\", numRows = 4\nOutput: \"PINALSIGYAHRPI\"\nExplanation:\nP     I    N\nA   L S  I G\nY A   H R\nP     I\nExample 3:\n\nInput: s = \"A\", numRows = 1\nOutput: \"A\"\n",
+    "level": "medium",
+    "solution": {
+      "content": "public String convert(String s, int numRows) {\n        if (numRows == 1) return s;\n\n        final StringBuilder[] rows = new StringBuilder[numRows];\n\n        for (int row = 0; row < numRows; row++) {\n            rows[row] = new StringBuilder();\n        }\n\n        int i = 0;\n        int k = -1;\n\n        for (final char character : s.toCharArray()) {\n            rows[i].append(character);\n\n            if (i == 0 || i == numRows - 1) {\n                k = -k;\n            }\n\n            i += k;\n        }\n\n        final StringBuilder result = new StringBuilder();\n        for (final StringBuilder row : rows) {\n            result.append(row);\n        }\n\n        return result.toString();\n    }"
+    }
+  },
+  {
     "title": "Top K Frequent Elements",
     "body": "Given an integer array and an integer k, return the k most frequent elements. Optimize for time complexity better than O(n log n)",
     "example": "Input: nums = [1,1,1,2,2,3], k = 2, Output: [1,2]",
