@@ -1,5 +1,14 @@
 [
   {
+    "title": "Design an Ordered Stream",
+    "body": "There is a stream of n (idKey, value) pairs arriving in an arbitrary order, where idKey is an integer between 1 and n and value is a string. No two pairs have the same id.\n\nDesign a stream that returns the values in increasing order of their IDs by returning a chunk (list) of values after each insertion. The concatenation of all the chunks should result in a list of the sorted values.\n\nImplement the OrderedStream class:\n\nOrderedStream(int n) Constructs the stream to take n values.\nString[] insert(int idKey, String value) Inserts the pair (idKey, value) into the stream, then returns the largest possible chunk of currently inserted values that appear next in the order.",
+    "example": "Input\n[\"OrderedStream\", \"insert\", \"insert\", \"insert\", \"insert\", \"insert\"]\n[[5], [3, \"ccccc\"], [1, \"aaaaa\"], [2, \"bbbbb\"], [5, \"eeeee\"], [4, \"ddddd\"]]\nOutput\n[null, [], [\"aaaaa\"], [\"bbbbb\", \"ccccc\"], [], [\"ddddd\", \"eeeee\"]]\n\nExplanation\n// Note that the values ordered by ID is [\"aaaaa\", \"bbbbb\", \"ccccc\", \"ddddd\", \"eeeee\"].\nOrderedStream os = new OrderedStream(5);\nos.insert(3, \"ccccc\"); // Inserts (3, \"ccccc\"), returns [].\nos.insert(1, \"aaaaa\"); // Inserts (1, \"aaaaa\"), returns [\"aaaaa\"].\nos.insert(2, \"bbbbb\"); // Inserts (2, \"bbbbb\"), returns [\"bbbbb\", \"ccccc\"].\nos.insert(5, \"eeeee\"); // Inserts (5, \"eeeee\"), returns [].\nos.insert(4, \"ddddd\"); // Inserts (4, \"ddddd\"), returns [\"ddddd\", \"eeeee\"].\n// Concatentating all the chunks returned:\n// [] + [\"aaaaa\"] + [\"bbbbb\", \"ccccc\"] + [] + [\"ddddd\", \"eeeee\"] = [\"aaaaa\", \"bbbbb\", \"ccccc\", \"ddddd\", \"eeeee\"]\n// The resulting order is the same as the order above.",
+    "level": "easy",
+    "solution": {
+      "content": "class OrderedStream {\n    private int prt;\n    private final String[] data;\n\n    public OrderedStream(int n) {\n        this.prt = 1;\n        this.data = new String[n + 1];\n    }\n\n    public List<String> insert(int idKey, String value) {\n        final List<String> result = new ArrayList<>();\n\n        this.data[idKey] = value;\n\n        while (this.prt < this.data.length && this.data[this.prt] != null) {\n            result.add(this.data[this.prt]);\n            this.prt++;\n        }\n        return result;\n    }\n}"
+    }
+  },
+  {
     "title": "Excel Sheet Column Title",
     "body": "Given an integer columnNumber, return its corresponding column title as it appears in an Excel sheet.\n\n For example:\n\nA -> 1\nB -> 2\nC -> 3\n...\nZ -> 26\nAA -> 27\nAB -> 28 \n...\n",
     "example": "Example 1:\n\nInput: columnNumber = 1\nOutput: \"A\"\nExample 2:\n\nInput: columnNumber = 28\nOutput: \"AB\"\nExample 3:\n\nInput: columnNumber = 701\nOutput: \"ZY\"",
