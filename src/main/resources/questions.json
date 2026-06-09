@@ -9,6 +9,15 @@
     }
   },
   {
+    "title": "X of a Kind in a Deck of Cards",
+    "body": "You are given an integer array deck where deck[i] represents the number written on the ith card.\n\nPartition the cards into one or more groups such that:\n\nEach group has exactly x cards where x > 1, and\nAll the cards in one group have the same integer written on them.\nReturn true if such partition is possible, or false otherwise.",
+    "example": "Example 1:\n\nInput: deck = [1,2,3,4,4,3,2,1]\nOutput: true\nExplanation: Possible partition [1,1],[2,2],[3,3],[4,4].\nExample 2:\n\nInput: deck = [1,1,1,2,2,2,3,3]\nOutput: false\nExplanation: No possible partition.",
+    "level": "easy",
+    "solution": {
+      "content": "public boolean hasGroupsSizeX(int[] deck) {\n        Objects.requireNonNull(deck, \"The array cannot be null\");\n\n        final Map<Integer, Integer> frequencyCount = new HashMap<>();\n\n        for (int number : deck) frequencyCount.merge(number, 1, Integer::sum);\n\n        Integer result = frequencyCount.get(deck[0]);\n\n        for (int frequency : frequencyCount.values()) {\n            result = gcd(result, frequency);\n        }\n        return result >= 2;\n    }\n    \n    private int gcd(int a, int b) {\n        return b == 0 ? a : gcd(b, a % b);\n    }"
+    }
+  },
+  {
     "title": "Unique Morse Code Words",
     "body": "International Morse Code defines a standard encoding where each letter is mapped to a series of dots and dashes, as follows:\n\n'a' maps to \".-\",\n'b' maps to \"-...\",\n'c' maps to \"-.-.\", and so on.\nFor convenience, the full table for the 26 letters of the English alphabet is given below:\n\n[\".-\",\"-...\",\"-.-.\",\"-..\",\".\",\"..-.\",\"--.\",\"....\",\"..\",\".---\",\"-.-\",\".-..\",\"--\",\"-.\",\"---\",\".--.\",\"--.-\",\".-.\",\"...\",\"-\",\"..-\",\"...-\",\".--\",\"-..-\",\"-.--\",\"--..\"]\nGiven an array of strings words where each word can be written as a concatenation of the Morse code of each letter.\n\nFor example, \"cab\" can be written as \"-.-..--...\", which is the concatenation of \"-.-.\", \".-\", and \"-...\". We will call such a concatenation the transformation of a word.\nReturn the number of different transformations among all words we have.",
     "example": "Example 1:\n\nInput: words = [\"gin\",\"zen\",\"gig\",\"msg\"]\nOutput: 2\nExplanation: The transformation of each word is:\n\"gin\" -> \"--...-.\"\n\"zen\" -> \"--...-.\"\n\"gig\" -> \"--...--.\"\n\"msg\" -> \"--...--.\"\nThere are 2 different transformations: \"--...-.\" and \"--...--.\".\nExample 2:\n\nInput: words = [\"a\"]\nOutput: 1",
