@@ -1,5 +1,14 @@
 [
   {
+    "title": "N-Repeated Element in Size 2N Array",
+    "body": "You are given an integer array nums with the following properties:\n\nnums.length == 2 * n.\nnums contains n + 1 unique values, n of which occur exactly once in the array.\nExactly one element of nums is repeated n times.\nReturn the element that is repeated n times.",
+    "example": "Example 1:\n\nInput: nums = [1,2,3,3]\nOutput: 3\nExample 2:\n\nInput: nums = [2,1,2,5,3,2]\nOutput: 2\nExample 3:\n\nInput: nums = [5,1,5,2,5,3,5,4]\nOutput: 5",
+    "level": "easy",
+    "solution": {
+      "content": "public int repeatedNTimes(int[] nums) {\n        Objects.requireNonNull(nums, \"The array cannot be null\");\n\n        if (nums.length < 2) return nums[0];\n\n        final Set<Integer> frequency = new HashSet<>();\n\n        for (int i = 0; ; i++) {\n            if (!frequency.add(nums[i])) {\n                return nums[i];\n            }\n        }\n    }"
+    }
+  },
+  {
     "title": "Design an Ordered Stream",
     "body": "There is a stream of n (idKey, value) pairs arriving in an arbitrary order, where idKey is an integer between 1 and n and value is a string. No two pairs have the same id.\n\nDesign a stream that returns the values in increasing order of their IDs by returning a chunk (list) of values after each insertion. The concatenation of all the chunks should result in a list of the sorted values.\n\nImplement the OrderedStream class:\n\nOrderedStream(int n) Constructs the stream to take n values.\nString[] insert(int idKey, String value) Inserts the pair (idKey, value) into the stream, then returns the largest possible chunk of currently inserted values that appear next in the order.",
     "example": "Input\n[\"OrderedStream\", \"insert\", \"insert\", \"insert\", \"insert\", \"insert\"]\n[[5], [3, \"ccccc\"], [1, \"aaaaa\"], [2, \"bbbbb\"], [5, \"eeeee\"], [4, \"ddddd\"]]\nOutput\n[null, [], [\"aaaaa\"], [\"bbbbb\", \"ccccc\"], [], [\"ddddd\", \"eeeee\"]]\n\nExplanation\n// Note that the values ordered by ID is [\"aaaaa\", \"bbbbb\", \"ccccc\", \"ddddd\", \"eeeee\"].\nOrderedStream os = new OrderedStream(5);\nos.insert(3, \"ccccc\"); // Inserts (3, \"ccccc\"), returns [].\nos.insert(1, \"aaaaa\"); // Inserts (1, \"aaaaa\"), returns [\"aaaaa\"].\nos.insert(2, \"bbbbb\"); // Inserts (2, \"bbbbb\"), returns [\"bbbbb\", \"ccccc\"].\nos.insert(5, \"eeeee\"); // Inserts (5, \"eeeee\"), returns [].\nos.insert(4, \"ddddd\"); // Inserts (4, \"ddddd\"), returns [\"ddddd\", \"eeeee\"].\n// Concatentating all the chunks returned:\n// [] + [\"aaaaa\"] + [\"bbbbb\", \"ccccc\"] + [] + [\"ddddd\", \"eeeee\"] = [\"aaaaa\", \"bbbbb\", \"ccccc\", \"ddddd\", \"eeeee\"]\n// The resulting order is the same as the order above.",
