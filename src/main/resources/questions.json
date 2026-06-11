@@ -1,5 +1,14 @@
 [
   {
+    "title": "Number of Equivalent Domino Pairs",
+    "body": "Given a list of dominoes, dominoes[i] = [a, b] is equivalent to dominoes[j] = [c, d] if and only if either (a == c and b == d), or (a == d and b == c) - that is, one domino can be rotated to be equal to another domino.\n\nReturn the number of pairs (i, j) for which 0 <= i < j < dominoes.length, and dominoes[i] is equivalent to dominoes[j].",
+    "example": "Example 1:\n\nInput: dominoes = [[1,2],[2,1],[3,4],[5,6]]\nOutput: 1\nExample 2:\n\nInput: dominoes = [[1,2],[1,2],[1,1],[1,2],[2,2]]\nOutput: 3",
+    "level": "easy",
+    "solution": {
+      "content": "public int numEquivDominoPairs(int[][] dominoes) {\n        Objects.requireNonNull(dominoes, \"The array cannot be null\");\n\n        if (dominoes.length < 2) return dominoes[0][0];\n\n        final int[] count = new int[100];\n\n        int result = 0;\n\n        for (int[] domino : dominoes) {\n            int x;\n\n            if (domino[0] < domino[1]) {\n                x = domino[0] * 10 + domino[1];\n            } else {\n                x = domino[1] * 10 + domino[0];\n            }\n\n            result += count[x];\n            count[x] += 1;\n        }\n        return result;\n    }"
+    }
+  },
+  {
     "title": "N-Repeated Element in Size 2N Array",
     "body": "You are given an integer array nums with the following properties:\n\nnums.length == 2 * n.\nnums contains n + 1 unique values, n of which occur exactly once in the array.\nExactly one element of nums is repeated n times.\nReturn the element that is repeated n times.",
     "example": "Example 1:\n\nInput: nums = [1,2,3,3]\nOutput: 3\nExample 2:\n\nInput: nums = [2,1,2,5,3,2]\nOutput: 2\nExample 3:\n\nInput: nums = [5,1,5,2,5,3,5,4]\nOutput: 5",
