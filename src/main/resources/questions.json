@@ -1,5 +1,14 @@
 [
   {
+    "title": "Sort Array By Parity",
+    "body": "Given an integer array nums, move all the even integers at the beginning of the array followed by all the odd integers.\n\nReturn any array that satisfies this condition.",
+    "example": "Example 1:\n\nInput: nums = [3,1,2,4]\nOutput: [2,4,3,1]\nExplanation: The outputs [4,2,3,1], [2,4,1,3], and [4,2,1,3] would also be accepted.\nExample 2:\n\nInput: nums = [0]\nOutput: [0]",
+    "level": "easy",
+    "solution": {
+      "content": "public int[] sortArrayByParity(int[] nums) {\n        Objects.requireNonNull(nums, \"The array cannot be null\");\n        int left = 0;\n        int right = nums.length - 1;\n\n        while (left < right) {\n            if (nums[left] % 2 == 0) {\n                left++;\n            } else if (nums[right] % 2 == 1) {\n                right--;\n            } else {\n                int temp = nums[left];\n                nums[left] = nums[right];\n                nums[right] = temp;\n\n                left++;\n                right--;\n            }\n\n        }\n\n        return nums;\n    }"
+    }
+  },
+  {
     "title": "Largest Number At Least Twice of Others",
     "body": "You are given an integer array nums where the largest integer is unique.\n\nDetermine whether the largest element in the array is at least twice as much as every other number in the array. If it is, return the index of the largest element, or return -1 otherwise.",
     "example": "Example 1:\n\nInput: nums = [3,6,1,0]\nOutput: 1\nExplanation: 6 is the largest integer.\nFor every other number in the array x, 6 is at least twice as big as x.\nThe index of value 6 is 1, so we return 1.\nExample 2:\n\nInput: nums = [1,2,3,4]\nOutput: -1\nExplanation: 4 is less than twice the value of 3, so we return -1.",
