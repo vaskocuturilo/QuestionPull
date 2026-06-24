@@ -1,5 +1,14 @@
 [
   {
+    "title": "Maximum Gap",
+    "body": "Given an integer array nums, return the maximum difference between two successive elements in its sorted form. If the array contains less than two elements, return 0.\n\nYou must write an algorithm that runs in linear time and uses linear extra space.",
+    "example": "Example 1:\n\nInput: nums = [3,6,9,1]\nOutput: 3\nExplanation: The sorted form of the array is [1,3,6,9], either (3,6) or (6,9) has the maximum difference 3.\nExample 2:\n\nInput: nums = [10]\nOutput: 0\nExplanation: The array contains less than 2 elements, therefore return 0.",
+    "level": "easy",
+    "solution": {
+      "content": "public int maximumGap(int[] nums) {\n        Objects.requireNonNull(nums, \"The array cannot be null\");\n\n        if (nums.length < 2) return 0;\n\n        int length = nums.length;\n\n        int maxValue = Integer.MIN_VALUE;\n        int minValue = Integer.MAX_VALUE;\n\n        for (int num : nums) {\n            minValue = Math.min(minValue, num);\n            maxValue = Math.max(maxValue, num);\n        }\n\n        int bucketSize = Math.max(1, (maxValue - minValue) / length - 1);\n\n        int bucketCount = (maxValue - minValue) / bucketSize + 1;\n\n        int[][] buckets = new int[bucketCount][2];\n\n        for (int[] bucket : buckets) {\n            bucket[0] = Integer.MAX_VALUE;\n            bucket[1] = Integer.MIN_VALUE;\n        }\n\n        for (int num : nums) {\n            final int bucketIndex = (num - minValue) / bucketSize;\n            buckets[bucketIndex][0] = Math.min(buckets[bucketIndex][0], num);\n            buckets[bucketIndex][1] = Math.max(buckets[bucketIndex][1], num);\n        }\n\n        int previousMax = Integer.MAX_VALUE;\n        int maxGap = 0;\n\n        for (int[] bucket : buckets) {\n            if (bucket[0] > bucket[1]) {\n                continue;\n            }\n\n            maxGap = Math.max(maxGap, bucket[0] - previousMax);\n            previousMax = bucket[1];\n        }\n\n        return maxGap;\n    }"
+    }
+  },
+  {
     "title": "Minimum Absolute Difference",
     "body": "Given an array of distinct integers arr, find all pairs of elements with the minimum absolute difference of any two elements.\n\nReturn a list of pairs in ascending order(with respect to pairs), each pair [a, b] follows\n\na, b are from arr\na < b\nb - a equals to the minimum absolute difference of any two elements in arr",
     "example": "Example 1:\n\nInput: arr = [4,2,1,3]\nOutput: [[1,2],[2,3],[3,4]]\nExplanation: The minimum absolute difference is 1. List all pairs with difference equal to 1 in ascending order.\nExample 2:\n\nInput: arr = [1,3,6,10,15]\nOutput: [[1,3]]\nExample 3:\n\nInput: arr = [3,8,-10,23,19,-4,-14,27]\nOutput: [[-14,-10],[19,23],[23,27]]",
