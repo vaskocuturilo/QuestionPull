@@ -1,5 +1,14 @@
 [
   {
+    "title": "Sort Integers by The Number of 1 Bits",
+    "body": "You are given an integer array arr. Sort the integers in the array in ascending order by the number of 1's in their binary representation and in case of two or more integers have the same number of 1's you have to sort them in ascending order.\n\nReturn the array after sorting it.",
+    "example": "Example 1:\n\nInput: arr = [0,1,2,3,4,5,6,7,8]\nOutput: [0,1,2,4,8,3,5,6,7]\nExplantion: [0] is the only integer with 0 bits.\n[1,2,4,8] all have 1 bit.\n[3,5,6] have 2 bits.\n[7] has 3 bits.\nThe sorted array by bits is [0,1,2,4,8,3,5,6,7]\nExample 2:\n\nInput: arr = [1024,512,256,128,64,32,16,8,4,2,1]\nOutput: [1,2,4,8,16,32,64,128,256,512,1024]\nExplantion: All integers have 1 bit in the binary representation, you should just sort them in ascending order.",
+    "level": "easy",
+    "solution": {
+      "content": "public int[] sortByBits(int[] arr) {\n        Objects.requireNonNull(arr, \"The array cannot be null\");\n\n        if (arr.length < 2) throw new IllegalArgumentException(\"The array should contain at least two elements\");\n\n        final int maxValue = 100_000;\n\n        final int length = arr.length;\n\n        for (int i = 0; i < length; i++) {\n            final int originalValue = arr[i];\n            final int bitCount = Integer.bitCount(arr[i]);\n            arr[i] = originalValue + (bitCount * maxValue);\n        }\n\n        Arrays.sort(arr);\n\n        for (int i = 0; i < length; i++) {\n            arr[i] = arr[i] % maxValue;\n        }\n\n        return arr;\n    }"
+    }
+  },
+  {
     "title": "Maximize Sum Of Array After K Negations",
     "body": "Given an integer array nums and an integer k, modify the array in the following way:\n\nchoose an index i and replace nums[i] with -nums[i].\nYou should apply this process exactly k times. You may choose the same index i multiple times.\n\nReturn the largest possible sum of the array after modifying it in this way.",
     "example": "Example 1:\n\nInput: nums = [4,2,3], k = 1\nOutput: 5\nExplanation: Choose index 1 and nums becomes [4,-2,3].\nExample 2:\n\nInput: nums = [3,-1,0,2], k = 3\nOutput: 6\nExplanation: Choose indices (1, 2, 2) and nums becomes [3,1,0,2].\nExample 3:\n\nInput: nums = [2,-3,-1,5,-4], k = 2\nOutput: 13\nExplanation: Choose indices (1, 4) and nums becomes [2,3,-1,5,4].",
