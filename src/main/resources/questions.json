@@ -1,5 +1,14 @@
 [
   {
+    "title": "Largest Perimeter Triangle",
+    "body": "Given an integer array nums, return the largest perimeter of a triangle with a non-zero area, formed from three of these lengths. If it is impossible to form any triangle of a non-zero area, return 0.",
+    "example": "Example 1:\n\nInput: nums = [2,1,2]\nOutput: 5\nExplanation: You can form a triangle with three side lengths: 1, 2, and 2.\nExample 2:\n\nInput: nums = [1,2,1,10]\nOutput: 0\nExplanation: \nYou cannot use the side lengths 1, 1, and 2 to form a triangle.\nYou cannot use the side lengths 1, 1, and 10 to form a triangle.\nYou cannot use the side lengths 1, 2, and 10 to form a triangle.\nAs we cannot use any three side lengths to form a triangle of non-zero area, we return 0.",
+    "level": "easy",
+    "solution": {
+      "content": "public int largestPerimeter(int[] nums) {\n        Objects.requireNonNull(nums, \"Input array cannot be null\");\n\n        if (nums.length < 3) throw new IllegalArgumentException(\"The array at least three elements is required\");\n\n        Arrays.sort(nums);\n\n        for (int i = nums.length - 1; i >= 2; i--) {\n            if (nums[i - 2] + nums[i - 1] > nums[i]) {\n                return nums[i - 2] + nums[i - 1] + nums[i];\n            }\n        }\n\n        return 0;\n    }"
+    }
+  },
+  {
     "title": "Sort Integers by The Number of 1 Bits",
     "body": "You are given an integer array arr. Sort the integers in the array in ascending order by the number of 1's in their binary representation and in case of two or more integers have the same number of 1's you have to sort them in ascending order.\n\nReturn the array after sorting it.",
     "example": "Example 1:\n\nInput: arr = [0,1,2,3,4,5,6,7,8]\nOutput: [0,1,2,4,8,3,5,6,7]\nExplantion: [0] is the only integer with 0 bits.\n[1,2,4,8] all have 1 bit.\n[3,5,6] have 2 bits.\n[7] has 3 bits.\nThe sorted array by bits is [0,1,2,4,8,3,5,6,7]\nExample 2:\n\nInput: arr = [1024,512,256,128,64,32,16,8,4,2,1]\nOutput: [1,2,4,8,16,32,64,128,256,512,1024]\nExplantion: All integers have 1 bit in the binary representation, you should just sort them in ascending order.",
