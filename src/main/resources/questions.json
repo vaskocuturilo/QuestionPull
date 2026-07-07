@@ -2883,6 +2883,15 @@
     }
   },
   {
+    "title": "Wiggle Sort II",
+    "body": "Given an integer array nums, reorder it such that nums[0] < nums[1] > nums[2] < nums[3]....\n\nYou may assume the input array always has a valid answer.",
+    "example": "Example 1:\n\nInput: nums = [1,5,1,1,6,4]\nOutput: [1,6,1,5,1,4]\nExplanation: [1,4,1,5,1,6] is also accepted.\nExample 2:\n\nInput: nums = [1,3,2,2,3,1]\nOutput: [2,3,1,3,1,2]",
+    "level": "medium",
+    "solution": {
+      "content": "public void wiggleSort(int[] nums) {\n        Objects.requireNonNull(nums, \"The array cannot be null\");\n\n        final int[] newArray = Arrays.copyOf(nums, nums.length);\n\n        Arrays.sort(newArray);\n\n        final int length = nums.length;\n\n        int left = (length - 1) / 2;\n        int right = (length - 1);\n\n        for (int i = 0; i < length; i++) {\n            if (i % 2 == 0) {\n                nums[i] = newArray[left];\n                left--;\n            } else {\n                nums[i] = newArray[right];\n                right--;\n            }\n        }\n    }"
+    }
+  },
+  {
     "title": "Top K Frequent Elements",
     "body": "Given an integer array and an integer k, return the k most frequent elements. Optimize for time complexity better than O(n log n)",
     "example": "Input: nums = [1,1,1,2,2,3], k = 2, Output: [1,2]",
