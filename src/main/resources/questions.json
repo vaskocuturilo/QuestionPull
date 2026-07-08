@@ -2892,6 +2892,15 @@
     }
   },
   {
+    "title": "Largest Divisible Subset",
+    "body": "Given a set of distinct positive integers nums, return the largest subset answer such that every pair (answer[i], answer[j]) of elements in this subset satisfies:\n\nanswer[i] % answer[j] == 0, or\nanswer[j] % answer[i] == 0\nIf there are multiple solutions, return any of them.",
+    "example": "Example 1:\n\nInput: nums = [1,2,3]\nOutput: [1,2]\nExplanation: [1,3] is also accepted.\nExample 2:\n\nInput: nums = [1,2,4,8]\nOutput: [1,2,4,8]",
+    "level": "medium",
+    "solution": {
+      "content": "public List<Integer> largestDivisibleSubset(int[] nums) {\n        Objects.requireNonNull(nums, \"The array cannot be null\");\n\n        Arrays.sort(nums);\n\n        final int length = nums.length;\n\n        final int[] newArray = new int[length];\n\n        Arrays.fill(newArray, 1);\n\n        int index = 0;\n\n        for (int i = 0; i < length; i++) {\n            for (int j = 0; j < i; j++) {\n                if (nums[i] % nums[j] == 0) {\n                    newArray[i] = Math.max(newArray[i], newArray[j] + 1);\n                }\n            }\n            if (newArray[index] < newArray[i]) {\n                index = i;\n            }\n        }\n        int maxLength = newArray[index];\n        final List<Integer> result = new ArrayList<>();\n\n        for (int i = index; maxLength > 0; i--) {\n            if (nums[index] % nums[i] == 0 && newArray[i] == maxLength) {\n                result.add(nums[i]);\n                index = i;\n                maxLength--;\n            }\n        }\n        return result;\n    }"
+    }
+  },
+  {
     "title": "Top K Frequent Elements",
     "body": "Given an integer array and an integer k, return the k most frequent elements. Optimize for time complexity better than O(n log n)",
     "example": "Input: nums = [1,1,1,2,2,3], k = 2, Output: [1,2]",
