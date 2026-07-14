@@ -2928,6 +2928,15 @@
     }
   },
   {
+    "title": "Unique Binary Search Trees",
+    "body": "Given an integer n, return the number of structurally unique BST's (binary search trees) which has exactly n nodes of unique values from 1 to n.",
+    "example": "Example 1:\n\n\nInput: n = 3\nOutput: 5\nExample 2:\n\nInput: n = 1\nOutput: 1",
+    "level": "medium",
+    "solution": {
+        "content": "public class TreeNode {\n        int val;\n        TreeNode left;\n        TreeNode right;\n\n        TreeNode() {\n        }\n\n        TreeNode(int val) {\n            this.val = val;\n        }\n\n        TreeNode(int val, TreeNode left, TreeNode right) {\n            this.val = val;\n            this.left = left;\n            this.right = right;\n        }\n    } \n public int numTrees(int n) {\n        final int[] newArray = new int[n + 1];\n\n        newArray[0] = 1;\n\n        for (int i = 1; i <= n; i++) {\n            for (int j = 0; j < i; j++) {\n                final int size = i - j - 1;\n                newArray[i] += newArray[j] * newArray[size];\n            }\n        }\n        return newArray[n];\n    }"
+    }
+  },
+  {
     "title": "Top K Frequent Elements",
     "body": "Given an integer array and an integer k, return the k most frequent elements. Optimize for time complexity better than O(n log n)",
     "example": "Input: nums = [1,1,1,2,2,3], k = 2, Output: [1,2]",
