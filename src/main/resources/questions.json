@@ -1,5 +1,14 @@
 [
   {
+    "title": "Path Sum",
+    "body": "Given the root of a binary tree and an integer targetSum, return true if the tree has a root-to-leaf path such that adding up all the values along the path equals targetSum.\n\nA leaf is a node with no children.",
+    "example": "Example 1:\n\n\nInput: root = [5,4,8,11,null,13,4,7,2,null,null,null,1], targetSum = 22\nOutput: true\nExplanation: The root-to-leaf path with the target sum is shown.\nExample 2:\n\n\nInput: root = [1,2,3], targetSum = 5\nOutput: false\nExplanation: There are two root-to-leaf paths in the tree:\n(1 --> 2): The sum is 3.\n(1 --> 3): The sum is 4.\nThere is no root-to-leaf path with sum = 5.\nExample 3:\n\nInput: root = [], targetSum = 0\nOutput: false\nExplanation: Since the tree is empty, there are no root-to-leaf paths.",
+    "level": "easy",
+    "solution": {
+      "content": "public class TreeNode {\n        int val;\n        TreeNode left;\n        TreeNode right;\n\n        TreeNode() {\n        }\n\n        TreeNode(int val) {\n            this.val = val;\n        }\n\n        TreeNode(int val, TreeNode left, TreeNode right) {\n            this.val = val;\n            this.left = left;\n            this.right = right;\n        }\n    } \n public boolean hasPathSum(TreeNode root, int targetSum) {\n        return dfs(root, targetSum);\n    }\n\n    private boolean dfs(TreeNode root, int sum) {\n        if (root == null) return false;\n\n        sum -= root.val;\n\n        if (root.left == null && root.right == null && sum == 0) {\n            return true;\n        }\n\n        return dfs(root.left, sum) || dfs(root.right, sum);\n    }"
+    }
+  },
+  {
     "title": "Balanced Binary Tree",
     "body": "Given a binary tree, determine if it is height-balanced.",
     "example": "Example 1:\n\n\nInput: root = [3,9,20,null,null,15,7]\nOutput: true\nExample 2:\n\n\nInput: root = [1,2,2,3,3,null,null,4,4]\nOutput: false\nExample 3:\n\nInput: root = []\nOutput: true",
