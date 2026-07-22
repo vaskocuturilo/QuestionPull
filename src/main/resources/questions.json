@@ -9,6 +9,15 @@
     }
   },
   {
+    "title": "Binary Tree Preorder Traversal",
+    "body": "Given the root of a binary tree, return the preorder traversal of its nodes' values.\n\n",
+    "example": "Example 1:\n\nInput: root = [1,null,2,3]\n\nOutput: [1,2,3]\n\nExplanation:\n\n\n\nExample 2:\n\nInput: root = [1,2,3,4,5,null,8,null,null,6,7,9]\n\nOutput: [1,2,4,5,6,7,3,8,9]\n\nExplanation:\n\n\n\nExample 3:\n\nInput: root = []\n\nOutput: []\n\nExample 4:\n\nInput: root = [1]\n\nOutput: [1]",
+    "level": "easy",
+    "solution": {
+      "content": "public class TreeNode {\n        int val;\n        TreeNode left;\n        TreeNode right;\n\n        TreeNode() {\n        }\n\n        TreeNode(int val) {\n            this.val = val;\n        }\n\n        TreeNode(int val, TreeNode left, TreeNode right) {\n            this.val = val;\n            this.left = left;\n            this.right = right;\n        }\n    } \n class Solution {\n    final List<Integer> result = new ArrayList<>();\n\n    public List<Integer> preorderTraversal(TreeNode root) {\n        return dfs(root);\n    }\n\n    private List<Integer> dfs(final TreeNode root) {\n        if (root == null) return result;\n\n        result.add(root.val);\n\n        dfs(root.left);\n\n        dfs(root.right);\n\n        return result;\n    }\n}"
+    }
+  },
+  {
     "title": "Balanced Binary Tree",
     "body": "Given a binary tree, determine if it is height-balanced.",
     "example": "Example 1:\n\n\nInput: root = [3,9,20,null,null,15,7]\nOutput: true\nExample 2:\n\n\nInput: root = [1,2,2,3,3,null,null,4,4]\nOutput: false\nExample 3:\n\nInput: root = []\nOutput: true",
