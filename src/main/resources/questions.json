@@ -3018,6 +3018,15 @@
     }
   },
   {
+    "title": "Construct Binary Tree from Inorder and Postorder Traversal",
+    "body": "Given two integer arrays inorder and postorder where inorder is the inorder traversal of a binary tree and postorder is the postorder traversal of the same tree, construct and return the binary tree.\n\n",
+    "example": "Example 1:\n\n\nInput: inorder = [9,3,15,20,7], postorder = [9,15,7,20,3]\nOutput: [3,9,20,null,null,15,7]\nExample 2:\n\nInput: inorder = [-1], postorder = [-1]\nOutput: [-1]",
+    "level": "medium",
+    "solution": {
+      "content": "public class TreeNode {\n        int val;\n        TreeNode left;\n        TreeNode right;\n\n        TreeNode() {\n        }\n\n        TreeNode(int val) {\n            this.val = val;\n        }\n\n        TreeNode(int val, TreeNode left, TreeNode right) {\n            this.val = val;\n            this.left = left;\n            this.right = right;\n        }\n    } \n class Solution {\n    private int[] postorder;\n    private final Map<Integer, Integer> inorderIndexMap = new HashMap<>();\n\n    public TreeNode buildTree(int[] inorder, int[] postorder) {\n        this.postorder = postorder;\n\n        final int arrayLength = inorder.length;\n\n        for (int i = 0; i < arrayLength; i++) {\n            inorderIndexMap.put(inorder[i], i);\n        }\n        return dfs(0, 0, arrayLength);\n    }\n\n    private TreeNode dfs(final int inorderStart, final int postOrderStart, final int size) {\n        if (size <= 0) return null;\n\n        final int rootValue = postorder[postOrderStart + size -1];\n\n        final int rootInorderIndex = inorderIndexMap.get(rootValue);\n\n        final int leftSubtreeSize = rootInorderIndex - inorderStart;\n\n        final TreeNode leftChild = dfs(inorderStart, postOrderStart, leftSubtreeSize);\n\n        final TreeNode rightChild = dfs(rootInorderIndex + 1,\n                postOrderStart + leftSubtreeSize,\n                size - leftSubtreeSize - 1);\n\n        return new TreeNode(rootValue, leftChild, rightChild);\n    }\n}"
+    }
+  },
+  {
     "title": "Top K Frequent Elements",
     "body": "Given an integer array and an integer k, return the k most frequent elements. Optimize for time complexity better than O(n log n)",
     "example": "Input: nums = [1,1,1,2,2,3], k = 2, Output: [1,2]",
