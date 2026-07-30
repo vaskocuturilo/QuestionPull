@@ -3027,6 +3027,15 @@
     }
   },
   {
+    "title": "Binary Tree Level Order Traversal II",
+    "body": "Given the root of a binary tree, return the bottom-up level order traversal of its nodes' values. (i.e., from left to right, level by level from leaf to root).\n\n",
+    "example": "Example 1:\n\n\nInput: root = [3,9,20,null,null,15,7]\nOutput: [[15,7],[9,20],[3]]\nExample 2:\n\nInput: root = [1]\nOutput: [[1]]\nExample 3:\n\nInput: root = []\nOutput: []",
+    "level": "medium",
+    "solution": {
+      "content": "public class TreeNode {\n        int val;\n        TreeNode left;\n        TreeNode right;\n\n        TreeNode() {\n        }\n\n        TreeNode(int val) {\n            this.val = val;\n        }\n\n        TreeNode(int val, TreeNode left, TreeNode right) {\n            this.val = val;\n            this.left = left;\n            this.right = right;\n        }\n    } \n \n public List<List<Integer>> levelOrderBottom(TreeNode root) {\n        final LinkedList<List<Integer>> result = new LinkedList<>();\n\n        if (root == null) return result;\n\n        final Deque<TreeNode> deque = new ArrayDeque<>();\n        deque.offer(root);\n\n        while (!deque.isEmpty()) {\n            final List<Integer> currentResult = new ArrayList<>();\n\n            final int currentSize = deque.size();\n\n            for (int i = 0; i < currentSize; i++) {\n                final TreeNode currentNode = deque.pollFirst();\n                currentResult.add(currentNode.val);\n\n                if (currentNode.left != null) {\n                    deque.offerLast(currentNode.left);\n                }\n\n                if (currentNode.right != null) {\n                    deque.offerLast(currentNode.right);\n                }\n            }\n\n            result.addFirst(currentResult);\n        }\n\n        return result;\n    }"
+    }
+  },
+  {
     "title": "Top K Frequent Elements",
     "body": "Given an integer array and an integer k, return the k most frequent elements. Optimize for time complexity better than O(n log n)",
     "example": "Input: nums = [1,1,1,2,2,3], k = 2, Output: [1,2]",
