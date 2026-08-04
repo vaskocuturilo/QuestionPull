@@ -3054,6 +3054,15 @@
     }
   },
   {
+    "title": "Find Mode in Binary Search Tree",
+    "body": "Given the root of a binary search tree (BST) with duplicates, return all the mode(s) (i.e., the most frequently occurred element) in it.\n\nIf the tree has more than one mode, return them in any order.\n\nAssume a BST is defined as follows:\n\nThe left subtree of a node contains only nodes with keys less than or equal to the node's key.\nThe right subtree of a node contains only nodes with keys greater than or equal to the node's key.\nBoth the left and right subtrees must also be binary search trees.",
+    "example": "Example 1:\n\n\nInput: root = [1,null,2,2]\nOutput: [2]\nExample 2:\n\nInput: root = [0]\nOutput: [0]",
+    "level": "medium",
+    "solution": {
+      "content": "public class TreeNode {\n        int val;\n        TreeNode left;\n        TreeNode right;\n\n        TreeNode() {\n        }\n\n        TreeNode(int val) {\n            this.val = val;\n        }\n\n        TreeNode(int val, TreeNode left, TreeNode right) {\n            this.val = val;\n            this.left = left;\n            this.right = right;\n        }\n    } \n \n class Solution {\n    private int count;\n    private int max;\n    private TreeNode prev;\n    private List<Integer> preResult;\n\n    public int[] findMode(TreeNode root) {\n        preResult = new ArrayList<>();\n        dfs(root);\n\n        int[] result = new int[preResult.size()];\n        for (int i = 0; i < preResult.size(); i++) {\n            result[i] = preResult.get(i);\n        }\n\n        return result;\n    }\n\n    private void dfs(final TreeNode root) {\n        if (root == null) return;\n\n        dfs(root.left);\n\n        count = (prev != null && prev.val == root.val ? count + 1 : 1);\n\n        if (count > max) {\n            preResult = new ArrayList<>(Arrays.asList(root.val));\n            max = count;\n        } else if (count == max) {\n            preResult.add(root.val);\n        }\n\n        prev = root;\n\n        dfs(root.right);\n    }\n}"
+    }
+  },
+  {
     "title": "Top K Frequent Elements",
     "body": "Given an integer array and an integer k, return the k most frequent elements. Optimize for time complexity better than O(n log n)",
     "example": "Input: nums = [1,1,1,2,2,3], k = 2, Output: [1,2]",
