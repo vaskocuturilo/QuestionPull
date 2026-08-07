@@ -1,5 +1,14 @@
 [
   {
+    "title": "Minimum Absolute Difference in BST",
+    "body": "Given the root of a Binary Search Tree (BST), return the minimum absolute difference between the values of any two different nodes in the tree.",
+    "example": "Example 1:\n\n\nInput: root = [4,2,6,1,3]\nOutput: 1\nExample 2:\n\n\nInput: root = [1,0,48,null,null,12,49]\nOutput: 1",
+    "level": "easy",
+    "solution": {
+      "content": "public class TreeNode {\n        int val;\n        TreeNode left;\n        TreeNode right;\n\n        TreeNode() {\n        }\n\n        TreeNode(int val) {\n            this.val = val;\n        }\n\n        TreeNode(int val, TreeNode left, TreeNode right) {\n            this.val = val;\n            this.left = left;\n            this.right = right;\n        }\n    } \n \n class Solution {\n    private static final int MAX_VALUE = 1 << 30;\n    private static final int NEGATIVE_VALUE = -MAX_VALUE;\n    \n    private int minDiff;\n    \n    private int prev;\n    public int getMinimumDifference(TreeNode root) {\n        this.prev = NEGATIVE_VALUE;\n        this.minDiff = MAX_VALUE;\n\n        dfs(root);\n\n        return minDiff;\n\n    }\n\n    private void dfs(final TreeNode node) {\n        if (node == null) return;\n\n        dfs(node.left);\n\n        minDiff = Math.min(minDiff, (node.val - prev));\n\n        prev = node.val;\n\n        dfs(node.right);\n    }\n}"
+    }
+  },
+  {
     "title": "Sum of Left Leaves",
     "body": "Given the root of a binary tree, return the sum of all left leaves.\n\nA leaf is a node with no children. A left leaf is a leaf that is the left child of another node.",
     "example": "Example 1:\n\n\nInput: root = [3,9,20,null,null,15,7]\nOutput: 24\nExplanation: There are two left leaves in the binary tree, with values 9 and 15 respectively.\nExample 2:\n\nInput: root = [1]\nOutput: 0",
