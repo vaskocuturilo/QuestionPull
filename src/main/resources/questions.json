@@ -9,6 +9,15 @@
     }
   },
   {
+    "title": "Range Sum of BST",
+    "body": "Given the root node of a binary search tree and two integers low and high, return the sum of values of all nodes with a value in the inclusive range [low, high].\n\n",
+    "example": "Example 1:\n\n\nInput: root = [10,5,15,3,7,null,18], low = 7, high = 15\nOutput: 32\nExplanation: Nodes 7, 10, and 15 are in the range [7, 15]. 7 + 10 + 15 = 32.\nExample 2:\n\n\nInput: root = [10,5,15,3,7,13,18,1,null,6], low = 6, high = 10\nOutput: 23\nExplanation: Nodes 6, 7, and 10 are in the range [6, 10]. 6 + 7 + 10 = 23.\n",
+    "level": "easy",
+    "solution": {
+      "content": "public class TreeNode {\n        int val;\n        TreeNode left;\n        TreeNode right;\n\n        TreeNode() {\n        }\n\n        TreeNode(int val) {\n            this.val = val;\n        }\n\n        TreeNode(int val, TreeNode left, TreeNode right) {\n            this.val = val;\n            this.left = left;\n            this.right = right;\n        }\n    } \n \n public int rangeSumBST(TreeNode root, int low, int high) {\n        return dfs(root, low, high);\n    }\n\n    private int dfs(final TreeNode root, int low, int high) {\n        if (root == null) return 0;\n\n        final int currentValue = root.val;\n\n        int result = (low <= currentValue && currentValue <= high) ? currentValue : 0;\n\n        if (currentValue > low) {\n            result += dfs(root.left, low, high);\n        }\n\n        if (currentValue < high) {\n            result += dfs(root.right, low, high);\n        }\n\n        return result;\n    }"
+    }
+  },
+  {
     "title": "Increasing Order Search Tree",
     "body": "Given the root of a binary search tree, rearrange the tree in in-order so that the leftmost node in the tree is now the root of the tree, and every node has no left child and only one right child.\n\n",
     "example": "Example 1:\n\n\nInput: root = [5,3,6,2,4,null,8,1,null,null,null,7,9]\nOutput: [1,null,2,null,3,null,4,null,5,null,6,null,7,null,8,null,9]\nExample 2:\n\n\nInput: root = [5,1,7]\nOutput: [1,null,5,null,7]",
