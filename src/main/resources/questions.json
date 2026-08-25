@@ -3189,6 +3189,15 @@
     }
   },
   {
+    "title": "Flatten Binary Tree to Linked List",
+    "body": "Given the root of a binary tree, flatten the tree into a \"linked list\":\n\nThe \"linked list\" should use the same TreeNode class where the right child pointer points to the next node in the list and the left child pointer is always null.\nThe \"linked list\" should be in the same order as a pre-order traversal of the binary tree.",
+    "example": "Example 1:\n\n\nInput: root = [1,2,5,3,4,null,6]\nOutput: [1,null,2,null,3,null,4,null,5,null,6]\nExample 2:\n\nInput: root = []\nOutput: []\nExample 3:\n\nInput: root = [0]\nOutput: [0]\n",
+    "level": "medium",
+    "solution": {
+        "content": "public class TreeNode {\n        int val;\n        TreeNode left;\n        TreeNode right;\n\n        TreeNode() {\n        }\n\n        TreeNode(int val) {\n            this.val = val;\n        }\n\n        TreeNode(int val, TreeNode left, TreeNode right) {\n            this.val = val;\n            this.left = left;\n            this.right = right;\n        }\n    } \n \n class Solution {\n    private TreeNode previous;\n\n    public void flatten(TreeNode root) {\n        while (root != null) {\n            if (root.left != null) {\n                previous = root.left;\n\n                while (previous.right != null) {\n                    previous = previous.right;\n                }\n\n                previous.right = root.right;\n                root.right = root.left;\n                root.left = null;\n            }\n\n            root = root.right;\n        }\n    }\n}"
+    }
+  },
+  {
     "title": "Top K Frequent Elements",
     "body": "Given an integer array and an integer k, return the k most frequent elements. Optimize for time complexity better than O(n log n)",
     "example": "Input: nums = [1,1,1,2,2,3], k = 2, Output: [1,2]",
