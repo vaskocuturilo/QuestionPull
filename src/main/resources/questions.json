@@ -3216,6 +3216,15 @@
     }
   },
   {
+    "title": "Lowest Common Ancestor of a Binary Tree",
+    "body": "Given a binary tree, find the lowest common ancestor (LCA) of two given nodes in the tree.\n\nAccording to the definition of LCA on Wikipedia: “The lowest common ancestor is defined between two nodes p and q as the lowest node in T that has both p and q as descendants (where we allow a node to be a descendant of itself).”",
+    "example": "Example 1:\n\n\nInput: root = [3,5,1,6,2,0,8,null,null,7,4], p = 5, q = 1\nOutput: 3\nExplanation: The LCA of nodes 5 and 1 is 3.\nExample 2:\n\n\nInput: root = [3,5,1,6,2,0,8,null,null,7,4], p = 5, q = 4\nOutput: 5\nExplanation: The LCA of nodes 5 and 4 is 5, since a node can be a descendant of itself according to the LCA definition.\nExample 3:\n\nInput: root = [1,2], p = 1, q = 2\nOutput: 1",
+    "level": "medium",
+    "solution": {
+      "content": "public class TreeNode {\n        int val;\n        TreeNode left;\n        TreeNode right;\n\n        TreeNode() {\n        }\n\n        TreeNode(int val) {\n            this.val = val;\n        }\n\n        TreeNode(int val, TreeNode left, TreeNode right) {\n            this.val = val;\n            this.left = left;\n            this.right = right;\n        }\n    } \n \n public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {\n        if (root == null || root == p || root == q) return root;\n\n        final TreeNode left = lowestCommonAncestor(root.left, p, q);\n        final TreeNode right = lowestCommonAncestor(root.right, p, q);\n\n        if (left != null && right != null) {\n            return root;\n        }\n\n\n        return left == null ? right : left;\n    }"
+    }
+  },
+  {
     "title": "Top K Frequent Elements",
     "body": "Given an integer array and an integer k, return the k most frequent elements. Optimize for time complexity better than O(n log n)",
     "example": "Input: nums = [1,1,1,2,2,3], k = 2, Output: [1,2]",
