@@ -3234,6 +3234,15 @@
     }
   },
   {
+    "title": "Lowest Common Ancestor of a Binary Search Tree",
+    "body": "Given a binary search tree (BST), find the lowest common ancestor (LCA) node of two given nodes in the BST.\n\nAccording to the definition of LCA on Wikipedia: “The lowest common ancestor is defined between two nodes p and q as the lowest node in T that has both p and q as descendants (where we allow a node to be a descendant of itself).”",
+    "example": "Example 1:\n\n\nInput: root = [6,2,8,0,4,7,9,null,null,3,5], p = 2, q = 8\nOutput: 6\nExplanation: The LCA of nodes 2 and 8 is 6.\nExample 2:\n\n\nInput: root = [6,2,8,0,4,7,9,null,null,3,5], p = 2, q = 4\nOutput: 2\nExplanation: The LCA of nodes 2 and 4 is 2, since a node can be a descendant of itself according to the LCA definition.\nExample 3:\n\nInput: root = [2,1], p = 2, q = 1\nOutput: 2",
+    "level": "medium",
+    "solution": {
+      "content": "public class TreeNode {\n        int val;\n        TreeNode left;\n        TreeNode right;\n\n        TreeNode() {\n        }\n\n        TreeNode(int val) {\n            this.val = val;\n        }\n\n        TreeNode(int val, TreeNode left, TreeNode right) {\n            this.val = val;\n            this.left = left;\n            this.right = right;\n        }\n    } \n \n public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {\n        int minValue = Math.min(p.val, q.val);\n        int maxValue = Math.max(p.val, q.val);\n\n        while (true) {\n            if (root.val < minValue) {\n                root = root.right;\n            } else if (root.val > maxValue) {\n                root = root.left;\n            } else {\n                return root;\n            }\n        }\n    }"
+    }
+  },
+  {
     "title": "Top K Frequent Elements",
     "body": "Given an integer array and an integer k, return the k most frequent elements. Optimize for time complexity better than O(n log n)",
     "example": "Input: nums = [1,1,1,2,2,3], k = 2, Output: [1,2]",
