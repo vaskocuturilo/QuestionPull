@@ -3243,6 +3243,15 @@
     }
   },
   {
+    "title": "Verify Preorder Serialization of a Binary Tree",
+    "body": "One way to serialize a binary tree is to use preorder traversal. When we encounter a non-null node, we record the node's value. If it is a null node, we record using a sentinel value such as '#'.\n\n\nFor example, the above binary tree can be serialized to the string \"9,3,4,#,#,1,#,#,2,#,6,#,#\", where '#' represents a null node.\n\nGiven a string of comma-separated values preorder, return true if it is a correct preorder traversal serialization of a binary tree.\n\nIt is guaranteed that each comma-separated value in the string must be either an integer or a character '#' representing null pointer.\n\nYou may assume that the input format is always valid.\n\nFor example, it could never contain two consecutive commas, such as \"1,,3\".\nNote: You are not allowed to reconstruct the tree.",
+    "example": "Example 1:\n\nInput: preorder = \"9,3,4,#,#,1,#,#,2,#,6,#,#\"\nOutput: true\nExample 2:\n\nInput: preorder = \"1,#\"\nOutput: false\nExample 3:\n\nInput: preorder = \"9,#,#,1\"\nOutput: false",
+    "level": "medium",
+    "solution": {
+      "content": "public boolean isValidSerialization(String preorder) {\n        final List<String> list = new ArrayList<>();\n\n        final String[] values = preorder.split(\",\");\n\n        for (String value : values) {\n\n            list.add(value);\n\n            while (list.size() >= 3\n                    && list.getLast().equals(\"#\")\n                    && list.get(list.size() - 2).equals(\"#\")\n                    && !list.get(list.size() - 3).equals(\"#\")) {\n\n                list.removeLast();\n                list.removeLast();\n                list.removeLast();\n\n                list.add(\"#\");\n            }\n        }\n\n        return list.size() == 1 && list.getFirst().equals(\"#\");\n    }"
+    }
+  },
+  {
     "title": "Top K Frequent Elements",
     "body": "Given an integer array and an integer k, return the k most frequent elements. Optimize for time complexity better than O(n log n)",
     "example": "Input: nums = [1,1,1,2,2,3], k = 2, Output: [1,2]",
