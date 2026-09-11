@@ -3288,6 +3288,15 @@
     }
   },
   {
+    "title": "Count Nodes Equal to Average of Subtree",
+    "body": "Given the root of a binary tree, return the number of nodes where the value of the node is equal to the average of the values in its subtree.\n\nNote:\n\nThe average of n elements is the sum of the n elements divided by n and rounded down to the nearest integer.\nA subtree of root is a tree consisting of root and all of its descendants.",
+    "example": "Example 1:\n\n\nInput: root = [4,8,5,0,1,null,6]\nOutput: 5\nExplanation: \nFor the node with value 4: The average of its subtree is (4 + 8 + 5 + 0 + 1 + 6) / 6 = 24 / 6 = 4.\nFor the node with value 5: The average of its subtree is (5 + 6) / 2 = 11 / 2 = 5.\nFor the node with value 0: The average of its subtree is 0 / 1 = 0.\nFor the node with value 1: The average of its subtree is 1 / 1 = 1.\nFor the node with value 6: The average of its subtree is 6 / 1 = 6.\nExample 2:\n\n\nInput: root = [1]\nOutput: 1\nExplanation: For the node with value 1: The average of its subtree is 1 / 1 = 1.\n",
+    "level": "medium",
+    "solution": {
+      "content": "public class TreeNode {\n        int val;\n        TreeNode left;\n        TreeNode right;\n\n        TreeNode() {\n        }\n\n        TreeNode(int val) {\n            this.val = val;\n        }\n\n        TreeNode(int val, TreeNode left, TreeNode right) {\n            this.val = val;\n            this.left = left;\n            this.right = right;\n        }\n    } \n \n class Solution {\n\n    private int result;\n\n    public int averageOfSubtree(TreeNode root) {\n        result = 0;\n\n        dfs(root);\n\n        return result;\n    }\n\n    private int[] dfs(final TreeNode root) {\n        if (root == null) return new int[]{0, 0};\n\n        final int[] left = dfs(root.left);\n        final int[] right = dfs(root.right);\n\n        int sum = left[0] + right[0] + root.val;\n        int count = left[1] + right[1] + 1;\n\n\n        if (sum / count == root.val) {\n            result++;\n        }\n        \n        return new int[]{sum, count};\n    }\n}"
+    }
+  },
+  {
     "title": "Top K Frequent Elements",
     "body": "Given an integer array and an integer k, return the k most frequent elements. Optimize for time complexity better than O(n log n)",
     "example": "Input: nums = [1,1,1,2,2,3], k = 2, Output: [1,2]",
