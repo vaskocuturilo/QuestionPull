@@ -3342,6 +3342,15 @@
     }
   },
   {
+    "title": "Largest Number",
+    "body": "Given a list of non-negative integers nums, arrange them such that they form the largest number and return it.\n\nSince the result may be very large, so you need to return a string instead of an integer.\n\n",
+    "example": "Example 1:\n\nInput: nums = [10,2]\nOutput: \"210\"\nExample 2:\n\nInput: nums = [3,30,34,5,9]\nOutput: \"9534330\"",
+    "level": "medium",
+    "solution": {
+      "content": "public String largestNumber(int[] nums) {\n        final List<String> result = new ArrayList<>();\n\n        for (int num : nums) {\n            result.add(String.valueOf(num));\n        }\n\n        result.sort((a, b) -> (b + a).compareTo(a + b));\n\n        if (result.getFirst().equalsIgnoreCase(\"0\")) {\n            return \"0\";\n        }\n\n        return String.join(\"\", result);\n    }"
+    }
+  },
+  {
     "title": "Top K Frequent Elements",
     "body": "Given an integer array and an integer k, return the k most frequent elements. Optimize for time complexity better than O(n log n)",
     "example": "Input: nums = [1,1,1,2,2,3], k = 2, Output: [1,2]",
