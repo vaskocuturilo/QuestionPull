@@ -3351,6 +3351,15 @@
     }
   },
   {
+    "title": "Subsets II",
+    "body": "Given an integer array nums that may contain duplicates, return all possible subsets (the power set).\n\nThe solution set must not contain duplicate subsets. Return the solution in any order.\n\n",
+    "example": "Example 1:\n\nInput: nums = [1,2,2]\nOutput: [[],[1],[1,2],[1,2,2],[2],[2,2]]\nExample 2:\n\nInput: nums = [0]\nOutput: [[],[0]]\n",
+    "level": "medium",
+    "solution": {
+      "content": "class Solution {\n    private List<List<Integer>> result = new ArrayList<>();\n\n    private List<Integer> temp = new ArrayList<>();\n\n    private int[] nums;\n    \n    public List<List<Integer>> subsetsWithDup(int[] nums) {\n        Arrays.sort(nums);\n\n        this.nums = nums;\n\n        dfs(0);\n\n        return this.result;\n    }\n\n    private void dfs(int i) {\n        if (i >= nums.length) {\n            result.add(new ArrayList<>(temp));\n            return;\n        }\n\n        temp.add(nums[i]);\n        dfs(i + 1);\n\n        int remove = temp.removeLast();\n\n        while (i + 1 < nums.length && nums[i + 1] == remove) {\n            i++;\n        }\n\n        dfs(i + 1);\n    }\n}"
+    }
+  },
+  {
     "title": "Top K Frequent Elements",
     "body": "Given an integer array and an integer k, return the k most frequent elements. Optimize for time complexity better than O(n log n)",
     "example": "Input: nums = [1,1,1,2,2,3], k = 2, Output: [1,2]",
