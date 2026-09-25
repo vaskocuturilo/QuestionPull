@@ -3628,5 +3628,14 @@
     "solution": {
       "content": "public int maxProfit(int[] prices) {\n        int buy1 = -prices[0], buy2 = - prices[0];\n        int profit1 = 0, totalProfit = 0;\n        \n\n        for (int price : prices) {\n            buy1 = Math.max(buy1, -price);\n            profit1 = Math.max(profit1, price + buy1);\n            buy2 = Math.max(buy2, profit1 - price);\n            totalProfit = Math.max(totalProfit, price + buy2);\n        }\n\n        return totalProfit;\n    }"
     }
+  },
+  {
+    "title": "Best Time to Buy and Sell Stock IV",
+    "body": "You are given an integer array prices where prices[i] is the price of a given stock on the ith day, and an integer k.\n\nFind the maximum profit you can achieve. You may complete at most k transactions: i.e. you may buy at most k times and sell at most k times.\n\nNote: You may not engage in multiple transactions simultaneously (i.e., you must sell the stock before you buy again).",
+    "example": "Example 1:\n\nInput: k = 2, prices = [2,4,1]\nOutput: 2\nExplanation: Buy on day 1 (price = 2) and sell on day 2 (price = 4), profit = 4-2 = 2.\nExample 2:\n\nInput: k = 2, prices = [3,2,6,5,0,3]\nOutput: 7\nExplanation: Buy on day 2 (price = 2) and sell on day 3 (price = 6), profit = 6-2 = 4. Then buy on day 5 (price = 0) and sell on day 6 (price = 3), profit = 3-0 = 3.\n",
+    "level": "hard",
+    "solution": {
+      "content": "class Solution {\n    private Integer[][][] result;\n    private int[] prices;\n    private int length;\n\n   public int maxProfit(int k, int[] prices) {\n        length = prices.length;\n        this.prices = prices;\n\n        result = new Integer[length][k + 1][2];\n\n        return dfs(0, k, 0);\n    }\n\n    private int dfs(int day, int transactionLeft, int holding) {\n        if (day >= length) {\n            return 0;\n        }\n\n        if (result[day][transactionLeft][holding] != null) {\n            return result[day][transactionLeft][holding];\n        }\n\n        int maxProfit = dfs(day + 1, transactionLeft, holding);\n\n        if (holding == 1) {\n            maxProfit = Math.max(maxProfit, prices[day] + dfs(day + 1, transactionLeft, 0));\n        } else if (transactionLeft > 0) {\n            maxProfit = Math.max(maxProfit, -prices[day] + dfs(day + 1, transactionLeft - 1, 1));\n        }\n\n        return result[day][transactionLeft][holding] = maxProfit;\n    }\n}"
+    }
   }
 ]
