@@ -3378,6 +3378,15 @@
     }
   },
   {
+    "title": "Count Primes",
+    "body": "Given an integer n, return the number of prime numbers that are strictly less than n.\n\n",
+    "example": "Example 1:\n\nInput: n = 10\nOutput: 4\nExplanation: There are 4 prime numbers less than 10, they are 2, 3, 5, 7.\nExample 2:\n\nInput: n = 0\nOutput: 0\nExample 3:\n\nInput: n = 1\nOutput: 0",
+    "level": "medium",
+    "solution": {
+      "content": "public int countPrimes(int n) {\n        if (n <= 2) return 0;\n\n        boolean[] isPrimes = new boolean[n];\n\n        Arrays.fill(isPrimes, true);\n\n        int count = 0;\n        \n        for (int i = 2; i < n; i++) {\n            if (isPrimes[i]) {\n                count++;\n\n                if ((long) i * i < n) {\n                    for (int j = i * i; j < n; j += i) {\n                        isPrimes[j] = false;\n                    }\n                }\n            }\n        }\n        return count;\n    }"
+    }
+  },
+  {
     "title": "Top K Frequent Elements",
     "body": "Given an integer array and an integer k, return the k most frequent elements. Optimize for time complexity better than O(n log n)",
     "example": "Input: nums = [1,1,1,2,2,3], k = 2, Output: [1,2]",
