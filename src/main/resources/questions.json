@@ -3405,6 +3405,15 @@
     }
   },
   {
+    "title": "Kth Largest Element in an Array",
+    "body": "Given an integer array nums and an integer k, return the kth largest element in the array.\n\nNote that it is the kth largest element in the sorted order, not the kth distinct element.\n\nCan you solve it without sorting?",
+    "example": "Example 1:\n\nInput: nums = [3,2,1,5,6,4], k = 2\nOutput: 5\nExample 2:\n\nInput: nums = [3,2,3,1,2,4,5,5,6], k = 4\nOutput: 4",
+    "level": "medium",
+    "solution": {
+      "content": "class Solution {\n\n    private int[] nums;\n    private int length;\n    \n    public int findKthLargest(int[] nums, int k) {\n        this.nums = nums;\n\n        this.length = nums.length - k;\n\n        return quickSort(0, nums.length - 1);\n    }\n\n    private int quickSort(final int left, final int right) {\n        if (left == right) return this.nums[left];\n\n        int i = left - 1;\n        int j = right + 1;\n\n        int pivot = nums[(left + right) >>> 1];\n\n        while (i < j) {\n            while (nums[++i] < pivot) {\n\n            }\n            while (nums[--j] > pivot) {\n\n            }\n            if (i < j) {\n                int temp = nums[i];\n                nums[i] = nums[j];\n                nums[j] = temp;\n            }\n        }\n\n        if (j < this.length) {\n            return quickSort(j + 1, right);\n        }\n\n        return quickSort(left, j);\n    }\n}"
+    }
+  },
+  {
     "title": "Top K Frequent Elements",
     "body": "Given an integer array and an integer k, return the k most frequent elements. Optimize for time complexity better than O(n log n)",
     "example": "Input: nums = [1,1,1,2,2,3], k = 2, Output: [1,2]",
