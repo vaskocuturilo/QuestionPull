@@ -3414,6 +3414,15 @@
     }
   },
   {
+    "title": "Best Time to Buy and Sell Stock with Cooldown",
+    "body": "You are given an array prices where prices[i] is the price of a given stock on the ith day.\n\nFind the maximum profit you can achieve. You may complete as many transactions as you like (i.e., buy one and sell one share of the stock multiple times) with the following restrictions:\n\nAfter you sell your stock, you cannot buy stock on the next day (i.e., cooldown one day).\nNote: You may not engage in multiple transactions simultaneously (i.e., you must sell the stock before you buy again).",
+    "example": "Example 1:\n\nInput: prices = [1,2,3,0,2]\nOutput: 3\nExplanation: transactions = [buy, sell, cooldown, buy, sell]\nExample 2:\n\nInput: prices = [1]\nOutput: 0",
+    "level": "medium",
+    "solution": {
+      "content": "class Solution {\n     private int[] prices;\n     \n     private Integer[][] memo;\n\n    public int maxProfit(int[] prices) {\n        this.prices = prices;\n\n        int n = prices.length;\n\n        memo = new Integer[n][2];\n\n        return dfs(0, 0);\n    }\n\n    private int dfs(int i, int j) {\n        if (i >= this.prices.length) return 0;\n\n        if (memo[i][j] != null) {\n            return memo[i][j];\n        }\n\n        int result = dfs(i + 1, j);\n\n        if (j == 1) {\n            result = Math.max(result, prices[i] + dfs(i + 2, 0));\n        } else {\n            result = Math.max(result, -prices[i] + dfs(i + 1, 1));\n        }\n\n        memo[i][j] = result;\n\n        return result;\n    }\n}"
+    }
+  },
+  {
     "title": "Top K Frequent Elements",
     "body": "Given an integer array and an integer k, return the k most frequent elements. Optimize for time complexity better than O(n log n)",
     "example": "Input: nums = [1,1,1,2,2,3], k = 2, Output: [1,2]",
