@@ -3459,6 +3459,15 @@
     }
   },
   {
+    "title": "Container With Most Water",
+    "body": "You are given an integer array height of length n. There are n vertical lines drawn such that the two endpoints of the ith line are (i, 0) and (i, height[i]).\n\nFind two lines that together with the x-axis form a container, such that the container contains the most water.\n\nReturn the maximum amount of water a container can store.\n\nNotice that you may not slant the container.",
+    "example": "Example 1:\n\n\nInput: height = [1,8,6,2,5,4,8,3,7]\nOutput: 49\nExplanation: The above vertical lines are represented by array [1,8,6,2,5,4,8,3,7]. In this case, the max area of water (blue section) the container can contain is 49.\nExample 2:\n\nInput: height = [1,1]\nOutput: 1",
+    "level": "medium",
+    "solution": {
+      "content": "ublic int maxArea(int[] height) {\n        int result = 0;\n        \n        int left = 0;\n\n        int right = height.length - 1;\n\n        while (left < right) {\n            int sumResult = (right - left);\n\n            int minResult = Math.min(height[left], height[right]);\n\n            int currentValue = minResult * sumResult;\n\n            result = Math.max(result, currentValue);\n\n            if (height[left] < height[right]) {\n                left++;\n            } else {\n                right--;\n            }\n        }\n\n        return result;\n    }"
+    }
+  },
+  {
     "title": "Top K Frequent Elements",
     "body": "Given an integer array and an integer k, return the k most frequent elements. Optimize for time complexity better than O(n log n)",
     "example": "Input: nums = [1,1,1,2,2,3], k = 2, Output: [1,2]",
