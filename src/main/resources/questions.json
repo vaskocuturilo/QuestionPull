@@ -3464,7 +3464,16 @@
     "example": "Example 1:\n\n\nInput: height = [1,8,6,2,5,4,8,3,7]\nOutput: 49\nExplanation: The above vertical lines are represented by array [1,8,6,2,5,4,8,3,7]. In this case, the max area of water (blue section) the container can contain is 49.\nExample 2:\n\nInput: height = [1,1]\nOutput: 1",
     "level": "medium",
     "solution": {
-      "content": "ublic int maxArea(int[] height) {\n        int result = 0;\n        \n        int left = 0;\n\n        int right = height.length - 1;\n\n        while (left < right) {\n            int sumResult = (right - left);\n\n            int minResult = Math.min(height[left], height[right]);\n\n            int currentValue = minResult * sumResult;\n\n            result = Math.max(result, currentValue);\n\n            if (height[left] < height[right]) {\n                left++;\n            } else {\n                right--;\n            }\n        }\n\n        return result;\n    }"
+      "content": "public int maxArea(int[] height) {\n        int result = 0;\n        \n        int left = 0;\n\n        int right = height.length - 1;\n\n        while (left < right) {\n            int sumResult = (right - left);\n\n            int minResult = Math.min(height[left], height[right]);\n\n            int currentValue = minResult * sumResult;\n\n            result = Math.max(result, currentValue);\n\n            if (height[left] < height[right]) {\n                left++;\n            } else {\n                right--;\n            }\n        }\n\n        return result;\n    }"
+    }
+  },
+  {
+    "title": "Find All Duplicates in an Array",
+    "body": "Given an integer array nums of length n where all the integers of nums are in the range [1, n] and each integer appears at most twice, return an array of all the integers that appears twice.\n\nYou must write an algorithm that runs in O(n) time and uses only constant auxiliary space, excluding the space needed to store the output",
+    "example": "Example 1:\n\nInput: nums = [4,3,2,7,8,2,3,1]\nOutput: [2,3]\nExample 2:\n\nInput: nums = [1,1,2]\nOutput: [1]\nExample 3:\n\nInput: nums = [1]\nOutput: []",
+    "level": "medium",
+    "solution": {
+      "content": "class Solution {\n    public List<Integer> findDuplicates(int[] nums) {\n        Objects.requireNonNull(nums, \"The array cannot be null\");\n\n        List<Integer> result = new ArrayList<>();\n\n        for (int i = 0; i < nums.length; i++) {\n            while (nums[i] != nums[nums[i] - 1]) {\n                swapValue(nums, i, nums[i] - 1);\n            }\n        }\n\n        for (int i = 0; i < nums.length; i++) {\n            if (nums[i] != i + 1) {\n                result.add(nums[i]);\n            }\n        }\n\n        return result;\n    }\n\n    private void swapValue(final int[] nums, int i, int j) {\n        int temp = nums[i];\n        nums[i] = nums[j];\n        nums[j] = temp;\n\n    }\n}"
     }
   },
   {
