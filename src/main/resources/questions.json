@@ -3495,6 +3495,15 @@
     }
   },
   {
+    "title": "Add Two Numbers",
+    "body": "You are given two non-empty linked lists representing two non-negative integers. The digits are stored in reverse order, and each of their nodes contains a single digit. Add the two numbers and return the sum as a linked list.\n\nYou may assume the two numbers do not contain any leading zero, except the number 0 itself.",
+    "example": "Example 1:\n\n\nInput: l1 = [2,4,3], l2 = [5,6,4]\nOutput: [7,0,8]\nExplanation: 342 + 465 = 807.\nExample 2:\n\nInput: l1 = [0], l2 = [0]\nOutput: [0]\nExample 3:\n\nInput: l1 = [9,9,9,9,9,9,9], l2 = [9,9,9,9]\nOutput: [8,9,9,9,0,0,0,1]",
+    "level": "medium",
+    "solution": {
+      "content": "type ListNode struct {\n\tVal  int\n\tNext *ListNode\n}\n\nfunc addTwoNumbers(l1 *ListNode, l2 *ListNode) *ListNode {\n\tdummy := &ListNode{}\n\n\tcurrent := dummy\n\n\tcarry := 0\n\n\tfor l1 != nil || l2 != nil {\n\t\tx := 0\n\t\tif l1 != nil {\n\t\t\tx = l1.Val\n\t\t\tl1 = l1.Next\n\t\t}\n\t\ty := 0\n\t\tif l2 != nil {\n\t\t\ty = l2.Val\n\t\t\tl2 = l2.Next\n\t\t}\n\t\tsum := carry + x + y\n\t\tcarry = sum / 10\n\n\t\tif current.Next == nil {\n\t\t\tcurrent.Next = &ListNode{}\n\t\t}\n\t\tcurrent.Next.Val = sum % 10\n\t\tcurrent = current.Next\n\t}\n\n\tif carry > 0 {\n\t\tcurrent.Next = &ListNode{Val: carry}\n\t}\n\n\treturn dummy.Next\n}"
+    }
+  },
+  {
     "title": "Top K Frequent Elements",
     "body": "Given an integer array and an integer k, return the k most frequent elements. Optimize for time complexity better than O(n log n)",
     "example": "Input: nums = [1,1,1,2,2,3], k = 2, Output: [1,2]",
