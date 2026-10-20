@@ -3522,6 +3522,15 @@
     }
   },
   {
+    "title": "Pow(x, n)",
+    "body": "Implement pow(x, n), which calculates x raised to the power n (i.e., xn).\n\n",
+    "example": "Example 1:\n\nInput: x = 2.00000, n = 10\nOutput: 1024.00000\nExample 2:\n\nInput: x = 2.10000, n = 3\nOutput: 9.26100\nExample 3:\n\nInput: x = 2.00000, n = -2\nOutput: 0.25000\nExplanation: 2-2 = 1/22 = 1/4 = 0.25",
+    "level": "medium",
+    "solution": {
+      "content": "func myPow(x float64, n int) float64 {\n\tquickPower := func(value float64, n int) float64 {\n\t\tresult := 1.0\n\n\t\tfor ; n > 0; n >>= 1 {\n\t\t\tif n&1 == 1 {\n\t\t\t\tresult *= value\n\t\t\t}\n\t\t\tvalue *= value\n\t\t}\n\t\treturn result\n\t}\n\tif n >= 0 {\n\t\treturn quickPower(x, n)\n\t}\n\n\treturn 1 / quickPower(x, -n)\n}"
+    }
+  },
+  {
     "title": "Top K Frequent Elements",
     "body": "Given an integer array and an integer k, return the k most frequent elements. Optimize for time complexity better than O(n log n)",
     "example": "Input: nums = [1,1,1,2,2,3], k = 2, Output: [1,2]",
