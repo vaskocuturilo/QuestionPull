@@ -3531,6 +3531,15 @@
     }
   },
   {
+    "title": "Permutation Sequence",
+    "body": "The set [1, 2, 3, ..., n] contains a total of n! unique permutations.\n\nBy listing and labeling all of the permutations in order, we get the following sequence for n = 3:\n\n\"123\"\n\"132\"\n\"213\"\n\"231\"\n\"312\"\n\"321\"\nGiven n and k, return the kth permutation sequence.",
+    "example": "Example 1:\n\nInput: n = 3, k = 3\nOutput: \"213\"\nExample 2:\n\nInput: n = 4, k = 9\nOutput: \"2314\"\nExample 3:\n\nInput: n = 3, k = 1\nOutput: \"123\"",
+    "level": "medium",
+    "solution": {
+      "content": "func getPermutation(n int, k int) string {\n\tresult := make([]byte, n)\n\tvisual := make([]bool, n+1)\n\n\tfor i := 0; i < n; i++ {\n\t\tfact := 1\n\n\t\tfor j := 1; j < n-i; j++ {\n\t\t\tfact *= j\n\t\t}\n\t\tfor j := 1; j <= n; j++ {\n\t\t\tif !visual[j] {\n\t\t\t\tif k > fact {\n\t\t\t\t\tk -= fact\n\t\t\t\t} else {\n\t\t\t\t\tresult[i] = byte('0' + j)\n\t\t\t\t\tvisual[j] = true\n\t\t\t\t\tbreak\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\t}\n\n\treturn string(result)\n}"
+    }
+  },
+  {
     "title": "Top K Frequent Elements",
     "body": "Given an integer array and an integer k, return the k most frequent elements. Optimize for time complexity better than O(n log n)",
     "example": "Input: nums = [1,1,1,2,2,3], k = 2, Output: [1,2]",
