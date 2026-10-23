@@ -1,5 +1,14 @@
 [
   {
+    "title": "Power of Two",
+    "body": "Given an integer n, return true if it is a power of two. Otherwise, return false.\n\nAn integer n is a power of two, if there exists an integer x such that n == 2x.",
+    "example": "Example 1:\n\nInput: n = 1\nOutput: true\nExplanation: 20 = 1\nExample 2:\n\nInput: n = 16\nOutput: true\nExplanation: 24 = 16\nExample 3:\n\nInput: n = 3\nOutput: false\n",
+    "level": "easy",
+    "solution": {
+      "content": "func isPowerOfTwo(n int) bool {\n    if n <= 0 {\n\t\treturn false\n\t}\n\treturn (n & (n - 1)) == 0\n}"
+    }
+  },
+  {
     "title": "Climbing Stairs",
     "body": "You are climbing a staircase. It takes n steps to reach the top.\n\nEach time you can either climb 1 or 2 steps. In how many distinct ways can you climb to the top?",
     "example": "Example 1:\n\nInput: n = 2\nOutput: 2\nExplanation: There are two ways to climb to the top.\n1. 1 step + 1 step\n2. 2 steps\nExample 2:\n\nInput: n = 3\nOutput: 3\nExplanation: There are three ways to climb to the top.\n1. 1 step + 1 step + 1 step\n2. 1 step + 2 steps\n3. 2 steps + 1 step",
