@@ -9,6 +9,15 @@
     }
   },
   {
+    "title": "Excel Sheet Column Number",
+    "body": "Given a string columnTitle that represents the column title as appears in an Excel sheet, return its corresponding column number.\n\nFor example:\n\nA -> 1\nB -> 2\nC -> 3\n...\nZ -> 26\nAA -> 27\nAB -> 28 \n...\n",
+    "example": "Example 1:\n\nInput: columnTitle = \"A\"\nOutput: 1\nExample 2:\n\nInput: columnTitle = \"AB\"\nOutput: 28\nExample 3:\n\nInput: columnTitle = \"ZY\"\nOutput: 701",
+    "level": "easy",
+    "solution": {
+      "content": "func titleToNumber(columnTitle string) int {\n    result := 0\n\n\tfor i := 0; i < len(columnTitle); i++ {\n\t\tcurrent := columnTitle[i]\n\t\tvalue := current - 'A' + 1\n\t\tresult = result*26 + int(value)\n\t}\n\treturn result\n}"
+    }
+  },
+  {
     "title": "Climbing Stairs",
     "body": "You are climbing a staircase. It takes n steps to reach the top.\n\nEach time you can either climb 1 or 2 steps. In how many distinct ways can you climb to the top?",
     "example": "Example 1:\n\nInput: n = 2\nOutput: 2\nExplanation: There are two ways to climb to the top.\n1. 1 step + 1 step\n2. 2 steps\nExample 2:\n\nInput: n = 3\nOutput: 3\nExplanation: There are three ways to climb to the top.\n1. 1 step + 1 step + 1 step\n2. 1 step + 2 steps\n3. 2 steps + 1 step",
