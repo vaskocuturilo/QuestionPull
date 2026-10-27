@@ -3567,6 +3567,15 @@
     }
   },
   {
+    "title": "Append K Integers With Minimal Sum",
+    "body": "You are given an integer array nums and an integer k. Append k unique positive integers that do not appear in nums to nums such that the resulting total sum is minimum.\n\nReturn the sum of the k integers appended to nums.",
+    "example": "Example 1:\n\nInput: nums = [1,4,25,10,25], k = 2\nOutput: 5\nExplanation: The two unique positive integers that do not appear in nums which we append are 2 and 3.\nThe resulting sum of nums is 1 + 4 + 25 + 10 + 25 + 2 + 3 = 70, which is the minimum.\nThe sum of the two integers appended is 2 + 3 = 5, so we return 5.\nExample 2:\n\nInput: nums = [5,6], k = 6\nOutput: 25\nExplanation: The six unique positive integers that do not appear in nums which we append are 1, 2, 3, 4, 7, and 8.\nThe resulting sum of nums is 5 + 6 + 1 + 2 + 3 + 4 + 7 + 8 = 36, which is the minimum. \nThe sum of the six integers appended is 1 + 2 + 3 + 4 + 7 + 8 = 25, so we return 25.",
+    "level": "medium",
+    "solution": {
+      "content": "func minimalKSum(nums []int, k int) int64 {\n\tnums = append(nums, []int{0, 2e9}...)\n\tsort.Ints(nums)\n\n\tresult := int64(0)\n\t\n\tfor index, value := range nums[1:] {\n\t\ttotalSum := nums[index]\n\t\tmaxValue := max(0, min(k, value-totalSum-1))\n\t\tresult += int64(totalSum+1+totalSum+maxValue) * int64(maxValue) / 2\n\t\tk -= maxValue\n\t}\n\treturn result\n}"
+    }
+  },
+  {
     "title": "Top K Frequent Elements",
     "body": "Given an integer array and an integer k, return the k most frequent elements. Optimize for time complexity better than O(n log n)",
     "example": "Input: nums = [1,1,1,2,2,3], k = 2, Output: [1,2]",
