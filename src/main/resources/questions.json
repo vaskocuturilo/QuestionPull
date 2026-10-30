@@ -1,5 +1,14 @@
 [
   {
+    "title": "Number of Elapsed Seconds Between Two Times",
+    "body": "You are given two valid times startTime and endTime, each represented as a string in the format \"HH:MM:SS\".\n\nReturn the number of seconds that have elapsed from startTime to endTime.\n\n",
+    "example": "Example 1:\n\nInput: startTime = \"01:00:00\", endTime = \"01:00:25\"\n\nOutput: 25\n\nExplanation:\n\nendTime is 25 seconds ahead of startTime.\nExample 2:\n\nInput: startTime = \"12:34:56\", endTime = \"13:00:00\"\n\nOutput: 1504\n\nExplanation:\n\nendTime is 25 minutes and 4 seconds ahead of startTime, which equals 1504 seconds.",
+    "level": "easy",
+    "solution": {
+      "content": "func secondsBetweenTimes(startTime string, endTime string) int {\n\treturn convert(endTime) - convert(startTime)\n}\n\nfunc convert(s string) int {\n\thour, _ := strconv.Atoi(s[:2])\n\tminute, _ := strconv.Atoi(s[3:5])\n\tseconds, _ := strconv.Atoi(s[6:])\n\n\treturn hour*3600 + minute*60 + seconds\n}"
+    }
+  },
+  {
     "title": "Largest Integer With Given Digit Sum",
     "body": "You are given two non-negative integers n and s.\n\nReturn the largest integer that has at most n digits and whose sum of digits is s. If no such integer exists, return -1.",
     "example": "Example 1:\n\nInput: n = 2, s = 9\n\nOutput: 90\n\nExplanation:\n\nThe largest integer with at most 2 digits that has a sum of digits of 9 is 90.\n\nExample 2:\n\nInput: n = 2, s = 19\n\nOutput: -1\n\nExplanation:\n\nThere is no integer with at most 2 digits that has a sum of digits of 19, so the answer is -1.\n\nExample 3:\n\nInput: n = 5, s = 0\n\nOutput: 0\n\nExplanation:\n\nThe only non-negative integer whose digits sum to 0 is 0.",
