@@ -1,5 +1,14 @@
 [
   {
+    "title": "Check Good Integer",
+    "body": "You are given a positive integer n.\n\nLet digitSum be the sum of the digits of n, and let squareSum be the sum of the squares of the digits of n.\n\nAn integer is called good if squareSum - digitSum >= 50.\n\nReturn true if n is good. Otherwise, return false.",
+    "example": "Example 1:\n\nInput: n = 1000\n\nOutput: false\n\nExplanation:\n\nThe digits of 1000 are 1, 0, 0, and 0.\nThe digitSum is 1 + 0 + 0 + 0 = 1.\nThe squareSum is 12 + 02 + 02 + 02 = 1.\nThe squareSum - digitSum is 1 - 1 = 0. As 0 is not greater than or equal to 50, the output is false.\nExample 2:\n\nInput: n = 19\n\nOutput: true\n\nExplanation:\n\nThe digits of 19 are 1 and 9.\nThe digitSum is 1 + 9 = 10.\nThe squareSum is 12 + 92 = 1 + 81 = 82.\nThe squareSum - digitSum is 82 - 10 = 72. As 72 is greater than or equal to 50, the output is true.",
+    "level": "easy",
+    "solution": {
+      "content": "func checkGoodInteger(n int) bool {\n\tresult := 0\n\tfor ; n > 0; n /= 10 {\n\t\tdigitSum := n % 10\n\t\tresult += digitSum * (digitSum - 1)\n\t}\n\n\treturn result >= 50\n}"
+    }
+  },
+  {
     "title": "Number of Elapsed Seconds Between Two Times",
     "body": "You are given two valid times startTime and endTime, each represented as a string in the format \"HH:MM:SS\".\n\nReturn the number of seconds that have elapsed from startTime to endTime.\n\n",
     "example": "Example 1:\n\nInput: startTime = \"01:00:00\", endTime = \"01:00:25\"\n\nOutput: 25\n\nExplanation:\n\nendTime is 25 seconds ahead of startTime.\nExample 2:\n\nInput: startTime = \"12:34:56\", endTime = \"13:00:00\"\n\nOutput: 1504\n\nExplanation:\n\nendTime is 25 minutes and 4 seconds ahead of startTime, which equals 1504 seconds.",
