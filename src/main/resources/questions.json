@@ -1,5 +1,14 @@
 [
   {
+    "title": "Ugly Number",
+    "body": "An ugly number is a positive integer which does not have a prime factor other than 2, 3, and 5.\n\nGiven an integer n, return true if n is an ugly number.",
+    "example": "Example 1:\n\nInput: n = 6\nOutput: true\nExplanation: 6 = 2 × 3\nExample 2:\n\nInput: n = 1\nOutput: true\nExplanation: 1 has no prime factors.\nExample 3:\n\nInput: n = 14\nOutput: false\nExplanation: 14 is not ugly since it includes the prime factor 7.",
+    "level": "easy",
+    "solution": {
+      "content": "func isUgly(num int) bool {\n\tif num <= 0 {\n\t\treturn false\n\t}\n\n\tfor num%2 == 0 {\n\t\tnum /= 2\n\t}\n\tfor num%3 == 0 {\n\t\tnum /= 3\n\t}\n\tfor num%5 == 0 {\n\t\tnum /= 5\n\t}\n\treturn num == 1\n}"
+    }
+  },
+  {
     "title": "Add Digits",
     "body": "Given an integer num, repeatedly add all its digits until the result has only one digit, and return it.\n\n",
     "example": "Example 1:\n\nInput: num = 38\nOutput: 2\nExplanation: The process is\n38 --> 3 + 8 --> 11\n11 --> 1 + 1 --> 2 \nSince 2 has only one digit, return it.\nExample 2:\n\nInput: num = 0\nOutput: 0",
