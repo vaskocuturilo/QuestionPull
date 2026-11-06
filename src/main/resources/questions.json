@@ -1,5 +1,14 @@
 [
   {
+    "title": "Perfect Number",
+    "body": "A perfect number is a positive integer that is equal to the sum of its positive divisors, excluding the number itself. A divisor of an integer x is an integer that can divide x evenly.\n\nGiven an integer n, return true if n is a perfect number, otherwise return false.",
+    "example": "Example 1:\n\nInput: num = 28\nOutput: true\nExplanation: 28 = 1 + 2 + 4 + 7 + 14\n1, 2, 4, 7, and 14 are all divisors of 28.\nExample 2:\n\nInput: num = 7\nOutput: false\n",
+    "level": "easy",
+    "solution": {
+      "content": "func checkPerfectNumber(num int) bool {\n\tif num <= 0 {\n\t\treturn false\n\t}\n\n\tif num == 1 {\n\t\treturn false\n\t}\n\n\tsum := 1\n\ti := 2\n\n\tfor i <= num/i {\n\t\tif num%i == 0 {\n\t\t\tsum += i\n\t\t\tif i != num/i {\n\t\t\t\tsum += num / i\n\t\t\t}\n\t\t}\n\t\ti++\n\t}\n\n\treturn sum == num\n}"
+    }
+  },
+  {
     "title": "Ugly Number",
     "body": "An ugly number is a positive integer which does not have a prime factor other than 2, 3, and 5.\n\nGiven an integer n, return true if n is an ugly number.",
     "example": "Example 1:\n\nInput: n = 6\nOutput: true\nExplanation: 6 = 2 × 3\nExample 2:\n\nInput: n = 1\nOutput: true\nExplanation: 1 has no prime factors.\nExample 3:\n\nInput: n = 14\nOutput: false\nExplanation: 14 is not ugly since it includes the prime factor 7.",
