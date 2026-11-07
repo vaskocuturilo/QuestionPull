@@ -1,5 +1,14 @@
 [
   {
+    "title": "Sum of All Odd Length Subarrays",
+    "body": "Given an array of positive integers arr, return the sum of all possible odd-length subarrays of arr.\n\nA subarray is a contiguous subsequence of the array.",
+    "example": "Example 1:\n\nInput: arr = [1,4,2,5,3]\nOutput: 58\nExplanation: The odd-length subarrays of arr and their sums are:\n[1] = 1\n[4] = 4\n[2] = 2\n[5] = 5\n[3] = 3\n[1,4,2] = 7\n[4,2,5] = 11\n[2,5,3] = 10\n[1,4,2,5,3] = 15\nIf we add all these together we get 1 + 4 + 2 + 5 + 3 + 7 + 11 + 10 + 15 = 58\nExample 2:\n\nInput: arr = [1,2]\nOutput: 3\nExplanation: There are only 2 subarrays of odd length, [1] and [2]. Their sum is 3.\nExample 3:\n\nInput: arr = [10,11,12]\nOutput: 66",
+    "level": "easy",
+    "solution": {
+      "content": "func sumOddLengthSubarrays(arr []int) int {\n\tlength := len(arr)\n\n\tf := make([]int, length)\n\tg := make([]int, length)\n\n\tf[0] = arr[0]\n\tsum := f[0]\n\n\tfor i := 1; i < length; i++ {\n\t\tf[i] = g[i-1] + arr[i]*((i/2)+1)\n\n\t\tg[i] = f[i-1] + arr[i]*((i+1)/2)\n\n\t\tsum += f[i]\n\t}\n\n\treturn sum\n}"
+    }
+  },
+  {
     "title": "Perfect Number",
     "body": "A perfect number is a positive integer that is equal to the sum of its positive divisors, excluding the number itself. A divisor of an integer x is an integer that can divide x evenly.\n\nGiven an integer n, return true if n is a perfect number, otherwise return false.",
     "example": "Example 1:\n\nInput: num = 28\nOutput: true\nExplanation: 28 = 1 + 2 + 4 + 7 + 14\n1, 2, 4, 7, and 14 are all divisors of 28.\nExample 2:\n\nInput: num = 7\nOutput: false\n",
