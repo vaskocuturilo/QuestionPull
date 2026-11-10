@@ -3675,6 +3675,15 @@
     }
   },
   {
+    "title": "Minimum Total Cost to Process All Elements",
+    "body": "You are given an integer array nums and an integer k.\n\nInitially, you have k units of resources.\n\nYou must process the elements of nums from left to right. To process the ith element, you need nums[i] resources.\n\nIf your available resources are less than nums[i], you may perform an operation that increases your available resources by k. The value of k is fixed and does not change throughout the process. The first such operation incurs a cost of 1, the second incurs a cost of 2, and so on.\n\nAfter processing the ith element, your available resources decrease by nums[i].\n\nReturn an integer denoting the minimum total cost required to process all elements. Since the answer may be very large, return it modulo 109 + 7.",
+    "example": "Example 1:\n\nInput: nums = [1,2,3,4], k = 4\n\nOutput: 3\n\nExplanation:\n\nAfter processing nums[0], we have 4 - 1 = 3 units of resources left.\nAfter processing nums[1], we have 3 - 2 = 1 unit of resources left.\nSince nums[2] = 3 and only 1 unit of resources is available, we perform the first operation costing 1. After processing nums[2], we have 1 + 4 - 3 = 2 units of resources left.\nSince nums[3] = 4 and only 2 units of resources are available, we perform the second operation costing 2, to have 2 + 4 = 6 units of resources, which is enough to process nums[3].\nThus, the total cost is 1 + 2 = 3.\nExample 2:\n\nInput: nums = [1,1,7,14], k = 4\n\nOutput: 15\n\nExplanation:\n\nAfter processing nums[0], we have 4 - 1 = 3 units of resources left.\nAfter processing nums[1], we have 3 - 1 = 2 units of resources left.\nSince nums[2] = 7 and only 2 units of resources are available, we perform two operations costing 1 + 2 = 3. After processing nums[2], we have 2 + 4 + 4 - 7 = 3 units of resources left.\nSince nums[3] = 14 and only 3 units of resources are available, we perform three operations costing 3 + 4 + 5 = 12, to have 3 + 4 + 4 + 4 = 15 units of resources, which is enough to process nums[3].\nThus, the total cost is 3 + 12 = 15.\nExample 3:\n\nInput: nums = [1,2,3,4], k = 10\n\nOutput: 0\n\nExplanation:\n\nTo process all elements, we can use the initial 10 units of resources without performing any operations. Thus, the total cost required is 0.",
+    "level": "medium",
+    "solution": {
+      "content": "func minimumCost(nums []int, k int) int {\n\tconst mod = 1_000_000_007\n\tcurrent := int64(k)\n\tvar cnt int64\n\n\tfor _, x := range nums {\n\t\tdiff := int64(x) - current\n\t\tif diff > 0 {\n\t\t\tm := (diff + int64(k) - 1) / int64(k)\n\t\t\tcurrent += m * int64(k)\n\t\t\tcnt += m\n\t\t}\n\t\tcurrent -= int64(x)\n\t}\n\tcnt %= mod\n\treturn int((cnt + 1) * cnt / 2 % mod)\n}"
+    }
+  },
+  {
     "title": "Top K Frequent Elements",
     "body": "Given an integer array and an integer k, return the k most frequent elements. Optimize for time complexity better than O(n log n)",
     "example": "Input: nums = [1,1,1,2,2,3], k = 2, Output: [1,2]",
