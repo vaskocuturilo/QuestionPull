@@ -1,5 +1,14 @@
 [
   {
+    "title": "Valid Digit Number",
+    "body": "You are given an integer n and a digit x.\n\nA number is considered valid if:\n\nIt contains at least one occurrence of digit x, and\nIt does not start with digit x.\nReturn true if n is valid, otherwise return false.",
+    "example": "Example 1:\n\nInput: n = 101, x = 0\n\nOutput: true\n\nExplanation:\n\nThe number contains digit 0 at index 1. It does not start with 0, so it satisfies both conditions. Thus, the answer is true\u200B\u200B\u200B\u200B\u200B\u200B\u200B.\n\nExample 2:\n\nInput: n = 232, x = 2\n\nOutput: false\n\nExplanation:\n\nThe number starts with 2, which violates the condition. Thus, the answer is false.\n\nExample 3:\n\nInput: n = 5, x = 1\n\nOutput: false\n\nExplanation:\n\nThe number does not contain digit 1. Thus, the answer is false.",
+    "level": "easy",
+    "solution": {
+      "content": "func validDigit(n int, x int) bool {\n\tvar valid bool\n\tfor n > 9 {\n\t\tdigit := n % 10\n\t\tif digit == x {\n\t\t\tvalid = true\n\t\t}\n\t\tn /= 10\n\t}\n\n\tif x == n {\n\t\treturn false\n\t}\n\treturn valid\n}"
+    }
+  },
+  {
     "title": "Convert the Temperature",
     "body": "You are given a non-negative floating point number rounded to two decimal places celsius, that denotes the temperature in Celsius.\n\nYou should convert Celsius into Kelvin and Fahrenheit and return it as an array ans = [kelvin, fahrenheit].\n\nReturn the array ans. Answers within 10-5 of the actual answer will be accepted.\n\nNote that:\n\nKelvin = Celsius + 273.15\nFahrenheit = Celsius * 1.80 + 32.00",
     "example": "Example 1:\n\nInput: celsius = 36.50\nOutput: [309.65000,97.70000]\nExplanation: Temperature at 36.50 Celsius converted in Kelvin is 309.65 and converted in Fahrenheit is 97.70.\nExample 2:\n\nInput: celsius = 122.11\nOutput: [395.26000,251.79800]\nExplanation: Temperature at 122.11 Celsius converted in Kelvin is 395.26 and converted in Fahrenheit is 251.798.",
