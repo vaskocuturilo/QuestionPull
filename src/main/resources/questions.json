@@ -1,5 +1,14 @@
 [
   {
+    "title": "Count Odd Numbers in an Interval Range",
+    "body": "Given two non-negative integers low and high. Return the count of odd numbers between low and high (inclusive).",
+    "example": "Example 1:\n\nInput: low = 3, high = 7\nOutput: 3\nExplanation: The odd numbers between 3 and 7 are [3,5,7].\nExample 2:\n\nInput: low = 8, high = 10\nOutput: 1\nExplanation: The odd numbers between 8 and 10 are [9].",
+    "level": "easy",
+    "solution": {
+      "content": "func countOdds(low int, high int) int {\n\tconst m = 1_000_000_000\n\n\tif low < 0 || high < 0 {\n\t\treturn 0\n\t}\n\n\tif low > m || high > m {\n\t\treturn 0\n\t}\n\n\treturn (high+1)/2 - low/2\n}"
+    }
+  },
+  {
     "title": "Valid Digit Number",
     "body": "You are given an integer n and a digit x.\n\nA number is considered valid if:\n\nIt contains at least one occurrence of digit x, and\nIt does not start with digit x.\nReturn true if n is valid, otherwise return false.",
     "example": "Example 1:\n\nInput: n = 101, x = 0\n\nOutput: true\n\nExplanation:\n\nThe number contains digit 0 at index 1. It does not start with 0, so it satisfies both conditions. Thus, the answer is true\u200B\u200B\u200B\u200B\u200B\u200B\u200B.\n\nExample 2:\n\nInput: n = 232, x = 2\n\nOutput: false\n\nExplanation:\n\nThe number starts with 2, which violates the condition. Thus, the answer is false.\n\nExample 3:\n\nInput: n = 5, x = 1\n\nOutput: false\n\nExplanation:\n\nThe number does not contain digit 1. Thus, the answer is false.",
