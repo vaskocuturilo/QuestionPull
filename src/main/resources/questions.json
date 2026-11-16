@@ -1,5 +1,14 @@
 [
   {
+    "title": "Traffic Signal Color",
+    "body": "You are given an integer timer representing the remaining time (in seconds) on a traffic signal.\n\nThe signal follows these rules:\n\nIf timer == 0, the signal is \"Green\"\nIf timer == 30, the signal is \"Orange\"\nIf 30 < timer <= 90, the signal is \"Red\"\nReturn the current state of the signal. If none of the above conditions are met, return \"Invalid\".",
+    "example": "Example 1:\n\nInput: timer = 60\n\nOutput: \"Red\"\n\nExplanation:\n\nSince timer = 60, and 30 < timer <= 90, the answer is \"Red\".\n\nExample 2:\n\nInput: timer = 5\n\nOutput: \"Invalid\"\n\nExplanation:\n\nSince timer = 5, it does not satisfy any of the given conditions, the answer is \"Invalid\".",
+    "level": "easy",
+    "solution": {
+      "content": "func trafficSignal(timer int) string {\n\tif timer == 0 {\n\t\treturn \"Green\"\n\t}\n\n\tif timer == 30 {\n\t\treturn \"Orange\"\n\t}\n\n\tif timer > 30 && timer <= 90 {\n\t\treturn \"Red\"\n\t}\n\treturn \"Invalid\"\n}"
+    }
+  },
+  {
     "title": "Fibonacci Number",
     "body": "The Fibonacci numbers, commonly denoted F(n) form a sequence, called the Fibonacci sequence, such that each number is the sum of the two preceding ones, starting from 0 and 1. That is,\n\nF(0) = 0, F(1) = 1\nF(n) = F(n - 1) + F(n - 2), for n > 1.\nGiven n, calculate F(n).",
     "example": "Example 1:\n\nInput: n = 2\nOutput: 1\nExplanation: F(2) = F(1) + F(0) = 1 + 0 = 1.\nExample 2:\n\nInput: n = 3\nOutput: 2\nExplanation: F(3) = F(2) + F(1) = 1 + 1 = 2.\nExample 3:\n\nInput: n = 4\nOutput: 3\nExplanation: F(4) = F(3) + F(2) = 2 + 1 = 3.",
