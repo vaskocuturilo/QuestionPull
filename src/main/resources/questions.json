@@ -3729,6 +3729,15 @@
     }
   },
   {
+    "title": "Number of Ways to Split a String",
+    "body": "Given a binary string s, you can split s into 3 non-empty strings s1, s2, and s3 where s1 + s2 + s3 = s.\n\nReturn the number of ways s can be split such that the number of ones is the same in s1, s2, and s3. Since the answer may be too large, return it modulo 109 + 7.\n\n",
+    "example": "Example 1:\n\nInput: s = \"10101\"\nOutput: 4\nExplanation: There are four ways to split s in 3 parts where each part contain the same number of letters '1'.\n\"1|010|1\"\n\"1|01|01\"\n\"10|10|1\"\n\"10|1|01\"\nExample 2:\n\nInput: s = \"1001\"\nOutput: 0\nExample 3:\n\nInput: s = \"0000\"\nOutput: 3\nExplanation: There are three ways to split s in 3 parts.\n\"0|0|00\"\n\"0|00|0\"\n\"00|0|0\"",
+    "level": "medium",
+    "solution": {
+      "content": "func numWays(s string) int {\n\tcnt := 0\n\tfor _, c := range s {\n\t\tif c == '1' {\n\t\t\tcnt++\n\t\t}\n\t}\n\tm := cnt % 3\n\tif m != 0 {\n\t\treturn 0\n\t}\n\tconst mod = 1e9 + 7\n\tn := len(s)\n\tif cnt == 0 {\n\t\treturn (n - 1) * (n - 2) / 2 % mod\n\t}\n\tcnt /= 3\n\tfind := func(x int) int {\n\t\tt := 0\n\t\tfor i := 0; ; i++ {\n\t\t\tif s[i] == '1' {\n\t\t\t\tt++\n\t\t\t\tif t == x {\n\t\t\t\t\treturn i\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\t}\n\ti1, i2 := find(cnt), find(cnt+1)\n\tj1, j2 := find(cnt*2), find(cnt*2+1)\n\treturn (i2 - i1) * (j2 - j1) % mod\n}"
+    }
+  },
+  {
     "title": "Top K Frequent Elements",
     "body": "Given an integer array and an integer k, return the k most frequent elements. Optimize for time complexity better than O(n log n)",
     "example": "Input: nums = [1,1,1,2,2,3], k = 2, Output: [1,2]",
