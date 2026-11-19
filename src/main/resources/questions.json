@@ -3738,6 +3738,15 @@
     }
   },
   {
+    "title": "Nth Digit",
+    "body": "Given an integer n, return the nth digit of the infinite integer sequence [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, ...].\n\n",
+    "example": "Example 1:\n\nInput: n = 3\nOutput: 3\nExample 2:\n\nInput: n = 11\nOutput: 0\nExplanation: The 11th digit of the sequence 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, ... is a 0, which is part of the number 10.",
+    "level": "medium",
+    "solution": {
+      "content": "func findNthDigit(n int) int {\n\tk, count := 1, 9\n\n\tfor k*count < n {\n\t\tn -= k * count\n        k++\n\t\tcount *= 10\n\t}\n\tnumber := int(math.Pow10(k-1)) + (n-1)/k\n\tindex := (n - 1) % k\n\treturn int(strconv.Itoa(number)[index] - '0')\n}"
+    }
+  },
+  {
     "title": "Top K Frequent Elements",
     "body": "Given an integer array and an integer k, return the k most frequent elements. Optimize for time complexity better than O(n log n)",
     "example": "Input: nums = [1,1,1,2,2,3], k = 2, Output: [1,2]",
