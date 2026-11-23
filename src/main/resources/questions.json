@@ -1,5 +1,14 @@
 [
   {
+    "title": "Smallest Even Multiple",
+    "body": "Given a positive integer n, return the smallest positive integer that is a multiple of both 2 and n.\n",
+    "example": "Example 1:\n\nInput: n = 5\nOutput: 10\nExplanation: The smallest multiple of both 5 and 2 is 10.\nExample 2:\n\nInput: n = 6\nOutput: 6\nExplanation: The smallest multiple of both 6 and 2 is 6. Note that a number is a multiple of itself.",
+    "level": "easy",
+    "solution": {
+      "content": "func smallestEvenMultiple(n int) int {\n\tif n%2 != 0 {\n\t\treturn 2 * n\n\t}\n\treturn n\n}"
+    }
+  },
+  {
     "title": "Power of Four",
     "body": "Given an integer n, return true if it is a power of four. Otherwise, return false.\n\nAn integer n is a power of four, if there exists an integer x such that n == 4x.",
     "example": "Example 1:\n\nInput: n = 16\nOutput: true\nExample 2:\n\nInput: n = 5\nOutput: false\nExample 3:\n\nInput: n = 1\nOutput: true",
