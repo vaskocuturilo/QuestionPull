@@ -1,5 +1,14 @@
 [
   {
+    "title": "Count Commas in Range",
+    "body": "You are given an integer n.\n\nReturn the total number of commas used when writing all integers from [1, n] (inclusive) in standard number formatting.\n\nIn standard formatting:\n\nA comma is inserted after every three digits from the right.\nNumbers with fewer than 4 digits contain no commas.\n",
+    "example": "Example 1:\n\nInput: n = 1002\n\nOutput: 3\n\nExplanation:\n\nThe numbers \"1,000\", \"1,001\", and \"1,002\" each contain one comma, giving a total of 3.\n\nExample 2:\n\nInput: n = 998\n\nOutput: 0\n\nExplanation:\n\nAll numbers from 1 to 998 have fewer than four digits. Therefore, no commas are used.",
+    "level": "easy",
+    "solution": {
+      "content": "func countCommas(n int) int {\n\treturn max(0, n-999)\n}"
+    }
+  },
+  {
     "title": "Smallest Even Multiple",
     "body": "Given a positive integer n, return the smallest positive integer that is a multiple of both 2 and n.\n",
     "example": "Example 1:\n\nInput: n = 5\nOutput: 10\nExplanation: The smallest multiple of both 5 and 2 is 10.\nExample 2:\n\nInput: n = 6\nOutput: 6\nExplanation: The smallest multiple of both 6 and 2 is 6. Note that a number is a multiple of itself.",
