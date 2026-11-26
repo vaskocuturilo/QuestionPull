@@ -1,5 +1,14 @@
 [
   {
+    "title": "Mirror Distance of an Integer",
+    "body": "You are given an integer n.\n\nDefine its mirror distance as: abs(n - reverse(n))\u200B\u200B\u200B\u200B\u200B\u200B\u200B where reverse(n) is the integer formed by reversing the digits of n.\n\nReturn an integer denoting the mirror distance of n\u200B\u200B\u200B\u200B\u200B\u200B\u200B.\n\nabs(x) denotes the absolute value of x.",
+    "example": "Example 1:\n\nInput: n = 25\n\nOutput: 27\n\nExplanation:\n\nreverse(25) = 52.\nThus, the answer is abs(25 - 52) = 27.\nExample 2:\n\nInput: n = 10\n\nOutput: 9\n\nExplanation:\n\nreverse(10) = 01 which is 1.\nThus, the answer is abs(10 - 1) = 9.\nExample 3:\n\nInput: n = 7\n\nOutput: 0\n\nExplanation:\n\nreverse(7) = 7.\nThus, the answer is abs(7 - 7) = 0.\n",
+    "level": "easy",
+    "solution": {
+      "content": "func mirrorDistance(n int) int {\n\treturn int(math.Abs(float64(n - reverse(n))))\n}\n\nfunc reverse(value int) int {\n\tresult := 0\n\tdigit := 0\n\tfor ; value > 0; value /= 10 {\n\t\tdigit = value % 10\n\t\tresult = result*10 + digit\n\t}\n\treturn result\n}"
+    }
+  },
+  {
     "title": "Harshad Number",
     "body": "An integer divisible by the sum of its digits is said to be a Harshad number. You are given an integer x. Return the sum of the digits of x if x is a Harshad number, otherwise, return -1.",
     "example": "Example 1:\n\nInput: x = 18\n\nOutput: 9\n\nExplanation:\n\nThe sum of digits of x is 9. 18 is divisible by 9. So 18 is a Harshad number and the answer is 9.\n\nExample 2:\n\nInput: x = 23\n\nOutput: -1\n\nExplanation:\n\nThe sum of digits of x is 5. 23 is not divisible by 5. So 23 is not a Harshad number and the answer is -1.\n\n",
