@@ -1,5 +1,14 @@
 [
   {
+    "title": "Day of the Year",
+    "body": "Given a string date representing a Gregorian calendar date formatted as YYYY-MM-DD, return the day number of the year.\n\n",
+    "example": "Example 1:\n\nInput: date = \"2019-01-09\"\nOutput: 9\nExplanation: Given date is the 9th day of the year in 2019.\nExample 2:\n\nInput: date = \"2019-02-10\"\nOutput: 41",
+    "level": "easy",
+    "solution": {
+      "content": "func dayOfYear(date string) int {\n\tif len(date) != 10 {\n\t\treturn 0\n\t}\n\n\tif date[4] != '-' && date[7] != '-' {\n\t\treturn 0\n\t}\n\n\tvar y, m, d int\n\tfmt.Sscanf(date, \"%d-%d-%d\", &y, &m, &d)\n\tresult := 0\n\n\tdays := []int{31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31}\n\tif y%400 == 0 || (y%4 == 0 && y%100 != 0) {\n\t\tdays[1] = 29\n\t}\n\n\tresult += d\n\n\tfor _, v := range days[:m-1] {\n\t\tresult += v\n\t}\n\n\treturn result\n}"
+    }
+  },
+  {
     "title": "Mirror Distance of an Integer",
     "body": "You are given an integer n.\n\nDefine its mirror distance as: abs(n - reverse(n))\u200B\u200B\u200B\u200B\u200B\u200B\u200B where reverse(n) is the integer formed by reversing the digits of n.\n\nReturn an integer denoting the mirror distance of n\u200B\u200B\u200B\u200B\u200B\u200B\u200B.\n\nabs(x) denotes the absolute value of x.",
     "example": "Example 1:\n\nInput: n = 25\n\nOutput: 27\n\nExplanation:\n\nreverse(25) = 52.\nThus, the answer is abs(25 - 52) = 27.\nExample 2:\n\nInput: n = 10\n\nOutput: 9\n\nExplanation:\n\nreverse(10) = 01 which is 1.\nThus, the answer is abs(10 - 1) = 9.\nExample 3:\n\nInput: n = 7\n\nOutput: 0\n\nExplanation:\n\nreverse(7) = 7.\nThus, the answer is abs(7 - 7) = 0.\n",
